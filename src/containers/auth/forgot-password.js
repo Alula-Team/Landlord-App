@@ -61,6 +61,7 @@ const ForgotPasswordScreen = (props) => {
                         autoCorrect={false}
                         clearButtonMode={'while-editing'}
                         keyboardType={'email-address'}
+                        keyboardAppearance='dark'
                         // value={}
                         // onChangeText={}
                     />

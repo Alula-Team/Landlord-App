@@ -17,7 +17,7 @@ import Transactions from '../routes/transactionStack';
 import Tenants from '../routes/tenantStack';
 
 // Settings
-
+import Settings from '../routes/settingsStack';
 
 // Icons
 import Icon from 'react-native-vector-icons/Feather';
@@ -27,7 +27,7 @@ const Tab = createMaterialBottomTabNavigator();
 const RootNavigation = (props) => {
     return (
         <>
-            <Tab.Navigator activeColor='white' barStyle={{backgroundColor: '#09061C'}}>
+            <Tab.Navigator  activeColor='white' barStyle={{backgroundColor: '#09061C'}}>
                 <Tab.Screen 
                     name={'Properties'}
                     component={Properties}
@@ -40,6 +40,7 @@ const RootNavigation = (props) => {
                             />
                         )
                     }}
+                    
                 />
                 <Tab.Screen 
                     name={'Transactions'}
@@ -80,19 +81,19 @@ const RootNavigation = (props) => {
                         )
                     }}
                 />
-                {/* <Tab.Screen 
-                    name={''}
-                    component={}
+                <Tab.Screen 
+                    name={'Settings'}
+                    component={Settings}
                     options={{
                         tabBarIcon: ({color}) => (
                             <Icon 
-                                name={''}
+                                name={'settings'}
                                 size={22}
                                 color={color}
                             />
                         )
                     }}
-                /> */}
+                />
             </Tab.Navigator>
         </>
     );

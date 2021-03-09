@@ -46,6 +46,7 @@ const RegisterScreen = (props) => {
                         autoCompleteType='name'
                         autoCorrect={false}
                         clearButtonMode={'while-editing'}
+                        keyboardAppearance='dark'
                         // value={}
                         // onChangeText={}
                     />
@@ -65,6 +66,7 @@ const RegisterScreen = (props) => {
                         autoCorrect={false}
                         clearButtonMode={'while-editing'}
                         keyboardType={'email-address'}
+                        keyboardAppearance='dark'
                         // value={}
                         // onChangeText={}
                     />
@@ -85,6 +87,7 @@ const RegisterScreen = (props) => {
                         autoCorrect={false}
                         clearButtonMode={'while-editing'}
                         returnKeyType={'done'}
+                        keyboardAppearance='dark'
                         // value={}
                         // onChangeText={}
                     />

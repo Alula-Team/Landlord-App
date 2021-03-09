@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         left: 20
     },
     form: {
-        marginTop: 80
+        marginTop: 40
     },
     nameInput: {
         flexDirection: 'row',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 
 // Icons
@@ -47,6 +47,7 @@ const LoginScreen = (props) => {
                         autoCorrect={false}
                         clearButtonMode={'while-editing'}
                         keyboardType={'email-address'}
+                        keyboardAppearance='dark'
                         // value={}
                         // onChangeText={}
                     />
@@ -67,6 +68,7 @@ const LoginScreen = (props) => {
                         autoCorrect={false}
                         clearButtonMode={'while-editing'}
                         returnKeyType={'done'}
+                        keyboardAppearance='dark'
                         // value={}
                         // onChangeText={}
                     />

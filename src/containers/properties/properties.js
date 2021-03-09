@@ -82,6 +82,7 @@ const Properties = () => {
             return <Occupied />
         }
     }
+    
     return(
         <>
             <View style={styles.container}>
