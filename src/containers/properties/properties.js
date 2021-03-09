@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
-import { Header, Icon } from 'react-native-elements';
+import { Badge, Header, Icon } from 'react-native-elements';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -14,7 +14,6 @@ import styles from './prop-styles';
 // THINGS I NEED FOR THIS SCREEN
     // Working Search Feature
     // New properties auto sorted in alpha numeric order
-    // Separation between vacant and occupied properties
 
 const Properties = () => {
 
@@ -69,6 +68,20 @@ const Properties = () => {
         },
     ]
 
+    function Occupied(props) {
+        return <Text style={{color: '#5CB85C', fontWeight: '700'}}>Occupied</Text>
+    }
+    function Vacant(props) {
+        return <Text style={{color: '#D9534F', fontWeight: '700'}}>Vacant</Text>
+    }
+    function Status(props) {
+        const vacant = props.vacant;
+        if (vacant) {
+            return <Vacant />
+        } else {
+            return <Occupied />
+        }
+    }
     return(
         <>
             <View style={styles.container}>
@@ -115,27 +128,54 @@ const Properties = () => {
                         placeholder='Search Properties'
                         placeholderTextColor='#ffffff75'
                         style={styles.searchInput}
+                        keyboardAppearance='dark'
                     />
                 </View>
 
+                {/* Service Requests */}
+                <TouchableOpacity style={styles.serviceRequestsButton} onPress={() => navigation.navigate('ServiceRequests')}>
+                    <View style={{flexDirection: 'row', alignSelf:'center'}}>
+                        <Badge 
+                            status='error'
+                            value={100}
+                            badgeStyle={{
+                                borderWidth: 'none',
+                                height: 25,
+                                width: 40,
+                            }}
+                            containerStyle={{
+                                marginLeft: 10
+                            }}
+                            textStyle={{
+                                fontSize: 14,
+                                fontWeight: '700'
+                            }}
+                        />
+                        <Text style={styles.serviceRequestsText}>Service Requests</Text>
+                    </View>
+                    <Feather name='arrow-right' color='#fff' size={20} style={{marginRight: 10, alignSelf: 'center'}} />
+                </TouchableOpacity>
+
                 {/* Properties Flat List */}
                 <SafeAreaView>
-                    <View style={styles.listView}>
-                        <FlatList
-                            data={data}
-                            keyExtractor={item => item.address}
-                            renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.listCell}>
-                                    <View style={{flexDirection: 'row'}}>
-                                        <Feather name='map-pin' color='#fff' size={20} />
+                    <FlatList
+                        data={data}
+                        keyExtractor={item => item.address}
+                        renderItem={({ item }) => (
+                            <TouchableOpacity style={styles.listCell} onPress={() => navigation.navigate('PropertyDetail')}>
+                                <View style={{flexDirection: 'row'}}>
+                                    <Feather name='map-pin' color='#fff' size={20} />
+                                    <View>
                                         <Text style={styles.listItem}>{item.address}</Text>
+                                        <Text style={styles.status}>Status: <Status vacant={item.vacant} /></Text>
                                     </View>
-                                    <Feather name='arrow-right' color='#fff' size={20} style={styles.arrow} />
-                                </TouchableOpacity>
-                            )}
-                            contentContainerStyle={{ paddingBottom: 350 }}
-                        />
-                    </View>
+                                </View>
+                                <Feather name='arrow-right' color='#fff' size={20} style={styles.arrow} />
+                            </TouchableOpacity>
+                        )}
+                        contentContainerStyle={{ paddingBottom: 350 }}
+                        showsVerticalScrollIndicator={false}
+                    />
                 </SafeAreaView>
             </View>
         </>

@@ -5,26 +5,23 @@ import { Badge, Header, Icon } from 'react-native-elements';
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
+// Vector Icons
+import Feather from 'react-native-vector-icons/Feather';
+
 // Style Sheet
-import styles from './dash-styles';
+import styles from './tenant-styles';
 
-
-// Things I need:
-// Header
-    // Title
-    // Back Button
-// Flatlist for Notifications
-const Notifications = () => {
-
+const AddTransactions = () => {
+    
     const navigation = useNavigation();
-   
+
     return (
         <>
             <View style={styles.container}>
                 {/* Header */}
                 <Header 
                     centerComponent={{ 
-                        text: 'Notifications', 
+                        text: 'Add Tenant', 
                         style: { 
                             color: '#fff', 
                             fontWeight: 'bold', 
@@ -46,6 +43,16 @@ const Notifications = () => {
                             onPress={() => navigation.goBack()}
                         />
                     }
+                    rightComponent={{
+                        text: 'Save',
+                        style: { 
+                            color: '#fff', 
+                            fontWeight: '600', 
+                            fontSize: 18, 
+                            marginTop: 35,
+                            marginRight: 10
+                        }
+                    }}
                     containerStyle={{
                         backgroundColor: '#09061C',
                         justifyContent: 'space-around',
@@ -57,4 +64,4 @@ const Notifications = () => {
     );
 }
 
-export default Notifications;
+export default AddTransactions;

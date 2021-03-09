@@ -6,7 +6,9 @@ import { createStackNavigator } from '@react-navigation/stack';
 // Screens
 import Properties from '../containers/properties/properties';
 import AddProperty from '../containers/properties/addProperties';
-
+import ServiceRequests from '../containers/properties/serviceRequests';
+// import ServiceRequestDetail form '../containers/properties/serviceRequestDetail';
+// import PropertyDetail form '../containers/properties/propertyDetail';
 const Stack = createStackNavigator();
 
 const PropertiesNavigation = (props) => {
@@ -15,6 +17,9 @@ const PropertiesNavigation = (props) => {
             <Stack.Navigator>
                 <Stack.Screen name='Properties' component={Properties} options={{ headerShown: false }} />
                 <Stack.Screen name='AddProperty' component={AddProperty} options={{ headerShown: false }} />
+                <Stack.Screen name='ServiceRequests' component={ServiceRequests} options={{ headerShown: false }} />
+                {/* <Stack.Screen name='ServiceRequestDetail' component={ServiceRequestDetail} options={{ headerShown: false }} /> */}
+                {/* <Stack.Screen name='PropertyDetail' component={PropertyDetail} options={{ headerShown: false }} /> */}
             </Stack.Navigator>
         </>
     );

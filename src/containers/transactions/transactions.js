@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
@@ -52,6 +52,26 @@ const Transactions = () => {
             notes: null,
             image: ''
         },
+        {
+            id: 3,
+            address: '595 S. Green Valley Pkwy Apt 121',
+            amount: 2500,
+            payment: true,
+            date: "02/28/21",
+            transactionType: 'Rent Payment',
+            notes: null,
+            image: ''
+        },
+        {
+            id: 4,
+            address: '101 Univeristy Dr. Unit 100',
+            amount: 500,
+            payment: false,
+            date: "02/28/21",
+            transactionType: 'Repairs',
+            notes: null,
+            image: ''
+        },
     ];
 
     // Amount Function
@@ -61,9 +81,8 @@ const Transactions = () => {
         );
     }
     function Payment(props)  {
-        
         return (
-            <Text style={{color: '#5CB85C', fontWeight: '700', fontSize: 18}}>$</Text>
+            <Text style={{color: '#5CB85C', fontWeight: '700', fontSize: 18}}>+$</Text>
         );
     }
     function Amount(props) {
@@ -73,7 +92,23 @@ const Transactions = () => {
         } else {
             return <Expense />
         }
+
     }
+
+    // Separator
+    const renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: .5,
+            //   width: '86%',
+              backgroundColor: '#CED0CE50',
+              marginLeft: '5%',
+              marginRight: '5%'
+            }}
+          />
+        );
+      }
 
     return(
         <>
@@ -102,7 +137,7 @@ const Transactions = () => {
                                     paddingRight: 20,
                                     paddingBottom: 10
                                 }}
-                                // onPress={() => navigation.navigate('')}
+                                onPress={() => navigation.navigate('AddTransactions')}
                             />
                         </>
                     }
@@ -118,9 +153,10 @@ const Transactions = () => {
                     <Feather name='search' color='#fff' size={20} style={styles.searchIcon} />
                     <TextInput 
                         type='search'
-                        placeholder='Search Properties'
+                        placeholder='Search Transactions'
                         placeholderTextColor='#ffffff75'
                         style={styles.searchInput}
+                        keyboardAppearance='dark'
                     />
                 </View>
 
@@ -140,9 +176,16 @@ const Transactions = () => {
                                             <Feather name='map-pin' color='#fff' size={15} />
                                             <Text style={styles.listItem}>{item.address}</Text>
                                         </View>
-                                        <View style={styles.amount}>
-                                            <Amount payment={item.payment} />
-                                        </View>
+                                        {/* <Amount 
+                                            payment={item.payment}
+                                            style={styles.amount} 
+                                        /> */}
+
+                                        <Text 
+                                            style={{
+                                                color: item.payment === true ? color='#5CB85C' : color='#D9534F', fontWeight: '700', fontSize: 18
+                                            }}
+                                        ><Amount payment={item.payment} />{item.amount}</Text>
                                     </View>
 
                                     {/* Date */}
@@ -153,6 +196,8 @@ const Transactions = () => {
                                 </TouchableOpacity>
                             )}
                             contentContainerStyle={{ paddingBottom: 350 }}
+                            showsVerticalScrollIndicator={false}
+                            // ItemSeparatorComponent={renderSeparator}
                         />
                     </View>
                 </SafeAreaView>

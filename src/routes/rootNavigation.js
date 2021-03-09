@@ -5,7 +5,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Dashboard
-import Dashboard from '../routes/dashboardStack';
+import Notifications from './notificationsStack';
 
 // Properties
 import Properties from '../routes/propertiesStack';
@@ -14,7 +14,7 @@ import Properties from '../routes/propertiesStack';
 import Transactions from '../routes/transactionStack';
 
 // Tenants
-
+import Tenants from '../routes/tenantStack';
 
 // Settings
 
@@ -28,19 +28,6 @@ const RootNavigation = (props) => {
     return (
         <>
             <Tab.Navigator activeColor='white' barStyle={{backgroundColor: '#09061C'}}>
-                <Tab.Screen 
-                    name={'Dashboard'}
-                    component={Dashboard}
-                    options={{
-                        tabBarIcon: ({color}) => (
-                            <Icon 
-                                name={'activity'}
-                                size={22}
-                                color={color}
-                            />
-                        )
-                    }}
-                />
                 <Tab.Screen 
                     name={'Properties'}
                     component={Properties}
@@ -67,19 +54,32 @@ const RootNavigation = (props) => {
                         )
                     }}
                 />
-                {/* <Tab.Screen 
-                    name={''}
-                    component={}
+                <Tab.Screen 
+                    name={'Tenants'}
+                    component={Tenants}
                     options={{
                         tabBarIcon: ({color}) => (
                             <Icon 
-                                name={''}
+                                name={'users'}
                                 size={22}
                                 color={color}
                             />
                         )
                     }}
-                /> */}
+                />
+                <Tab.Screen 
+                    name={'Notifications'}
+                    component={Notifications}
+                    options={{
+                        tabBarIcon: ({color}) => (
+                            <Icon 
+                                name={'bell'}
+                                size={22}
+                                color={color}
+                            />
+                        )
+                    }}
+                />
                 {/* <Tab.Screen 
                     name={''}
                     component={}

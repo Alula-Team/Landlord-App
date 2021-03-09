@@ -28,14 +28,29 @@ const styles = StyleSheet.create({
         marginLeft: 12.5
     },
 
-    // Flatlist
-    listView: {
-        marginHorizontal: 30,
+    // Service Request Button
+    serviceRequestsButton: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
         borderRadius: 10,
-        // backgroundColor: '#4B416C'
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
+    serviceRequestsText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: '700',
+        marginLeft: 10
+    },
+
+    // Flatlist
     listCell: {
         paddingVertical: 20,
+        paddingHorizontal: 25,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -46,6 +61,48 @@ const styles = StyleSheet.create({
         color: '#fff',
         alignSelf: 'center',
     },
+    status: {
+        color: '#fff',
+        marginLeft: 12.5,
+        marginTop: 5
+    },
+    arrow: {
+        alignSelf: 'center'
+    },
+
+    // ** ADD PROPERTY SCREEN ** //
+    sectionText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#fff',
+        textAlign: 'left',
+        marginTop: 30,
+        marginBottom: 20,
+        marginLeft: 20
+    },
+    addButton: {
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        width: '50%',
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        alignSelf: 'flex-end',
+        marginRight: 20,
+        marginTop: 20
+    },
+    addButtonText: {
+        fontSize: 16,
+        color: '#fff',
+        
+    },
+
+    // ** SERVICE REQUEST DETAIL SCREEN ** //
+
+    // ** PROPERTY DETAIL SCREEN ** //
+    
 });
 
 export default styles;

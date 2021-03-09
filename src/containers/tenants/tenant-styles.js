@@ -28,45 +28,14 @@ const styles = StyleSheet.create({
         marginLeft: 12.5
     },
 
-    // Money Boxes
-    moneyInCell: {
-        margin: 30,
-        padding: 20,
-        backgroundColor: '#5CB85C',
-        borderRadius: 10,
-    },
-    moneyOutCell: {
-        marginHorizontal: 30,
-        marginBottom: 30,
-        padding: 20,
-        backgroundColor: '#D9534F',
-        borderRadius: 10,
-    },
-    netGainsCellTitle: {
-        fontSize: 18,
-        fontWeight: '700',
-        color: '#fff'
-    },
-    netGainsCellSubTitle: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#fff',
-        opacity: 0.5,
-    },
-    netGainsCellNumber: {
-        fontSize: 26,
-        fontWeight: '700',
-        color: '#fff',
-        marginVertical: 10
-    },
-
     // Flatlist
     listView: {
-        // marginHorizontal: 5,
+        marginHorizontal: 30,
+        borderRadius: 10,
+        // backgroundColor: '#4B416C'
     },
     listCell: {
         paddingVertical: 20,
-        paddingHorizontal: 25
     },
     itemCenter: {
         flexDirection: 'row', 
@@ -89,7 +58,7 @@ const styles = StyleSheet.create({
     amount: {
         alignSelf: 'center',
         flexDirection: 'row'
-    },
+    }
 });
 
 export default styles;

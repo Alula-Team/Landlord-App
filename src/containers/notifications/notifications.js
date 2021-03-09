@@ -9,15 +9,15 @@ import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Style Sheet
-import styles from './dash-styles';
+import styles from './notif-styles';
 
 
 // Things I need:
 // Header
     // Title
-    // Notifications Button
-// Box for Net gains
-// Flatlist for Service Requests
+    // Stepper
+
+// Flatlist for Service Requests & Notifications
     // Needs a sort feature where the newest requests are at the top
 
 
@@ -105,7 +105,7 @@ const Dashboard = () => {
                 {/* Header */}
                 <Header placement={'left'}
                     centerComponent={{ 
-                        text: 'Dashboard', 
+                        text: 'Notifications', 
                         style: { 
                             color: '#fff', 
                             fontWeight: 'bold', 
@@ -113,33 +113,33 @@ const Dashboard = () => {
                             paddingTop: 30
                         }
                     }}
-                    rightComponent={
-                        <>
-                        <Icon 
-                            name='bell'
-                            type='feather'
-                            color='#fff'
-                            size={25}
-                            iconStyle={{
-                                paddingTop: 30,
-                                paddingRight: 20,
-                                paddingBottom: 10
-                            }}
-                            onPress={() => navigation.navigate('Notifications')}
-                        />
-                        <Badge 
-                            status="error" 
-                            containerStyle={{ 
-                                position: 'absolute', 
-                                top: 30, 
-                                right: 23.5,
-                            }}
-                            badgeStyle={{
-                                borderWidth: 'none'
-                            }}
-                        />
-                        </>
-                    }
+                    // rightComponent={
+                    //     <>
+                    //     <Icon 
+                    //         name='bell'
+                    //         type='feather'
+                    //         color='#fff'
+                    //         size={25}
+                    //         iconStyle={{
+                    //             paddingTop: 30,
+                    //             paddingRight: 20,
+                    //             paddingBottom: 10
+                    //         }}
+                    //         onPress={() => navigation.navigate('Notifications')}
+                    //     />
+                    //     <Badge 
+                    //         status="error" 
+                    //         containerStyle={{ 
+                    //             position: 'absolute', 
+                    //             top: 30, 
+                    //             right: 23.5,
+                    //         }}
+                    //         badgeStyle={{
+                    //             borderWidth: 'none'
+                    //         }}
+                    //     />
+                    //     </>
+                    // }
                     containerStyle={{
                         backgroundColor: '#09061C',
                         justifyContent: 'space-around',
@@ -147,16 +147,8 @@ const Dashboard = () => {
                     }}
                 />
 
-                {/* Net Gains Box */}
-                <View style={styles.netGainsCell}>
-                    <Text style={styles.netGainsCellTitle}>Net Revenue</Text>
-                    <Text style={styles.netGainsCellNumber}>$500,000 </Text>
-                    <Text style={styles.netGainsCellSubTitle}>Year to Date</Text>
-                </View>
-
                 {/* Service Request Flat List */}
                 <SafeAreaView>
-                    <Text style={styles.flatlistTitle}>Service Requests</Text>
                     <View style={styles.listView}>
                         <FlatList
                             data={data}
@@ -171,6 +163,7 @@ const Dashboard = () => {
                                 </TouchableOpacity>
                             )}
                             contentContainerStyle={{ paddingBottom: 350 }}
+                            showsVerticalScrollIndicator={false}
                         />
                     </View>
                 </SafeAreaView>
