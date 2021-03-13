@@ -93,7 +93,7 @@ const AddProperties = () => {
 
             <TouchableOpacity style={styles.addButton}>
                 <Feather name='plus' size={25} style={styles.addButtonText} />
-                <Text style={styles.addButtonText}>Add Another Unit</Text>
+                <Text style={styles.addButtonText}>Add Unit</Text>
             </TouchableOpacity>
         </View>
 

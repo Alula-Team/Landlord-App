@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
     },
     serviceRequestsText: {
         color: '#fff',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '700',
-        marginLeft: 10
+        marginLeft: 10,
+        alignSelf: 'center'
     },
 
     // Flatlist
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         borderColor: '#ffffff50',
         borderRadius: 10,
         borderWidth: 1,
-        width: '50%',
+        width: '30%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
@@ -100,9 +101,69 @@ const styles = StyleSheet.create({
     },
 
     // ** SERVICE REQUEST DETAIL SCREEN ** //
+    markComplete: {
+        marginHorizontal: 20,
+        marginTop: 50,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        justifyContent: 'center'
+    },
+    completed: {
+        marginHorizontal: 20,
+        marginTop: 50,
+        backgroundColor: '#5cb85c',
+        borderRadius: 10,
+        height: 45,
+        justifyContent: 'center'
+    },
+    serviceRequestImage: {
+        backgroundColor: '#ffffff50',
+        width: '100%',
+        height: 200,
+    },
 
     // ** PROPERTY DETAIL SCREEN ** //
-    
+    sectionSpacing: {
+        marginHorizontal: 30,
+        marginTop: 20,
+    },
+    propertyDetailTitle: {
+        color: '#fff',
+        fontSize: 20,
+        fontWeight: '700'
+    },
+    propertyDetailSubText: {
+        color: '#ffffff90',
+        fontSize: 16,
+        fontWeight: '500'
+    },
+    button: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    buttonText: {
+        fontSize: 17,
+        color: '#fff',
+        alignSelf: 'center',
+        marginLeft: 20
+    },
+    deleteProperty: {
+        marginHorizontal: 30,
+        marginTop: 50,
+        backgroundColor: '#d9534f',
+        borderRadius: 10,
+        height: 45,
+        justifyContent: 'center'
+    },
 });
 
 export default styles;

@@ -5,7 +5,6 @@ import RootNavigation from './src/routes/rootNavigation';
 
 export default function App() {
   return (
-  
     <NavigationContainer>
     <RootNavigation />
     </NavigationContainer>
