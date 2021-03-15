@@ -14,7 +14,6 @@ import styles from './prop-styles';
 
 
 // THINGS I NEED
-    // Google Places API 
     // Function to add more units when button is pressed
     // Function to save content
 
@@ -68,12 +67,23 @@ const AddProperties = () => {
 
             {/* Form */}
             <Text style={styles.sectionText}>Property Address</Text>
-            {/* Search Bar */}
+
+            {/* Street Address */}
             <View style={styles.searchContainer}>
-                <Feather name='search' color='#fff' size={20} style={styles.searchIcon} />
                 <TextInput 
-                    type='search'
-                    placeholder='Enter Property Address'
+                    type='text'
+                    placeholder='Enter Street Address'
+                    placeholderTextColor='#ffffff75'
+                    style={styles.searchInput}
+                    keyboardAppearance='dark'
+                />
+            </View>
+
+            {/* City, ST, Zip Code */}
+            <View style={styles.searchContainer}>
+                <TextInput 
+                    type='text'
+                    placeholder='City, State, Zip Code'
                     placeholderTextColor='#ffffff75'
                     style={styles.searchInput}
                     keyboardAppearance='dark'

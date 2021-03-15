@@ -1,7 +1,7 @@
 import React from 'react';
-
 import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
+import RNPickerSelect from 'react-native-picker-select';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -24,84 +24,88 @@ const PropertyDetail = () => {
     return(
         <View style={styles.container}>
             {/* Header */}
-            <Header 
-                centerComponent={{ 
-                    text: 'Details', 
-                    style: { 
-                        color: '#fff', 
-                        fontWeight: 'bold', 
-                        fontSize: 22, 
-                        paddingTop: 30
-                    }
-                }}
-                leftComponent={
-                    <Icon 
-                        name='arrow-left'
-                        type='feather'
-                        color='#fff'
-                        size={25}
-                        iconStyle={{
-                            paddingTop: 30,
-                            paddingLeft: 10,
-                            paddingBottom: 10
-                        }}
-                        onPress={() => navigation.goBack()}
-                    />
-                }
-                rightComponent={
-                    <Icon 
-                        name='more-horizontal'
-                        type='feather'
-                        color='#fff'
-                        size={25}
-                        iconStyle={{ 
-                            marginRight: 20,
-                            marginTop: 30
-                        }}
-
-                        // Will pop modal to with options to edit property or delete property
-                        // onPress={() => }
-                    />
-                }
-                containerStyle={{
-                    backgroundColor: 'transparent',
-                    justifyContent: 'space-around',
-                    borderBottomWidth: 0
-                }}
-            />
+            <View style={{top: 0, left: 0, height: 300, backgroundColor: 'white'}}>
+                <View style={styles.backBtn}>
+                    <Feather name='arrow-left' size={25} color='#fff' onPress={() => navigation.goBack()} />
+                </View>
+            </View>
 
             <ScrollView>
                 {/* Property Information */}
                 <View style={styles.sectionSpacing}>
                     <Text style={styles.propertyDetailTitle}>595 S. Green Valley Pkwy Apt 121</Text>
-                    <View style={{flexDirection: 'row', marginTop: 5, marginBottom: 30}}>
+                    <View style={{flexDirection: 'row', marginTop: 5}}>
                         <Feather name='map-pin' color='white' size={15} style={{marginRight: 5, marginTop: 1, color: '#ffffff90'}} />
                         <Text style={styles.propertyDetailSubText}>Las Vegas, NV, 89107</Text>
                     </View>
                 </View>
-                
+
                 {/* Tenant Information */}
+                <Text style={styles.sectionTitle}>Tenant Information</Text>
+                <View style={{backgroundColor: '#ffffff20', borderRadius: 10, marginHorizontal: 30, marginTop: 10, padding: 10}}>
+                    <Text style={styles.tenantName}>Tenant Name</Text>
+
+                    {/* Lease Type */}
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, justifyContent: 'space-between'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Feather name='edit-3' color='#ffffff90' size={16} />
+                            <Text style={styles.infoTitle}>Lease Type:</Text>
+                        </View>
+                        <Text style={styles.infoText}> - -</Text>
+                    </View>
+                    
+                    {/* Lease Period */}
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, justifyContent: 'space-between'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Feather name='clock' color='#ffffff90' size={16} />
+                            <Text style={styles.infoTitle}>Lease Period:</Text>
+                        </View>
+                        <Text style={styles.infoText}> - -</Text>
+                    </View>
+
+                    {/* Rental Rate */}
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, justifyContent: 'space-between'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Feather name='dollar-sign' color='#ffffff90' size={16} />
+                            <Text style={styles.infoTitle}>Rental Rate:</Text>
+                        </View>
+                        <Text style={styles.infoText}> - -</Text>
+                    </View>
+
+                    {/* Security Deposit */}
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, justifyContent: 'space-between'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Feather name='dollar-sign' color='#ffffff90' size={16} />
+                            <Text style={styles.infoTitle}>Security Deposit:</Text>
+                        </View>
+                        <Text style={styles.infoText}> - -</Text>
+                    </View>
+
+                    <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, justifyContent: 'space-between'}}>
+                        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                            <Feather name='calendar' color='#ffffff90' size={16} />
+                            <Text style={styles.infoTitle}>Rent Due:</Text>
+                        </View>
+                        <Text style={styles.infoText}> - -</Text>
+                    </View>
+                </View>
+
+                {/* Tenant Information */}
+                <Text style={styles.sectionTitle}>Service Requests</Text>
                 <View style={{marginHorizontal: 10}}>
-                    <Text style={styles.sectionText}>Tenant</Text>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Select Tenant</Text>
+                    <TouchableOpacity style={styles.serviceRequestsButton}>
+                        <View style={{flexDirection: 'row', alignSelf:'center'}}>
+                            <Feather name='tool' color='#fff' size={20} style={{marginLeft: 10, alignSelf: 'center'}} />
+                            <Text style={styles.serviceRequestsText}>Service Requests</Text>
+                        </View>
                         <Feather name='arrow-right' color='#fff' size={20} style={{marginRight: 10, alignSelf: 'center'}} />
                     </TouchableOpacity>
                 </View>
 
-                {/* Service Request History */}
-                <View style={{marginHorizontal: 10}}>
-                    <Text style={styles.sectionText}>Service History</Text>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>View Service History</Text>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{marginRight: 10, alignSelf: 'center'}} />
-                    </TouchableOpacity>
+                {/* Remove Property Button */}
+                <View style={{backgroundColor: 'red', margin: 30, padding: 15, borderRadius: 10}}>
+                    <Text style={styles.buttonText}>Remove Property</Text>
                 </View>
-
-                {/* Button */}
-                <TouchableOpacity style={styles.deleteProperty}>
-                        <Text style={styles.buttonText}>Delete Property</Text>
-                    </TouchableOpacity>
             </ScrollView>
         </View>
     );

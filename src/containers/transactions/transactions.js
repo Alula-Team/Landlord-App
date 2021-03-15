@@ -167,27 +167,20 @@ const Transactions = () => {
                             data={data}
                             keyExtractor={item => item.address}
                             renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.listCell}>
+                                <TouchableOpacity style={styles.listCell} onPress={() => navigation.navigate('TransactionDetail')}>
                                     <Text style={styles.transactionType}>{item.transactionType}</Text>
-                                    
                                     {/* Address and Transaction Amount */}
                                     <View style={styles.itemCenter}>
                                         <View style={{flexDirection: 'row'}}>
                                             <Feather name='map-pin' color='#fff' size={15} />
                                             <Text style={styles.listItem}>{item.address}</Text>
                                         </View>
-                                        {/* <Amount 
-                                            payment={item.payment}
-                                            style={styles.amount} 
-                                        /> */}
-
                                         <Text 
                                             style={{
                                                 color: item.payment === true ? color='#5CB85C' : color='#D9534F', fontWeight: '700', fontSize: 18
                                             }}
                                         ><Amount payment={item.payment} />{item.amount}</Text>
                                     </View>
-
                                     {/* Date */}
                                     <View style={{flexDirection: 'row', marginTop: 10}}>
                                         <Feather name='clock' color='#fff' size={15} />

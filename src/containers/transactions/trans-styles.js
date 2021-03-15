@@ -90,6 +90,39 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row'
     },
+
+    // Add Transaction Screen
+    scrollView: {
+        paddingBottom: 30
+    },
+    sectionText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#fff',
+        textAlign: 'left',
+        marginTop: 30,
+        marginLeft: 30
+    },
+    upload: {
+        marginHorizontal: 30,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row'
+    },
+    textArea: {
+        marginHorizontal: 30,
+        marginTop: 10,
+        marginBottom: 50,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row'
+    },
 });
 
 export default styles;

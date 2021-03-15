@@ -123,11 +123,26 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 200,
     },
+    buttonText: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: '700',
+        textAlign: 'center'
+    },
 
     // ** PROPERTY DETAIL SCREEN ** //
+    backBtn: {
+        top: 70, 
+        left: 20, 
+        backgroundColor:'#09061C70', 
+        width: 45, 
+        height: 45, 
+        alignItems: 'center', 
+        justifyContent: 'center', 
+        borderRadius: 10
+    },
     sectionSpacing: {
-        marginHorizontal: 30,
-        marginTop: 20,
+        margin: 30
     },
     propertyDetailTitle: {
         color: '#fff',
@@ -139,7 +154,34 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '500'
     },
-    button: {
+    sectionTitle: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        marginLeft: 30,
+        marginTop: 30,
+        marginBottom: 20
+    },
+    infoTitle: {
+        color: '#ffffff90',
+        fontSize: 16,
+        marginLeft: 10,
+        marginVertical: 10
+    },
+    infoText: {
+        color: '#fff',
+        fontSize: 16,
+        marginRight: 10,
+        marginVertical: 10
+    },
+    tenantName: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        marginLeft: 10,
+        marginVertical: 10
+    },
+    buttons: {
         marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
@@ -147,22 +189,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         height: 45,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    buttonText: {
-        fontSize: 17,
-        color: '#fff',
-        alignSelf: 'center',
-        marginLeft: 20
-    },
-    deleteProperty: {
-        marginHorizontal: 30,
-        marginTop: 50,
-        backgroundColor: '#d9534f',
-        borderRadius: 10,
-        height: 45,
-        justifyContent: 'center'
     },
 });
 
