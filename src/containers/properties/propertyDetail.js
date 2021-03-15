@@ -24,22 +24,20 @@ const PropertyDetail = () => {
     return(
         <View style={styles.container}>
             {/* Header */}
-            <View style={{top: 0, left: 0, height: 300, backgroundColor: 'white'}}>
-                <View style={styles.backBtn}>
+            <View style={{top: 0, left: 0, height: 100}}>
+                <TouchableOpacity style={styles.backBtn}>
                     <Feather name='arrow-left' size={25} color='#fff' onPress={() => navigation.goBack()} />
-                </View>
-            </View>
-
-            <ScrollView>
-                {/* Property Information */}
+                </TouchableOpacity>
                 <View style={styles.sectionSpacing}>
                     <Text style={styles.propertyDetailTitle}>595 S. Green Valley Pkwy Apt 121</Text>
-                    <View style={{flexDirection: 'row', marginTop: 5}}>
+                    <View style={{flexDirection: 'row', marginTop: 5, marginLeft: 45}}>
                         <Feather name='map-pin' color='white' size={15} style={{marginRight: 5, marginTop: 1, color: '#ffffff90'}} />
                         <Text style={styles.propertyDetailSubText}>Las Vegas, NV, 89107</Text>
                     </View>
                 </View>
+            </View>
 
+            <ScrollView style={{marginTop: 30}}>
                 {/* Tenant Information */}
                 <Text style={styles.sectionTitle}>Tenant Information</Text>
                 <View style={{backgroundColor: '#ffffff20', borderRadius: 10, marginHorizontal: 30, marginTop: 10, padding: 10}}>
@@ -104,7 +102,7 @@ const PropertyDetail = () => {
 
                 {/* Remove Property Button */}
                 <View style={{backgroundColor: 'red', margin: 30, padding: 15, borderRadius: 10}}>
-                    <Text style={styles.buttonText}>Remove Property</Text>
+                    <Text style={styles.removePropButtonText}>Remove Property</Text>
                 </View>
             </ScrollView>
         </View>

@@ -82,6 +82,21 @@ const Properties = () => {
             return <Occupied />
         }
     }
+
+    // Separator
+    const renderSeparator = () => {
+        return (
+          <View
+            style={{
+              height: .5,
+            //   width: '86%',
+              backgroundColor: '#CED0CE50',
+              marginLeft: '5%',
+              marginRight: '5%'
+            }}
+          />
+        );
+      }
     
     return(
         <>
@@ -138,18 +153,18 @@ const Properties = () => {
                     <View style={{flexDirection: 'row', alignSelf:'center'}}>
                         <Badge 
                             status='error'
-                            value={100}
+                            value='New'
                             badgeStyle={{
                                 borderWidth: 'none',
-                                height: 25,
-                                width: 40,
+                                height: 22.5,
+                                width: 35,
                             }}
                             containerStyle={{
                                 marginLeft: 10
                             }}
                             textStyle={{
-                                fontSize: 14,
-                                fontWeight: '700'
+                                fontSize: 12,
+                                fontWeight: '600'
                             }}
                         />
                         <Text style={styles.serviceRequestsText}>Service Requests</Text>
@@ -176,6 +191,7 @@ const Properties = () => {
                         )}
                         contentContainerStyle={{ paddingBottom: 350 }}
                         showsVerticalScrollIndicator={false}
+                        ItemSeparatorComponent={renderSeparator}
                     />
                 </SafeAreaView>
             </View>

@@ -100,59 +100,29 @@ const styles = StyleSheet.create({
         
     },
 
-    // ** SERVICE REQUEST DETAIL SCREEN ** //
-    markComplete: {
-        marginHorizontal: 20,
-        marginTop: 50,
-        borderColor: '#ffffff50',
+    // ** SERVICE REQUEST Modal ** //
+    
+
+    // ** PROPERTY DETAIL SCREEN ** //
+    backBtn: {
+        top: 70, 
+        left: 30,
         borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        justifyContent: 'center'
     },
-    completed: {
-        marginHorizontal: 20,
-        marginTop: 50,
-        backgroundColor: '#5cb85c',
-        borderRadius: 10,
-        height: 45,
-        justifyContent: 'center'
+    sectionSpacing: {
+        marginTop: 35,
+        marginLeft: 50
     },
-    serviceRequestImage: {
-        backgroundColor: '#ffffff50',
-        width: '100%',
-        height: 200,
-    },
-    buttonText: {
+    propertyDetailTitle: {
         color: '#fff',
         fontSize: 18,
         fontWeight: '700',
         textAlign: 'center'
     },
-
-    // ** PROPERTY DETAIL SCREEN ** //
-    backBtn: {
-        top: 70, 
-        left: 20, 
-        backgroundColor:'#09061C70', 
-        width: 45, 
-        height: 45, 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        borderRadius: 10
-    },
-    sectionSpacing: {
-        margin: 30
-    },
-    propertyDetailTitle: {
-        color: '#fff',
-        fontSize: 20,
-        fontWeight: '700'
-    },
     propertyDetailSubText: {
         color: '#ffffff90',
         fontSize: 16,
-        fontWeight: '500'
+        fontWeight: '500',
     },
     sectionTitle: {
         color: '#fff',
@@ -181,7 +151,7 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         marginVertical: 10
     },
-    buttons: {
+    removePropButton: {
         marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
@@ -190,6 +160,12 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         height: 45,
     },
+    removePropButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        textAlign: 'center'
+    }
 });
 
 export default styles;

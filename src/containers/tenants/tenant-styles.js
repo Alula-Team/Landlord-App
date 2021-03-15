@@ -36,6 +36,8 @@ const styles = StyleSheet.create({
     },
     listCell: {
         paddingVertical: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     itemCenter: {
         flexDirection: 'row', 
@@ -45,20 +47,15 @@ const styles = StyleSheet.create({
     },
     listItem: {
         paddingLeft: 12.5,
-        fontSize: 14,
-        fontWeight: '600',
-        color: '#fff',
-        alignSelf: 'center',
-    },
-    transactionType: {
-        color: '#fff',
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '700',
+        color: '#fff',
     },
-    amount: {
-        alignSelf: 'center',
-        flexDirection: 'row'
-    }
+    status: {
+        color: '#fff',
+        marginLeft: 12.5,
+        marginTop: 5
+    },
 });
 
 export default styles;

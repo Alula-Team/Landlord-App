@@ -29,8 +29,9 @@ const Transactions = () => {
             payment: true,
             date: "03/03/21",
             transactionType: 'Rent Payment',
+            paymentType: 'Auto Payment Collection',
             notes: null,
-            image: ''
+            image: {}
         },
         {
             id: 1,
@@ -39,8 +40,9 @@ const Transactions = () => {
             payment: true,
             date: "03/01/21",
             transactionType: 'Rent Payment',
+            paymentType: 'Auto Payment Collection',
             notes: null,
-            image: ''
+            image: {}
         },
         {
             id: 2,
@@ -49,8 +51,9 @@ const Transactions = () => {
             payment: false,
             date: "02/28/21",
             transactionType: 'Repairs',
+            paymentType: 'Check',
             notes: null,
-            image: ''
+            image: {}
         },
         {
             id: 3,
@@ -59,8 +62,9 @@ const Transactions = () => {
             payment: true,
             date: "02/28/21",
             transactionType: 'Rent Payment',
+            paymentType: 'Auto Payment Collection',
             notes: null,
-            image: ''
+            image: {}
         },
         {
             id: 4,
@@ -69,8 +73,9 @@ const Transactions = () => {
             payment: false,
             date: "02/28/21",
             transactionType: 'Repairs',
-            notes: null,
-            image: ''
+            paymentType: 'Credit Card',
+            notes: 'Hello World',
+            image: {}
         },
     ];
 
@@ -167,13 +172,18 @@ const Transactions = () => {
                             data={data}
                             keyExtractor={item => item.address}
                             renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.listCell} onPress={() => navigation.navigate('TransactionDetail')}>
+                                <TouchableOpacity style={styles.listCell}>
                                     <Text style={styles.transactionType}>{item.transactionType}</Text>
-                                    {/* Address and Transaction Amount */}
+                                    {/* Address */}
+                                    <View style={{flexDirection: 'row', marginTop: 10}}>
+                                        <Feather name='map-pin' color='#fff' size={15} />
+                                        <Text style={styles.listItem}>{item.address}</Text>
+                                    </View>
+                                    {/* Date and Transaction Amount */}
                                     <View style={styles.itemCenter}>
                                         <View style={{flexDirection: 'row'}}>
-                                            <Feather name='map-pin' color='#fff' size={15} />
-                                            <Text style={styles.listItem}>{item.address}</Text>
+                                            <Feather name='clock' color='#fff' size={15} />
+                                            <Text style={styles.listItem}>{item.date}</Text>
                                         </View>
                                         <Text 
                                             style={{
@@ -181,16 +191,16 @@ const Transactions = () => {
                                             }}
                                         ><Amount payment={item.payment} />{item.amount}</Text>
                                     </View>
-                                    {/* Date */}
+                                    {/* Payment Type */}
                                     <View style={{flexDirection: 'row', marginTop: 10}}>
-                                        <Feather name='clock' color='#fff' size={15} />
-                                        <Text style={styles.listItem}>{item.date}</Text>
+                                        <Feather name='credit-card' color='#fff' size={15} />
+                                        <Text style={styles.listItem}>{item.paymentType}</Text>
                                     </View>
                                 </TouchableOpacity>
                             )}
                             contentContainerStyle={{ paddingBottom: 350 }}
                             showsVerticalScrollIndicator={false}
-                            // ItemSeparatorComponent={renderSeparator}
+                            ItemSeparatorComponent={renderSeparator}
                         />
                     </View>
                 </SafeAreaView>

@@ -130,7 +130,7 @@ const ServiceRequests = () => {
                         data={data}
                         keyExtractor={item => item.address}
                         renderItem={({ item }) => (
-                            <TouchableOpacity style={styles.listCell} onPress={() => navigation.navigate('ServiceRequestDetail')}>
+                            <TouchableOpacity style={styles.listCell}>
                                 <View style={{flexDirection: 'row'}}>
                                     <CellBadge isCompleted={item.isCompleted} />
                                     <Text style={styles.listItem}>{item.address}</Text>

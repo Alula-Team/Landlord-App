@@ -183,14 +183,14 @@ const AddTransactions = () => {
                     />
 
                     {/* Attachement */}
-                    <Text style={styles.sectionText}>Attachements:</Text>
+                    {/* <Text style={styles.sectionText}>Attachements:</Text>
                     <TouchableOpacity style={styles.upload}>
                         <Feather name='upload' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                         <Text style={{color: '#fff', marginLeft: 10, fontSize: 16, fontWeight: '600', alignSelf: 'center'}}>Upload Attachement</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                     {/* Notes */}
-                    <Text style={styles.sectionText}>Notes:</Text>
+                    {/* <Text style={styles.sectionText}>Notes:</Text>
                     <View>
                         <TextInput 
                             style={{
@@ -208,7 +208,7 @@ const AddTransactions = () => {
                             autoCorrect={false}
                             multiline={true}
                         />
-                    </View>
+                    </View> */}
                 </KeyboardAwareScrollView>
             </View>
         </>
