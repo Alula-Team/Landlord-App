@@ -77,6 +77,11 @@ const AddTransactions = () => {
             value: null,
             color: '#fff'
         }
+        const CategoryPlaceholder = {
+            label: 'Select Category...',
+            value: null,
+            color: '#fff'
+        }
 
     return (
         <>
@@ -134,6 +139,25 @@ const AddTransactions = () => {
                         items={[
                             { label: 'Expense', value: 'expense', color: 'white' },
                             { label: 'Payment', value: 'payment', color: 'white' },
+                        ]}
+                    />
+
+                    {/* Category */}
+                    <Text style={styles.sectionText}>Category</Text>
+                    <RNPickerSelect
+                        placeholder={CategoryPlaceholder}
+                        style={pickerStyles}
+                        onValueChange={(value) => console.log(value)}
+                        items={[
+                            { label: 'Appraisal', value: 'appraisal', color: 'white' },
+                            { label: 'Cleaning', value: 'cleaning', color: 'white' },
+                            { label: 'Inspection', value: 'inspection', color: 'white' },
+                            { label: 'Marketing', value: 'marketing', color: 'white' },
+                            { label: 'Renovations', value: 'renovations', color: 'white' },
+                            { label: 'Rent Payment', value: 'rent-payment', color: 'white' },
+                            { label: 'Repairs', value: 'repairs', color: 'white' },
+                            { label: 'Security Deposit', value: 'secuirty-deposit', color: 'white' },
+                            { label: 'Tax Services', value: 'tax-services', color: 'white' },
                         ]}
                     />
 

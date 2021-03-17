@@ -97,11 +97,37 @@ const styles = StyleSheet.create({
     addButtonText: {
         fontSize: 16,
         color: '#fff',
-        
+    },
+    propertyInput: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        marginLeft: 12.5
     },
 
-    // ** SERVICE REQUEST Modal ** //
-    
+    // ** SERVICE REQUEST Screen ** //
+    propertySectionSpacing: {
+        marginTop: 37,
+        marginLeft: 30
+    },
+    propertyServiceTitle: {
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: '700',
+        textAlign: 'left', 
+    },
+    propertyServiceSubText: {
+        color: '#ffffff90',
+        fontSize: 16,
+        fontWeight: '500',
+    },
+    descriptionSectionSpacing: {
+        margin: 30
+    },
+    descriptionText: {
+        color: '#fff',
+        fontSize: 16,
+    },
 
     // ** PROPERTY DETAIL SCREEN ** //
     backBtn: {
@@ -110,18 +136,18 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     sectionSpacing: {
-        marginTop: 35,
-        marginLeft: 50
+        marginTop: 37,
+        left: 100
     },
     propertyDetailTitle: {
         color: '#fff',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '700',
-        textAlign: 'center'
+        textAlign: 'left', 
     },
     propertyDetailSubText: {
         color: '#ffffff90',
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: '500',
     },
     sectionTitle: {

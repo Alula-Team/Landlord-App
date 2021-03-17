@@ -11,6 +11,10 @@ import Feather from 'react-native-vector-icons/Feather';
 // Style Sheet
 import styles from './prop-styles';
 
+// Things I need
+    // 
+
+
 const ServiceRequests = () => {
 
     const navigation = useNavigation();
@@ -130,7 +134,7 @@ const ServiceRequests = () => {
                         data={data}
                         keyExtractor={item => item.address}
                         renderItem={({ item }) => (
-                            <TouchableOpacity style={styles.listCell}>
+                            <TouchableOpacity style={styles.listCell} onPress={() => navigation.navigate('ServiceRequestDetail')}>
                                 <View style={{flexDirection: 'row'}}>
                                     <CellBadge isCompleted={item.isCompleted} />
                                     <Text style={styles.listItem}>{item.address}</Text>

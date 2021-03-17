@@ -15,11 +15,16 @@ import styles from './prop-styles';
 
 // What I need:
     // State
-    // Function that changes select button to tenant cell when tenant is selected
+    //
+    // Function that deletes property from server
 
 const PropertyDetail = () => {
 
     const navigation = useNavigation();
+
+    function name(params) {
+        
+    }
 
     return(
         <View style={styles.container}>
@@ -29,10 +34,10 @@ const PropertyDetail = () => {
                     <Feather name='arrow-left' size={25} color='#fff' onPress={() => navigation.goBack()} />
                 </TouchableOpacity>
                 <View style={styles.sectionSpacing}>
-                    <Text style={styles.propertyDetailTitle}>595 S. Green Valley Pkwy Apt 121</Text>
-                    <View style={{flexDirection: 'row', marginTop: 5, marginLeft: 45}}>
-                        <Feather name='map-pin' color='white' size={15} style={{marginRight: 5, marginTop: 1, color: '#ffffff90'}} />
-                        <Text style={styles.propertyDetailSubText}>Las Vegas, NV, 89107</Text>
+                    <Text style={styles.propertyDetailTitle}>Property Address</Text>
+                    <View style={{flexDirection: 'row', marginTop: 5}}>
+                        <Feather name='map-pin' color='white' size={12} style={{marginRight: 5, marginTop: 1, color: '#ffffff90'}} />
+                        <Text style={styles.propertyDetailSubText}>City, State, Zip</Text>
                     </View>
                 </View>
             </View>
@@ -49,7 +54,7 @@ const PropertyDetail = () => {
                             <Feather name='edit-3' color='#ffffff90' size={16} />
                             <Text style={styles.infoTitle}>Lease Type:</Text>
                         </View>
-                        <Text style={styles.infoText}> - -</Text>
+                        <Text style={styles.infoText}></Text>
                     </View>
                     
                     {/* Lease Period */}
@@ -58,7 +63,7 @@ const PropertyDetail = () => {
                             <Feather name='clock' color='#ffffff90' size={16} />
                             <Text style={styles.infoTitle}>Lease Period:</Text>
                         </View>
-                        <Text style={styles.infoText}> - -</Text>
+                        <Text style={styles.infoText}></Text>
                     </View>
 
                     {/* Rental Rate */}
@@ -67,7 +72,7 @@ const PropertyDetail = () => {
                             <Feather name='dollar-sign' color='#ffffff90' size={16} />
                             <Text style={styles.infoTitle}>Rental Rate:</Text>
                         </View>
-                        <Text style={styles.infoText}> - -</Text>
+                        <Text style={styles.infoText}></Text>
                     </View>
 
                     {/* Security Deposit */}
@@ -76,22 +81,23 @@ const PropertyDetail = () => {
                             <Feather name='dollar-sign' color='#ffffff90' size={16} />
                             <Text style={styles.infoTitle}>Security Deposit:</Text>
                         </View>
-                        <Text style={styles.infoText}> - -</Text>
+                        <Text style={styles.infoText}></Text>
                     </View>
-
+                    
+                    {/* Rent Due */}
                     <View style={{flexDirection: 'row', alignItems: 'center', marginLeft: 10, justifyContent: 'space-between'}}>
                         <View style={{flexDirection: 'row', alignItems: 'center'}}>
                             <Feather name='calendar' color='#ffffff90' size={16} />
                             <Text style={styles.infoTitle}>Rent Due:</Text>
                         </View>
-                        <Text style={styles.infoText}> - -</Text>
+                        <Text style={styles.infoText}></Text>
                     </View>
                 </View>
 
                 {/* Tenant Information */}
                 <Text style={styles.sectionTitle}>Service Requests</Text>
                 <View style={{marginHorizontal: 10}}>
-                    <TouchableOpacity style={styles.serviceRequestsButton}>
+                    <TouchableOpacity style={styles.serviceRequestsButton} onPress={() => navigation.navigate('ServiceRequests')}>
                         <View style={{flexDirection: 'row', alignSelf:'center'}}>
                             <Feather name='tool' color='#fff' size={20} style={{marginLeft: 10, alignSelf: 'center'}} />
                             <Text style={styles.serviceRequestsText}>Service Requests</Text>
@@ -101,9 +107,9 @@ const PropertyDetail = () => {
                 </View>
 
                 {/* Remove Property Button */}
-                <View style={{backgroundColor: 'red', margin: 30, padding: 15, borderRadius: 10}}>
-                    <Text style={styles.removePropButtonText}>Remove Property</Text>
-                </View>
+                <TouchableOpacity style={{backgroundColor: 'red', margin: 30, padding: 15, borderRadius: 10}}>
+                    <Text style={styles.removePropButtonText}>Delete Property</Text>
+                </TouchableOpacity>
             </ScrollView>
         </View>
     );
