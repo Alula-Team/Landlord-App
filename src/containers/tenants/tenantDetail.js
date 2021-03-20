@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Alert, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Navigation
@@ -11,6 +11,12 @@ import Feather from 'react-native-vector-icons/Feather';
 // Style Sheet
 import styles from './tenant-styles';
 
+// Things I need
+    // Actions button pops up modal with options to: 
+        //add lease (if no lease), 
+        // remove lease (if there is a lease), 
+        // renew lease (once lease term is set to expire in 60d)
+
 const TenantDetailScreen = () => {
 
     const navigation = useNavigation();
@@ -18,8 +24,8 @@ const TenantDetailScreen = () => {
     // Delete Alert Pop Up
     const deleteAlert = () => {
         Alert.alert(
-            "Delete Property?",
-            "Deleting this property will also delete its data from all reportings.",
+            "Delete Tenant?",
+            "Are you sure you want to delete this tenant?",
             [
                 { text: "Cancel", style: "cancel", onPress: () => console.log("Cancel Pressed") },
                 { text: "Delete", style: "destructive", onPress: () => console.log("Delete Pressed") }
@@ -83,13 +89,18 @@ const TenantDetailScreen = () => {
                                     <Feather name='mail' size={16} color='#ffffff80'/>
                                     <Text style={{color: '#ffffff80', fontSize: 16, fontWeight: '500', marginLeft: 5}}>email@email.com</Text>
                                 </View>
-                                {/* Status */}
                             </View>
                         </View>
                     </View>
 
                     {/* Lease Information */}
-                    <Text style={styles.sectionTitle}>Lease Details</Text>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={styles.sectionTitle}>Lease Details</Text>
+                        <TouchableOpacity style={{flexDirection: 'row', marginTop: 30, marginRight: 40}}>
+                            <Text style={{color: '#fff', fontSize: 15, fontWeight: '500', marginRight: 10}}>Actions</Text>
+                            <Feather name='arrow-right' color='#fff' size={18} />
+                        </TouchableOpacity>
+                    </View>
                     <View style={{backgroundColor: '#ffffff20', borderRadius: 10, marginHorizontal: 30, marginTop: 10, padding: 10}}>
                         <Text style={styles.tenantName}>Lease Activity</Text>
 
