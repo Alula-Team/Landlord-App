@@ -185,13 +185,14 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         height: 45,
+        width: 100
     },
     removePropButtonText: {
         color: '#fff',
         fontSize: 16,
         fontWeight: '700',
         textAlign: 'center'
-    }
+    },
 });
 
 export default styles;

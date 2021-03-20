@@ -56,6 +56,23 @@ const styles = StyleSheet.create({
         marginLeft: 12.5,
         marginTop: 5
     },
+
+    // ADD TENANT
+    sectionText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#fff',
+        textAlign: 'left',
+        marginTop: 30,
+        marginBottom: 20,
+        marginLeft: 20
+    },
+    tenantInput: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        marginLeft: 12.5
+    },
 });
 
 export default styles;

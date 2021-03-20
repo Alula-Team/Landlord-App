@@ -1,8 +1,8 @@
 import React from 'react';
-import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -202,6 +202,7 @@ const AddProperties = () => {
                         placeholderTextColor='#ffffff80'
                         style={styles.propertyInput}
                         keyboardAppearance='dark'
+                        keyboardType='number-pad'
                     />
                 </View>
                 
