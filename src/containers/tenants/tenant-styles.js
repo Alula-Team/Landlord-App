@@ -73,6 +73,72 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         marginLeft: 12.5
     },
+
+    // Tenant Detail
+    imgPlaceHolder: {
+        width: 70, 
+        height: 70, 
+        borderRadius: 80/2, 
+        borderColor: '#fff',
+        borderWidth: 3,
+        justifyContent: 'center', 
+        alignItems: 'center',
+        alignSelf: 'center'
+    },
+    propertyDetailTitle: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        textAlign: 'left', 
+    },
+    propertyDetailSubText: {
+        color: '#ffffff90',
+        fontSize: 14,
+        fontWeight: '500',
+    },
+    sectionTitle: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        marginLeft: 30,
+        marginTop: 30,
+        marginBottom: 20
+    },
+    infoTitle: {
+        color: '#ffffff90',
+        fontSize: 16,
+        marginLeft: 10,
+        marginVertical: 10
+    },
+    infoText: {
+        color: '#fff',
+        fontSize: 16,
+        marginRight: 10,
+        marginVertical: 10
+    },
+    tenantName: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        marginLeft: 10,
+        marginVertical: 10
+    },
+    removePropButton: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        width: 100
+    },
+    removePropButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        textAlign: 'center'
+    },
 });
 
 export default styles;
