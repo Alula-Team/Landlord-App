@@ -131,7 +131,7 @@ const Tenants = () => {
                             data={data}
                             keyExtractor={item => item.address}
                             renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.listCell}>
+                                <TouchableOpacity style={styles.listCell} onPress={() => navigation.navigate('TenantDetail')}>
                                     <View style={{flexDirection: 'row'}}>
                                         <Feather name='user' color='#fff' size={20} />
                                         <View>

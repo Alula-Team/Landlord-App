@@ -102,7 +102,7 @@ const PropertyDetail = () => {
                     </View>
                 </View>
 
-                {/* Tenant Information */}
+                {/* Service Requests */}
                 <Text style={styles.sectionTitle}>Service Requests</Text>
                 <View style={{marginHorizontal: 10}}>
                     <TouchableOpacity style={styles.serviceRequestsButton} onPress={() => navigation.navigate('ServiceRequests')}>
