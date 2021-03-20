@@ -13,7 +13,7 @@ import styles from './tenant-styles';
 
 // THINGS I NEED FOR THIS SCREEN
     // Working Search Feature
-    // New tenants auto sorted by last name
+    // New tenants auto sorted by first name
 
 const Tenants = () => {
 
@@ -34,7 +34,7 @@ const Tenants = () => {
         },
         {
             id: 2,
-            tenant: 'Xohcitl Gonzales-Lopez',
+            tenant: 'Xochitl Gonzales-Lopez',
             address: '595 S. Green Valley Pkwy Apt 121',
             archived: true,
         },
@@ -70,15 +70,7 @@ const Tenants = () => {
     // Separator
     const renderSeparator = () => {
         return (
-          <View
-            style={{
-              height: .5,
-            //   width: '86%',
-              backgroundColor: '#CED0CE50',
-              marginLeft: '5%',
-              marginRight: '5%'
-            }}
-          />
+          <View style={{ height: .5, backgroundColor: '#CED0CE50'}} />
         );
       }
 
@@ -152,6 +144,7 @@ const Tenants = () => {
                             )}
                             contentContainerStyle={{ paddingBottom: 350 }}
                             showsVerticalScrollIndicator={false}
+                            ItemSeparatorComponent={renderSeparator}
                         />
                     </View>
                 </SafeAreaView>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Alert, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 
@@ -22,8 +22,16 @@ const PropertyDetail = () => {
 
     const navigation = useNavigation();
 
-    function name(params) {
-        
+    // Delete Alert Pop Up
+    const deleteAlert = () => {
+        Alert.alert(
+            "Delete Property?",
+            "Deleting this property will also delete its data from all reportings.",
+            [
+                { text: "Cancel", style: "cancel", onPress: () => console.log("Cancel Pressed") },
+                { text: "Delete", style: "destructive", onPress: () => console.log("Delete Pressed") }
+            ]
+        );
     }
 
     return(
@@ -107,7 +115,7 @@ const PropertyDetail = () => {
                 </View>
 
                 {/* Remove Property Button */}
-                <TouchableOpacity style={{backgroundColor: 'red', margin: 30, padding: 15, borderRadius: 10}}>
+                <TouchableOpacity style={{backgroundColor: 'red', margin: 30, padding: 15, borderRadius: 10}} onPress={deleteAlert}>
                     <Text style={styles.removePropButtonText}>Delete Property</Text>
                 </TouchableOpacity>
             </ScrollView>

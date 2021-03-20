@@ -90,6 +90,22 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row'
     },
+    actionsBtn: {
+        alignItems: 'center',
+        alignSelf: 'flex-end',
+        borderColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 10,
+        flexDirection: 'row',
+        marginTop: 30,
+        padding: 7,
+        width: 100,
+    },
+    actionsText: {
+        color: '#fff',
+        fontSize: 14,
+        fontWeight: '600',
+    },
 
     // Add Transaction Screen
     scrollView: {

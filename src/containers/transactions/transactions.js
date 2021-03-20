@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import { Alert, Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Navigation
@@ -113,8 +113,24 @@ const Transactions = () => {
             }}
           />
         );
-      }
+    }
 
+    // Delete Alert Pop Up
+    const deleteAlert = () => {
+        Alert.alert(
+            "Delete Transaction?",
+            "Deleting this transaction will also delete its data from all reportings.",
+            [
+                {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel"
+                },
+                { text: "Delete", style: "destructive", onPress: () => console.log("OK Pressed") }
+            ]
+        );
+    }
+    
     return(
         <>
             <View style={styles.container}>
@@ -172,7 +188,7 @@ const Transactions = () => {
                             data={data}
                             keyExtractor={item => item.address}
                             renderItem={({ item }) => (
-                                <TouchableOpacity style={styles.listCell}>
+                                <View style={styles.listCell}>
                                     <Text style={styles.transactionType}>{item.transactionType}</Text>
                                     {/* Address */}
                                     <View style={{flexDirection: 'row', marginTop: 10}}>
@@ -196,7 +212,14 @@ const Transactions = () => {
                                         <Feather name='credit-card' color='#fff' size={15} />
                                         <Text style={styles.listItem}>{item.paymentType}</Text>
                                     </View>
-                                </TouchableOpacity>
+                                    {/* Actions */}
+                                    <View>
+                                        <TouchableOpacity style={styles.actionsBtn} onPress={deleteAlert}>
+                                            <Feather name='trash-2' color='#fff' size={20} style={{marginRight: 10}} />
+                                            <Text style={styles.actionsText}>Delete</Text>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
                             )}
                             contentContainerStyle={{ paddingBottom: 350 }}
                             showsVerticalScrollIndicator={false}

@@ -174,7 +174,7 @@ const AddTransactions = () => {
                     />
 
                     {/* Date Paid */}
-                    <Text style={styles.sectionText}>Date Paid:</Text>
+                    <Text style={styles.sectionText}>Date Paid</Text>
                     <DateTimePicker
                         testID="dateTimePicker"
                         value={date}
