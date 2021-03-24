@@ -95,18 +95,21 @@ const AddProperties = () => {
                     />
                 }
                 rightComponent={
-                    <Icon 
-                        name='send'
-                        type='feather'
-                        color='#fff'
-                        size={25}
-                        iconStyle={{
-                            paddingTop: 30,
-                            paddingRight: 10,
-                            paddingBottom: 10
-                        }}
-                        onPress={handleSubmit(onSubmit)}
-                    />
+                    // <Icon 
+                    //     name='send'
+                    //     type='feather'
+                    //     color='#fff'
+                    //     size={22.5}
+                    //     iconStyle={{
+                    //         paddingTop: 30,
+                    //         paddingRight: 10,
+                    //         paddingBottom: 10
+                    //     }}
+                    //     onPress={handleSubmit(onSubmit)}
+                    // />
+                    <TouchableOpacity style={{paddingTop: 32.5, paddingRight: 10}} onPress={handleSubmit(onSubmit)}>
+                        <Text style={{color: '#fff', fontSize: 18, fontWeight: '600'}}>Save</Text>
+                    </TouchableOpacity>
                 }
                 containerStyle={{
                     backgroundColor: '#09061C',
