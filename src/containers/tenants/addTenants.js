@@ -28,7 +28,7 @@ const AddTransactions = () => {
                 color: '#fff',
                 paddingLeft: 15,
                 fontSize: 16,
-                fontWeight: '600'
+                fontWeight: '500'
             },
             inputAndroid: {
                 marginHorizontal: 20,
@@ -41,7 +41,7 @@ const AddTransactions = () => {
                 color: '#fff',
                 paddingLeft: 15,
                 fontSize: 16,
-                fontWeight: '600'
+                fontWeight: '500'
             }
         }
         // Placeholders
