@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     tenantInput: {
         color: '#fff',
         fontSize: 16,
-        fontWeight: '700',
+        fontWeight: '500',
         marginLeft: 12.5
     },
 

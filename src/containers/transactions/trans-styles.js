@@ -139,6 +139,22 @@ const styles = StyleSheet.create({
         height: 45,
         flexDirection: 'row'
     },
+    dateContainer: {
+        marginHorizontal: 30,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row'
+    },
+    dateText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '500',
+        marginLeft: 12.5
+    },
 });
 
 export default styles;

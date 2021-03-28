@@ -4,6 +4,9 @@ import { Header, Icon } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+// Forms
+import { useForm, Controller } from "react-hook-form";
+
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
@@ -13,6 +16,9 @@ import styles from './tenant-styles';
 const AddTransactions = () => {
     
     const navigation = useNavigation();
+
+    const { control, handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
 
     // For Picker Select
         // Styles
@@ -28,7 +34,7 @@ const AddTransactions = () => {
                 color: '#fff',
                 paddingLeft: 15,
                 fontSize: 16,
-                fontWeight: '600'
+                fontWeight: '500'
             },
             inputAndroid: {
                 marginHorizontal: 20,
@@ -41,7 +47,7 @@ const AddTransactions = () => {
                 color: '#fff',
                 paddingLeft: 15,
                 fontSize: 16,
-                fontWeight: '600'
+                fontWeight: '500'
             }
         }
         // Placeholders
@@ -79,16 +85,11 @@ const AddTransactions = () => {
                             onPress={() => navigation.goBack()}
                         />
                     }
-                    rightComponent={{
-                        text: 'Save',
-                        style: { 
-                            color: '#fff', 
-                            fontWeight: '600', 
-                            fontSize: 18, 
-                            marginTop: 35,
-                            marginRight: 10
-                        }
-                    }}
+                    rightComponent={
+                        <TouchableOpacity style={{paddingTop: 32.5, paddingRight: 10}} onPress={handleSubmit(onSubmit)}>
+                            <Text style={{color: '#fff', fontSize: 18, fontWeight: '600'}}>Save</Text>
+                        </TouchableOpacity>
+                    }
                     containerStyle={{
                         backgroundColor: '#09061C',
                         justifyContent: 'space-around',
@@ -101,50 +102,90 @@ const AddTransactions = () => {
                     <Text style={styles.sectionText}>Tenant Information</Text>
 
                     {/* Tenant Name */}
-                    <View style={styles.searchContainer}>
-                        <TextInput 
-                            type='text'
-                            placeholder=' Name...'
-                            placeholderTextColor='#ffffff80'
-                            style={styles.tenantInput}
-                            keyboardAppearance='dark'
-                        />
-                    </View>
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.searchContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder=' Name...'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.tenantInput}
+                                    autoCapitalize={true}
+                                    keyboardAppearance='dark'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="tenantName"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
                     
                     {/* Email Address */}
-                    <View style={styles.searchContainer}>
-                        <TextInput 
-                            type='text'
-                            placeholder='Email...'
-                            placeholderTextColor='#ffffff80'
-                            style={styles.tenantInput}
-                            keyboardAppearance='dark'
-                            keyboardType='email-address'
-                        />
-                    </View>
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.searchContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='Email...'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.tenantInput}
+                                    autoCapitalize={false}
+                                    keyboardAppearance='dark'
+                                    keyboardType='email-address'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="tenantEmail"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
 
                     {/* Phone Number*/}
-                    <View style={styles.searchContainer}>
-                        <TextInput 
-                            type='text'
-                            placeholder='Phone Number...'
-                            placeholderTextColor='#ffffff80'
-                            style={styles.tenantInput}
-                            keyboardAppearance='dark'
-                            keyboardType='phone-pad'
-                        />
-                    </View>
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.searchContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='Phone Number...'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.tenantInput}
+                                    keyboardAppearance='dark'
+                                    keyboardType='phone-pad'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="tenantPhoneNumber"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
 
                     {/* Property */}
                     <Text style={styles.sectionText}>Property</Text>
-                    <RNPickerSelect
-                        placeholder={PropertyPlaceholder}
-                        style={pickerStyles}
-                        onValueChange={(value) => console.log(value)}
-                        items={[
-                            { label: 'Property', value: 'property', color: 'white' },
-                            
-                        ]}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={PropertyPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Property', value: 'property', color: 'white' },
+                                    
+                                ]}
+                            />
+                        )}
+                        name="property"
+                        rules={{ required: true }}
+                        defaultValue=""
                     />
                     
                 </KeyboardAwareScrollView>

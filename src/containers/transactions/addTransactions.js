@@ -5,6 +5,9 @@ import RNPickerSelect from 'react-native-picker-select';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
+// Forms
+import { useForm, Controller } from "react-hook-form";
+
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
@@ -18,18 +21,8 @@ const AddTransactions = () => {
     
     const navigation = useNavigation();
 
-    const [date, setDate] = useState(new Date());
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-    };
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
+    const { control, handleSubmit } = useForm();
+    const onSubmit = data => console.log(data);
 
     // For Picker Select
         // Styles
@@ -45,7 +38,7 @@ const AddTransactions = () => {
                 color: '#fff',
                 paddingLeft: 15,
                 fontSize: 16,
-                fontWeight: '600'
+                fontWeight: '500'
             },
             inputAndroid: {
                 marginHorizontal: 30,
@@ -58,7 +51,7 @@ const AddTransactions = () => {
                 color: '#fff',
                 paddingLeft: 15,
                 fontSize: 16,
-                fontWeight: '600'
+                fontWeight: '500'
             }
         }
         // Placeholders
@@ -111,16 +104,11 @@ const AddTransactions = () => {
                             onPress={() => navigation.goBack()}
                         />
                     }
-                    rightComponent={{
-                        text: 'Save',
-                        style: { 
-                            color: '#fff', 
-                            fontWeight: '600', 
-                            fontSize: 18, 
-                            marginTop: 35,
-                            marginRight: 10
-                        }
-                    }}
+                    rightComponent={
+                        <TouchableOpacity style={{paddingTop: 32.5, paddingRight: 10}} onPress={handleSubmit(onSubmit)}>
+                            <Text style={{color: '#fff', fontSize: 18, fontWeight: '600'}}>Save</Text>
+                        </TouchableOpacity>
+                    }
                     containerStyle={{
                         backgroundColor: '#09061C',
                         justifyContent: 'space-around',
@@ -132,78 +120,115 @@ const AddTransactions = () => {
                 <KeyboardAwareScrollView style={{ flex: 1 }}>
                     {/* Transaction Type */}
                     <Text style={styles.sectionText}>Transaction Type</Text>
-                    <RNPickerSelect
-                        placeholder={TransactionPlaceholder}
-                        style={pickerStyles}
-                        onValueChange={(value) => console.log(value)}
-                        items={[
-                            { label: 'Expense', value: 'expense', color: 'white' },
-                            { label: 'Payment', value: 'payment', color: 'white' },
-                        ]}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={TransactionPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Expense', value: 'expense', color: 'white' },
+                                    { label: 'Payment', value: 'payment', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="transactionType"
+                        rules={{ required: true }}
+                        defaultValue=""
                     />
 
                     {/* Category */}
                     <Text style={styles.sectionText}>Category</Text>
-                    <RNPickerSelect
-                        placeholder={CategoryPlaceholder}
-                        style={pickerStyles}
-                        onValueChange={(value) => console.log(value)}
-                        items={[
-                            { label: 'Appraisal', value: 'appraisal', color: 'white' },
-                            { label: 'Cleaning', value: 'cleaning', color: 'white' },
-                            { label: 'Inspection', value: 'inspection', color: 'white' },
-                            { label: 'Marketing', value: 'marketing', color: 'white' },
-                            { label: 'Renovations', value: 'renovations', color: 'white' },
-                            { label: 'Rent Payment', value: 'rent-payment', color: 'white' },
-                            { label: 'Repairs', value: 'repairs', color: 'white' },
-                            { label: 'Security Deposit', value: 'secuirty-deposit', color: 'white' },
-                            { label: 'Tax Services', value: 'tax-services', color: 'white' },
-                        ]}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={CategoryPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Appraisal', value: 'appraisal', color: 'white' },
+                                    { label: 'Cleaning', value: 'cleaning', color: 'white' },
+                                    { label: 'Inspection', value: 'inspection', color: 'white' },
+                                    { label: 'Marketing', value: 'marketing', color: 'white' },
+                                    { label: 'Renovations', value: 'renovations', color: 'white' },
+                                    { label: 'Rent Payment', value: 'rent-payment', color: 'white' },
+                                    { label: 'Repairs', value: 'repairs', color: 'white' },
+                                    { label: 'Security Deposit', value: 'secuirty-deposit', color: 'white' },
+                                    { label: 'Tax Services', value: 'tax-services', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="transactionCategory"
+                        rules={{ required: true }}
+                        defaultValue=""
                     />
 
                     {/* Property */}
                     <Text style={styles.sectionText}>Property</Text>
-                    <RNPickerSelect
-                        placeholder={PropertyPlaceholder}
-                        style={pickerStyles}
-                        onValueChange={(value) => console.log(value)}
-                        items={[
-                            { label: 'Property', value: 'property', color: 'white' },
-                            
-                        ]}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={PropertyPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Property', value: 'property', color: 'white' },
+                                    
+                                ]}
+                            />
+                        )}
+                        name="property"
+                        rules={{ required: true }}
+                        defaultValue=""
                     />
 
                     {/* Date Paid */}
                     <Text style={styles.sectionText}>Date Paid</Text>
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date}
-                        mode={mode}
-                        display="default"
-                        style={{
-                            marginVertical: 15,
-                            marginHorizontal: 30,
-                            borderColor: '#ffffff50',
-                            borderRadius: 10,
-                            borderWidth: 1,
-                            height: 45,
-                        }}
-                        onChange={onChange}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.dateContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='e.g mm/dd/yyyy'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.dateText}
+                                    keyboardAppearance='dark'
+                                    keyboardType='phone-pad'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="date"
+                        rules={{ required: true }}
+                        defaultValue=""
                     />
                     
 
                     {/* Payment Method */}
                     <Text style={styles.sectionText}>Payment Method</Text>
-                    <RNPickerSelect
-                        placeholder={PaymentPlaceholder}
-                        style={pickerStyles}
-                        onValueChange={(value) => console.log(value)}
-                        items={[
-                            { label: 'Bank Transfer', value: 'bank-transfer', color: 'white' },
-                            { label: 'Cash', value: 'cash', color: 'white' },
-                            { label: 'Check', value: 'check', color: 'white' },
-                            { label: 'Other', value: 'other', color: 'white' },
-                        ]}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={PaymentPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Bank Transfer', value: 'bank-transfer', color: 'white' },
+                                    { label: 'Cash', value: 'cash', color: 'white' },
+                                    { label: 'Check', value: 'check', color: 'white' },
+                                    { label: 'Other', value: 'other', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="paymentMethod"
+                        rules={{ required: true }}
+                        defaultValue=""
                     />
 
                     {/* Attachement */}
