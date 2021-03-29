@@ -196,7 +196,13 @@ const AddTransactions = ({ addresses, addTenant }) => {
                 //     color: "white",
                 //   };
                 // })}
-                items={addresses}
+                items={addresses.map((item) => {
+                  return {
+                    label: item,
+                    value: item,
+                    color: "white",
+                  };
+                })}
               />
             )}
             name="property"
