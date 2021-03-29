@@ -275,6 +275,7 @@ const AddProperties = () => {
                     name="unit"
                     defaultValue=""
                 />
+
                 {/* Add Units Button */}
                 <TouchableOpacity style={styles.addButton}>
                     <Feather name='plus' size={25} style={styles.addButtonText} />

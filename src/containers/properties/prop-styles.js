@@ -128,6 +128,33 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 16,
     },
+    markComplete: {
+        borderColor: '#fff',
+        borderWidth: 1,
+        padding: 20,
+        borderRadius: 10,
+        width: 200,
+        alignSelf: 'center'
+    },
+    markCompleteText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        textAlign: 'center'
+    },
+    completed: {
+        backgroundColor: '#5cb85c',
+        padding: 20,
+        borderRadius: 10,
+        width: 200,
+        alignSelf: 'center'
+    },
+    completedText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        textAlign: 'center'
+    },
 
     // ** PROPERTY DETAIL SCREEN ** //
     backBtn: {

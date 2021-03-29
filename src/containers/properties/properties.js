@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Badge, Header, Icon } from 'react-native-elements';
 
 // Navigation
@@ -19,6 +19,7 @@ const Properties = () => {
 
     const navigation = useNavigation();
 
+    
     // Flatlist Dummy Data
     const data = [
         {

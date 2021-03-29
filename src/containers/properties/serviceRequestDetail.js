@@ -18,11 +18,35 @@ const ServiceRequestDetailScreen = () => {
 
     const navigation = useNavigation();
 
-    // Button Function
+    // Button Functions
+    function Outstanding (props) {
+        return (
+            <TouchableOpacity style={styles.markComplete} onPress={MarkComplete}>
+                <Text style={styles.markCompleteText}>Mark Complete</Text>
+            </TouchableOpacity>
+        );
+    }
 
-    // function Buttons(props) {
+    function Complete (props) {
+        return (
+            <TouchableOpacity style={styles.completed}>
+                <Text style={styles.completedText}>Task Completed</Text>
+            </TouchableOpacity>
+        );
+    }
+
+    function Status (props) {
+        const isCompleted = false;
+        if (isCompleted) {
+            return <Complete />
+        } else {
+            return <Outstanding />
+        }
+    }
+
+    function MarkComplete (props) {
         
-    // }
+    }
 
     return (
         <>
@@ -86,7 +110,7 @@ const ServiceRequestDetailScreen = () => {
                     </View> 
 
                     {/* Buttons */}
-                    
+                    <Status />
 
                 </ScrollView>
             </View>
