@@ -26,12 +26,12 @@ const Dashboard = () => {
     const navigation = useNavigation();
 
     // Flatlist Dummy Data
-    const data = [
-        {
+    // const data = [
+    //     {
             
-        },
+    //     },
         
-    ]
+    // ]
 
     // Badge Functions
     function NewBadge(props) {
@@ -110,7 +110,7 @@ const Dashboard = () => {
                 <SafeAreaView>
                     <View style={styles.listView}>
                         <FlatList
-                            data={data}
+                            // data={data}
                             keyExtractor={item => item.address}
                             renderItem={({ item }) => (
                                 <TouchableOpacity style={styles.listCell}>
