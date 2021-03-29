@@ -24,41 +24,56 @@ const AddTransactions = ({ addresses, addTenant }) => {
   const addItem = (data) => addTenant(data);
   const logItem = (data) => console.log(data);
   // For Picker Select
-  // Styles
   const pickerStyles = {
     inputIOS: {
-      marginHorizontal: 20,
-      marginTop: 15,
-      borderColor: "#ffffff50",
-      borderRadius: 10,
-      borderWidth: 1,
-      height: 45,
-      flexDirection: "row",
-      color: "#fff",
-      paddingLeft: 15,
-      fontSize: 16,
-      fontWeight: "500",
+        marginHorizontal: 20,
+        marginTop: 15,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        color: '#fff',
+        paddingLeft: 15,
+        fontSize: 16,
+        fontWeight: '500'
     },
     inputAndroid: {
-      marginHorizontal: 20,
-      marginTop: 15,
-      borderColor: "#ffffff50",
-      borderRadius: 10,
-      borderWidth: 1,
-      height: 45,
-      flexDirection: "row",
-      color: "#fff",
-      paddingLeft: 15,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-  };
-  // Placeholders
-  const PropertyPlaceholder = {
-    label: "Select Property...",
+        marginHorizontal: 20,
+        marginTop: 15,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        color: '#fff',
+        paddingLeft: 15,
+        fontSize: 16,
+        fontWeight: '500'
+    }
+}
+// Placeholders
+const PropertyPlaceholder = {
+    label: 'Select Property',
     value: null,
-    color: "#fff",
-  };
+    color: '#fff'
+}
+const LeaseTypePlaceholder = {
+    label: 'Select Lease Type',
+    value: null,
+    color: '#fff'
+}
+const LeasePeriodPlaceholder = {
+    label: 'Select Lease Duration',
+    value: null,
+    color: '#fff'
+}
+const RentDuePlaceholder = {
+    label: 'Select Rent Due Date',
+    value: null,
+    color: '#fff'
+}
 
   return (
     <>
