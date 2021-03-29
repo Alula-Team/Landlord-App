@@ -150,46 +150,46 @@ const RentDuePlaceholder = {
           <Controller
             control={control}
             render={({ onChange, value }) => (
-              <View style={styles.searchContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Email..."
-                  placeholderTextColor="#ffffff80"
-                  style={styles.tenantInput}
-                  autoCapitalize={false}
-                  keyboardAppearance="dark"
-                  keyboardType="email-address"
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                />
-              </View>
+                <View style={styles.searchContainer}>
+                    <TextInput 
+                        type='text'
+                        placeholder='Enter Tenants Email'
+                        placeholderTextColor='#ffffff80'
+                        style={styles.tenantInput}
+                        autoCapitalize={false}
+                        keyboardAppearance='dark'
+                        keyboardType='email-address'
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                    />
+                </View>
             )}
             name="tenantEmail"
             rules={{ required: true }}
             defaultValue=""
-          />
+        />
 
-          {/* Phone Number*/}
-          <Controller
+        {/* Phone Number*/}
+        <Controller
             control={control}
             render={({ onChange, value }) => (
-              <View style={styles.searchContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Phone Number..."
-                  placeholderTextColor="#ffffff80"
-                  style={styles.tenantInput}
-                  keyboardAppearance="dark"
-                  keyboardType="phone-pad"
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                />
-              </View>
+                <View style={styles.searchContainer}>
+                    <TextInput 
+                        type='text'
+                        placeholder='Enter Tenants Phone Number'
+                        placeholderTextColor='#ffffff80'
+                        style={styles.tenantInput}
+                        keyboardAppearance='dark'
+                        keyboardType='phone-pad'
+                        onChangeText={value => onChange(value)}
+                        value={value}
+                    />
+                </View>
             )}
             name="tenantPhoneNumber"
             rules={{ required: true }}
             defaultValue=""
-          />
+        />
 
           {/* Property */}
           <Text style={styles.sectionText}>Property</Text>
