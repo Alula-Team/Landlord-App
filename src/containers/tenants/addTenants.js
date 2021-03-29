@@ -26,6 +26,7 @@ const AddTransactions = () => {
             inputIOS: {
                 marginHorizontal: 20,
                 marginTop: 15,
+                marginBottom: 20,
                 borderColor: '#ffffff50',
                 borderRadius: 10,
                 borderWidth: 1,
@@ -52,7 +53,22 @@ const AddTransactions = () => {
         }
         // Placeholders
         const PropertyPlaceholder = {
-            label: 'Select Property...',
+            label: 'Select Property',
+            value: null,
+            color: '#fff'
+        }
+        const LeaseTypePlaceholder = {
+            label: 'Select Lease Type',
+            value: null,
+            color: '#fff'
+        }
+        const LeasePeriodPlaceholder = {
+            label: 'Select Lease Duration',
+            value: null,
+            color: '#fff'
+        }
+        const RentDuePlaceholder = {
+            label: 'Select Rent Due Date',
             value: null,
             color: '#fff'
         }
@@ -97,7 +113,7 @@ const AddTransactions = () => {
                     }}
                 />
             
-                <KeyboardAwareScrollView style={{marginHorizontal: 10}}>
+                <KeyboardAwareScrollView>
                     {/* Form */}
                     <Text style={styles.sectionText}>Tenant Information</Text>
 
@@ -108,7 +124,7 @@ const AddTransactions = () => {
                             <View style={styles.searchContainer}>
                                 <TextInput 
                                     type='text'
-                                    placeholder=' Name...'
+                                    placeholder='Enter Tenants Full Name'
                                     placeholderTextColor='#ffffff80'
                                     style={styles.tenantInput}
                                     autoCapitalize={true}
@@ -130,7 +146,7 @@ const AddTransactions = () => {
                             <View style={styles.searchContainer}>
                                 <TextInput 
                                     type='text'
-                                    placeholder='Email...'
+                                    placeholder='Enter Tenants Email'
                                     placeholderTextColor='#ffffff80'
                                     style={styles.tenantInput}
                                     autoCapitalize={false}
@@ -153,7 +169,7 @@ const AddTransactions = () => {
                             <View style={styles.searchContainer}>
                                 <TextInput 
                                     type='text'
-                                    placeholder='Phone Number...'
+                                    placeholder='Enter Tenants Phone Number'
                                     placeholderTextColor='#ffffff80'
                                     style={styles.tenantInput}
                                     keyboardAppearance='dark'
@@ -168,8 +184,10 @@ const AddTransactions = () => {
                         defaultValue=""
                     />
 
-                    {/* Property */}
-                    <Text style={styles.sectionText}>Property</Text>
+                    {/* Leasing Information */}
+                    <Text style={styles.sectionText}>Leasing Information (optional)</Text>
+
+                    {/* Add Property */}
                     <Controller
                         control={control}
                         render={({ onChange, value }) => (
@@ -184,6 +202,110 @@ const AddTransactions = () => {
                             />
                         )}
                         name="property"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+
+                    {/* Lease Type */}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={LeaseTypePlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Fixed Lease', value: 'fixed', color: 'white' },
+                                    { label: 'Month to Month', value: 'month-to-month', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="leaseType"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+
+                    {/* Lease Period */}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={LeasePeriodPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: '6 month', value: 'six-month', color: 'white' },
+                                    { label: '12 month', value: 'twelve-month', color: 'white' },
+                                    { label: '15 month', value: 'fifteen-month', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="leasePeriod"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+
+                    {/* Rental Rate */}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.searchContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='Enter Rental Rate'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.tenantInput}
+                                    autoCapitalize={false}
+                                    keyboardAppearance='dark'
+                                    keyboardType='number-pad'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="rentalRate"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+
+                    {/* Security Deposit */}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.searchContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='Enter Security Deposit (optional)'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.tenantInput}
+                                    autoCapitalize={false}
+                                    keyboardAppearance='dark'
+                                    keyboardType='number-pad'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="securityDeposit"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+
+                    {/* Rent Due */}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={RentDuePlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: '1st of each month', value: 'first-of-month', color: 'white' },
+                                    { label: '15th of each month', value: 'fifteenth-of-month', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="rentDue"
                         rules={{ required: true }}
                         defaultValue=""
                     />
