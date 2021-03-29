@@ -204,7 +204,7 @@ const RentDuePlaceholder = {
                     return {
                         label: item,
                         value: item,
-                        color: "white"
+                        color: 'white'
                     };
                 })}
               />
