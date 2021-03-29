@@ -192,7 +192,7 @@ const RentDuePlaceholder = {
         />
 
           {/* Property */}
-          <Text style={styles.sectionText}>Property</Text>
+          <Text style={styles.sectionText}>Leasing Information</Text>
           <Controller
             control={control}
             render={({ onChange, value }) => (
@@ -200,18 +200,13 @@ const RentDuePlaceholder = {
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
                 onValueChange={(value) => onChange(value)}
-                // items={[
-                //   { label: "Property", value: "property", color: "white" },
-                //   { addresses },
-                // ]}
-                // items={properties.map((item) => {
-                //   return {
-                //     label: item.address,
-                //     value: item.address,
-                //     color: "white",
-                //   };
-                // })}
-                items={addresses}
+                items={addresses.map((item) => {
+                    return {
+                        label: item,
+                        value: item,
+                        color: "white"
+                    };
+                })}
               />
             )}
             name="property"
@@ -268,7 +263,6 @@ const RentDuePlaceholder = {
                             placeholder='Enter Rental Rate'
                             placeholderTextColor='#ffffff80'
                             style={styles.tenantInput}
-                            autoCapitalize={false}
                             keyboardAppearance='dark'
                             keyboardType='number-pad'
                             onChangeText={value => onChange(value)}
@@ -291,7 +285,6 @@ const RentDuePlaceholder = {
                             placeholder='Enter Security Deposit (optional)'
                             placeholderTextColor='#ffffff80'
                             style={styles.tenantInput}
-                            autoCapitalize={false}
                             keyboardAppearance='dark'
                             keyboardType='number-pad'
                             onChangeText={value => onChange(value)}
