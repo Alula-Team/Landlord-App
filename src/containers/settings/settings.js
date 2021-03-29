@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, TextInput, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
-import { Badge, Header, Icon } from 'react-native-elements';
+import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Header } from 'react-native-elements';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -10,9 +10,11 @@ import Feather from 'react-native-vector-icons/Feather';
 
 // Style Sheet
 import styles from './sett-styles';
-import { ScrollView } from 'react-native';
 
 const Settings = () => {
+
+    const navigation = useNavigation();
+    
     return (
         <>
             <View style={styles.container}>
@@ -40,7 +42,7 @@ const Settings = () => {
                         <Text style={styles.sectionText}>User Information</Text>
 
                         {/* Edit Profile Button */}
-                        <TouchableOpacity style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateProfile')}>
                             <View style={{flexDirection: 'row'}}>
                                 <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                                 <Text style={styles.buttonText}>Update Profile</Text>
