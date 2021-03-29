@@ -27,8 +27,8 @@ import { connect } from "react-redux";
 
 const Tenants = ({ stateTenants }) => {
   const navigation = useNavigation();
-  const data = stateTenants;
-  const datas = [
+  const datas = { stateTenants };
+  const data = [
     {
       id: 0,
       tenant: "Kane Toomer",
@@ -143,23 +143,16 @@ const Tenants = ({ stateTenants }) => {
           <View style={styles.listView}>
             <FlatList
               data={data}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.address}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={styles.listCell}
-                  onPress={() =>
-                    navigation.navigate("TenantDetail", {
-                      itemID: item.id,
-                      itemName: item.name,
-                      itemEmail: item.email,
-                      itemPhone: item.phone,
-                    })
-                  }
+                  onPress={() => navigation.navigate("TenantDetail")}
                 >
                   <View style={{ flexDirection: "row" }}>
                     <Feather name="user" color="#fff" size={20} />
                     <View>
-                      <Text style={styles.listItem}>{item.name}</Text>
+                      <Text style={styles.listItem}>{item.tenant}</Text>
                       <Text style={styles.status}>
                         Status: <Status archived={item.archived} />
                       </Text>
@@ -186,7 +179,7 @@ const Tenants = ({ stateTenants }) => {
 
 const mapStateToProps = (state) => {
   return {
-    stateTenants: state.tenants.tenants,
+    stateTenants: state.tenants,
   };
 };
 

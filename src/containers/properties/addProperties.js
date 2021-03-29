@@ -28,10 +28,10 @@ const AddProperties = ({ addProperty }) => {
   const navigation = useNavigation();
 
   const { control, handleSubmit } = useForm();
-  const addUnit = (data) => {
+  const addItem = (data) => {
     addProperty(data);
   };
-  const logUnit = (data) => {
+  const logItem = (data) => {
     console.log(data);
   };
   // For Picker Select
@@ -115,7 +115,7 @@ const AddProperties = ({ addProperty }) => {
           // />
           <TouchableOpacity
             style={{ paddingTop: 32.5, paddingRight: 10 }}
-            onPress={handleSubmit(addUnit)}
+            onPress={handleSubmit(addItem)}
           >
             <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
               Save

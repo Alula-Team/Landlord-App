@@ -11,3 +11,17 @@ export const doDeleteProperty = (id) => {
     id,
   };
 };
+
+export const doAddTenant = (payload) => {
+  return {
+    type: "ADD_TENANT",
+    payload,
+  };
+};
+
+export const doDeleteTenant = (id) => {
+  return {
+    type: "DELETE_TENANT",
+    id,
+  };
+};
