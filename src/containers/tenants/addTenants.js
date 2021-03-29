@@ -17,7 +17,7 @@ import styles from "./tenant-styles";
 import { connect } from "react-redux";
 import { doAddTenant } from "../../redux/actions";
 
-const AddTransactions = ({ properties, addTenant }) => {
+const AddTransactions = ({ addresses, addTenant }) => {
   const navigation = useNavigation();
 
   const { control, handleSubmit } = useForm();
@@ -189,13 +189,14 @@ const AddTransactions = ({ properties, addTenant }) => {
                 //   { label: "Property", value: "property", color: "white" },
                 //   { addresses },
                 // ]}
-                items={properties.map((item) => {
-                  return {
-                    label: item.address,
-                    value: item.address,
-                    color: "white",
-                  };
-                })}
+                // items={properties.map((item) => {
+                //   return {
+                //     label: item.address,
+                //     value: item.address,
+                //     color: "white",
+                //   };
+                // })}
+                items={addresses}
               />
             )}
             name="property"
@@ -209,8 +210,9 @@ const AddTransactions = ({ properties, addTenant }) => {
 };
 
 const mapStateToProps = (state) => {
+  const addresses = state.properties.properties.map((item) => item.address);
   return {
-    properties: state.properties.properties,
+    addresses,
   };
 };
 
