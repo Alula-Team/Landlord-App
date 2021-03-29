@@ -17,7 +17,7 @@ import styles from "./tenant-styles";
 import { connect } from "react-redux";
 import { doAddTenant } from "../../redux/actions";
 
-const AddTransactions = ({ addTenant }) => {
+const AddTransactions = ({ properties, addTenant }) => {
   const navigation = useNavigation();
 
   const { control, handleSubmit } = useForm();
@@ -185,9 +185,17 @@ const AddTransactions = ({ addTenant }) => {
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
                 onValueChange={(value) => onChange(value)}
-                items={[
-                  { label: "Property", value: "property", color: "white" },
-                ]}
+                // items={[
+                //   { label: "Property", value: "property", color: "white" },
+                //   { addresses },
+                // ]}
+                items={properties.map((item) => {
+                  return {
+                    label: item.address,
+                    value: item.address,
+                    color: "white",
+                  };
+                })}
               />
             )}
             name="property"
@@ -200,8 +208,14 @@ const AddTransactions = ({ addTenant }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    properties: state.properties.properties,
+  };
+};
+
 const actions = {
   addTenant: doAddTenant,
 };
 
-export default connect(null, actions)(AddTransactions);
+export default connect(mapStateToProps, actions)(AddTransactions);
