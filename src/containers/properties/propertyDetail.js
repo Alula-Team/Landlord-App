@@ -14,17 +14,17 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import styles from "./prop-styles";
 
 // Redux Stuff
-// import { connect } from "react-redux";
-// import { doDeleteProperty } from "../../redux/actions";
+import { connect } from "react-redux";
+import { doDeleteProperty } from "../../redux/actions";
 
 // What I need:
 // State
 // import { State } from "react-native-gesture-handler";
 // Function that deletes property from server
 
-const PropertyDetail = () => {
+const PropertyDetail = ({ route, deleteProperty }) => {
   const navigation = useNavigation();
-
+  const { itemID, itemAddress, itemCity, itemState, itemZip } = route.params;
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
@@ -39,7 +39,10 @@ const PropertyDetail = () => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => console.log("Delete Pressed"),
+          // onPress: () => console.log("Deleting Item ", { itemID }),
+          onPress: () => {
+            deleteProperty(itemID);
+          },
         },
       ]
     );
@@ -58,7 +61,10 @@ const PropertyDetail = () => {
           />
         </TouchableOpacity>
         <View style={styles.sectionSpacing}>
-          <Text style={styles.propertyDetailTitle}>Property Address</Text>
+          <Text style={styles.propertyDetailTitle}>
+            {/* Property Address: */}
+            {itemAddress}
+          </Text>
           <View style={{ flexDirection: "row", marginTop: 5 }}>
             <Feather
               name="map-pin"
@@ -66,7 +72,9 @@ const PropertyDetail = () => {
               size={12}
               style={{ marginRight: 5, marginTop: 1, color: "#ffffff90" }}
             />
-            <Text style={styles.propertyDetailSubText}>City, State, Zip</Text>
+            <Text style={styles.propertyDetailSubText}>
+              {itemCity}, {itemState} {itemZip}
+            </Text>
           </View>
         </View>
       </View>
@@ -208,8 +216,8 @@ const PropertyDetail = () => {
   );
 };
 
-// const actions = {
-//   deleteProperty: doDeleteProperty,
-// };
+const actions = {
+  deleteProperty: doDeleteProperty,
+};
 
-export default PropertyDetail;
+export default connect(null, actions)(PropertyDetail);

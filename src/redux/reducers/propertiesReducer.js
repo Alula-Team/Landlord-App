@@ -9,6 +9,9 @@ const propertiesReducer = (state = initialState, action) => {
     const newProperty = {
       id: uuid.v4(),
       address: action.payload.address,
+      city: action.payload.city,
+      state: action.payload.states,
+      zip: action.payload.zipCode,
       vacant: true,
     };
     const properties = [...state.properties, newProperty];
