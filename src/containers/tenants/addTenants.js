@@ -192,7 +192,7 @@ const RentDuePlaceholder = {
         />
 
           {/* Property */}
-          <Text style={styles.sectionText}>Property</Text>
+          <Text style={styles.sectionText}>Leasing Information</Text>
           <Controller
             control={control}
             render={({ onChange, value }) => (
