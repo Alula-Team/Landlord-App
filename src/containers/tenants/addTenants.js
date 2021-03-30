@@ -134,7 +134,7 @@ const RentDuePlaceholder = {
                   placeholder=" Name..."
                   placeholderTextColor="#ffffff80"
                   style={styles.tenantInput}
-                  autoCapitalize={true}
+                  autoCapitalize='words'
                   keyboardAppearance="dark"
                   onChangeText={(value) => onChange(value)}
                   value={value}
@@ -156,7 +156,8 @@ const RentDuePlaceholder = {
                         placeholder='Enter Tenants Email'
                         placeholderTextColor='#ffffff80'
                         style={styles.tenantInput}
-                        autoCapitalize='none'
+                        autoCapitalize='none',
+                        autocomplete='off'
                         keyboardAppearance='dark'
                         keyboardType='email-address'
                         onChangeText={value => onChange(value)}
