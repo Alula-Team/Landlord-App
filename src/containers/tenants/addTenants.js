@@ -134,7 +134,7 @@ const RentDuePlaceholder = {
                   placeholder=" Name..."
                   placeholderTextColor="#ffffff80"
                   style={styles.tenantInput}
-                  autoCapitalize={true}
+                  autoCapitalize='words'
                   keyboardAppearance="dark"
                   onChangeText={(value) => onChange(value)}
                   value={value}
@@ -156,7 +156,8 @@ const RentDuePlaceholder = {
                         placeholder='Enter Tenants Email'
                         placeholderTextColor='#ffffff80'
                         style={styles.tenantInput}
-                        autoCapitalize={false}
+                        autoCapitalize='none'
+                        autocomplete='off'
                         keyboardAppearance='dark'
                         keyboardType='email-address'
                         onChangeText={value => onChange(value)}
@@ -192,7 +193,7 @@ const RentDuePlaceholder = {
         />
 
           {/* Property */}
-          <Text style={styles.sectionText}>Property</Text>
+          <Text style={styles.sectionText}>Leasing Information</Text>
           <Controller
             control={control}
             render={({ onChange, value }) => (
@@ -200,23 +201,12 @@ const RentDuePlaceholder = {
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
                 onValueChange={(value) => onChange(value)}
-                // items={[
-                //   { label: "Property", value: "property", color: "white" },
-                //   { addresses },
-                // ]}
-                // items={properties.map((item) => {
-                //   return {
-                //     label: item.address,
-                //     value: item.address,
-                //     color: "white",
-                //   };
-                // })}
                 items={addresses.map((item) => {
-                  return {
-                    label: item,
-                    value: item,
-                    color: "white",
-                  };
+                    return {
+                        label: item,
+                        value: item,
+                        color: 'white'
+                    };
                 })}
               />
             )}
@@ -274,7 +264,6 @@ const RentDuePlaceholder = {
                             placeholder='Enter Rental Rate'
                             placeholderTextColor='#ffffff80'
                             style={styles.tenantInput}
-                            autoCapitalize={false}
                             keyboardAppearance='dark'
                             keyboardType='number-pad'
                             onChangeText={value => onChange(value)}
@@ -297,7 +286,6 @@ const RentDuePlaceholder = {
                             placeholder='Enter Security Deposit (optional)'
                             placeholderTextColor='#ffffff80'
                             style={styles.tenantInput}
-                            autoCapitalize={false}
                             keyboardAppearance='dark'
                             keyboardType='number-pad'
                             onChangeText={value => onChange(value)}
