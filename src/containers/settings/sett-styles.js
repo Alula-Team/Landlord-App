@@ -49,7 +49,55 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         textAlign: 'center'
-    }
+    },
+    formInput: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '500',
+        marginLeft: 12.5
+    },
+
+    // Update Payment Explainer
+        // Image
+        img: {
+            width: '100%',
+            height: 200,
+            resizeMode: 'center'
+        },
+        // Explainer
+        title: {
+            color: '#fff',
+            fontSize: 20,
+            fontWeight: '600',
+            textAlign: 'center',
+            marginTop: 10
+        },
+        listView: {
+            marginHorizontal: 30,
+            marginVertical: 50,
+           
+        },
+        listInline: {
+            flexDirection: 'row',
+        },
+        listText: {
+            color: '#fff',
+            fontSize: 18,
+            fontWeight: '600',
+            marginBottom: 20
+        },
+        continueButton: {
+            backgroundColor: "#428bca",
+            marginHorizontal: 30,
+            padding: 15,
+            borderRadius: 10,
+        },
+        continueButtonText: {
+            color: '#fff',
+            fontSize: 16,
+            fontWeight: '700',
+            textAlign: 'center'
+        },
 });
 
 export default styles;
