@@ -51,7 +51,7 @@ const Settings = () => {
                         </TouchableOpacity>
 
                         {/* Update Password Button */}
-                        <TouchableOpacity style={styles.buttonContainer}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePassword')}>
                             <View style={{flexDirection: 'row'}}>
                                 <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                                 <Text style={styles.buttonText}>Update Password</Text>
@@ -59,8 +59,8 @@ const Settings = () => {
                             <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                         </TouchableOpacity>
 
-                        {/* Edit Profile Button */}
-                        <TouchableOpacity style={styles.buttonContainer}>
+                        {/* Update Payment Button */}
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePayment')}>
                             <View style={{flexDirection: 'row'}}>
                                 <Feather name='credit-card' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                                 <Text style={styles.buttonText}>Update Payment Info</Text>
