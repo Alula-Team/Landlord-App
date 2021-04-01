@@ -267,14 +267,18 @@ const AddProperties = ({ addProperty }) => {
         />
 
         {/* Units */}
-        <Text style={styles.sectionText}>Unit(s)</Text>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={styles.sectionText}>Unit(s)</Text>
+          <Text style={{marginTop: 15, marginLeft: 10, color: '#ffffff80'}}>(if applicable)</Text>
+        </View>
+        <Text style={{color: '#ffffff80', marginLeft: 20}}>Please include the appropriate label to each unit.</Text>
         <Controller
           control={control}
           render={({ onChange, value }) => (
             <View style={styles.searchContainer}>
               <TextInput
                 type="text"
-                placeholder="Enter Unit Number (if applicable)..."
+                placeholder="i.e Apt 100, Unit 100, Suite 100, etc..."
                 placeholderTextColor="#ffffff80"
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
