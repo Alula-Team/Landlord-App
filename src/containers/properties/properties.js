@@ -24,8 +24,17 @@ import { connect } from "react-redux";
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New properties auto sorted in alpha numeric order
-
+import {
+  normalProps,
+  normalTenant,
+  normalTransaction,
+  normalServiceRequest,
+} from "../../normalizedState";
 const Properties = ({ stateProperties }) => {
+  console.log(normalProps);
+  console.log(normalTenant);
+  console.log(normalTransaction);
+  console.log(normalServiceRequest);
   const navigation = useNavigation();
   const data = stateProperties;
   // Flatlist Dummy Data
