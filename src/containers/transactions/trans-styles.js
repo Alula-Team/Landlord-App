@@ -12,11 +12,11 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
-        borderColor: '#ffffff50',
         borderRadius: 10,
         borderWidth: 1,
         height: 45,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: '#ffffff30'
     },
     searchIcon: {
         alignSelf: 'center',
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     searchInput: {
         color: '#fff',
         fontSize: 18,
-        marginLeft: 12.5
+        marginHorizontal: 12.5,
+        width: '85%'
     },
 
     // Money Boxes
