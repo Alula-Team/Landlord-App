@@ -126,6 +126,16 @@ const styles = StyleSheet.create({
         // width: '75%',
         flexDirection: 'row'
     },
+    addInputContainer: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        borderColor: '#ffffff50'
+    },
 
     // ** SERVICE REQUEST Screen ** //
     propertySectionSpacing: {

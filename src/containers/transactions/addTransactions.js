@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Text, View, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 // Forms
@@ -28,7 +27,7 @@ const AddTransactions = () => {
         // Styles
         const pickerStyles = {
             inputIOS: {
-                marginHorizontal: 30,
+                marginHorizontal: 20,
                 marginTop: 15,
                 borderColor: '#ffffff50',
                 borderRadius: 10,
@@ -41,7 +40,7 @@ const AddTransactions = () => {
                 fontWeight: '500'
             },
             inputAndroid: {
-                marginHorizontal: 30,
+                marginHorizontal: 20,
                 marginTop: 15,
                 borderColor: '#ffffff50',
                 borderRadius: 10,
@@ -117,7 +116,7 @@ const AddTransactions = () => {
                 />
 
                 {/* Content */}
-                <KeyboardAwareScrollView style={{ flex: 1 }}>
+                <KeyboardAwareScrollView>
                     {/* Transaction Type */}
                     <Text style={styles.sectionText}>Transaction Type</Text>
                     <Controller

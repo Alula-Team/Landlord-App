@@ -79,6 +79,16 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         marginLeft: 12.5
     },
+    addInputContainer: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        borderColor: '#ffffff50'
+    },
 
     // Tenant Detail
     imgPlaceHolder: {
