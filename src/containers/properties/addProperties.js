@@ -142,7 +142,7 @@ const AddProperties = ({ addProperty }) => {
         <Controller
           control={control}
           render={({ onChange, value }) => (
-            <View style={styles.searchContainer}>
+            <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
                 placeholder="Enter Street Address..."
@@ -163,7 +163,7 @@ const AddProperties = ({ addProperty }) => {
         <Controller
           control={control}
           render={({ onChange, value }) => (
-            <View style={styles.searchContainer}>
+            <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
                 placeholder="Enter City..."
@@ -253,7 +253,7 @@ const AddProperties = ({ addProperty }) => {
         <Controller
           control={control}
           render={({ onChange, value }) => (
-            <View style={styles.searchContainer}>
+            <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
                 placeholder="Enter Zip Code..."

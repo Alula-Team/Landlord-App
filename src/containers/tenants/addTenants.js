@@ -120,7 +120,7 @@ const RentDuePlaceholder = {
           }}
         />
 
-        <KeyboardAwareScrollView style={{ marginHorizontal: 10 }}>
+        <KeyboardAwareScrollView>
           {/* Form */}
           <Text style={styles.sectionText}>Tenant Information</Text>
 
@@ -128,7 +128,7 @@ const RentDuePlaceholder = {
           <Controller
             control={control}
             render={({ onChange, value }) => (
-              <View style={styles.searchContainer}>
+              <View style={styles.addInputContainer}>
                 <TextInput
                   type="text"
                   placeholder=" Name..."
@@ -150,7 +150,7 @@ const RentDuePlaceholder = {
           <Controller
             control={control}
             render={({ onChange, value }) => (
-                <View style={styles.searchContainer}>
+                <View style={styles.addInputContainer}>
                     <TextInput 
                         type='text'
                         placeholder='Enter Tenants Email'
@@ -174,7 +174,7 @@ const RentDuePlaceholder = {
         <Controller
             control={control}
             render={({ onChange, value }) => (
-                <View style={styles.searchContainer}>
+                <View style={styles.addInputContainer}>
                     <TextInput 
                         type='text'
                         placeholder='Enter Tenants Phone Number'
@@ -254,11 +254,30 @@ const RentDuePlaceholder = {
                 defaultValue=""
             />
 
+            {/* Rent Due */}
+            <Controller
+                control={control}
+                render={({ onChange, value }) => (
+                    <RNPickerSelect
+                        placeholder={RentDuePlaceholder}
+                        style={pickerStyles}
+                        onValueChange={value => onChange(value)}
+                        items={[
+                            { label: '1st of each month', value: 'first-of-month', color: 'white' },
+                            { label: '15th of each month', value: 'fifteenth-of-month', color: 'white' },
+                        ]}
+                    />
+                )}
+                name="rentDue"
+                rules={{ required: true }}
+                defaultValue=""
+            />
+
             {/* Rental Rate */}
             <Controller
                 control={control}
                 render={({ onChange, value }) => (
-                    <View style={styles.searchContainer}>
+                    <View style={styles.addInputContainer}>
                         <TextInput 
                             type='text'
                             placeholder='Enter Rental Rate'
@@ -280,7 +299,7 @@ const RentDuePlaceholder = {
             <Controller
                 control={control}
                 render={({ onChange, value }) => (
-                    <View style={styles.searchContainer}>
+                    <View style={styles.addInputContainer}>
                         <TextInput 
                             type='text'
                             placeholder='Enter Security Deposit (optional)'
@@ -294,25 +313,6 @@ const RentDuePlaceholder = {
                     </View>
                 )}
                 name="securityDeposit"
-                rules={{ required: true }}
-                defaultValue=""
-            />
-
-            {/* Rent Due */}
-            <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <RNPickerSelect
-                        placeholder={RentDuePlaceholder}
-                        style={pickerStyles}
-                        onValueChange={value => onChange(value)}
-                        items={[
-                            { label: '1st of each month', value: 'first-of-month', color: 'white' },
-                            { label: '15th of each month', value: 'fifteenth-of-month', color: 'white' },
-                        ]}
-                    />
-                )}
-                name="rentDue"
                 rules={{ required: true }}
                 defaultValue=""
             />

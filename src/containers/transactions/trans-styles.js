@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         color: '#fff',
         textAlign: 'left',
         marginTop: 30,
-        marginLeft: 30
+        marginLeft: 20
     },
     upload: {
         marginHorizontal: 30,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     dateContainer: {
-        marginHorizontal: 30,
+        marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
         borderColor: '#ffffff50',
