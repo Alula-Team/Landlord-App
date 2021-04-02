@@ -29,13 +29,9 @@ const styles = StyleSheet.create({
     },
 
     // Flatlist
-    listView: {
-        marginHorizontal: 30,
-        borderRadius: 10,
-        // backgroundColor: '#4B416C'
-    },
     listCell: {
         paddingVertical: 20,
+        paddingHorizontal: 25,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -55,6 +51,15 @@ const styles = StyleSheet.create({
         color: '#fff',
         marginLeft: 12.5,
         marginTop: 5
+    },
+    emptyList: {
+        marginTop: 30,
+    },
+    img: {
+        width: '120%',
+        height: 300,
+        resizeMode: 'contain',
+        alignSelf: 'center'
     },
 
     // ADD TENANT

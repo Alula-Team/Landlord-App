@@ -6,8 +6,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#09061C',
         height: '100%',
     },
-    
-    // Stepper
 
     // Flatlist
     flatlistTitle: {
@@ -17,14 +15,9 @@ const styles = StyleSheet.create({
         color: '#fff',
         left: 30
     },
-    listView: {
-        marginTop: 15,
-        marginHorizontal: 30,
-        borderRadius: 10,
-        // backgroundColor: '#4B416C'
-    },
     listCell: {
         paddingVertical: 20,
+        paddingHorizontal: 25,
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
@@ -34,6 +27,15 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         color: '#fff',
         alignSelf: 'center',
+    },
+    emptyList: {
+        marginTop: 100,
+    },
+    img: {
+        width: '100%',
+        height: 300,
+        resizeMode: 'contain',
+        alignSelf: 'center'
     },
 });
 

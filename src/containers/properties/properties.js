@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  Image
 } from "react-native";
 import { Badge, Header, Icon } from "react-native-elements";
 
@@ -62,6 +63,21 @@ const Properties = ({ stateProperties }) => {
     );
   };
 
+  // Empty List Content
+  const EmptyListMessage = () => {
+    return(
+      <View style={styles.emptyList}>
+        <Image source={require('../../assets/emptyPropList.png')} style={styles.img} />
+        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
+          Hmm... 
+          There is nothing here... 
+          Let's add your first property! 
+          Use the '+' symbol at the top to get started. 
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <>
       <View style={styles.container}>
@@ -117,38 +133,6 @@ const Properties = ({ stateProperties }) => {
           />
         </View>
 
-        {/* Service Requests */}
-        <TouchableOpacity
-          style={styles.serviceRequestsButton}
-          onPress={() => navigation.navigate("ServiceRequests")}
-        >
-          <View style={{ flexDirection: "row", alignSelf: "center" }}>
-            <Badge
-              status="error"
-              value="New"
-              badgeStyle={{
-                borderWidth: "none",
-                height: 22.5,
-                width: 35,
-              }}
-              containerStyle={{
-                marginLeft: 10,
-              }}
-              textStyle={{
-                fontSize: 12,
-                fontWeight: "600",
-              }}
-            />
-            <Text style={styles.serviceRequestsText}>Service Requests</Text>
-          </View>
-          <Feather
-            name="arrow-right"
-            color="#fff"
-            size={20}
-            style={{ marginRight: 10, alignSelf: "center" }}
-          />
-        </TouchableOpacity>
-
         {/* Properties Flat List */}
         <SafeAreaView>
           <FlatList
@@ -187,6 +171,7 @@ const Properties = ({ stateProperties }) => {
             contentContainerStyle={{ paddingBottom: 350 }}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={renderSeparator}
+            ListEmptyComponent={EmptyListMessage}
           />
         </SafeAreaView>
       </View>

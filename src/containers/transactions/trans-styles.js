@@ -61,9 +61,6 @@ const styles = StyleSheet.create({
     },
 
     // Flatlist
-    listView: {
-        // marginHorizontal: 5,
-    },
     listCell: {
         paddingVertical: 20,
         paddingHorizontal: 25
@@ -105,6 +102,15 @@ const styles = StyleSheet.create({
         color: '#fff',
         fontSize: 14,
         fontWeight: '600',
+    },
+    emptyList: {
+        marginTop: 30,
+    },
+    img: {
+        width: '100%',
+        height: 300,
+        resizeMode: 'contain',
+        alignSelf: 'center'
     },
 
     // Add Transaction Screen

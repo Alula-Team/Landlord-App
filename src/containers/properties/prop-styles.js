@@ -70,6 +70,16 @@ const styles = StyleSheet.create({
     arrow: {
         alignSelf: 'center'
     },
+    emptyList: {
+        marginTop: 30,
+    },
+    img: {
+        width: '100%',
+        height: 300,
+        resizeMode: 'contain',
+        alignSelf: 'center'
+    },
+
 
     // ** ADD PROPERTY SCREEN ** //
     sectionText: {

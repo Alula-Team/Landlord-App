@@ -48,16 +48,6 @@ const UpdateProfile = () => {
                         onPress={() => navigation.goBack()}
                         />
                     }
-                    rightComponent={
-                        <TouchableOpacity
-                        style={{ paddingTop: 32.5, paddingRight: 10 }}
-                        // onPress={handleSubmit(addItem)}
-                        >
-                        <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
-                            Save
-                        </Text>
-                        </TouchableOpacity>
-                    }
                     containerStyle={{
                         backgroundColor: "#09061C",
                         justifyContent: "space-around",
@@ -134,6 +124,11 @@ const UpdateProfile = () => {
                         rules={{ required: true }}
                         defaultValue=""
                     />
+
+                    {/* Conintue Button */}
+                    <TouchableOpacity style={styles.continueButton}>
+                        <Text style={styles.continueButtonText}>Save</Text>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
         </>
