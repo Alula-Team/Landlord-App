@@ -145,6 +145,7 @@ const Properties = ({ stateProperties }) => {
                   navigation.navigate("PropertyDetail", {
                     itemID: item.id,
                     itemAddress: item.address,
+                    itemUnit: item.unit,
                     itemCity: item.city,
                     itemState: item.state,
                     itemZip: item.zip,
@@ -154,7 +155,7 @@ const Properties = ({ stateProperties }) => {
                 <View style={{ flexDirection: "row" }}>
                   <Feather name="map-pin" color="#fff" size={20} />
                   <View>
-                    <Text style={styles.listItem}>{item.address}</Text>
+                    <Text style={styles.listItem}>{item.address}  {item.unit}</Text>
                     <Text style={styles.status}>
                       Status: <Status vacant={item.vacant} />
                     </Text>

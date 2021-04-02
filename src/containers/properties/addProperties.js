@@ -73,6 +73,11 @@ const AddProperties = ({ addProperty }) => {
     color: "#fff",
   };
 
+  // Add TextInput
+  const addUnitInput = {
+
+  }
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -275,7 +280,7 @@ const AddProperties = ({ addProperty }) => {
         <Controller
           control={control}
           render={({ onChange, value }) => (
-            <View style={styles.searchContainer}>
+            <View style={styles.addUnitInput}>
               <TextInput
                 type="text"
                 placeholder="i.e Apt 100, Unit 100, Suite 100, etc..."
@@ -291,7 +296,7 @@ const AddProperties = ({ addProperty }) => {
           defaultValue=""
         />
         {/* Add Units Button */}
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton} onPress={() => {addUnitInput}}>
           <Feather name="plus" size={25} style={styles.addButtonText} />
           <Text style={styles.addButtonText}>Add Unit</Text>
         </TouchableOpacity>

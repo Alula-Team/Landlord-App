@@ -114,6 +114,17 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         marginLeft: 12.5
     },
+    addUnitInput: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        // width: '75%',
+        flexDirection: 'row'
+    },
 
     // ** SERVICE REQUEST Screen ** //
     propertySectionSpacing: {
