@@ -193,7 +193,7 @@ const AddTransactions = () => {
                             <View style={styles.dateContainer}>
                                 <TextInput 
                                     type='text'
-                                    placeholder='e.g mm/dd/yyyy'
+                                    placeholder='MM/DD/YYYY'
                                     placeholderTextColor='#ffffff80'
                                     style={styles.dateText}
                                     keyboardAppearance='dark'

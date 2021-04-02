@@ -24,7 +24,7 @@ import { doDeleteProperty } from "../../redux/actions";
 
 const PropertyDetail = ({ route, deleteProperty }) => {
   const navigation = useNavigation();
-  const { itemID, itemAddress, itemCity, itemState, itemZip } = route.params;
+  const { itemID, itemAddress, itemUnit, itemCity, itemState, itemZip } = route.params;
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
@@ -63,7 +63,7 @@ const PropertyDetail = ({ route, deleteProperty }) => {
         <View style={styles.sectionSpacing}>
           <Text style={styles.propertyDetailTitle}>
             {/* Property Address: */}
-            {itemAddress}
+            {itemAddress} {itemUnit}
           </Text>
           <View style={{ flexDirection: "row", marginTop: 5 }}>
             <Feather
