@@ -130,6 +130,7 @@ const Properties = ({ stateProperties }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
+            clearButtonMode='while-editing'
           />
         </View>
 
