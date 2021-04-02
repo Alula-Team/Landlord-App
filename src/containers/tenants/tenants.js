@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  Image
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
 
@@ -82,6 +83,19 @@ const Tenants = ({ stateTenants }) => {
   const renderSeparator = () => {
     return <View style={{ height: 0.5, backgroundColor: "#CED0CE50" }} />;
   };
+
+  // Empty List Content
+  const EmptyListMessage = () => {
+    return(
+      <View style={styles.emptyList}>
+        <Image source={require('../../assets/tenantEmptyList.png')} style={styles.img} />
+        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
+          Let's move someone in! 
+          Use the '+' symbol at the top to get started. 
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <>
@@ -176,6 +190,7 @@ const Tenants = ({ stateTenants }) => {
               contentContainerStyle={{ paddingBottom: 350 }}
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
+              ListEmptyComponent={EmptyListMessage}
             />
           </View>
         </SafeAreaView>

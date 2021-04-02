@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity } from 'react-native';
-import { Badge, Header, Icon } from 'react-native-elements';
+import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native';
+import { Badge, Header } from 'react-native-elements';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -13,12 +13,8 @@ import styles from './notif-styles';
 
 
 // Things I need:
-// Header
-    // Title
-    // Stepper
-
-// Flatlist for Service Requests & Notifications
-    // Needs a sort feature where the newest requests are at the top
+    // Flatlist for Service Requests & Notifications
+        // Needs a sort feature where the newest requests are at the top
 
 
 const Dashboard = () => {
@@ -56,6 +52,33 @@ const Dashboard = () => {
             return <NewBadge />
         }
     }
+
+    // Separator
+  const renderSeparator = () => {
+    return (
+      <View
+        style={{
+          height: 0.5,
+          //   width: '86%',
+          backgroundColor: "#CED0CE50",
+          marginLeft: "5%",
+          marginRight: "5%",
+        }}
+      />
+    );
+  };
+
+    // Empty List Content
+  const EmptyListMessage = () => {
+    return(
+      <View style={styles.emptyList}>
+        <Image source={require('../../assets/notifEmptyList.png')} style={styles.img} />
+        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}> 
+          No mail yet but don't worry there will be something soon...!
+        </Text>
+      </View>
+    );
+  }
     
 
     return(
@@ -119,6 +142,8 @@ const Dashboard = () => {
                             )}
                             contentContainerStyle={{ paddingBottom: 350 }}
                             showsVerticalScrollIndicator={false}
+                            ItemSeparatorComponent={renderSeparator}
+                            ListEmptyComponent={EmptyListMessage}
                         />
                     </View>
                 </SafeAreaView>

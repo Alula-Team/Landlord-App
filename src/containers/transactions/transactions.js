@@ -125,6 +125,21 @@ const Transactions = () => {
     );
   };
 
+  // Empty List Content
+  const EmptyListMessage = () => {
+    return(
+      <View style={styles.emptyList}>
+        <Image source={require('../../assets/transEmptyList.png')} style={styles.img} />
+        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
+          Hmm... 
+          There is nothing here... 
+          Let's add your first property! 
+          Use the '+' symbol at the top to get started. 
+        </Text>
+      </View>
+    );
+  }
+
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
@@ -258,6 +273,7 @@ const Transactions = () => {
               contentContainerStyle={{ paddingBottom: 350 }}
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
+              ListEmptyComponent={EmptyListMessage}
             />
           </View>
         </SafeAreaView>
