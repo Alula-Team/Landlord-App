@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -18,6 +18,9 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./prop-styles";
 
+// Search Bar
+import SearchBar from "../../components/SearchBar";
+
 // Redux Stuff
 import { connect } from "react-redux";
 
@@ -31,10 +34,32 @@ import {
   normalServiceRequest,
 } from "../../normalizedState";
 const Properties = ({ stateProperties }) => {
-  console.log(normalProps);
-  console.log(normalTenant);
-  console.log(normalTransaction);
-  console.log(normalServiceRequest);
+  // const allProperties = stateProperties;
+  // const [search, setSearch] = useState("");
+  // const [filteredData, setFilteredData] = useState([allProperties]);
+  // const [originalData, setOriginalData] = useState([allProperties]);
+
+  // const searchFilterFunction = (text) => {
+  //   if (text) {
+  //     const newData = allProperties.filter((item) => {
+  //       const itemData = item.address
+  //         ? item.address.toUpperCase()
+  //         : "".toUpperCase();
+  //       const textData = text.toUpperCase();
+  //       return itemData.indexOf(textData) > -1;
+  //     });
+  //     setFilteredData(newData);
+  //     setSearch(text);
+  //   } else {
+  //     setFilteredData(allProperties);
+  //     setSearch(text);
+  //   }
+  // };
+
+  // console.log(normalProps);
+  // console.log(normalTenant);
+  // console.log(normalTransaction);
+  // console.log(normalServiceRequest);
   const navigation = useNavigation();
   const data = stateProperties;
   // Flatlist Dummy Data
@@ -110,7 +135,8 @@ const Properties = ({ stateProperties }) => {
         />
 
         {/* Search Bar */}
-        <View style={styles.searchContainer}>
+        <SearchBar />
+        {/* <View style={styles.searchContainer}>
           <Feather
             name="search"
             color="#fff"
@@ -123,8 +149,10 @@ const Properties = ({ stateProperties }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
           />
-        </View>
+        </View> */}
 
         {/* Service Requests */}
         <TouchableOpacity

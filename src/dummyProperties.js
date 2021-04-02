@@ -1,4 +1,4 @@
-const datum = [
+export default datum = [
   {
     id: 0,
     address: "5612 Harmony Ave",
