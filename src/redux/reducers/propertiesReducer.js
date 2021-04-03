@@ -3,18 +3,17 @@ import uuid from "react-native-uuid";
 import defaultProperties from "../../dummyProperties";
 const initialState = {
   newProperty: {},
-  properties: defaultProperties,
+  properties: [],
 };
 
 const propertiesReducer = (state = initialState, action) => {
-  console.log(state, action);
-  return state;
   if (action.type === "ADD_PROPERTY") {
     const newProperty = {
       id: uuid.v4(),
       address: action.payload.address,
+      unit: action.payload.unit,
       city: action.payload.city,
-      state: action.payload.states,
+      state: action.payload.state,
       zip: action.payload.zipCode,
       vacant: true,
     };

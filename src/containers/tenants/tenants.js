@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -26,40 +26,27 @@ import { connect } from "react-redux";
 // New tenants auto sorted by first name
 
 const Tenants = ({ stateTenants }) => {
+  const allTenants = stateTenants;
+  const [search, setSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([allTenants]);
+  const [originalData, setOriginalData] = useState([allTenants]);
+
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = allTenants.filter((item) => {
+        const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredData(newData);
+      setSearch(text);
+    } else {
+      setFilteredData(allTenants);
+      setSearch(text);
+    }
+  };
   const navigation = useNavigation();
   const data = stateTenants;
-  const datas = [
-    {
-      id: 0,
-      tenant: "Kane Toomer",
-      address: "5612 Harmony Ave",
-      archived: true,
-    },
-    {
-      id: 1,
-      tenant: "Jaida Nash",
-      address: "123 Main Street",
-      archived: true,
-    },
-    {
-      id: 2,
-      tenant: "Xochitl Gonzales-Lopez",
-      address: "595 S. Green Valley Pkwy Apt 121",
-      archived: true,
-    },
-    {
-      id: 3,
-      tenant: "John Smith",
-      address: "561 Harrington Ct",
-      archived: false,
-    },
-    {
-      id: 4,
-      tenant: "Jane Doe",
-      address: "1012 Horizon Ridge",
-      archived: false,
-    },
-  ];
 
   function Active(props) {
     return <Text style={{ color: "#5CB85C", fontWeight: "700" }}>Active</Text>;
@@ -135,14 +122,16 @@ const Tenants = ({ stateTenants }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
+            onChangeText={(text) => searchFilterFunction(text)}
+            value={search}
           />
         </View>
 
-        {/* Properties Flat List */}
+        {/* Tenants Flat List */}
         <SafeAreaView>
           <View style={styles.listView}>
             <FlatList
-              data={data}
+              data={filteredData}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <TouchableOpacity

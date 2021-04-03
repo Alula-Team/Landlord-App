@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -7,7 +7,7 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import { Badge, Header, Icon } from "react-native-elements";
+import { Badge, Header, Icon, SearchBar } from "react-native-elements";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
@@ -19,7 +19,7 @@ import Feather from "react-native-vector-icons/Feather";
 import styles from "./prop-styles";
 
 // Search Bar
-import SearchBar from "../../components/SearchBar";
+// import SearchBar from "../../components/SearchBar";
 
 // Redux Stuff
 import { connect } from "react-redux";
@@ -27,34 +27,33 @@ import { connect } from "react-redux";
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New properties auto sorted in alpha numeric order
-import {
-  normalProps,
-  normalTenant,
-  normalTransaction,
-  normalServiceRequest,
-} from "../../normalizedState";
+import { normalData as theData } from "../../normalizedState";
 const Properties = ({ stateProperties }) => {
-  // const allProperties = stateProperties;
-  // const [search, setSearch] = useState("");
-  // const [filteredData, setFilteredData] = useState([allProperties]);
-  // const [originalData, setOriginalData] = useState([allProperties]);
+  console.log(theData);
+  const allProperties = stateProperties;
+  const [search, setSearch] = useState("");
+  const updateSearch = (search) => {
+    setSearch(search);
+  };
+  const [filteredData, setFilteredData] = useState([allProperties]);
+  const [originalData, setOriginalData] = useState([allProperties]);
 
-  // const searchFilterFunction = (text) => {
-  //   if (text) {
-  //     const newData = allProperties.filter((item) => {
-  //       const itemData = item.address
-  //         ? item.address.toUpperCase()
-  //         : "".toUpperCase();
-  //       const textData = text.toUpperCase();
-  //       return itemData.indexOf(textData) > -1;
-  //     });
-  //     setFilteredData(newData);
-  //     setSearch(text);
-  //   } else {
-  //     setFilteredData(allProperties);
-  //     setSearch(text);
-  //   }
-  // };
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = allProperties.filter((item) => {
+        const itemData = item.address
+          ? item.address.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setFilteredData(newData);
+      setSearch(text);
+    } else {
+      setFilteredData(allProperties);
+      setSearch(text);
+    }
+  };
 
   // console.log(normalProps);
   // console.log(normalTenant);
@@ -135,8 +134,8 @@ const Properties = ({ stateProperties }) => {
         />
 
         {/* Search Bar */}
-        <SearchBar />
-        {/* <View style={styles.searchContainer}>
+
+        <View style={styles.searchContainer}>
           <Feather
             name="search"
             color="#fff"
@@ -151,8 +150,14 @@ const Properties = ({ stateProperties }) => {
             keyboardAppearance="dark"
             onChangeText={(text) => searchFilterFunction(text)}
             value={search}
+            // clearButtonMode="while-editing"
           />
-        </View> */}
+        </View>
+        <SearchBar
+          placeholder="Search Properties"
+          // onChangeText={updateSearch}
+          value={search}
+        />
 
         {/* Service Requests */}
         <TouchableOpacity
@@ -189,7 +194,7 @@ const Properties = ({ stateProperties }) => {
         {/* Properties Flat List */}
         <SafeAreaView>
           <FlatList
-            data={data}
+            data={filteredData}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity

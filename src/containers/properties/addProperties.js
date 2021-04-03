@@ -240,7 +240,7 @@ const AddProperties = ({ addProperty }) => {
               ]}
             />
           )}
-          name="states"
+          name="state"
           rules={{ required: true }}
           defaultValue=""
         />

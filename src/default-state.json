@@ -3,10 +3,10 @@
     {
       "id": "1",
       "street": "123 Harmony Avenue",
+      "unit": "",
       "city": "Las Vegas",
       "state": "NV",
       "zip": "89123",
-      "units": [],
       "tenant": "1",
       "transactions": ["1"],
       "serviceRequests": ["1", "2"]
@@ -14,13 +14,13 @@
     {
       "id": "2",
       "street": "108 Verigold Lane",
+      "unit": "",
       "city": "Hendertucky",
       "state": "NV",
-      "zip": "89052",
-      "units": [],
-      "tenant": "2",
-      "transactions": ["2", "3"],
-      "serviceRequests": ["3"]
+      "zip": "89052"
+      // "tenant": "2",
+      // "transactions": ["2", "3"],
+      // "serviceRequests": ["3"]
     }
   ],
   "tenants": [
