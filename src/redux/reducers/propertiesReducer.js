@@ -3,7 +3,30 @@ import uuid from "react-native-uuid";
 import defaultProperties from "../../dummyProperties";
 const initialState = {
   newProperty: {},
-  properties: [],
+  properties: [
+    {
+      id: "1",
+      address: "123 Harmony Avenue",
+      unit: "",
+      city: "Las Vegas",
+      state: "NV",
+      zip: "89123",
+      tenant: "1",
+      transactions: ["1"],
+      serviceRequests: ["1", "2"],
+    },
+    {
+      id: "2",
+      address: "108 Verigold Lane",
+      unit: "",
+      city: "Hendertucky",
+      state: "NV",
+      zip: "89052",
+      tenant: "2",
+      transactions: ["2", "3"],
+      serviceRequests: ["3"],
+    },
+  ],
 };
 
 const propertiesReducer = (state = initialState, action) => {
@@ -16,6 +39,9 @@ const propertiesReducer = (state = initialState, action) => {
       state: action.payload.state,
       zip: action.payload.zipCode,
       vacant: true,
+      tenant: null,
+      transactions: [],
+      serviceRequests: [],
     };
     const properties = [...state.properties, newProperty];
     return {

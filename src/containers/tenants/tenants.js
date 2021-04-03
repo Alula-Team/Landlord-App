@@ -25,28 +25,19 @@ import { connect } from "react-redux";
 // Working Search Feature
 // New tenants auto sorted by first name
 
-const Tenants = ({ stateTenants }) => {
-  const allTenants = stateTenants;
-  const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState([allTenants]);
-  const [originalData, setOriginalData] = useState([allTenants]);
-
-  const searchFilterFunction = (text) => {
-    if (text) {
-      const newData = allTenants.filter((item) => {
-        const itemData = item.name ? item.name.toUpperCase() : "".toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredData(newData);
-      setSearch(text);
-    } else {
-      setFilteredData(allTenants);
-      setSearch(text);
-    }
-  };
+const Tenants = ({ stateTenants, stateProperties }) => {
   const navigation = useNavigation();
-  const data = stateTenants;
+  // const data = stateTenants;
+  let data = stateTenants;
+  let newData = [];
+  for (tenant of stateTenants) {
+    newData.push(tenant.name, tenant.email);
+    for (property of stateProperties) {
+      if (tenant.property === property.id) {
+        newData.push(property.address);
+      }
+    }
+  }
 
   function Active(props) {
     return <Text style={{ color: "#5CB85C", fontWeight: "700" }}>Active</Text>;
@@ -122,8 +113,6 @@ const Tenants = ({ stateTenants }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
-            onChangeText={(text) => searchFilterFunction(text)}
-            value={search}
           />
         </View>
 
@@ -131,7 +120,7 @@ const Tenants = ({ stateTenants }) => {
         <SafeAreaView>
           <View style={styles.listView}>
             <FlatList
-              data={filteredData}
+              data={data}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <TouchableOpacity
@@ -142,6 +131,12 @@ const Tenants = ({ stateTenants }) => {
                       itemName: item.name,
                       itemEmail: item.email,
                       itemPhone: item.phone,
+                      itemProperty: item.property,
+                      itemLeaseType: item.leaseType,
+                      itemLeasePeriod: item.leasePeriod,
+                      itemRentalRate: item.rentalRate,
+                      itemSecurityDeposit: item.securityDeposit,
+                      itemRentDue: item.rentDue,
                     })
                   }
                 >
@@ -175,6 +170,7 @@ const Tenants = ({ stateTenants }) => {
 
 const mapStateToProps = (state) => {
   return {
+    stateProperties: state.properties.properties,
     stateTenants: state.tenants.tenants,
   };
 };

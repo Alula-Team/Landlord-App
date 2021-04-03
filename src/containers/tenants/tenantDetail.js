@@ -16,15 +16,34 @@ import { connect } from "react-redux";
 import { doDeleteTenant } from "../../redux/actions";
 
 import "./getInitials";
+
 // Things I need
 // Actions button pops up modal with options to:
 //add lease (if no lease),
 // remove lease (if there is a lease),
 // renew lease (once lease term is set to expire in 60d)
 
-const TenantDetailScreen = ({ route, deleteTenant }) => {
+const TenantDetailScreen = ({ stateProperties, route, deleteTenant }) => {
   const navigation = useNavigation();
-  const { itemID, itemName, itemEmail, itemPhone } = route.params;
+  const {
+    itemID,
+    itemName,
+    itemEmail,
+    itemPhone,
+    itemProperty,
+    itemLeaseType,
+    itemLeasePeriod,
+    itemRentalRate,
+    itemSecurityDeposit,
+    itemRentDue,
+  } = route.params;
+  let itemAddress = null;
+
+  for (property of stateProperties) {
+    if (property.id === itemProperty) {
+      itemAddress = property.address;
+    }
+  }
   const itemInitials = itemName.getInitials();
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -187,7 +206,7 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Feather name="key" color="#ffffff90" size={16} />
-                <Text style={styles.infoTitle}>Property:</Text>
+                <Text style={styles.infoTitle}>Property: {itemAddress}</Text>
               </View>
               <Text style={styles.infoText}></Text>
             </View>
@@ -203,7 +222,9 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Feather name="edit-3" color="#ffffff90" size={16} />
-                <Text style={styles.infoTitle}>Lease Type:</Text>
+                <Text style={styles.infoTitle}>
+                  Lease Type: {itemLeaseType}
+                </Text>
               </View>
               <Text style={styles.infoText}></Text>
             </View>
@@ -219,7 +240,9 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Feather name="clock" color="#ffffff90" size={16} />
-                <Text style={styles.infoTitle}>Lease Period:</Text>
+                <Text style={styles.infoTitle}>
+                  Lease Period: {itemLeasePeriod}
+                </Text>
               </View>
               <Text style={styles.infoText}></Text>
             </View>
@@ -235,7 +258,9 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Feather name="dollar-sign" color="#ffffff90" size={16} />
-                <Text style={styles.infoTitle}>Rental Rate:</Text>
+                <Text style={styles.infoTitle}>
+                  Rental Rate: {itemRentalRate}
+                </Text>
               </View>
               <Text style={styles.infoText}></Text>
             </View>
@@ -251,7 +276,9 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Feather name="dollar-sign" color="#ffffff90" size={16} />
-                <Text style={styles.infoTitle}>Security Deposit:</Text>
+                <Text style={styles.infoTitle}>
+                  Security Deposit: {itemSecurityDeposit}
+                </Text>
               </View>
               <Text style={styles.infoText}></Text>
             </View>
@@ -267,7 +294,7 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Feather name="calendar" color="#ffffff90" size={16} />
-                <Text style={styles.infoTitle}>Rent Due:</Text>
+                <Text style={styles.infoTitle}>Rent Due: {itemRentDue}</Text>
               </View>
               <Text style={styles.infoText}></Text>
             </View>
@@ -292,8 +319,14 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    stateProperties: state.properties.properties,
+  };
+};
+
 const actions = {
   deleteTenant: doDeleteTenant,
 };
 
-export default connect(null, actions)(TenantDetailScreen);
+export default connect(mapStateToProps, actions)(TenantDetailScreen);

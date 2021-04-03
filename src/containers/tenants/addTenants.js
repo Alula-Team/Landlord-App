@@ -17,7 +17,7 @@ import styles from "./tenant-styles";
 import { connect } from "react-redux";
 import { doAddTenant } from "../../redux/actions";
 
-const AddTransactions = ({ addresses, addTenant }) => {
+const AddTenants = ({ addresses, addTenant }) => {
   const navigation = useNavigation();
 
   const { control, handleSubmit } = useForm();
@@ -26,54 +26,54 @@ const AddTransactions = ({ addresses, addTenant }) => {
   // For Picker Select
   const pickerStyles = {
     inputIOS: {
-        marginHorizontal: 20,
-        marginTop: 15,
-        marginBottom: 20,
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        flexDirection: 'row',
-        color: '#fff',
-        paddingLeft: 15,
-        fontSize: 16,
-        fontWeight: '500'
+      marginHorizontal: 20,
+      marginTop: 15,
+      marginBottom: 20,
+      borderColor: "#ffffff50",
+      borderRadius: 10,
+      borderWidth: 1,
+      height: 45,
+      flexDirection: "row",
+      color: "#fff",
+      paddingLeft: 15,
+      fontSize: 16,
+      fontWeight: "500",
     },
     inputAndroid: {
-        marginHorizontal: 20,
-        marginTop: 15,
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        flexDirection: 'row',
-        color: '#fff',
-        paddingLeft: 15,
-        fontSize: 16,
-        fontWeight: '500'
-    }
-}
-// Placeholders
-const PropertyPlaceholder = {
-    label: 'Select Property',
+      marginHorizontal: 20,
+      marginTop: 15,
+      borderColor: "#ffffff50",
+      borderRadius: 10,
+      borderWidth: 1,
+      height: 45,
+      flexDirection: "row",
+      color: "#fff",
+      paddingLeft: 15,
+      fontSize: 16,
+      fontWeight: "500",
+    },
+  };
+  // Placeholders
+  const PropertyPlaceholder = {
+    label: "Select Property",
     value: null,
-    color: '#fff'
-}
-const LeaseTypePlaceholder = {
-    label: 'Select Lease Type',
+    color: "#fff",
+  };
+  const LeaseTypePlaceholder = {
+    label: "Select Lease Type",
     value: null,
-    color: '#fff'
-}
-const LeasePeriodPlaceholder = {
-    label: 'Select Lease Duration',
+    color: "#fff",
+  };
+  const LeasePeriodPlaceholder = {
+    label: "Select Lease Duration",
     value: null,
-    color: '#fff'
-}
-const RentDuePlaceholder = {
-    label: 'Select Rent Due Date',
+    color: "#fff",
+  };
+  const RentDuePlaceholder = {
+    label: "Select Rent Due Date",
     value: null,
-    color: '#fff'
-}
+    color: "#fff",
+  };
 
   return (
     <>
@@ -134,7 +134,7 @@ const RentDuePlaceholder = {
                   placeholder=" Name..."
                   placeholderTextColor="#ffffff80"
                   style={styles.tenantInput}
-                  autoCapitalize='words'
+                  autoCapitalize="words"
                   keyboardAppearance="dark"
                   onChangeText={(value) => onChange(value)}
                   value={value}
@@ -150,47 +150,47 @@ const RentDuePlaceholder = {
           <Controller
             control={control}
             render={({ onChange, value }) => (
-                <View style={styles.searchContainer}>
-                    <TextInput 
-                        type='text'
-                        placeholder='Enter Tenants Email'
-                        placeholderTextColor='#ffffff80'
-                        style={styles.tenantInput}
-                        autoCapitalize='none'
-                        autocomplete='off'
-                        keyboardAppearance='dark'
-                        keyboardType='email-address'
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                    />
-                </View>
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Tenants Email"
+                  placeholderTextColor="#ffffff80"
+                  style={styles.tenantInput}
+                  autoCapitalize="none"
+                  autocomplete="off"
+                  keyboardAppearance="dark"
+                  keyboardType="email-address"
+                  onChangeText={(value) => onChange(value)}
+                  value={value}
+                />
+              </View>
             )}
             name="tenantEmail"
             rules={{ required: true }}
             defaultValue=""
-        />
+          />
 
-        {/* Phone Number*/}
-        <Controller
+          {/* Phone Number*/}
+          <Controller
             control={control}
             render={({ onChange, value }) => (
-                <View style={styles.searchContainer}>
-                    <TextInput 
-                        type='text'
-                        placeholder='Enter Tenants Phone Number'
-                        placeholderTextColor='#ffffff80'
-                        style={styles.tenantInput}
-                        keyboardAppearance='dark'
-                        keyboardType='phone-pad'
-                        onChangeText={value => onChange(value)}
-                        value={value}
-                    />
-                </View>
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Tenants Phone Number"
+                  placeholderTextColor="#ffffff80"
+                  style={styles.tenantInput}
+                  keyboardAppearance="dark"
+                  keyboardType="phone-pad"
+                  onChangeText={(value) => onChange(value)}
+                  value={value}
+                />
+              </View>
             )}
             name="tenantPhoneNumber"
             rules={{ required: true }}
             defaultValue=""
-        />
+          />
 
           {/* Property */}
           <Text style={styles.sectionText}>Leasing Information</Text>
@@ -202,11 +202,11 @@ const RentDuePlaceholder = {
                 style={pickerStyles}
                 onValueChange={(value) => onChange(value)}
                 items={addresses.map((item) => {
-                    return {
-                        label: item,
-                        value: item,
-                        color: 'white'
-                    };
+                  return {
+                    label: item.address,
+                    value: item.id,
+                    color: "white",
+                  };
                 })}
               />
             )}
@@ -217,105 +217,117 @@ const RentDuePlaceholder = {
 
           {/* Lease Type */}
           <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <RNPickerSelect
-                        placeholder={LeaseTypePlaceholder}
-                        style={pickerStyles}
-                        onValueChange={value => onChange(value)}
-                        items={[
-                            { label: 'Fixed Lease', value: 'fixed', color: 'white' },
-                            { label: 'Month to Month', value: 'month-to-month', color: 'white' },
-                        ]}
-                    />
-                )}
-                name="leaseType"
-                rules={{ required: true }}
-                defaultValue=""
-            />
+            control={control}
+            render={({ onChange, value }) => (
+              <RNPickerSelect
+                placeholder={LeaseTypePlaceholder}
+                style={pickerStyles}
+                onValueChange={(value) => onChange(value)}
+                items={[
+                  { label: "Fixed Lease", value: "fixed", color: "white" },
+                  {
+                    label: "Month to Month",
+                    value: "month-to-month",
+                    color: "white",
+                  },
+                ]}
+              />
+            )}
+            name="leaseType"
+            rules={{ required: true }}
+            defaultValue=""
+          />
 
-            {/* Lease Period */}
-            <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <RNPickerSelect
-                        placeholder={LeasePeriodPlaceholder}
-                        style={pickerStyles}
-                        onValueChange={value => onChange(value)}
-                        items={[
-                            { label: '6 month', value: 'six-month', color: 'white' },
-                            { label: '12 month', value: 'twelve-month', color: 'white' },
-                            { label: '15 month', value: 'fifteen-month', color: 'white' },
-                        ]}
-                    />
-                )}
-                name="leasePeriod"
-                rules={{ required: true }}
-                defaultValue=""
-            />
+          {/* Lease Period */}
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <RNPickerSelect
+                placeholder={LeasePeriodPlaceholder}
+                style={pickerStyles}
+                onValueChange={(value) => onChange(value)}
+                items={[
+                  { label: "6 month", value: "six-month", color: "white" },
+                  { label: "12 month", value: "twelve-month", color: "white" },
+                  { label: "15 month", value: "fifteen-month", color: "white" },
+                ]}
+              />
+            )}
+            name="leasePeriod"
+            rules={{ required: true }}
+            defaultValue=""
+          />
 
-            {/* Rental Rate */}
-            <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <View style={styles.searchContainer}>
-                        <TextInput 
-                            type='text'
-                            placeholder='Enter Rental Rate'
-                            placeholderTextColor='#ffffff80'
-                            style={styles.tenantInput}
-                            keyboardAppearance='dark'
-                            keyboardType='number-pad'
-                            onChangeText={value => onChange(value)}
-                            value={value}
-                        />
-                    </View>
-                )}
-                name="rentalRate"
-                rules={{ required: true }}
-                defaultValue=""
-            />
+          {/* Rental Rate */}
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Rental Rate"
+                  placeholderTextColor="#ffffff80"
+                  style={styles.tenantInput}
+                  keyboardAppearance="dark"
+                  keyboardType="number-pad"
+                  onChangeText={(value) => onChange(value)}
+                  value={value}
+                />
+              </View>
+            )}
+            name="rentalRate"
+            rules={{ required: true }}
+            defaultValue=""
+          />
 
-            {/* Security Deposit */}
-            <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <View style={styles.searchContainer}>
-                        <TextInput 
-                            type='text'
-                            placeholder='Enter Security Deposit (optional)'
-                            placeholderTextColor='#ffffff80'
-                            style={styles.tenantInput}
-                            keyboardAppearance='dark'
-                            keyboardType='number-pad'
-                            onChangeText={value => onChange(value)}
-                            value={value}
-                        />
-                    </View>
-                )}
-                name="securityDeposit"
-                rules={{ required: true }}
-                defaultValue=""
-            />
+          {/* Security Deposit */}
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Security Deposit (optional)"
+                  placeholderTextColor="#ffffff80"
+                  style={styles.tenantInput}
+                  keyboardAppearance="dark"
+                  keyboardType="number-pad"
+                  onChangeText={(value) => onChange(value)}
+                  value={value}
+                />
+              </View>
+            )}
+            name="securityDeposit"
+            rules={{ required: true }}
+            defaultValue=""
+          />
 
-            {/* Rent Due */}
-            <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <RNPickerSelect
-                        placeholder={RentDuePlaceholder}
-                        style={pickerStyles}
-                        onValueChange={value => onChange(value)}
-                        items={[
-                            { label: '1st of each month', value: 'first-of-month', color: 'white' },
-                            { label: '15th of each month', value: 'fifteenth-of-month', color: 'white' },
-                        ]}
-                    />
-                )}
-                name="rentDue"
-                rules={{ required: true }}
-                defaultValue=""
-            />
+          {/* Rent Due */}
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <RNPickerSelect
+                placeholder={RentDuePlaceholder}
+                style={pickerStyles}
+                onValueChange={(value) => onChange(value)}
+                items={[
+                  {
+                    label: "1st of each month",
+                    value: "first-of-month",
+                    color: "white",
+                  },
+                  {
+                    label: "15th of each month",
+                    value: "fifteenth-of-month",
+                    color: "white",
+                  },
+                ]}
+              />
+            )}
+            name="rentDue"
+            rules={{ required: true }}
+            defaultValue=""
+          />
         </KeyboardAwareScrollView>
       </View>
     </>
@@ -323,9 +335,12 @@ const RentDuePlaceholder = {
 };
 
 const mapStateToProps = (state) => {
-  const addresses = state.properties.properties.map((item) => item.address);
+  // const addresses = state.properties.properties.map((item) => [
+  //   item.id,
+  //   item.address,
+  // ]);
   return {
-    addresses,
+    addresses: state.properties.properties,
   };
 };
 
@@ -333,4 +348,4 @@ const actions = {
   addTenant: doAddTenant,
 };
 
-export default connect(mapStateToProps, actions)(AddTransactions);
+export default connect(mapStateToProps, actions)(AddTenants);

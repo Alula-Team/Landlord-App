@@ -17,10 +17,10 @@
       "unit": "",
       "city": "Hendertucky",
       "state": "NV",
-      "zip": "89052"
-      // "tenant": "2",
-      // "transactions": ["2", "3"],
-      // "serviceRequests": ["3"]
+      "zip": "89052",
+      "tenant": "2",
+      "transactions": ["2", "3"],
+      "serviceRequests": ["3"]
     }
   ],
   "tenants": [
@@ -28,13 +28,17 @@
       "id": "1",
       "name": "Kane Toomer",
       "email": "kane@toomsville.toom",
-      "phone": "7029876543"
+      "phone": "7029876543",
+      "archived": true,
+      "property": "1"
     },
     {
       "id": "2",
       "name": "James Cappers",
       "email": "jcaper@capersville.cape",
-      "phone": "7023456789"
+      "phone": "7023456789",
+      "archived": true,
+      "property": "2"
     }
   ],
   "transactions": [
@@ -46,7 +50,8 @@
       "transactionType": "Rent Payment",
       "paymentType": "Auto Payment Collection",
       "notes": null,
-      "images": []
+      "images": [],
+      "property": "1"
     },
     {
       "id": "2",
@@ -56,7 +61,8 @@
       "transactionType": "Rent Payment",
       "paymentType": "Auto Payment Collection",
       "notes": null,
-      "images": []
+      "images": [],
+      "property": "2"
     },
     {
       "id": "3",
@@ -66,7 +72,8 @@
       "transactionType": "Rent Payment",
       "paymentType": "Auto Payment Collection",
       "notes": null,
-      "images": []
+      "images": [],
+      "property": "2"
     }
   ],
   "serviceRequests": [
@@ -75,21 +82,24 @@
       "date": "03-03-21",
       "description": "Help. Downed telephone line in living room.",
       "images": [],
-      "isCompleted": false
+      "isCompleted": false,
+      "property": "1"
     },
     {
       "id": "2",
       "date": "03-23-21",
       "description": "Help. Downed telephone line in back of pants.",
       "images": [],
-      "isCompleted": false
+      "isCompleted": false,
+      "property": "1"
     },
     {
       "id": "3",
       "date": "03-24-21",
       "description": "2B or not 2B... Which is my apartment?",
       "images": [],
-      "isCompleted": false
+      "isCompleted": false,
+      "property": "2"
     }
   ]
 }

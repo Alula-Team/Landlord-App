@@ -30,30 +30,6 @@ import { connect } from "react-redux";
 import { normalData as theData } from "../../normalizedState";
 const Properties = ({ stateProperties }) => {
   console.log(theData);
-  const allProperties = stateProperties;
-  const [search, setSearch] = useState("");
-  const updateSearch = (search) => {
-    setSearch(search);
-  };
-  const [filteredData, setFilteredData] = useState([allProperties]);
-  const [originalData, setOriginalData] = useState([allProperties]);
-
-  const searchFilterFunction = (text) => {
-    if (text) {
-      const newData = allProperties.filter((item) => {
-        const itemData = item.address
-          ? item.address.toUpperCase()
-          : "".toUpperCase();
-        const textData = text.toUpperCase();
-        return itemData.indexOf(textData) > -1;
-      });
-      setFilteredData(newData);
-      setSearch(text);
-    } else {
-      setFilteredData(allProperties);
-      setSearch(text);
-    }
-  };
 
   // console.log(normalProps);
   // console.log(normalTenant);
@@ -148,16 +124,8 @@ const Properties = ({ stateProperties }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
-            onChangeText={(text) => searchFilterFunction(text)}
-            value={search}
-            // clearButtonMode="while-editing"
           />
         </View>
-        <SearchBar
-          placeholder="Search Properties"
-          // onChangeText={updateSearch}
-          value={search}
-        />
 
         {/* Service Requests */}
         <TouchableOpacity
@@ -194,7 +162,7 @@ const Properties = ({ stateProperties }) => {
         {/* Properties Flat List */}
         <SafeAreaView>
           <FlatList
-            data={filteredData}
+            data={data}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <TouchableOpacity
