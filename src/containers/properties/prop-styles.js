@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 1,
         height: 45,
-        // width: '75%',
+        width: '80%',
         flexDirection: 'row'
     },
     addInputContainer: {
