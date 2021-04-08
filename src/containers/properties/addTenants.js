@@ -11,7 +11,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useNavigation } from "@react-navigation/native";
 
 // Style Sheet
-import styles from "./tenant-styles";
+import styles from "../tenants/tenant-styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
