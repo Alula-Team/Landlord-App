@@ -90,8 +90,7 @@ const Tenants = ({ stateTenants }) => {
       <View style={styles.emptyList}>
         <Image source={require('../../assets/tenantEmptyList.png')} style={styles.img} />
         <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
-          Let's move someone in! 
-          Use the '+' symbol at the top to get started. 
+          When you invite tenants to connect, they will show up here!
         </Text>
       </View>
     );
