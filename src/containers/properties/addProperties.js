@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
@@ -73,9 +73,26 @@ const AddProperties = ({ addProperty }) => {
     color: "#fff",
   };
 
-  // Add TextInput
-  const addUnitInput = {
+  // Add TextInput Code
+  const [inputs, setInputs] = useState([{key: '', value: ''}]);
 
+  const addHandler = ()=>{
+    const _inputs = [...inputs];
+    _inputs.push({key: '', value: ''});
+    setInputs(_inputs);
+  }
+  
+  const deleteHandler = (key)=>{
+    const _inputs = inputs.filter((input,index) => index != key);
+    setInputs(_inputs);
+  }
+
+  const inputHandler = (text, key)=>{
+    const _inputs = [...inputs];
+    _inputs[key].value = text;
+    _inputs[key].key   = key;
+    setInputs(_inputs);
+    
   }
 
   return (
@@ -106,18 +123,6 @@ const AddProperties = ({ addProperty }) => {
           />
         }
         rightComponent={
-          // <Icon
-          //     name='send'
-          //     type='feather'
-          //     color='#fff'
-          //     size={22.5}
-          //     iconStyle={{
-          //         paddingTop: 30,
-          //         paddingRight: 10,
-          //         paddingBottom: 10
-          //     }}
-          //     onPress={handleSubmit(onSubmit)}
-          // />
           <TouchableOpacity
             style={{ paddingTop: 32.5, paddingRight: 10 }}
             onPress={handleSubmit(addItem)}
@@ -189,11 +194,11 @@ const AddProperties = ({ addProperty }) => {
               style={pickerStyles}
               onValueChange={(value) => onChange(value)}
               items={[
-                { label: "AL", value: "AL", color: "white" },
                 { label: "A. Samoa", value: "A. Samoa", color: "white" },
                 { label: "AK", value: "AK", color: "white" },
-                { label: "AZ", value: "AZ", color: "white" },
+                { label: "AL", value: "AL", color: "white" },
                 { label: "AR", value: "AR", color: "white" },
+                { label: "AZ", value: "AZ", color: "white" },
                 { label: "CA", value: "CA", color: "white" },
                 { label: "CO", value: "CO", color: "white" },
                 { label: "CT", value: "CT", color: "white" },
@@ -202,29 +207,29 @@ const AddProperties = ({ addProperty }) => {
                 { label: "GA", value: "GA", color: "white" },
                 { label: "Guam", value: "Guam", color: "white" },
                 { label: "HI", value: "HI", color: "white" },
+                { label: "IA", value: "IA", color: "white" },
                 { label: "ID", value: "ID", color: "white" },
                 { label: "IL", value: "IL", color: "white" },
                 { label: "IN", value: "IN", color: "white" },
-                { label: "IA", value: "IA", color: "white" },
                 { label: "KS", value: "KS", color: "white" },
                 { label: "KY", value: "KY", color: "white" },
                 { label: "LA", value: "LA", color: "white" },
-                { label: "ME", value: "ME", color: "white" },
-                { label: "MD", value: "MD", color: "white" },
                 { label: "MA", value: "MA", color: "white" },
+                { label: "MD", value: "MD", color: "white" },
+                { label: "ME", value: "ME", color: "white" },
                 { label: "MI", value: "MI", color: "white" },
+                { label: "MO", value: "MO", color: "white" },
                 { label: "MN", value: "MN", color: "white" },
                 { label: "MS", value: "MS", color: "white" },
-                { label: "MO", value: "MO", color: "white" },
                 { label: "MT", value: "MT", color: "white" },
+                { label: "NC", value: "NC", color: "white" },
+                { label: "ND", value: "ND", color: "white" },
                 { label: "NE", value: "NE", color: "white" },
-                { label: "NV", value: "NV", color: "white" },
                 { label: "NH", value: "NH", color: "white" },
                 { label: "NJ", value: "NJ", color: "white" },
                 { label: "NM", value: "NM", color: "white" },
+                { label: "NV", value: "NV", color: "white" },
                 { label: "NY", value: "NY", color: "white" },
-                { label: "NC", value: "NC", color: "white" },
-                { label: "ND", value: "ND", color: "white" },
                 { label: "OH", value: "OH", color: "white" },
                 { label: "OK", value: "OK", color: "white" },
                 { label: "OR", value: "OR", color: "white" },
@@ -236,11 +241,11 @@ const AddProperties = ({ addProperty }) => {
                 { label: "TN", value: "TN", color: "white" },
                 { label: "TX", value: "TX", color: "white" },
                 { label: "UT", value: "UT", color: "white" },
-                { label: "VT", value: "VT", color: "white" },
                 { label: "VA", value: "VA", color: "white" },
+                { label: "VT", value: "VT", color: "white" },
                 { label: "WA", value: "WA", color: "white" },
-                { label: "WV", value: "WV", color: "white" },
                 { label: "WI", value: "WI", color: "white" },
+                { label: "WV", value: "WV", color: "white" },
                 { label: "WY", value: "WY", color: "white" },
               ]}
             />
@@ -277,26 +282,33 @@ const AddProperties = ({ addProperty }) => {
           <Text style={{marginTop: 15, marginLeft: 10, color: '#ffffff80'}}>(if applicable)</Text>
         </View>
         <Text style={{color: '#ffffff80', marginLeft: 20}}>Please include the appropriate label to each unit.</Text>
-        <Controller
-          control={control}
-          render={({ onChange, value }) => (
-            <View style={styles.addUnitInput}>
-              <TextInput
-                type="text"
-                placeholder="i.e Apt 100, Unit 100, Suite 100, etc..."
-                placeholderTextColor="#ffffff80"
-                style={styles.propertyInput}
-                keyboardAppearance="dark"
-                onChangeText={(value) => onChange(value)}
-                value={value}
-              />
-            </View>
-          )}
-          name="unit"
-          defaultValue=""
-        />
+        {inputs.map((input, key)=>(
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <View style={{flexDirection:'row'}}>
+                <View style={styles.addUnitInput}>
+                  <TextInput
+                    type="text"
+                    placeholder="i.e Apt, Unit, Suite, etc..."
+                    placeholderTextColor="#ffffff80"
+                    style={styles.propertyInput}
+                    keyboardAppearance="dark"
+                    onChangeText={(value, text) => onChange(value, text, key)}
+                    value={input.value}
+                  />
+                </View>
+                <TouchableOpacity style={{alignSelf: 'center', marginBottom: 12.5}} onPress = {()=> deleteHandler(key)}>
+                  <Feather name='trash' color='#fff' size={20} />
+                </TouchableOpacity>
+              </View>
+            )}
+            name="unit"
+            defaultValue=""
+          />
+        ))}  
         {/* Add Units Button */}
-        <TouchableOpacity style={styles.addButton} onPress={() => {addUnitInput}}>
+        <TouchableOpacity style={styles.addButton} onPress={addHandler}>
           <Feather name="plus" size={25} style={styles.addButtonText} />
           <Text style={styles.addButtonText}>Add Unit</Text>
         </TouchableOpacity>
