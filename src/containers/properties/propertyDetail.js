@@ -1,7 +1,8 @@
-import React from "react";
-import { Alert, Text, View, ScrollView, TouchableOpacity } from "react-native";
-import { Header, Icon } from "react-native-elements";
-import RNPickerSelect from "react-native-picker-select";
+import React, {useState} from "react";
+import { Alert, Text, View, ScrollView, TouchableOpacity, Modal, TextInput } from "react-native";
+
+// Forms
+import { useForm, Controller } from "react-hook-form";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
@@ -16,6 +17,7 @@ import styles from "./prop-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 import { doDeleteProperty } from "../../redux/actions";
+import { KeyboardAvoidingView } from "react-native";
 
 // What I need:
 // State
@@ -24,6 +26,8 @@ import { doDeleteProperty } from "../../redux/actions";
 
 const PropertyDetail = ({ route, deleteProperty }) => {
   const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const { control, handleSubmit } = useForm();
   const { itemID, itemAddress, itemUnit, itemCity, itemState, itemZip } = route.params;
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -82,7 +86,7 @@ const PropertyDetail = ({ route, deleteProperty }) => {
       <ScrollView style={{ marginTop: 30 }}>
         {/* Tenant Information */}
         <Text style={styles.sectionTitle}>Tenant Information</Text>
-        <View
+        {/* <View
           style={{
             backgroundColor: "#ffffff20",
             borderRadius: 10,
@@ -90,11 +94,11 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             marginTop: 10,
             padding: 10,
           }}
-        >
-          <Text style={styles.tenantName}>Tenant Name</Text>
+        > */}
+          {/* <Text style={styles.tenantName}>Tenant Name</Text> */}
 
           {/* Lease Type */}
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -107,10 +111,10 @@ const PropertyDetail = ({ route, deleteProperty }) => {
               <Text style={styles.infoTitle}>Lease Type:</Text>
             </View>
             <Text style={styles.infoText}></Text>
-          </View>
+          </View> */}
 
           {/* Lease Period */}
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -123,10 +127,10 @@ const PropertyDetail = ({ route, deleteProperty }) => {
               <Text style={styles.infoTitle}>Lease Period:</Text>
             </View>
             <Text style={styles.infoText}></Text>
-          </View>
+          </View> */}
 
           {/* Rental Rate */}
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -139,10 +143,10 @@ const PropertyDetail = ({ route, deleteProperty }) => {
               <Text style={styles.infoTitle}>Rental Rate:</Text>
             </View>
             <Text style={styles.infoText}></Text>
-          </View>
+          </View> */}
 
           {/* Security Deposit */}
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -155,10 +159,10 @@ const PropertyDetail = ({ route, deleteProperty }) => {
               <Text style={styles.infoTitle}>Security Deposit:</Text>
             </View>
             <Text style={styles.infoText}></Text>
-          </View>
+          </View> */}
 
           {/* Rent Due */}
-          <View
+          {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -171,8 +175,82 @@ const PropertyDetail = ({ route, deleteProperty }) => {
               <Text style={styles.infoTitle}>Rent Due:</Text>
             </View>
             <Text style={styles.infoText}></Text>
-          </View>
+          </View> */}
+        {/* </View> */}
+
+        {/* Add Tenant Button */}
+        <View style={{ marginHorizontal: 10 }}>
+          <TouchableOpacity
+            style={styles.serviceRequestsButton}
+            onPress={() => setModalVisible(true)}
+          >
+            <View style={{ flexDirection: "row", alignSelf: "center" }}>
+              <Feather
+                name="user-plus"
+                color="#fff"
+                size={20}
+                style={{ marginLeft: 10, alignSelf: "center" }}
+              />
+              <Text style={styles.serviceRequestsText}>Add Tenant</Text>
+            </View>
+            <Feather
+              name="arrow-right"
+              color="#fff"
+              size={20}
+              style={{ marginRight: 10, alignSelf: "center" }}
+            />
+          </TouchableOpacity>
         </View>
+
+        {/* Add Tenant Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.overlay}>
+            <KeyboardAvoidingView behavior='position' enabled>
+              <View style={styles.modalContainer}>
+                {/* Close modal button */}
+                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
+                  <Feather name='x' size={25} color='#fff' style={{marginLeft: 20, marginTop: 20}}/>
+                </TouchableOpacity>
+
+                <Text style={styles.modalText}>Invite your tenant to connect...</Text>
+
+                {/* Email Field */}
+                <Controller
+                  control={control}
+                  render={({ onChange, value }) => (
+                    <View style={styles.tenantInputContainer}>
+                      <TextInput
+                        type="text"
+                        placeholder="Enter Tenant Email..."
+                        placeholderTextColor="#ffffff90"
+                        style={styles.tenantInput}
+                        keyboardAppearance="dark"
+                        onChangeText={(value) => onChange(value)}
+                        value={value}
+                      />
+                    </View>
+                  )}
+                  name="address"
+                  rules={{ required: true }}
+                  defaultValue=""
+                />
+
+                {/* Invite Button */}
+                <TouchableOpacity style={styles.modalButton}>
+                  <Text style={styles.modalButtonText}>Invite</Text>
+                </TouchableOpacity>
+              </View>
+            </KeyboardAvoidingView>
+          </View>
+        </Modal>
 
         {/* Service Requests */}
         <Text style={styles.sectionTitle}>Service Requests</Text>

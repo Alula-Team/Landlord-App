@@ -112,22 +112,6 @@ const Tenants = ({ stateTenants }) => {
               paddingTop: 30,
             },
           }}
-          rightComponent={
-            <>
-              <Icon
-                name="plus"
-                type="feather"
-                color="#fff"
-                size={25}
-                iconStyle={{
-                  paddingTop: 30,
-                  paddingRight: 20,
-                  paddingBottom: 10,
-                }}
-                onPress={() => navigation.navigate("AddTenants")}
-              />
-            </>
-          }
           containerStyle={{
             backgroundColor: "#09061C",
             justifyContent: "space-around",

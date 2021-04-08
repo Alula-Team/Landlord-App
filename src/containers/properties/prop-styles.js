@@ -225,6 +225,52 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center'
     },
+    overlay: {
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
+    modalContainer: {
+        backgroundColor: '#5858FB',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        height: 325
+    },
+    modalText: {
+        color: '#fff',
+        textAlign: 'center',
+        marginVertical: 20,
+        fontSize: 18
+    },
+    modalButton: {
+        backgroundColor: '#fff',
+        padding: 15,
+        marginTop: 20,
+        marginHorizontal: '20%',
+        borderRadius: 10,
+    },
+    modalButtonText: {
+        fontSize: 18,
+        fontWeight: '600',
+        alignSelf: 'center',
+        color: '#5858FB'
+    },
+    tenantInputContainer: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        marginBottom: 20,
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        borderColor: '#ffffff60'
+    },
+    tenantInput: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '500',
+        marginLeft: 12.5
+    }
 });
 
 export default styles;
