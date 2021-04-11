@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  ScrollView
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
 
@@ -133,7 +134,6 @@ const Transactions = () => {
         <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
           Hmm... 
           There is nothing here... 
-          Let's add your first property! 
           Use the '+' symbol at the top to get started. 
         </Text>
       </View>
@@ -154,7 +154,7 @@ const Transactions = () => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => console.log("OK Pressed"),
+          onPress: () => console.log("Delete Pressed"),
         },
       ]
     );
@@ -215,68 +215,68 @@ const Transactions = () => {
           />
         </View>
 
-        {/* Transactions Flat List */}
-        <SafeAreaView>
-          <View style={styles.listView}>
-            <FlatList
-              data={data}
-              keyExtractor={(item) => item.address}
-              renderItem={({ item }) => (
-                <View style={styles.listCell}>
-                  <Text style={styles.transactionType}>
-                    {item.transactionType}
-                  </Text>
-                  {/* Address */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="map-pin" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.address}</Text>
-                  </View>
-                  {/* Date and Transaction Amount */}
-                  <View style={styles.itemCenter}>
-                    <View style={{ flexDirection: "row" }}>
-                      <Feather name="clock" color="#fff" size={15} />
-                      <Text style={styles.listItem}>{item.date}</Text>
-                    </View>
-                    <Text
-                      style={{
-                        color: item.payment === true ? "#5CB85C" : "#D9534F",
-                        fontWeight: "700",
-                        fontSize: 18,
-                      }}
-                    >
-                      <Amount payment={item.payment} />
-                      {item.amount}
+          {/* Transactions Flat List */}
+          <SafeAreaView>
+            <View style={styles.listView}>
+              <FlatList
+                data={data}
+                keyExtractor={(item) => item.address}
+                renderItem={({ item }) => (
+                  <View style={styles.listCell}>
+                    <Text style={styles.transactionType}>
+                      {item.transactionType}
                     </Text>
+                    {/* Address */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                      <Feather name="map-pin" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{item.address}</Text>
+                    </View>
+                    {/* Date and Transaction Amount */}
+                    <View style={styles.itemCenter}>
+                      <View style={{ flexDirection: "row" }}>
+                        <Feather name="clock" color="#fff" size={15} />
+                        <Text style={styles.listItem}>{item.date}</Text>
+                      </View>
+                      <Text
+                        style={{
+                          color: item.payment === true ? "#5CB85C" : "#D9534F",
+                          fontWeight: "700",
+                          fontSize: 18,
+                        }}
+                      >
+                        <Amount payment={item.payment} />
+                        {item.amount}
+                      </Text>
+                    </View>
+                    {/* Payment Type */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                      <Feather name="credit-card" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{item.paymentType}</Text>
+                    </View>
+                    {/* Actions */}
+                    <View>
+                      <TouchableOpacity
+                        style={styles.actionsBtn}
+                        onPress={deleteAlert}
+                      >
+                        <Feather
+                          name="trash-2"
+                          color="#fff"
+                          size={20}
+                          style={{ marginRight: 10 }}
+                        />
+                        <Text style={styles.actionsText}>Delete</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                  {/* Payment Type */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="credit-card" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.paymentType}</Text>
-                  </View>
-                  {/* Actions */}
-                  <View>
-                    <TouchableOpacity
-                      style={styles.actionsBtn}
-                      onPress={deleteAlert}
-                    >
-                      <Feather
-                        name="trash-2"
-                        color="#fff"
-                        size={20}
-                        style={{ marginRight: 10 }}
-                      />
-                      <Text style={styles.actionsText}>Delete</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
-              contentContainerStyle={{ paddingBottom: 350 }}
-              showsVerticalScrollIndicator={false}
-              ItemSeparatorComponent={renderSeparator}
-              ListEmptyComponent={EmptyListMessage}
-            />
-          </View>
-        </SafeAreaView>
+                )}
+                contentContainerStyle={{ paddingBottom: 350 }}
+                showsVerticalScrollIndicator={false}
+                ItemSeparatorComponent={renderSeparator}
+                ListEmptyComponent={EmptyListMessage}
+              />
+            </View>
+          </SafeAreaView>
       </View>
     </>
   );
