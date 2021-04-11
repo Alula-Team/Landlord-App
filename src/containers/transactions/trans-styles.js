@@ -31,34 +31,38 @@ const styles = StyleSheet.create({
 
     // Money Boxes
     moneyInCell: {
-        margin: 30,
-        padding: 20,
+        marginHorizontal: 20,
+        padding: 10,
         backgroundColor: '#5CB85C',
         borderRadius: 10,
     },
     moneyOutCell: {
-        marginHorizontal: 30,
+        marginTop: 15,
+        marginHorizontal: 20,
         marginBottom: 30,
-        padding: 20,
+        padding: 10,
         backgroundColor: '#D9534F',
         borderRadius: 10,
     },
     netGainsCellTitle: {
         fontSize: 18,
         fontWeight: '700',
-        color: '#fff'
+        color: '#fff',
+        marginLeft: 10
     },
     netGainsCellSubTitle: {
         fontSize: 14,
         fontWeight: '500',
         color: '#fff',
         opacity: 0.5,
+        marginLeft: 10
     },
     netGainsCellNumber: {
         fontSize: 26,
         fontWeight: '700',
         color: '#fff',
-        marginVertical: 10
+        marginVertical: 10,
+        marginLeft: 10
     },
 
     // Flatlist
