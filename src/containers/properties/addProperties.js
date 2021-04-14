@@ -30,7 +30,9 @@ const AddProperties = ({ addProperty }) => {
   const { control, handleSubmit } = useForm();
   const addItem = (data) => {
     addProperty(data);
+    navigation.goBack();
   };
+  
   const logItem = (data) => {
     console.log(data);
   };
