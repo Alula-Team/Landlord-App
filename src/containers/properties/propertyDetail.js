@@ -46,6 +46,7 @@ const PropertyDetail = ({ route, deleteProperty }) => {
           // onPress: () => console.log("Deleting Item ", { itemID }),
           onPress: () => {
             deleteProperty(itemID);
+            navigation.goBack();
           },
         },
       ]
