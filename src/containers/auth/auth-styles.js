@@ -163,6 +163,37 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         color: 'white',
     },
+    buttonContainer: {
+        marginHorizontal: 30,
+        marginTop: 10,
+        marginBottom: 20,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    buttonText: {
+        alignSelf: 'center',
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        marginLeft: 10
+    },
+    continueButton: {
+        backgroundColor: "#428bca",
+        marginHorizontal: 30,
+        marginVertical: 30,
+        padding: 15,
+        borderRadius: 10,
+    },
+    continueButtonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+        textAlign: 'center'
+    },
 });
 
 export default styles;
