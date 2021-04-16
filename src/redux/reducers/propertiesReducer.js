@@ -1,13 +1,11 @@
 import uuid from "react-native-uuid";
-// import { normalProps as defaultProperties } from "../../normalizedState";
-import defaultProperties from "../../dummyProperties";
 const initialState = {
   newProperty: {},
   properties: [
     {
       id: "1",
       address: "123 Harmony Avenue",
-      unit: "",
+      unit: [1, 5, 8],
       city: "Las Vegas",
       state: "NV",
       zip: "89123",
@@ -18,7 +16,7 @@ const initialState = {
     {
       id: "2",
       address: "108 Verigold Lane",
-      unit: "",
+      unit: [],
       city: "Hendertucky",
       state: "NV",
       zip: "89052",

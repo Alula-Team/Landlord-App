@@ -37,6 +37,7 @@ const Properties = ({ stateProperties }) => {
   // console.log(normalServiceRequest);
   const navigation = useNavigation();
   const data = stateProperties;
+  const units = stateProperties.map((item) => item.itemUnit);
   // Flatlist Dummy Data
 
   function Occupied(props) {
@@ -174,13 +175,16 @@ const Properties = ({ stateProperties }) => {
                     itemCity: item.city,
                     itemState: item.state,
                     itemZip: item.zip,
+                    itemUnit: item.unit,
                   })
                 }
               >
                 <View style={{ flexDirection: "row" }}>
                   <Feather name="map-pin" color="#fff" size={20} />
                   <View>
-                    <Text style={styles.listItem}>{item.address}</Text>
+                    <Text style={styles.listItem}>
+                      {item.address} {` `} {item.unit}
+                    </Text>
                     <Text style={styles.status}>
                       Status: <Status vacant={item.vacant} />
                     </Text>

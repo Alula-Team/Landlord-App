@@ -25,25 +25,3 @@ export const normalData = {
   entities: normalizedData.entities.properties,
   ids: normalizedData.result,
 };
-
-// export const normalTenant = {
-//   entities: normalizedTenants.entities.tenants,
-//   ids: normalizedTenants.result,
-// };
-
-// export const normalTransaction = {
-//   entities: normalizedTransactions.entities.transactions,
-//   ids: normalizedTransactions.result,
-// };
-
-// export const normalServiceRequest = {
-//   entities: normalizedServiceRequests.entities.serviceRequests,
-//   ids: normalizedServiceRequests.result,
-// };
-
-// export default {
-//   normalProps,
-//   normalTenant,
-//   normalTransaction,
-//   normalServiceRequest,
-// };
