@@ -18,8 +18,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <RootNavigation />
-        {/* <Routes /> */}
+        {/* <RootNavigation /> */}
+        <Routes />
       </NavigationContainer>
     </Provider>
   );

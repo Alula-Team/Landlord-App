@@ -2,8 +2,11 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { Header } from 'react-native-elements';
 
+// Forms
+import { useForm, Controller } from "react-hook-form";
+
 // Icons
-import Icon from 'react-native-vector-icons/EvilIcons';
+import Feather from 'react-native-vector-icons/Feather';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -14,6 +17,8 @@ import globalStyles from './auth-styles';
 const RegisterScreen = (props) => {
 
     const navigation = useNavigation();
+
+    const { control, handleSubmit } = useForm();
 
     return (
         <View style={globalStyles.container}>
@@ -32,70 +37,96 @@ const RegisterScreen = (props) => {
 
             {/* Form */}
             <View style={globalStyles.form}>
-                <View style={globalStyles.nameInput}>
-                    <Icon 
-                        name={'user'}
-                        size={30}
-                        style={globalStyles.nameIcon}
-                    />
-                    <TextInput
-                        style={globalStyles.name}
-                        placeholder='Full Name'
-                        placeholderTextColor='#ffffff50'
-                        autoCapitalize='words'
-                        autoCompleteType='name'
-                        autoCorrect={false}
-                        clearButtonMode={'while-editing'}
-                        keyboardAppearance='dark'
-                        // value={}
-                        // onChangeText={}
-                    />
-                </View>
-                <View style={globalStyles.emailInput}>
-                    <Icon 
-                        name={'envelope'}
-                        size={31}
-                        style={globalStyles.emailIcon}
-                    />
-                    <TextInput
-                        style={globalStyles.email}
-                        placeholder='Email'
-                        placeholderTextColor='#ffffff50'
-                        autoCapitalize='none'
-                        autoCompleteType='email'
-                        autoCorrect={false}
-                        clearButtonMode={'while-editing'}
-                        keyboardType={'email-address'}
-                        keyboardAppearance='dark'
-                        // value={}
-                        // onChangeText={}
-                    />
-                </View>
-                <View style={globalStyles.passwordInput}>
-                    <Icon 
-                        name={'lock'}
-                        size={30}
-                        style={globalStyles.passwordIcon}
-                    />
-                    <TextInput
-                        style={globalStyles.password}
-                        placeholder='Password'
-                        placeholderTextColor='#ffffff50'
-                        secureTextEntry={true}
-                        autoCapitalize='none'
-                        autoCompleteType='password'
-                        autoCorrect={false}
-                        clearButtonMode={'while-editing'}
-                        returnKeyType={'done'}
-                        keyboardAppearance='dark'
-                        // value={}
-                        // onChangeText={}
-                    />
-                </View>
+                <Controller
+                control={control}
+                render={({ onChange, value }) => (
+                    <View style={globalStyles.nameInput}>
+                        <Feather 
+                            name={'user'}
+                            size={22.5}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                        />
+                        <TextInput
+                            style={globalStyles.name}
+                            placeholder='Full Name'
+                            placeholderTextColor='#ffffff50'
+                            autoCapitalize='words'
+                            autoCompleteType='name'
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            keyboardAppearance='dark'
+                            // value={}
+                            // onChangeText={}
+                        />
+                    </View>
+                    )}
+                    name="name"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                <Controller
+                    control={control}
+                    render={({ onChange, value }) => (
+                        <View style={globalStyles.emailInput}>
+                            <Feather 
+                                name={'mail'}
+                                size={22.5}
+                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            />
+                            <TextInput
+                                style={globalStyles.email}
+                                placeholder='Email'
+                                placeholderTextColor='#ffffff50'
+                                autoCapitalize='none'
+                                autoCompleteType='email'
+                                autoCorrect={false}
+                                clearButtonMode={'while-editing'}
+                                keyboardType={'email-address'}
+                                keyboardAppearance='dark'
+                                // value={}
+                                // onChangeText={}
+                            />
+                        </View>
+                    )}
+                    name="email"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                <Controller
+                    control={control}
+                    render={({ onChange, value }) => (  
+                        <View style={globalStyles.passwordInput}>
+                            <Feather 
+                                name={'lock'}
+                                size={22.5}
+                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            />
+                            <TextInput
+                                style={globalStyles.password}
+                                placeholder='Password'
+                                placeholderTextColor='#ffffff50'
+                                secureTextEntry={true}
+                                autoCapitalize='none'
+                                autoCompleteType='password'
+                                autoCorrect={false}
+                                clearButtonMode={'while-editing'}
+                                returnKeyType={'done'}
+                                keyboardAppearance='dark'
+                                // value={}
+                                // onChangeText={}
+                            />
+                        </View>
+                    )}
+                    name="password"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
 
                 {/* Sign In Button */}
                 <TouchableOpacity 
-                    style={globalStyles.submitButton}
+                    style={globalStyles.continueButton}
                     onPress={() => navigation.navigate('Onboarding')}
                 >
                     <Text style={globalStyles.submitText}>Next</Text>
