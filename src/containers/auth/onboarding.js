@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 
 // Icons
@@ -23,7 +23,7 @@ const OnboardingScreen = () => {
                 barStyle={'light-content'}
                 containerStyle={{ borderBottomWidth: 0}}
                 centerComponent={
-                    <Text style={styles.headerText}> ALULA </Text>
+                    <Image source={require('../../assets/favicon.jpg')} style={{width: 100, height: 100}} />
                 }
                 leftComponent={
                     <Feather 
@@ -31,14 +31,14 @@ const OnboardingScreen = () => {
                         size={25}
                         style={{
                             color: 'white',
-                            marginTop: 20,
+                            marginTop: 40,
                             marginLeft: 20
                         }}
                         onPress={() => navigation.goBack()}
                     />
                 }
                 rightComponent={
-                    <TouchableOpacity style={{ paddingTop: 20, paddingRight: 20 }}>
+                    <TouchableOpacity style={{ marginTop: 42, paddingRight: 20 }}>
                       <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>Skip</Text>
                     </TouchableOpacity>
                 }

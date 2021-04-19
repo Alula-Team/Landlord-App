@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 
 // Forms
@@ -33,14 +33,14 @@ const ForgotPasswordScreen = (props) => {
                         size={25}
                         style={{
                             color: 'white',
-                            marginTop: 20,
+                            marginTop: 40,
                             marginLeft: 20
                         }}
                         onPress={() => navigation.goBack()}
                     />
                 }
                 centerComponent={
-                    <Text style={globalStyles.headerText}> ALULA </Text>
+                    <Image source={require('../../assets/favicon.jpg')} style={{width: 100, height: 100}} />
                 }
             />
 

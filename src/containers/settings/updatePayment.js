@@ -24,6 +24,9 @@ const UpdatePayment = () => {
             <View style={styles.container}>
                 {/* Header */}
                 <Header
+                    centerComponent={
+                        <Image source={require('../../assets/favicon.jpg')} style={{width: 75, height: 75}} />
+                    }
                     leftComponent={
                         <Icon
                         name="arrow-left"
