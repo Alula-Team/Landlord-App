@@ -27,7 +27,7 @@ const LoginScreen = (props) => {
                 barStyle={'light-content'}
                 containerStyle={{ borderBottomWidth: 0}}
                 centerComponent={
-                    <Text style={globalStyles.headerText}> ALULA </Text>
+                    <Image source={require('../../assets/favicon.jpg')} style={{width: 100, height: 100}} />
                 }
             />
 
