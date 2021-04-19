@@ -12,7 +12,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 // Style Sheet
-import globalStyles from './auth-styles';
+import styles from './auth-styles';
 
 const LoginScreen = (props) => {
 
@@ -21,7 +21,7 @@ const LoginScreen = (props) => {
     const { control, handleSubmit } = useForm();
 
     return (
-        <View style={globalStyles.container}>
+        <View style={styles.container}>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}
@@ -32,23 +32,23 @@ const LoginScreen = (props) => {
             />
 
             {/* Title of App */}
-            <Text style={globalStyles.title}>Welcome</Text>
-            <Text style={globalStyles.subTitle}>Sign in to get started!</Text>
+            <Text style={styles.title}>Welcome</Text>
+            <Text style={styles.subTitle}>Sign in to get started!</Text>
 
             {/* Form */}
-            <View style={globalStyles.form}>
+            <View style={styles.form}>
 
                 <Controller
                     control={control}
                     render={({ onChange, value }) => (
-                        <View style={globalStyles.emailInput}>
+                        <View style={styles.emailInput}>
                             <Feather 
                                 name={'mail'}
                                 size={22.5}
                                 style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                             />
                             <TextInput
-                                style={globalStyles.email}
+                                style={styles.email}
                                 placeholder='Email'
                                 placeholderTextColor='#ffffff50'
                                 autoCapitalize='none'
@@ -70,14 +70,14 @@ const LoginScreen = (props) => {
                 <Controller
                     control={control}
                     render={({ onChange, value }) => (
-                        <View style={globalStyles.passwordInput}>
+                        <View style={styles.passwordInput}>
                             <Feather 
                                 name={'lock'}
                                 size={22.5}
                                 style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                             />
                             <TextInput
-                                style={globalStyles.password}
+                                style={styles.password}
                                 placeholder='Password'
                                 placeholderTextColor='#ffffff50'
                                 secureTextEntry={true}
@@ -99,27 +99,27 @@ const LoginScreen = (props) => {
 
                 {/* Forgot Password Button */}
                 <TouchableOpacity 
-                    style={globalStyles.forgotPasswordButton} 
+                    style={styles.forgotPasswordButton} 
                     onPress={() => navigation.navigate('ForgotPassword')}
                 >
-                    <Text style={globalStyles.forgotPasswordText}>Forgot Password</Text>
+                    <Text style={styles.forgotPasswordText}>Forgot Password</Text>
                 </TouchableOpacity >
 
                 {/* Sign In Button */}
                 <TouchableOpacity 
-                    style={globalStyles.continueButton}
+                    style={styles.continueButton}
                     onPress={() => navigation.navigate('Home')}
                 >
-                    <Text style={globalStyles.submitText}>Login</Text>
+                    <Text style={styles.submitText}>Login</Text>
                 </TouchableOpacity>
             </View>
 
             {/* Register Button */}
             <TouchableOpacity 
-                style={globalStyles.otherAuthButton}
+                style={styles.otherAuthButton}
                 onPress={() => navigation.navigate('Register')}
             >
-                <Text style={globalStyles.otherAuthText}>
+                <Text style={styles.otherAuthText}>
                     Need an account? <Text style={{fontWeight: '800'}}>Sign Up Instead</Text>
                 </Text>
             </TouchableOpacity>
