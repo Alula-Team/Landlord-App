@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
             marginBottom: 20
         },
         continueButton: {
-            backgroundColor: "#428bca",
+            backgroundColor: "#5858FB",
             marginHorizontal: 30,
             marginTop: 20,
             padding: 15,

@@ -4,8 +4,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Notifications from '../containers/notifications/notifications';
-// import Notifications from '../containers/notifications/notifications';
+import Notifications from '../containers/notifications/notificationScreen';
 
 const Stack = createStackNavigator();
 
@@ -13,8 +12,7 @@ const DashboardNavigation = (props) => {
     return(
         <>
             <Stack.Navigator>
-                <Stack.Screen name='Dashboard' component={Notifications} options={{ headerShown: false }} />
-                {/* <Stack.Screen name='Notifications' component={Notifications} options={{ headerShown: false }} /> */}
+                <Stack.Screen name='Notifications' component={Notifications} options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );

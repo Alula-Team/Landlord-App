@@ -4,7 +4,7 @@ import { View } from 'react-native';
 // Style Sheet
 import styles from './notif-styles';
 
-const Notifications = () => {
+const ServiceRequests = () => {
 
     return(
         <>
@@ -15,4 +15,4 @@ const Notifications = () => {
     );
 }
 
-export default Notifications;
+export default ServiceRequests;
