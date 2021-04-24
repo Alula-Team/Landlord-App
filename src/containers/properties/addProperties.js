@@ -26,12 +26,42 @@ import { doAddProperty } from "../../redux/actions";
 
 const AddProperties = ({ addProperty }) => {
   const navigation = useNavigation();
+  const [treeState, setTreeState] = {};
+
+  const serialize = (data) => {
+    let obj = {};
+    for (let [key, value] of data) {
+      if (obj[key] !== undefined) {
+        if (!Array.isArray(obj[key])) {
+          obj[key] = [obj[key]];
+        }
+        obj[key].push(value);
+      } else {
+        obj[key] = value;
+      }
+    }
+    return obj;
+  };
 
   const { control, handleSubmit } = useForm();
   const addItem = (data) => {
+    let form = document.querySelector("#form");
+
+    // Get all field data from the form
+    let data = new FormData(form);
+
+    // Convert to an object
+    let formObj = serialize(data);
+    setTreeState(formObj);
     addProperty(data);
   };
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
   const logItem = (data) => {
+    let tree = serialize(data);
+    setTreeState(tree);
     console.log(data);
   };
   // For Picker Select
@@ -73,6 +103,31 @@ const AddProperties = ({ addProperty }) => {
     color: "#fff",
   };
 
+<<<<<<< Updated upstream
+=======
+  // Add TextInput Code
+  const [inputs, setInputs] = useState({ units: "" });
+
+  const addHandler = () => {
+    const _inputs = [...inputs];
+    _inputs.push({ units: "" });
+    setInputs(_inputs);
+  };
+
+  const deleteHandler = (index) => {
+    const _inputs = [...inputs];
+    _inputs.slice(index, 1);
+    setInputs(_inputs);
+  };
+
+  const inputHandler = (text, key) => {
+    const _inputs = [...inputs];
+    _inputs[key].value = text;
+    _inputs[key].key = key;
+    setInputs(_inputs);
+  };
+
+>>>>>>> Stashed changes
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -115,7 +170,7 @@ const AddProperties = ({ addProperty }) => {
           // />
           <TouchableOpacity
             style={{ paddingTop: 32.5, paddingRight: 10 }}
-            onPress={handleSubmit(addItem)}
+            onPress={handleSubmit(logItem)}
           >
             <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
               Save
@@ -130,6 +185,7 @@ const AddProperties = ({ addProperty }) => {
       />
 
       <KeyboardAwareScrollView>
+        <form onSubmit={handleSubmit(addHandler)}></form>
         {/* Form */}
         <Text style={styles.sectionText}>Property Address</Text>
 
@@ -267,6 +323,7 @@ const AddProperties = ({ addProperty }) => {
         />
 
         {/* Units */}
+<<<<<<< Updated upstream
         <Text style={styles.sectionText}>Unit(s)</Text>
         <Controller
           control={control}
@@ -286,12 +343,53 @@ const AddProperties = ({ addProperty }) => {
           name="unit"
           defaultValue=""
         />
+=======
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={styles.sectionText}>Unit(s)</Text>
+          <Text style={{ marginTop: 15, marginLeft: 10, color: "#ffffff80" }}>
+            (if applicable)
+          </Text>
+        </View>
+        <Text style={{ color: "#ffffff80", marginLeft: 20 }}>
+          Please include the appropriate label to each unit.
+        </Text>
+        {inputs.map((input, key) => (
+          <Controller
+            control={control}
+            render={({ onChange, value }) => (
+              <View style={{ flexDirection: "row" }}>
+                <View style={styles.addUnitInput}>
+                  <TextInput
+                    type="text"
+                    placeholder="i.e Apt, Unit, Suite, etc..."
+                    placeholderTextColor="#ffffff80"
+                    style={styles.propertyInput}
+                    keyboardAppearance="dark"
+                    onChangeText={(value, text) => onChange(value, text, key)}
+                    value={input.value}
+                  />
+                </View>
+                <TouchableOpacity
+                  style={{ alignSelf: "center", marginBottom: 12.5 }}
+                  onPress={() => deleteHandler(key)}
+                >
+                  <Feather name="trash" color="#fff" size={20} />
+                </TouchableOpacity>
+              </View>
+            )}
+            name="unit"
+            defaultValue=""
+          />
+        ))}
+>>>>>>> Stashed changes
         {/* Add Units Button */}
         <TouchableOpacity style={styles.addButton}>
           <Feather name="plus" size={25} style={styles.addButtonText} />
           <Text style={styles.addButtonText}>Add Unit</Text>
         </TouchableOpacity>
       </KeyboardAwareScrollView>
+      <br />
+      <pre>{JSON.stringify(treeState, null, 2)}</pre>
     </View>
   );
 };
