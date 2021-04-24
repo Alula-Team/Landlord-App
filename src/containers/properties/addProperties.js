@@ -204,6 +204,7 @@ const AddProperties = ({ addProperty }) => {
                 { label: "CA", value: "CA", color: "white" },
                 { label: "CO", value: "CO", color: "white" },
                 { label: "CT", value: "CT", color: "white" },
+                { label: "DC", value: "DC", color: "white" },
                 { label: "DE", value: "DE", color: "white" },
                 { label: "FL", value: "FL", color: "white" },
                 { label: "GA", value: "GA", color: "white" },
