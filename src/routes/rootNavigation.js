@@ -2,7 +2,6 @@ import React from 'react';
 
 // Navigation
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 
 // Dashboard
 import Notifications from './notificationsStack';
