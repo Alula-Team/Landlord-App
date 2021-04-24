@@ -7,7 +7,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
-  ScrollView
+  Image,
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
 
@@ -20,72 +20,18 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./trans-styles";
 
+// Redux Stuff
+import { connect } from "react-redux";
+import { doDeleteTransaction } from "../../redux/actions";
+
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New transactions auto sorted by newest to oldest
 // Separation between months/year
 
-const Transactions = () => {
+const Transactions = ({ stateTransactions, deleteTransaction }) => {
   const navigation = useNavigation();
-
-  // Flatlist Dummy Data
-  const data = [
-    {
-      id: 0,
-      address: "5612 Harmony Ave",
-      amount: 1000,
-      payment: true,
-      date: "03/03/21",
-      transactionType: "Rent Payment",
-      paymentType: "Auto Payment Collection",
-      notes: null,
-      image: {},
-    },
-    {
-      id: 1,
-      address: "123 Main Street",
-      amount: 1000,
-      payment: true,
-      date: "03/01/21",
-      transactionType: "Rent Payment",
-      paymentType: "Auto Payment Collection",
-      notes: null,
-      image: {},
-    },
-    {
-      id: 2,
-      address: "1012 Horizon Ridge",
-      amount: 250,
-      payment: false,
-      date: "02/28/21",
-      transactionType: "Repairs",
-      paymentType: "Check",
-      notes: null,
-      image: {},
-    },
-    {
-      id: 3,
-      address: "595 S. Green Valley Pkwy Apt 121",
-      amount: 2500,
-      payment: true,
-      date: "02/28/21",
-      transactionType: "Rent Payment",
-      paymentType: "Auto Payment Collection",
-      notes: null,
-      image: {},
-    },
-    {
-      id: 4,
-      address: "101 Univeristy Dr. Unit 100",
-      amount: 500,
-      payment: false,
-      date: "02/28/21",
-      transactionType: "Repairs",
-      paymentType: "Credit Card",
-      notes: "Hello World",
-      image: {},
-    },
-  ];
+  const data = stateTransactions;
 
   // Amount Function
   function Expense(props) {
@@ -140,6 +86,8 @@ const Transactions = () => {
     );
   }
 
+  const id = stateTransactions.id;
+
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
@@ -154,7 +102,7 @@ const Transactions = () => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => console.log("Delete Pressed"),
+          onPress: (id) => deleteTransaction(id),
         },
       ]
     );
@@ -221,23 +169,14 @@ const Transactions = () => {
             <View style={styles.listView}>
               <FlatList
                 data={data}
-                keyExtractor={(item) => item.address}
+                keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                   <View style={styles.listCell}>
-                    <Text style={styles.transactionType}>
-                      {item.transactionType}
-                    </Text>
-                    {/* Address */}
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="map-pin" color="#fff" size={15} />
-                      <Text style={styles.listItem}>{item.address}</Text>
-                    </View>
-                    {/* Date and Transaction Amount */}
+                    {/* Transaction Type and Amount*/}
                     <View style={styles.itemCenter}>
-                      <View style={{ flexDirection: "row" }}>
-                        <Feather name="clock" color="#fff" size={15} />
-                        <Text style={styles.listItem}>{item.date}</Text>
-                      </View>
+                      <Text style={styles.transactionType}>
+                        {item.transactionType}
+                      </Text>
                       <Text
                         style={{
                           color: item.payment === true ? "#5CB85C" : "#D9534F",
@@ -249,10 +188,25 @@ const Transactions = () => {
                         {item.amount}
                       </Text>
                     </View>
+                    {/* Category */}
+                    <View style={{ flexDirection: "row", marginTop: 10}}>
+                      <Feather name="file-text" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{item.transactionCategory}</Text>
+                    </View>
+                    {/* Property */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                      <Feather name="map-pin" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{item.address}</Text>
+                    </View>
+                    {/* Date */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                        <Feather name="clock" color="#fff" size={15} />
+                        <Text style={styles.listItem}>{item.date}</Text>
+                    </View>
                     {/* Payment Type */}
                     <View style={{ flexDirection: "row", marginTop: 10 }}>
                       <Feather name="credit-card" color="#fff" size={15} />
-                      <Text style={styles.listItem}>{item.paymentType}</Text>
+                      <Text style={styles.listItem}>{item.paymentMethod}</Text>
                     </View>
                     {/* Actions */}
                     <View>
@@ -283,4 +237,14 @@ const Transactions = () => {
   );
 };
 
-export default Transactions;
+const mapStateToProps = (state) => {
+  return {
+    stateTransactions: state.transactions.transactions,
+  };
+};
+
+const actions = {
+  deleteTransaction: doDeleteTransaction,
+};
+
+export default connect(mapStateToProps, actions)(Transactions);

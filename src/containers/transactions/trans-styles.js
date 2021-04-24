@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
     },
     transactionType: {
         color: '#fff',
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: '600',
     },
     amount: {

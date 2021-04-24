@@ -16,12 +16,19 @@ import Feather from 'react-native-vector-icons/Feather';
 // Style Sheet
 import styles from './trans-styles';
 
-const AddTransactions = () => {
+// Redux Stuff
+import { connect } from "react-redux";
+import { doAddTransaction } from "../../redux/actions";
+
+const AddTransactions = ({addTransaction}) => {
     
     const navigation = useNavigation();
 
     const { control, handleSubmit } = useForm();
-    const onSubmit = data => console.log(data);
+    const addItem = (data) => {
+        addTransaction(data);
+        navigation.goBack();
+    };
 
     // For Picker Select
         // Styles
@@ -104,7 +111,7 @@ const AddTransactions = () => {
                         />
                     }
                     rightComponent={
-                        <TouchableOpacity style={{paddingTop: 32.5, paddingRight: 10}} onPress={handleSubmit(onSubmit)}>
+                        <TouchableOpacity style={{paddingTop: 32.5, paddingRight: 10}} onPress={handleSubmit(addItem)}>
                             <Text style={{color: '#fff', fontSize: 18, fontWeight: '600'}}>Save</Text>
                         </TouchableOpacity>
                     }
@@ -127,8 +134,8 @@ const AddTransactions = () => {
                                 style={pickerStyles}
                                 onValueChange={value => onChange(value)}
                                 items={[
-                                    { label: 'Expense', value: 'expense', color: 'white' },
-                                    { label: 'Payment', value: 'payment', color: 'white' },
+                                    { label: 'Expense', value: 'Expense', color: 'white' },
+                                    { label: 'Payment', value: 'Payment', color: 'white' },
                                 ]}
                             />
                         )}
@@ -147,15 +154,15 @@ const AddTransactions = () => {
                                 style={pickerStyles}
                                 onValueChange={value => onChange(value)}
                                 items={[
-                                    { label: 'Appraisal', value: 'appraisal', color: 'white' },
+                                    { label: 'Appraisal', value: 'Appraisal', color: 'white' },
                                     { label: 'Cleaning', value: 'cleaning', color: 'white' },
-                                    { label: 'Inspection', value: 'inspection', color: 'white' },
-                                    { label: 'Marketing', value: 'marketing', color: 'white' },
-                                    { label: 'Renovations', value: 'renovations', color: 'white' },
-                                    { label: 'Rent Payment', value: 'rent-payment', color: 'white' },
-                                    { label: 'Repairs', value: 'repairs', color: 'white' },
-                                    { label: 'Security Deposit', value: 'secuirty-deposit', color: 'white' },
-                                    { label: 'Tax Services', value: 'tax-services', color: 'white' },
+                                    { label: 'Inspection', value: 'Inspection', color: 'white' },
+                                    { label: 'Marketing', value: 'Marketing', color: 'white' },
+                                    { label: 'Renovations', value: 'Renovations', color: 'white' },
+                                    { label: 'Rent Payment', value: 'Rent Payment', color: 'white' },
+                                    { label: 'Repairs', value: 'Repairs', color: 'white' },
+                                    { label: 'Security Deposit', value: 'Secuirty Deposit', color: 'white' },
+                                    { label: 'Tax Services', value: 'Tax Services', color: 'white' },
                                 ]}
                             />
                         )}
@@ -179,7 +186,30 @@ const AddTransactions = () => {
                                 ]}
                             />
                         )}
-                        name="property"
+                        name="address"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+
+                    {/* Amount */}
+                    <Text style={styles.sectionText}>Amount</Text>
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={styles.dateContainer}>
+                                <TextInput 
+                                    type='text'
+                                    placeholder='i.e 1500'
+                                    placeholderTextColor='#ffffff80'
+                                    style={styles.dateText}
+                                    keyboardAppearance='dark'
+                                    keyboardType='phone-pad'
+                                    onChangeText={value => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="amount"
                         rules={{ required: true }}
                         defaultValue=""
                     />
@@ -196,7 +226,7 @@ const AddTransactions = () => {
                                     placeholderTextColor='#ffffff80'
                                     style={styles.dateText}
                                     keyboardAppearance='dark'
-                                    keyboardType='phone-pad'
+                                    keyboardType='default'
                                     onChangeText={value => onChange(value)}
                                     value={value}
                                 />
@@ -209,26 +239,28 @@ const AddTransactions = () => {
                     
 
                     {/* Payment Method */}
-                    <Text style={styles.sectionText}>Payment Method</Text>
-                    <Controller
-                        control={control}
-                        render={({ onChange, value }) => (
-                            <RNPickerSelect
-                                placeholder={PaymentPlaceholder}
-                                style={pickerStyles}
-                                onValueChange={value => onChange(value)}
-                                items={[
-                                    { label: 'Bank Transfer', value: 'bank-transfer', color: 'white' },
-                                    { label: 'Cash', value: 'cash', color: 'white' },
-                                    { label: 'Check', value: 'check', color: 'white' },
-                                    { label: 'Other', value: 'other', color: 'white' },
-                                ]}
-                            />
-                        )}
-                        name="paymentMethod"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    />
+                    <View style={{paddingBottom: 20}}>
+                        <Text style={styles.sectionText}>Payment Method</Text>
+                        <Controller
+                            control={control}
+                            render={({ onChange, value }) => (
+                                <RNPickerSelect
+                                    placeholder={PaymentPlaceholder}
+                                    style={pickerStyles}
+                                    onValueChange={value => onChange(value)}
+                                    items={[
+                                        { label: 'Bank Transfer', value: 'Bank Transfer', color: 'white' },
+                                        { label: 'Cash', value: 'Cash', color: 'white' },
+                                        { label: 'Check', value: 'Check', color: 'white' },
+                                        { label: 'Other', value: 'Other', color: 'white' },
+                                    ]}
+                                />
+                            )}
+                            name="paymentMethod"
+                            rules={{ required: true }}
+                            defaultValue=""
+                        />
+                    </View>
 
                     {/* Attachement */}
                     {/* <Text style={styles.sectionText}>Attachements:</Text>
@@ -261,6 +293,10 @@ const AddTransactions = () => {
             </View>
         </>
     );
-}
+};
 
-export default AddTransactions;
+const actions = {
+    addTransaction: doAddTransaction,
+};
+
+export default connect(null, actions)(AddTransactions);
