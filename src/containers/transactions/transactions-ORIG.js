@@ -20,21 +20,18 @@ import Feather from "react-native-vector-icons/Feather";
 import styles from "./trans-styles";
 
 // Dummy Data
-// import allTransactions from "../../dummyTransactions";
+import allTransactions from "../../dummyTransactions";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New transactions auto sorted by newest to oldest
 // Separation between months/year
 
-import { connect } from "react-redux";
-import { doDeleteTransaction } from "../../redux/actions";
-
-const Transactions = ({ stateTransactions, deleteTransaction }) => {
+const Transactions = () => {
   const navigation = useNavigation();
 
   // Flatlist Dummy Data
-  const data = stateTransactions;
+  const data = allTransactions;
   // Amount Function
   function Expense(props) {
     return (
@@ -215,12 +212,4 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateTransactions: state.transactions.transactions };
-};
-
-const actions = {
-  deleteTransaction: doDeleteTransaction,
-};
-
-export default connect(mapStateToProps, actions)(Transactions);
+export default Transactions;

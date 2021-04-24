@@ -25,3 +25,17 @@ export const doDeleteTenant = (id) => {
     id,
   };
 };
+
+export const doAddTransaction = (payload) => {
+  return {
+    type: "ADD_TRANSACTION",
+    payload,
+  };
+};
+
+export const doDeleteTransaction = (id) => {
+  return {
+    type: "DELETE_TRANSACTION",
+    id,
+  };
+};
