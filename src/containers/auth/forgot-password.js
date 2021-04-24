@@ -12,7 +12,7 @@ import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Styles
-import globalStyles from './auth-styles';
+import styles from './auth-styles';
 
 
 const ForgotPasswordScreen = (props) => {
@@ -21,7 +21,7 @@ const ForgotPasswordScreen = (props) => {
     const { control, handleSubmit } = useForm();
 
     return (
-        <View style={globalStyles.container}>
+        <View style={styles.container}>
             {/* Navbar */}
             <Header
                 backgroundColor={'transparent'}
@@ -45,22 +45,22 @@ const ForgotPasswordScreen = (props) => {
             />
 
             {/* Greeting*/}
-            <Text style={globalStyles.title}>Forgot Password</Text>
-            <Text style={globalStyles.subTitle}>Enter your email to continue!</Text>
+            <Text style={styles.title}>Forgot Password</Text>
+            <Text style={styles.subTitle}>Enter your email to continue!</Text>
 
             {/* Form */}
-            <View style={globalStyles.form}>
+            <View style={styles.form}>
                 <Controller
                     control={control}
                     render={({ onChange, value }) => (  
-                        <View style={globalStyles.emailInput}>
+                        <View style={styles.emailInput}>
                             <Feather 
                                 name={'mail'}
                                 size={22.5}
                                 style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                             />
                             <TextInput
-                                style={globalStyles.email}
+                                style={styles.email}
                                 placeholder='Email'
                                 placeholderTextColor='#ffffff50'
                                 autoCapitalize='none'
@@ -80,8 +80,8 @@ const ForgotPasswordScreen = (props) => {
                 />
                 
                 {/* Sign In Button */}
-                <TouchableOpacity style={globalStyles.continueButton}>
-                    <Text style={globalStyles.submitText}>Submit</Text>
+                <TouchableOpacity style={styles.continueButton}>
+                    <Text style={styles.submitText}>Submit</Text>
                 </TouchableOpacity>
             </View>
         </View>

@@ -12,7 +12,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 // Style Sheet
-import globalStyles from './auth-styles';
+import styles from './auth-styles';
 
 const RegisterScreen = (props) => {
 
@@ -21,7 +21,7 @@ const RegisterScreen = (props) => {
     const { control, handleSubmit } = useForm();
 
     return (
-        <View style={globalStyles.container}>
+        <View style={styles.container}>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}
@@ -32,22 +32,22 @@ const RegisterScreen = (props) => {
             />
 
             {/* Title of App */}
-            <Text style={globalStyles.title}>Create Account</Text>
-            <Text style={globalStyles.subTitle}>Sign up to get started!</Text>
+            <Text style={styles.title}>Create Account</Text>
+            <Text style={styles.subTitle}>Sign up to get started!</Text>
 
             {/* Form */}
-            <View style={globalStyles.form}>
+            <View style={styles.form}>
                 <Controller
                 control={control}
                 render={({ onChange, value }) => (
-                    <View style={globalStyles.nameInput}>
+                    <View style={styles.nameInput}>
                         <Feather 
                             name={'user'}
                             size={22.5}
                             style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                         />
                         <TextInput
-                            style={globalStyles.name}
+                            style={styles.name}
                             placeholder='Full Name'
                             placeholderTextColor='#ffffff50'
                             autoCapitalize='words'
@@ -68,14 +68,14 @@ const RegisterScreen = (props) => {
                 <Controller
                     control={control}
                     render={({ onChange, value }) => (
-                        <View style={globalStyles.emailInput}>
+                        <View style={styles.emailInput}>
                             <Feather 
                                 name={'mail'}
                                 size={22.5}
                                 style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                             />
                             <TextInput
-                                style={globalStyles.email}
+                                style={styles.email}
                                 placeholder='Email'
                                 placeholderTextColor='#ffffff50'
                                 autoCapitalize='none'
@@ -97,14 +97,14 @@ const RegisterScreen = (props) => {
                 <Controller
                     control={control}
                     render={({ onChange, value }) => (  
-                        <View style={globalStyles.passwordInput}>
+                        <View style={styles.passwordInput}>
                             <Feather 
                                 name={'lock'}
                                 size={22.5}
                                 style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                             />
                             <TextInput
-                                style={globalStyles.password}
+                                style={styles.password}
                                 placeholder='Password'
                                 placeholderTextColor='#ffffff50'
                                 secureTextEntry={true}
@@ -126,24 +126,24 @@ const RegisterScreen = (props) => {
 
                 {/* Sign In Button */}
                 <TouchableOpacity 
-                    style={globalStyles.continueButton}
+                    style={styles.continueButton}
                     onPress={() => navigation.navigate('Onboarding')}
                 >
-                    <Text style={globalStyles.submitText}>Next</Text>
+                    <Text style={styles.submitText}>Next</Text>
                 </TouchableOpacity>
 
                 {/* Terms & Conditions */}
-                <Text style={globalStyles.termsText}>
-                    By signing up, you agree to Alula’s <Text style={globalStyles.terms}>Terms & Conditions</Text> and the <Text style={globalStyles.terms}>Privacy Policy</Text>.
+                <Text style={styles.termsText}>
+                    By signing up, you agree to Alula’s <Text style={styles.terms}>Terms & Conditions</Text> and the <Text style={styles.terms}>Privacy Policy</Text>.
                 </Text>
             </View>
 
             {/* Register Button */}
             <TouchableOpacity 
-                style={globalStyles.otherAuthButton}
+                style={styles.otherAuthButton}
                 onPress={() => navigation.navigate('Login')}
             >
-                <Text style={globalStyles.otherAuthText}>
+                <Text style={styles.otherAuthText}>
                     Already have an account? <Text style={{fontWeight: '800'}}>Login Instead</Text>
                 </Text>
             </TouchableOpacity>
