@@ -37,11 +37,6 @@ const OnboardingScreen = () => {
                         onPress={() => navigation.goBack()}
                     />
                 }
-                rightComponent={
-                    <TouchableOpacity style={{ marginTop: 42, paddingRight: 20 }}>
-                      <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>Skip</Text>
-                    </TouchableOpacity>
-                }
             />
 
             <Text style={{color: '#fff', marginLeft: 30, marginTop: 40, fontSize: 18}}>Let's do a little onboarding...</Text>

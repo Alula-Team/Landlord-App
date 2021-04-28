@@ -4,7 +4,7 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Notifications from '../containers/notifications/notificationScreen';
+import Notifications from '../../containers/notifications/notificationScreen';
 
 const Stack = createStackNavigator();
 

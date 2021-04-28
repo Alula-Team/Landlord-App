@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     continueButton: {
-        backgroundColor: "#428bca",
+        backgroundColor: "#5858FB",
         marginHorizontal: 30,
         marginVertical: 30,
         padding: 15,
@@ -193,6 +193,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         textAlign: 'center'
+    },
+
+    // Loading Screen
+    splashContainer: {
+        justifyContent: 'center',
+        alignContent: 'center',
+        backgroundColor: '#09061C',
+        height: '100%'
+    },
+    splashImg: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center'
     },
 });
 

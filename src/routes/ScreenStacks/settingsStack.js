@@ -4,10 +4,10 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Settings from '../containers/settings/settings';
-import UpdateProfile from '../containers/settings/updateProfile';
-import UpdatePassword from '../containers/settings/updatePassword';
-import UpdatePayment from '../containers/settings/updatePayment';
+import Settings from '../../containers/settings/settings';
+import UpdateProfile from '../../containers/settings/updateProfile';
+import UpdatePassword from '../../containers/settings/updatePassword';
+import UpdatePayment from '../../containers/settings/updatePayment';
 
 const Stack = createStackNavigator();
 
