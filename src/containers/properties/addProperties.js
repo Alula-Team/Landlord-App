@@ -29,10 +29,52 @@ const AddProperty = ({ addProperty }) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "units",
+    name: "unotes",
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    return addProperty(data);
+  };
+
+  // For Picker Select
+  // Styles
+  const pickerStyles = {
+    inputIOS: {
+      marginHorizontal: 20,
+      marginTop: 10,
+      marginBottom: 20,
+      borderColor: "#ffffff50",
+      borderRadius: 10,
+      borderWidth: 1,
+      height: 45,
+      flexDirection: "row",
+      color: "#fff",
+      paddingLeft: 15,
+      fontSize: 16,
+      fontWeight: "500",
+    },
+    inputAndroid: {
+      marginHorizontal: 20,
+      marginTop: 10,
+      marginBottom: 20,
+      borderColor: "#ffffff50",
+      borderRadius: 10,
+      borderWidth: 1,
+      height: 45,
+      flexDirection: "row",
+      color: "#fff",
+      paddingLeft: 15,
+      fontSize: 16,
+      fontWeight: "500",
+    },
+  };
+  // Placeholder
+  const StatePlaceholder = {
+    label: "Select State...",
+    value: null,
+    color: "#fff",
+  };
 
   return (
     <View style={styles.container}>
@@ -98,8 +140,125 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="address"
           rules={{ required: true }}
-          defaultValue=""
+          defaultValue="108 Verigold Lane"
         />
+        {/* City */}
+        <Controller
+          control={control}
+          render={({ onChange, value }) => (
+            <View style={styles.addInputContainer}>
+              <TextInput
+                type="text"
+                placeholder="Enter City..."
+                placeholderTextColor="#ffffff80"
+                style={styles.propertyInput}
+                keyboardAppearance="dark"
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            </View>
+          )}
+          name="city"
+          rules={{ required: true }}
+          defaultValue="Vegas"
+        />
+        {/* STATE */}
+        <Controller
+          control={control}
+          render={({ onChange, value }) => (
+            <RNPickerSelect
+              placeholder={StatePlaceholder}
+              style={pickerStyles}
+              onValueChange={(value) => onChange(value)}
+              items={[
+                { label: "A. Samoa", value: "A. Samoa", color: "white" },
+                { label: "AK", value: "AK", color: "white" },
+                { label: "AL", value: "AL", color: "white" },
+                { label: "AR", value: "AR", color: "white" },
+                { label: "AZ", value: "AZ", color: "white" },
+                { label: "CA", value: "CA", color: "white" },
+                { label: "CO", value: "CO", color: "white" },
+                { label: "CT", value: "CT", color: "white" },
+                { label: "DC", value: "DC", color: "white" },
+                { label: "DE", value: "DE", color: "white" },
+                { label: "FL", value: "FL", color: "white" },
+                { label: "GA", value: "GA", color: "white" },
+                { label: "Guam", value: "Guam", color: "white" },
+                { label: "HI", value: "HI", color: "white" },
+                { label: "IA", value: "IA", color: "white" },
+                { label: "ID", value: "ID", color: "white" },
+                { label: "IL", value: "IL", color: "white" },
+                { label: "IN", value: "IN", color: "white" },
+                { label: "KS", value: "KS", color: "white" },
+                { label: "KY", value: "KY", color: "white" },
+                { label: "LA", value: "LA", color: "white" },
+                { label: "MA", value: "MA", color: "white" },
+                { label: "MD", value: "MD", color: "white" },
+                { label: "ME", value: "ME", color: "white" },
+                { label: "MI", value: "MI", color: "white" },
+                { label: "MO", value: "MO", color: "white" },
+                { label: "MN", value: "MN", color: "white" },
+                { label: "MS", value: "MS", color: "white" },
+                { label: "MT", value: "MT", color: "white" },
+                { label: "NC", value: "NC", color: "white" },
+                { label: "ND", value: "ND", color: "white" },
+                { label: "NE", value: "NE", color: "white" },
+                { label: "NH", value: "NH", color: "white" },
+                { label: "NJ", value: "NJ", color: "white" },
+                { label: "NM", value: "NM", color: "white" },
+                { label: "NV", value: "NV", color: "white" },
+                { label: "NY", value: "NY", color: "white" },
+                { label: "OH", value: "OH", color: "white" },
+                { label: "OK", value: "OK", color: "white" },
+                { label: "OR", value: "OR", color: "white" },
+                { label: "PA", value: "PA", color: "white" },
+                {
+                  label: "Puerto Rico",
+                  value: "Puerto Rico",
+                  color: "white",
+                },
+                { label: "RI", value: "RI", color: "white" },
+                { label: "SC", value: "SC", color: "white" },
+                { label: "SD", value: "SD", color: "white" },
+                { label: "TN", value: "TN", color: "white" },
+                { label: "TX", value: "TX", color: "white" },
+                { label: "UT", value: "UT", color: "white" },
+                { label: "VA", value: "VA", color: "white" },
+                { label: "VT", value: "VT", color: "white" },
+                { label: "WA", value: "WA", color: "white" },
+                { label: "WI", value: "WI", color: "white" },
+                { label: "WV", value: "WV", color: "white" },
+                { label: "WY", value: "WY", color: "white" },
+              ]}
+            />
+          )}
+          name="state"
+          rules={{ required: true }}
+          defaultValue="WI"
+        />
+        {/* ZIP CODE */}
+        <Controller
+          control={control}
+          render={({ onChange, value }) => (
+            <View style={styles.addInputContainer}>
+              <TextInput
+                type="text"
+                placeholder="Enter Zip Code..."
+                placeholderTextColor="#ffffff80"
+                style={styles.propertyInput}
+                keyboardAppearance="dark"
+                keyboardType="number-pad"
+                onChangeText={(value) => onChange(value)}
+                value={value}
+              />
+            </View>
+          )}
+          name="zipCode"
+          rules={{ required: true }}
+          defaultValue="89123"
+        />
+
+        {/* Units */}
         <Text style={styles.sectionText}>Units</Text>
         {fields.map((item, index) => (
           <Controller
@@ -127,38 +286,10 @@ const AddProperty = ({ addProperty }) => {
               </View>
             )}
             name={`units.${index}`}
-            defaultValue=""
+            rules={{ required: true }}
+            defaultValue={`Unit ${index}`}
           />
         ))}
-        {/* {fields.map((item, index) => {
-          return (
-            <View>
-              <Controller
-                key={item.id}
-                control={control}
-                render={({ onChange, value }) => (
-                  <View style={styles.addInputContainer}>
-                    <TextInput
-                      type="text"
-                      placeholder="Enter Unit Number..."
-                      placeholderTextColor="#ffffff80"
-                      style={styles.propertyInput}
-                      keyboardAppearance="dark"
-                      onChangeText={(value) => onChange(value)}
-                      value={value}
-                    />
-                  </View>
-                )}
-                name={`unit.${index}`}
-                defaultValue=""
-              />
-
-              <Text style={{ color: "white" }} onPress={() => remove(index)}>
-                Remove
-              </Text>
-            </View>
-          );
-        })} */}
       </KeyboardAwareScrollView>
 
       {/* Add Units Button */}
@@ -173,4 +304,8 @@ const AddProperty = ({ addProperty }) => {
   );
 };
 
-export default AddProperty;
+const actions = {
+  addProperty: doAddProperty,
+};
+
+export default connect(null, actions)(AddProperty);

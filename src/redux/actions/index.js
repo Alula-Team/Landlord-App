@@ -1,3 +1,12 @@
+export const thunkAddProperty = (payload) => (dispatch) => {
+  return setTimeout(() => {
+    dispatch({
+      type: "ADD_PROPERTY",
+      payload,
+    });
+  }, 9999);
+};
+
 export const doAddProperty = (payload) => {
   return {
     type: "ADD_PROPERTY",
