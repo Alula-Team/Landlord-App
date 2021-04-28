@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+// Forms
+import { useForm, Controller, useFieldArray } from "react-hook-form";
 
+// Navigation
 import { useNavigation } from "@react-navigation/native";
 
 // Vector Icons
@@ -18,25 +20,29 @@ import styles from "./prop-styles";
 import { connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
 
-const AddProperty = ({ addProperty }) => {
+// THINGS I NEED
+// Function to add more units when button is pressed
+// Update handleSubmit function to reset form when submitted.
+
+const AddProperties = ({ addProperty }) => {
   const navigation = useNavigation();
 
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
+  const { control, handleSubmit } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "unotes",
+    name: "units",
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    return addProperty(data);
+  const addItem = (data) => {
+    addProperty(data);
+    navigation.goBack();
   };
 
+  const onSubmit = (data) => console.log(data);
+
+  const logItem = (data) => {
+    console.log(data);
+  };
   // For Picker Select
   // Styles
   const pickerStyles = {
@@ -106,7 +112,7 @@ const AddProperty = ({ addProperty }) => {
         rightComponent={
           <TouchableOpacity
             style={{ paddingTop: 32.5, paddingRight: 10 }}
-            onPress={handleSubmit(onSubmit)}
+            onPress={handleSubmit(addItem)}
           >
             <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
               Save
@@ -121,6 +127,7 @@ const AddProperty = ({ addProperty }) => {
       />
 
       <KeyboardAwareScrollView>
+        {/* Form */}
         <Text style={styles.sectionText}>Property Address</Text>
         {/* Street Address */}
         <Controller
@@ -140,9 +147,10 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="address"
           rules={{ required: true }}
-          defaultValue="108 Verigold Lane"
+          defaultValue=""
         />
-        {/* City */}
+
+        {/* CITY */}
         <Controller
           control={control}
           render={({ onChange, value }) => (
@@ -160,8 +168,9 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="city"
           rules={{ required: true }}
-          defaultValue="Vegas"
+          defaultValue=""
         />
+
         {/* STATE */}
         <Controller
           control={control}
@@ -232,9 +241,9 @@ const AddProperty = ({ addProperty }) => {
               ]}
             />
           )}
-          name="state"
+          name="states"
           rules={{ required: true }}
-          defaultValue="WI"
+          defaultValue=""
         />
         {/* ZIP CODE */}
         <Controller
@@ -255,11 +264,19 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="zipCode"
           rules={{ required: true }}
-          defaultValue="89123"
+          defaultValue=""
         />
 
         {/* Units */}
-        <Text style={styles.sectionText}>Units</Text>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text style={styles.sectionText}>Unit(s)</Text>
+          <Text style={{ marginTop: 15, marginLeft: 10, color: "#ffffff80" }}>
+            (if applicable)
+          </Text>
+        </View>
+        <Text style={{ color: "#ffffff80", marginLeft: 20 }}>
+          Please include the appropriate label to each unit.
+        </Text>
         {fields.map((item, index) => (
           <Controller
             key={item.id}
@@ -273,7 +290,7 @@ const AddProperty = ({ addProperty }) => {
                     placeholderTextColor="#ffffff80"
                     style={styles.propertyInput}
                     keyboardAppearance="dark"
-                    onChangeText={(value) => onChange(value)}
+                    onChangeText={(value, text) => onChange(value, text, key)}
                     value={value}
                   />
                 </View>
@@ -286,20 +303,18 @@ const AddProperty = ({ addProperty }) => {
               </View>
             )}
             name={`units.${index}`}
-            rules={{ required: true }}
-            defaultValue={`Unit ${index}`}
+            defaultValue=""
           />
         ))}
+        {/* Add Units Button */}
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={append({ units: "" })}
+        >
+          <Feather name="plus" size={25} style={styles.addButtonText} />
+          <Text style={styles.addButtonText}>Add Unit</Text>
+        </TouchableOpacity>
       </KeyboardAwareScrollView>
-
-      {/* Add Units Button */}
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => append({ units: "" })}
-      >
-        <Feather name="plus" size={25} style={styles.addButtonText} />
-        <Text style={styles.addButtonText}>Add Unit</Text>
-      </TouchableOpacity>
     </View>
   );
 };
@@ -308,4 +323,4 @@ const actions = {
   addProperty: doAddProperty,
 };
 
-export default connect(null, actions)(AddProperty);
+export default connect(null, actions)(AddProperties);

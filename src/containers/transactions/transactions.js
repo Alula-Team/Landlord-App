@@ -33,30 +33,6 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
   const navigation = useNavigation();
   const data = stateTransactions;
 
-  // Amount Function
-  function Expense(props) {
-    return (
-      <Text style={{ color: "#D9534F", fontWeight: "700", fontSize: 18 }}>
-        -$
-      </Text>
-    );
-  }
-  function Payment(props) {
-    return (
-      <Text style={{ color: "#5CB85C", fontWeight: "700", fontSize: 18 }}>
-        +$
-      </Text>
-    );
-  }
-  function Amount(props) {
-    const payment = props.payment;
-    if (payment) {
-      return <Payment />;
-    } else {
-      return <Expense />;
-    }
-  }
-
   // Separator
   const renderSeparator = () => {
     return (
@@ -168,30 +144,24 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
           <SafeAreaView>
             <View style={styles.listView}>
               <FlatList
-                data={data}
+                data={data.sort((a, b) => a.date.localeCompare(b.date))}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
                   <View style={styles.listCell}>
-                    {/* Transaction Type and Amount*/}
+                    {/* Transaction Category and Amount*/}
                     <View style={styles.itemCenter}>
                       <Text style={styles.transactionType}>
-                        {item.transactionType}
+                        {item.transactionCategory}
                       </Text>
                       <Text
                         style={{
-                          color: item.payment === true ? "#5CB85C" : "#D9534F",
+                          color: item.payment === 'Payment' ? "#5CB85C" : "#D9534F",
                           fontWeight: "700",
                           fontSize: 18,
                         }}
                       >
-                        <Amount payment={item.payment} />
-                        {item.amount}
+                        ${item.amount}
                       </Text>
-                    </View>
-                    {/* Category */}
-                    <View style={{ flexDirection: "row", marginTop: 10}}>
-                      <Feather name="file-text" color="#fff" size={15} />
-                      <Text style={styles.listItem}>{item.transactionCategory}</Text>
                     </View>
                     {/* Property */}
                     <View style={{ flexDirection: "row", marginTop: 10 }}>

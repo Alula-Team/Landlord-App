@@ -10,13 +10,11 @@ const transactionsReducer = (state = initialState, action) => {
     const newTransaction = {
       id: uuid.v4(),
       address: action.payload.address,
-      transactionType: action.payload.transactionType,
       transactionCategory: action.payload.transactionCategory,
       date: action.payload.date,
       paymentMethod: action.payload.paymentMethod,
       amount: action.payload.amount,
-      payment: action.payload.transactionType,
-      
+      payment: action.payload.payment
     };
     const transactions = [...state.transactions, newTransaction];
     return {

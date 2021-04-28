@@ -150,6 +150,15 @@ const styles = StyleSheet.create({
         height: 45,
         flexDirection: 'row'
     },
+    amountContainer: {
+        marginHorizontal: 20,
+        marginTop: 10,
+        borderColor: '#ffffff50',
+        borderRadius: 10,
+        borderWidth: 1,
+        height: 45,
+        flexDirection: 'row'
+    },
     dateContainer: {
         marginHorizontal: 20,
         marginTop: 10,

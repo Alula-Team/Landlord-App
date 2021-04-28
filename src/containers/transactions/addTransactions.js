@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Text, View, TouchableOpacity, TextInput } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -28,6 +30,20 @@ const AddTransactions = ({addTransaction}) => {
     const addItem = (data) => {
         addTransaction(data);
         navigation.goBack();
+    };
+
+    // Date
+    const [date, setDate] = useState(new Date());
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
     };
 
     // For Picker Select
@@ -139,7 +155,7 @@ const AddTransactions = ({addTransaction}) => {
                                 ]}
                             />
                         )}
-                        name="transactionType"
+                        name="payment"
                         rules={{ required: true }}
                         defaultValue=""
                     />
@@ -191,19 +207,42 @@ const AddTransactions = ({addTransaction}) => {
                         defaultValue=""
                     />
 
+                    {/* Payment Method */}
+                    <Text style={styles.sectionText}>Payment Method</Text>
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <RNPickerSelect
+                                placeholder={PaymentPlaceholder}
+                                style={pickerStyles}
+                                onValueChange={value => onChange(value)}
+                                items={[
+                                    { label: 'Bank Transfer', value: 'Bank Transfer', color: 'white' },
+                                    { label: 'Cash', value: 'Cash', color: 'white' },
+                                    { label: 'Check', value: 'Check', color: 'white' },
+                                    { label: 'Other', value: 'Other', color: 'white' },
+                                ]}
+                            />
+                        )}
+                        name="paymentMethod"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
+                    
+
                     {/* Amount */}
                     <Text style={styles.sectionText}>Amount</Text>
                     <Controller
                         control={control}
                         render={({ onChange, value }) => (
-                            <View style={styles.dateContainer}>
+                            <View style={styles.amountContainer}>
                                 <TextInput 
                                     type='text'
                                     placeholder='i.e 1500'
                                     placeholderTextColor='#ffffff80'
                                     style={styles.dateText}
                                     keyboardAppearance='dark'
-                                    keyboardType='phone-pad'
+                                    keyboardType='numeric'
                                     onChangeText={value => onChange(value)}
                                     value={value}
                                 />
@@ -215,7 +254,7 @@ const AddTransactions = ({addTransaction}) => {
                     />
 
                     {/* Date Paid */}
-                    <Text style={styles.sectionText}>Date Paid</Text>
+                    {/* <Text style={styles.sectionText}>Date Paid</Text>
                     <Controller
                         control={control}
                         render={({ onChange, value }) => (
@@ -227,6 +266,7 @@ const AddTransactions = ({addTransaction}) => {
                                     style={styles.dateText}
                                     keyboardAppearance='dark'
                                     keyboardType='default'
+                                    
                                     onChangeText={value => onChange(value)}
                                     value={value}
                                 />
@@ -235,60 +275,36 @@ const AddTransactions = ({addTransaction}) => {
                         name="date"
                         rules={{ required: true }}
                         defaultValue=""
-                    />
-                    
+                    /> */}
 
-                    {/* Payment Method */}
-                    <View style={{paddingBottom: 20}}>
-                        <Text style={styles.sectionText}>Payment Method</Text>
-                        <Controller
-                            control={control}
-                            render={({ onChange, value }) => (
-                                <RNPickerSelect
-                                    placeholder={PaymentPlaceholder}
-                                    style={pickerStyles}
-                                    onValueChange={value => onChange(value)}
-                                    items={[
-                                        { label: 'Bank Transfer', value: 'Bank Transfer', color: 'white' },
-                                        { label: 'Cash', value: 'Cash', color: 'white' },
-                                        { label: 'Check', value: 'Check', color: 'white' },
-                                        { label: 'Other', value: 'Other', color: 'white' },
-                                    ]}
+                    {/* Date Paid - ALT */}
+                    {/* <Text style={styles.sectionText}>Date Paid</Text> */}
+                    <Controller
+                        control={control}
+                        render={({ onChange, value }) => (
+                            <View style={{flexDirection: 'row', marginTop: 20}}>
+                                <Text style={styles.sectionText}>Date Paid:</Text>
+                                <DateTimePicker
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={mode}
+                                    display='default'
+                                    textColor='#fff'
+                                    style={{
+                                        marginLeft: 10,
+                                        marginTop: 20,
+                                        width: '100%',
+                                    }} 
+                                    onChange={value => onChange(value)}
                                 />
-                            )}
-                            name="paymentMethod"
-                            rules={{ required: true }}
-                            defaultValue=""
-                        />
-                    </View>
+                            </View>
+                        )}
+                        name="date"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
 
-                    {/* Attachement */}
-                    {/* <Text style={styles.sectionText}>Attachements:</Text>
-                    <TouchableOpacity style={styles.upload}>
-                        <Feather name='upload' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                        <Text style={{color: '#fff', marginLeft: 10, fontSize: 16, fontWeight: '600', alignSelf: 'center'}}>Upload Attachement</Text>
-                    </TouchableOpacity> */}
-
-                    {/* Notes */}
-                    {/* <Text style={styles.sectionText}>Notes:</Text>
-                    <View>
-                        <TextInput 
-                            style={{
-                                marginTop: 10,
-                                marginLeft: 30,
-                                marginBottom: 50,
-                                color:'#fff',
-                                fontSize: 16,
-                                fontWeight: '600'
-                            }}
-                            placeholder="Enter Notes (optional)..."
-                            placeholderTextColor='#ffffff90'
-                            keyboardAppearance='dark'
-                            autoCapitalize='none'
-                            autoCorrect={false}
-                            multiline={true}
-                        />
-                    </View> */}
+                    
                 </KeyboardAwareScrollView>
             </View>
         </>
@@ -300,3 +316,4 @@ const actions = {
 };
 
 export default connect(null, actions)(AddTransactions);
+
