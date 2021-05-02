@@ -155,6 +155,7 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
           <View style={styles.listView}>
             <FlatList
               data={data}
+              // data={data.sort((a, b) => a.date.localeCompare(b.date))}
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => (
                 <View style={styles.listCell}>

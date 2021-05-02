@@ -1,7 +1,24 @@
 import uuid from "react-native-uuid";
 const initialState = {
   newProperty: {},
-  properties: [],
+  properties: [
+    {
+      id: uuid.v4(),
+      address: "2486 Fresno Avenue Canyon",
+      city: "Las Weegas",
+      state: "NV",
+      zip: "89123",
+      vacant: false,
+    },
+    {
+      id: uuid.v4(),
+      address: "8393 Some Other Drive",
+      city: "Los Tacos",
+      state: "NV",
+      zip: "27844",
+      vacant: false,
+    },
+  ],
 };
 
 const propertiesReducer = (state = initialState, action) => {

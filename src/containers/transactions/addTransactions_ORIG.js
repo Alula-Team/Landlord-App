@@ -1,14 +1,16 @@
-<<<<<<< Updated upstream
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
+
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
 import DateTimePicker from "@react-native-community/datetimepicker";
-
 // Forms
 import { useForm, Controller } from "react-hook-form";
+
+import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+// import { format, compareDesc } from "date-fns";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
@@ -24,25 +26,50 @@ import { connect } from "react-redux";
 import { doAddTransaction } from "../../redux/actions";
 
 const AddTransactions = ({ stateProperties, addTransaction }) => {
-  const allProperties = stateProperties.map((item) => {
+  const navigation = useNavigation();
+
+  const allAddresses = stateProperties.map((item) => {
     return {
       label: item.address,
       value: item.address,
+      color: "white",
     };
   });
 
-  const navigation = useNavigation();
+  const {
+    control,
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm();
 
-  const { control, handleSubmit } = useForm();
-  const addItem = (data) => {
-    data.date = date.toString();
-    console.log(data);
+  // const value = getValues("date");
+
+  useEffect(() => {
+    register({ name: "date" });
+  }, [register]);
+
+  const dateValue = watch("date");
+  const handleChange = (e) => setValue("name", e.target.value);
+
+  const [selectedDate, handleDateChange] = useState(new Date());
+
+  // useEffect(() => {
+  //   setDate(value || null);
+  // }, [setDate, value]);
+
+  const onSubmit = (data) => {
+    // let month = data.date.getMonth();
     addTransaction(data);
     navigation.goBack();
+
+    console.log(data);
   };
 
   // Date
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date("May 15,2002"));
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
   const onChange = (event, selectedDate) => {
@@ -138,7 +165,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
           rightComponent={
             <TouchableOpacity
               style={{ paddingTop: 32.5, paddingRight: 10 }}
-              onPress={handleSubmit(addItem)}
+              onPress={handleSubmit(onSubmit)}
             >
               <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
                 Save
@@ -158,7 +185,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
           <Text style={styles.sectionText}>Transaction Type</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ onChange, value }) => (
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
@@ -173,12 +200,24 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.payment && (
+            <Text
+              style={{
+                color: "#f00",
+                fontSize: 14,
+                fontWeight: "600",
+                paddingLeft: 30,
+                paddingTop: 5,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Category */}
           <Text style={styles.sectionText}>Category</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ onChange, value }) => (
               <RNPickerSelect
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
@@ -216,29 +255,53 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.transactionCategory && (
+            <Text
+              style={{
+                color: "#f00",
+                fontSize: 14,
+                fontWeight: "600",
+                paddingLeft: 30,
+                paddingTop: 5,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Property */}
           <Text style={styles.sectionText}>Property</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ onChange, value }) => (
               <RNPickerSelect
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
                 onValueChange={(value) => onChange(value)}
-                items={allProperties}
+                items={[...allAddresses]}
               />
             )}
             name="address"
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.address && (
+            <Text
+              style={{
+                color: "#f00",
+                fontSize: 14,
+                fontWeight: "600",
+                paddingLeft: 30,
+                paddingTop: 5,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Payment Method */}
           <Text style={styles.sectionText}>Payment Method</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ onChange, value }) => (
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
@@ -259,12 +322,24 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.paymentMethod && (
+            <Text
+              style={{
+                color: "#f00",
+                fontSize: 14,
+                fontWeight: "600",
+                paddingLeft: 30,
+                paddingTop: 5,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Amount */}
           <Text style={styles.sectionText}>Amount</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ onChange, value }) => (
               <View style={styles.amountContainer}>
                 <TextInput
                   type="text"
@@ -282,55 +357,26 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
+          {errors.amount && (
+            <Text
+              style={{
+                color: "#f00",
+                fontSize: 14,
+                fontWeight: "600",
+                paddingLeft: 30,
+                paddingTop: 5,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
 
-          {/* Date Paid */}
-          {/* <Text style={styles.sectionText}>Date Paid</Text>
-                    <Controller
-                        control={control}
-                        render={({ onChange, value }) => (
-                            <View style={styles.dateContainer}>
-                                <TextInput 
-                                    type='text'
-                                    placeholder='MM/DD/YYYY'
-                                    placeholderTextColor='#ffffff80'
-                                    style={styles.dateText}
-                                    keyboardAppearance='dark'
-                                    keyboardType='default'
-                                    
-                                    onChangeText={value => onChange(value)}
-                                    value={value}
-                                />
-                            </View>
-                        )}
-                        name="date"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    /> */}
-
-          {/* Date Paid - ALT */}
-          {/* <Text style={styles.sectionText}>Date Paid</Text> */}
-          <Controller
-            control={control}
-            render={() => (
-              <View style={{ flexDirection: "row", marginTop: 20 }}>
-                <Text style={styles.sectionText}>Date Paid:</Text>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode={mode}
-                  display="default"
-                  textColor="#fff"
-                  style={{
-                    marginLeft: 10,
-                    marginTop: 20,
-                    width: "100%",
-                  }}
-                  onChange={onChange}
-                />
-              </View>
-            )}
-            name="date"
-          />
+          <View style={{ flexDirection: "row", marginTop: 20 }}>
+            <Text style={styles.sectionText}>Date Paid:</Text>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker value={selectedDate} onChange={handleDateChange} />
+            </MuiPickersUtilsProvider>
+          </View>
         </KeyboardAwareScrollView>
       </View>
     </>
@@ -338,7 +384,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
+  return {
+    stateProperties: state.properties.properties,
+  };
 };
 
 const actions = {
@@ -346,83 +394,3 @@ const actions = {
 };
 
 export default connect(mapStateToProps, actions)(AddTransactions);
-=======
-import React, { useState, useEffect } from "react";
-import { useForm, Controller, useController } from "react-hook-form";
-import { Text, View, TextInput, Button } from "react-native";
-import DatePicker from "react-native-date-picker";
-
-const Input = ({ name, control }) => {
-  const { field } = useController({
-    control,
-    defaultValue: "",
-    name,
-    rules: { required: true },
-  });
-  return <TextInput value={field.value} onChangeText={field.onChange} />;
-};
-
-export default function AddTransactions() {
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      date: new Date(),
-      date2: new Date(),
-      date3: new Date(),
-    },
-  });
-
-  const onSubmit = (data) => console.log(data);
-  return (
-    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-    <View style={{ paddingTop: 300 }}>
-      {/* register your input into the hook by invoking the "register" function */}
-      <Text>Date Paid:</Text>
-      <Input name="date" control={control} />
-      {errors.date && (
-        <Text
-          style={{
-            color: "#f00",
-            fontSize: 14,
-            fontWeight: "600",
-            paddingLeft: 30,
-            paddingTop: 5,
-          }}
-        >
-          This field is required
-        </Text>
-      )}
-      {/* include validation with required or other standard HTML validation rules */}
-      <Text>Some Other Thing:</Text>
-      <Input name="something" control={control} />
-      {/* errors will return when field validation fails  */}
-      {errors.something && (
-        <Text
-          style={{
-            color: "#f00",
-            fontSize: 14,
-            fontWeight: "600",
-            paddingLeft: 30,
-            paddingTop: 5,
-          }}
-        >
-          This field is required
-        </Text>
-      )}
-      <Controller
-        control={control}
-        name="date2"
-        render={({ field: { value, onChange } }) => (
-          <DatePicker date={value} onDateChange={onChange} />
-        )}
-        defaultValue={new Date()}
-      />
-
-      <Button type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />
-    </View>
-  );
-}
->>>>>>> Stashed changes

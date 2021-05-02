@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -6,8 +6,11 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
+
+import filter from "lodash.filter";
+
 import { Badge, Header, Icon } from "react-native-elements";
 
 // Navigation
@@ -28,7 +31,56 @@ import { connect } from "react-redux";
 
 const Properties = ({ stateProperties }) => {
   const navigation = useNavigation();
-  const data = stateProperties;
+  const [data, setData] = useState([...stateProperties]);
+  const [fullData, setFullData] = useState([]);
+  const makeRemoteRequest = () => {
+    const [page, seed] = useState();
+    const url = `https://randomuser.me/api/?seed=${seed}&page=${page}&results=20`;
+    // this.setState({ loading: true });
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res.results);
+        setFullData(res.results);
+        // this.setState({
+        //   data: page === 1 ? res.results : [...state.data, ...res.results],
+        //   error: res.error || null,
+        //   loading: false,
+
+        //   // ---- ADD THIS ----
+        //   fullData: res.results,
+        // });
+      })
+      .catch((error) => {
+        console.warn(error);
+      });
+  };
+  // const data = stateProperties;
+
+  // Search state
+  // const [query, setQuery] = useState("");
+  // const [fullData, setFullData] = useState([...stateProperties]);
+  console.log(data);
+  const handleSearch = (text) => {
+    const formattedQuery = text.toLowerCase();
+    const data = filter(fullData, (user) => {
+      return this.contains(user, formattedQuery);
+    });
+    this.setState({ data, query: text });
+  };
+  const contains = ({ name, email }, query) => {
+    const { first, last } = name;
+    if (
+      first.includes(query) ||
+      last.includes(query) ||
+      email.includes(query)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   // Flatlist Dummy Data
 
   function Occupied(props) {
@@ -65,18 +117,26 @@ const Properties = ({ stateProperties }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
-    return(
+    return (
       <View style={styles.emptyList}>
-        <Image source={require('../../assets/emptyPropList.png')} style={styles.img} />
-        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
-          Hmm... 
-          There is nothing here... 
-          Let's add your first property! 
-          Use the '+' symbol at the top to get started. 
+        <Image
+          source={require("../../assets/emptyPropList.png")}
+          style={styles.img}
+        />
+        <Text
+          style={{
+            color: "#fff",
+            marginHorizontal: 35,
+            alignSelf: "center",
+            fontSize: 18,
+          }}
+        >
+          Hmm... There is nothing here... Let's add your first property! Use the
+          '+' symbol at the top to get started.
         </Text>
       </View>
     );
-  }
+  };
 
   return (
     <>
@@ -130,7 +190,8 @@ const Properties = ({ stateProperties }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
-            clearButtonMode='while-editing'
+            clearButtonMode="while-editing"
+            onChangeText={handleSearch}
           />
         </View>
 
@@ -156,7 +217,9 @@ const Properties = ({ stateProperties }) => {
                 <View style={{ flexDirection: "row" }}>
                   <Feather name="map-pin" color="#fff" size={20} />
                   <View>
-                    <Text style={styles.listItem}>{item.address}  {item.unit}</Text>
+                    <Text style={styles.listItem}>
+                      {item.address} {item.unit}
+                    </Text>
                     <Text style={styles.status}>
                       Status: <Status vacant={item.vacant} />
                     </Text>

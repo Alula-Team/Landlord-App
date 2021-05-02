@@ -33,8 +33,8 @@ const AddProperty = ({ addProperty }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
-    return addProperty(data);
+    addProperty(data);
+    navigation.goBack();
   };
 
   // For Picker Select
@@ -160,7 +160,11 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="city"
           rules={{ required: true }}
+<<<<<<< Updated upstream
           defaultValue=""
+=======
+          defaultValue="Los Vegos"
+>>>>>>> Stashed changes
         />
         {/* STATE */}
         <Controller
