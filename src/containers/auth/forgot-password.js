@@ -19,7 +19,7 @@ const ForgotPasswordScreen = (props) => {
 
     const navigation = useNavigation();
     
-    const { control, handleSubmit, errors } = useForm();
+    const { control, handleSubmit, formState: { errors }, } = useForm();
 
     const onSubmit = (data) => {
         console.log(data);
@@ -57,7 +57,7 @@ const ForgotPasswordScreen = (props) => {
             <View style={styles.form}>
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (
+                    render={({ field: { onChange, onBlur, value } }) => (
                         <View style={styles.authFieldContainer}>
                             <View style={styles.emailInput}>
                                 <Feather 

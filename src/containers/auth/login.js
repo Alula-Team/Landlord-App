@@ -22,7 +22,7 @@ const LoginScreen = (props) => {
 
     const navigation = useNavigation();
 
-    const { control, handleSubmit, errors } = useForm();
+    const { control, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
         const { email, password } = data;
@@ -49,7 +49,7 @@ const LoginScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (
+                    render={({ field: { onChange, onBlur, value } }) => (
                         <View style={styles.authFieldContainer}>
                             <View style={styles.emailInput}>
                                 <Feather 
@@ -84,7 +84,7 @@ const LoginScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (
+                    render={({ field: { onChange, onBlur, value } }) => (
                         <View style={styles.authFieldContainer}>
                             <View style={styles.passwordInput}>
                                 <Feather 
@@ -109,7 +109,7 @@ const LoginScreen = (props) => {
                                 />
                             </View>
                             <View style={styles.errorMsg}>
-                                    {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
+                                {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
                             </View>
                         </View>
                     )}

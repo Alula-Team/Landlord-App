@@ -22,7 +22,7 @@ const RegisterScreen = (props) => {
 
     const navigation = useNavigation();
 
-    const { control, handleSubmit, errors, watch, register } = useForm();
+    const { control, handleSubmit, formState: { errors }, watch, register } = useForm();
 
     const password = useRef({});
     password.current = watch('password', '');
@@ -51,7 +51,7 @@ const RegisterScreen = (props) => {
             <View style={styles.form}>
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (
+                    render={({ field: { onChange, onBlur, value } }) => (
                         <View style={styles.authFieldContainer}>
                             <View style={styles.emailInput}>
                                 <Feather 
@@ -86,7 +86,7 @@ const RegisterScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (  
+                    render={({ field: { onChange, onBlur, value } }) => (  
                         <View style={styles.authFieldContainer}>
                             <View style={styles.passwordInput}>
                                 <Feather 
