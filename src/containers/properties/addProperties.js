@@ -29,7 +29,7 @@ const AddProperty = ({ addProperty }) => {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "unotes",
+    name: "units",
   });
 
   const onSubmit = (data) => {
@@ -125,7 +125,7 @@ const AddProperty = ({ addProperty }) => {
         {/* Street Address */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
@@ -133,19 +133,19 @@ const AddProperty = ({ addProperty }) => {
                 placeholderTextColor="#ffffff80"
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
-                onChangeText={(value) => onChange(value)}
+                onChangeText={onChange}
                 value={value}
               />
             </View>
           )}
           name="address"
           rules={{ required: true }}
-          defaultValue="108 Verigold Lane"
+          defaultValue=""
         />
         {/* City */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
@@ -153,23 +153,23 @@ const AddProperty = ({ addProperty }) => {
                 placeholderTextColor="#ffffff80"
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
-                onChangeText={(value) => onChange(value)}
+                onChangeText={onChange}
                 value={value}
               />
             </View>
           )}
           name="city"
           rules={{ required: true }}
-          defaultValue="Vegas"
+          defaultValue=""
         />
         {/* STATE */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <RNPickerSelect
               placeholder={StatePlaceholder}
               style={pickerStyles}
-              onValueChange={(value) => onChange(value)}
+              onValueChange={onChange}
               items={[
                 { label: "A. Samoa", value: "A. Samoa", color: "white" },
                 { label: "AK", value: "AK", color: "white" },
@@ -239,7 +239,7 @@ const AddProperty = ({ addProperty }) => {
         {/* ZIP CODE */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
@@ -248,14 +248,14 @@ const AddProperty = ({ addProperty }) => {
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
                 keyboardType="number-pad"
-                onChangeText={(value) => onChange(value)}
+                onChangeText={onChange}
                 value={value}
               />
             </View>
           )}
           name="zipCode"
           rules={{ required: true }}
-          defaultValue="89123"
+          defaultValue=""
         />
 
         {/* Units */}
@@ -264,7 +264,7 @@ const AddProperty = ({ addProperty }) => {
           <Controller
             key={item.id}
             control={control}
-            render={({ onChange, value }) => (
+            render={({ field: { value, onChange } }) => (
               <View style={{ flexDirection: "row" }}>
                 <View style={styles.addUnitInput}>
                   <TextInput
@@ -273,7 +273,7 @@ const AddProperty = ({ addProperty }) => {
                     placeholderTextColor="#ffffff80"
                     style={styles.propertyInput}
                     keyboardAppearance="dark"
-                    onChangeText={(value) => onChange(value)}
+                    onChangeText={onChange}
                     value={value}
                   />
                 </View>
