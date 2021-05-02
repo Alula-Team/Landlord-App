@@ -24,12 +24,16 @@ const initialState = {
 const propertiesReducer = (state = initialState, action) => {
   if (action.type === "ADD_PROPERTY") {
     let propertyArray = [];
-    if (action.payload.hasOwnProperty("units")) {
+    if (action.payload.units.length) {
+      // for (var i = 0; i < action.payload.units.length; i++) {
+      //   console.log(action.payload.units[i]);
+      // }
+
       for (var i = 0; i < action.payload.units.length; i++) {
         let oneProperty = {
           id: uuid.v4(),
           address: action.payload.address,
-          unit: action.payload.units[i],
+          unit: action.payload.units[i].number,
           city: action.payload.city,
           state: action.payload.states,
           zip: action.payload.zipCode,

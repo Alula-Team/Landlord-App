@@ -23,6 +23,14 @@ import { connect } from "react-redux";
 import { doAddTransaction } from "../../redux/actions";
 
 const AddTransactions = ({ stateProperties, addTransaction }) => {
+  const navigation = useNavigation();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const allProperties = stateProperties.map((item) => {
     return {
       label: item.address,
@@ -30,9 +38,6 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     };
   });
 
-  const navigation = useNavigation();
-
-  const { control, handleSubmit } = useForm();
   const addItem = (data) => {
     data.date = date.toString();
     console.log(data);
@@ -157,7 +162,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
           <Text style={styles.sectionText}>Transaction Type</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { value, onChange } }) => (
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
@@ -172,12 +177,23 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.payment && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 30,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Category */}
           <Text style={styles.sectionText}>Category</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { value, onChange } }) => (
               <RNPickerSelect
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
@@ -215,12 +231,23 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.transactionCategory && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 30,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Property */}
           <Text style={styles.sectionText}>Property</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { value, onChange } }) => (
               <RNPickerSelect
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
@@ -232,12 +259,23 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.address && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 30,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Payment Method */}
           <Text style={styles.sectionText}>Payment Method</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { value, onChange } }) => (
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
@@ -258,12 +296,23 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.paymentMethod && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 30,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Amount */}
           <Text style={styles.sectionText}>Amount</Text>
           <Controller
             control={control}
-            render={({ field: { onChange, value } }) => (
+            render={({ field: { value, onChange } }) => (
               <View style={styles.amountContainer}>
                 <TextInput
                   type="text"
@@ -272,7 +321,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                   style={styles.dateText}
                   keyboardAppearance="dark"
                   keyboardType="numeric"
-                  onChangeText={(value) => onChange(value)}
+                  onChangeText={onChange}
                   value={value}
                 />
               </View>
@@ -281,33 +330,19 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-
+          {errors.amount && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 30,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* Date Paid */}
-          {/* <Text style={styles.sectionText}>Date Paid</Text>
-                    <Controller
-                        control={control}
-                        render={({ onChange, value }) => (
-                            <View style={styles.dateContainer}>
-                                <TextInput 
-                                    type='text'
-                                    placeholder='MM/DD/YYYY'
-                                    placeholderTextColor='#ffffff80'
-                                    style={styles.dateText}
-                                    keyboardAppearance='dark'
-                                    keyboardType='default'
-                                    
-                                    onChangeText={value => onChange(value)}
-                                    value={value}
-                                />
-                            </View>
-                        )}
-                        name="date"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    /> */}
-
-          {/* Date Paid - ALT */}
-          {/* <Text style={styles.sectionText}>Date Paid</Text> */}
           <Controller
             control={control}
             render={() => (

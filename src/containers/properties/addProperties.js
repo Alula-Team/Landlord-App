@@ -142,6 +142,18 @@ const AddProperty = ({ addProperty }) => {
           rules={{ required: true }}
           defaultValue=""
         />
+        {errors.address && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 30,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* City */}
         <Controller
           control={control}
@@ -160,12 +172,20 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="city"
           rules={{ required: true }}
-<<<<<<< Updated upstream
           defaultValue=""
-=======
-          defaultValue="Los Vegos"
->>>>>>> Stashed changes
         />
+        {errors.city && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 30,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* STATE */}
         <Controller
           control={control}
@@ -238,8 +258,20 @@ const AddProperty = ({ addProperty }) => {
           )}
           name="state"
           rules={{ required: true }}
-          defaultValue="WI"
+          defaultValue=""
         />
+        {errors.state && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 30,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* ZIP CODE */}
         <Controller
           control={control}
@@ -261,7 +293,18 @@ const AddProperty = ({ addProperty }) => {
           rules={{ required: true }}
           defaultValue=""
         />
-
+        {errors.zipCode && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 30,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* Units */}
         <Text style={styles.sectionText}>Units</Text>
         {fields.map((item, index) => (
@@ -289,9 +332,9 @@ const AddProperty = ({ addProperty }) => {
                 </TouchableOpacity>
               </View>
             )}
-            name={`units.${index}`}
+            name={`units[${index}].number`}
             rules={{ required: true }}
-            defaultValue={`Unit ${index}`}
+            defaultValue=""
           />
         ))}
       </KeyboardAwareScrollView>
@@ -299,7 +342,7 @@ const AddProperty = ({ addProperty }) => {
       {/* Add Units Button */}
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => append({ units: "" })}
+        onPress={() => append({ number: "Something" })}
       >
         <Feather name="plus" size={25} style={styles.addButtonText} />
         <Text style={styles.addButtonText}>Add Unit</Text>

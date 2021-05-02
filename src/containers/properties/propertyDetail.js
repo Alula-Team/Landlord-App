@@ -1,5 +1,13 @@
-import React, {useState} from "react";
-import { Alert, Text, View, ScrollView, TouchableOpacity, Modal, TextInput } from "react-native";
+import React, { useState } from "react";
+import {
+  Alert,
+  Text,
+  View,
+  ScrollView,
+  TouchableOpacity,
+  Modal,
+  TextInput,
+} from "react-native";
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -28,7 +36,14 @@ const PropertyDetail = ({ route, deleteProperty }) => {
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const { control, handleSubmit } = useForm();
-  const { itemID, itemAddress, itemUnit, itemCity, itemState, itemZip } = route.params;
+  const {
+    itemID,
+    itemAddress,
+    itemUnit,
+    itemCity,
+    itemState,
+    itemZip,
+  } = route.params;
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
@@ -96,10 +111,10 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             padding: 10,
           }}
         > */}
-          {/* <Text style={styles.tenantName}>Tenant Name</Text> */}
+        {/* <Text style={styles.tenantName}>Tenant Name</Text> */}
 
-          {/* Lease Type */}
-          {/* <View
+        {/* Lease Type */}
+        {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -114,8 +129,8 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             <Text style={styles.infoText}></Text>
           </View> */}
 
-          {/* Lease Period */}
-          {/* <View
+        {/* Lease Period */}
+        {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -130,8 +145,8 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             <Text style={styles.infoText}></Text>
           </View> */}
 
-          {/* Rental Rate */}
-          {/* <View
+        {/* Rental Rate */}
+        {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -146,8 +161,8 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             <Text style={styles.infoText}></Text>
           </View> */}
 
-          {/* Security Deposit */}
-          {/* <View
+        {/* Security Deposit */}
+        {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -162,8 +177,8 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             <Text style={styles.infoText}></Text>
           </View> */}
 
-          {/* Rent Due */}
-          {/* <View
+        {/* Rent Due */}
+        {/* <View
             style={{
               flexDirection: "row",
               alignItems: "center",
@@ -214,19 +229,28 @@ const PropertyDetail = ({ route, deleteProperty }) => {
           }}
         >
           <View style={styles.overlay}>
-            <KeyboardAvoidingView behavior='position' enabled>
+            <KeyboardAvoidingView behavior="position" enabled>
               <View style={styles.modalContainer}>
                 {/* Close modal button */}
-                <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
-                  <Feather name='x' size={25} color='#fff' style={{marginLeft: 20, marginTop: 20}}/>
+                <TouchableOpacity
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Feather
+                    name="x"
+                    size={25}
+                    color="#fff"
+                    style={{ marginLeft: 20, marginTop: 20 }}
+                  />
                 </TouchableOpacity>
 
-                <Text style={styles.modalText}>Invite your tenant to connect...</Text>
+                <Text style={styles.modalText}>
+                  Invite your tenant to connect...
+                </Text>
 
                 {/* Email Field */}
                 <Controller
                   control={control}
-                  render={({ onChange, value }) => (
+                  render={({ field: { value, onChange } }) => (
                     <View style={styles.tenantInputContainer}>
                       <TextInput
                         type="text"
@@ -234,7 +258,7 @@ const PropertyDetail = ({ route, deleteProperty }) => {
                         placeholderTextColor="#ffffff90"
                         style={styles.tenantInput}
                         keyboardAppearance="dark"
-                        onChangeText={(value) => onChange(value)}
+                        onChangeText={onChange}
                         value={value}
                       />
                     </View>
