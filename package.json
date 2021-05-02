@@ -8,9 +8,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@date-io/date-fns": "1.x",
-    "@date-io/luxon": "1.x",
-    "@date-io/moment": "1.x",
     "@material-ui/core": "^4.11.4",
     "@material-ui/pickers": "^3.3.10",
     "@react-native-community/datetimepicker": "^3.4.7",
@@ -20,12 +17,9 @@
     "@react-navigation/material-top-tabs": "^5.3.15",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
-    "date-fns": "^2.21.1",
     "expo": "40.0.0",
     "expo-status-bar": "~1.0.3",
     "lodash.filter": "^4.6.0",
-    "luxon": "^1.26.0",
-    "moment": "^2.29.1",
     "react": "16.13.1",
     "react-devtools": "^4.10.1",
     "react-dom": "16.13.1",
