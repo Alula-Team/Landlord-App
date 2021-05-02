@@ -40,7 +40,6 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 
   const addItem = (data) => {
     data.date = date.toString();
-    console.log(data);
     addTransaction(data);
     navigation.goBack();
   };
@@ -181,9 +180,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             <Text
               style={{
                 color: "red",
-                paddingLeft: 30,
-                marginTop: -15,
-                marginBottom: -2,
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
               }}
             >
               This field is required
@@ -197,7 +196,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
-                onValueChange={(value) => onChange(value)}
+                onValueChange={onChange}
                 items={[
                   { label: "Appraisal", value: "Appraisal", color: "white" },
                   { label: "Cleaning", value: "Cleaning", color: "white" },
@@ -235,9 +234,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             <Text
               style={{
                 color: "red",
-                paddingLeft: 30,
-                marginTop: -15,
-                marginBottom: -2,
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
               }}
             >
               This field is required
@@ -263,9 +262,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             <Text
               style={{
                 color: "red",
-                paddingLeft: 30,
-                marginTop: -15,
-                marginBottom: -2,
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
               }}
             >
               This field is required
@@ -300,9 +299,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             <Text
               style={{
                 color: "red",
-                paddingLeft: 30,
-                marginTop: -15,
-                marginBottom: -2,
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
               }}
             >
               This field is required
@@ -334,9 +333,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
             <Text
               style={{
                 color: "red",
-                paddingLeft: 30,
-                marginTop: -15,
-                marginBottom: -2,
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
               }}
             >
               This field is required

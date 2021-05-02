@@ -146,7 +146,7 @@ const AddProperty = ({ addProperty }) => {
           <Text
             style={{
               color: "red",
-              paddingLeft: 30,
+              paddingLeft: 35,
               marginTop: -15,
               marginBottom: -2,
             }}
@@ -178,7 +178,7 @@ const AddProperty = ({ addProperty }) => {
           <Text
             style={{
               color: "red",
-              paddingLeft: 30,
+              paddingLeft: 35,
               marginTop: -15,
               marginBottom: -2,
             }}
@@ -264,7 +264,7 @@ const AddProperty = ({ addProperty }) => {
           <Text
             style={{
               color: "red",
-              paddingLeft: 30,
+              paddingLeft: 35,
               marginTop: -15,
               marginBottom: -2,
             }}
@@ -297,7 +297,7 @@ const AddProperty = ({ addProperty }) => {
           <Text
             style={{
               color: "red",
-              paddingLeft: 30,
+              paddingLeft: 35,
               marginTop: -15,
               marginBottom: -2,
             }}

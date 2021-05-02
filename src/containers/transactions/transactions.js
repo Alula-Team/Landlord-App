@@ -31,6 +31,7 @@ import { doDeleteTransaction } from "../../redux/actions";
 
 const Transactions = ({ stateTransactions, deleteTransaction }) => {
   const navigation = useNavigation();
+
   const data = stateTransactions;
 
   const ids = data.map((item) => {
