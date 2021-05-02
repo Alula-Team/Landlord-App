@@ -2,6 +2,9 @@ import React from 'react'
 import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 
+// Firebase
+import { logout } from '../../firebase/firebase';
+
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
@@ -14,6 +17,15 @@ import styles from './sett-styles';
 const Settings = () => {
 
     const navigation = useNavigation();
+
+    // Sign Out
+    async function handleSignOut() {
+        try {
+          await logout();
+        } catch (error) {
+          console.log(error);
+        }
+    }
     
     return (
         <>
@@ -95,7 +107,7 @@ const Settings = () => {
                     {/* END Reporting */}
 
                     {/* Logout Button */}
-                        <TouchableOpacity style={styles.logoutButton}>
+                        <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
                             <Text style={styles.logoutButtonText}>Log Out</Text>
                         </TouchableOpacity>
                     {/* END Logout Button */}

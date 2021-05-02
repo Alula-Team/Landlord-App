@@ -18,7 +18,12 @@ import styles from './auth-styles';
 const ForgotPasswordScreen = (props) => {
 
     const navigation = useNavigation();
-    const { control, handleSubmit } = useForm();
+    
+    const { control, handleSubmit, errors } = useForm();
+
+    const onSubmit = (data) => {
+        console.log(data);
+    }
 
     return (
         <View style={styles.container}>
@@ -52,26 +57,32 @@ const ForgotPasswordScreen = (props) => {
             <View style={styles.form}>
                 <Controller
                     control={control}
-                    render={({ onChange, value }) => (  
-                        <View style={styles.emailInput}>
-                            <Feather 
-                                name={'mail'}
-                                size={22.5}
-                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                            />
-                            <TextInput
-                                style={styles.email}
-                                placeholder='Email'
-                                placeholderTextColor='#ffffff50'
-                                autoCapitalize='none'
-                                autoCompleteType={'email'}
-                                autoCorrect={false}
-                                clearButtonMode={'while-editing'}
-                                keyboardType={'email-address'}
-                                keyboardAppearance='dark'
-                                // value={}
-                                // onChangeText={}
-                            />
+                    render={({ onChange, onBlur, value }) => (
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.emailInput}>
+                                <Feather 
+                                    name={'mail'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.email}
+                                    placeholder='Email'
+                                    placeholderTextColor='#ffffff50'
+                                    autoCapitalize='none'
+                                    autoCompleteType='email'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    keyboardType={'email-address'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.email && <Text style={styles.errorText}>Please enter a valid email address</Text>}
+                            </View>
                         </View>
                     )}
                     name="email"

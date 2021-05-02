@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     form: {
         marginTop: 40
     },
+    authFieldContainer: {
+        marginBottom: 25
+    },
     nameInput: {
         flexDirection: 'row',
         justifyContent: 'center',
@@ -35,9 +38,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#323f4b',
         color: '#fff',
         height: 55,
-        marginHorizontal: 25,
+        marginHorizontal: 20,
         marginTop: 10,
-        marginBottom: 25,
         borderRadius: 10
     },
     nameIcon: {
@@ -61,8 +63,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#323f4b',
         height: 55,
-        marginHorizontal: 25,
-        marginBottom: 25,
+        marginHorizontal: 20,
         borderRadius: 10
     },
     emailIcon: {
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#323f4b',
         height: 55,
-        marginHorizontal: 25,
+        marginHorizontal: 20,
         borderRadius: 10
     },
     passwordIcon: {
@@ -98,6 +99,13 @@ const styles = StyleSheet.create({
         paddingLeft: 4,
         paddingRight: 1,
         color: '#ffffff70'
+    },
+    errorMsg: {
+        marginLeft: 30, 
+        marginTop: 10
+    },
+    errorText: {
+        color: '#f0ad4e'
     },
     password: {
         flex: 1,
@@ -140,7 +148,6 @@ const styles = StyleSheet.create({
     forgotPasswordButton: {
         alignItems: 'flex-end',
         marginHorizontal: 25,
-        marginTop: 20
     },
     forgotPasswordText: {
         fontSize: 16,
@@ -182,7 +189,7 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     continueButton: {
-        backgroundColor: "#428bca",
+        backgroundColor: "#5858FB",
         marginHorizontal: 30,
         marginVertical: 30,
         padding: 15,
@@ -193,6 +200,19 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '700',
         textAlign: 'center'
+    },
+
+    // Loading Screen
+    splashContainer: {
+        justifyContent: 'center',
+        alignContent: 'center',
+        backgroundColor: '#09061C',
+        height: '100%'
+    },
+    splashImg: {
+        width: 200,
+        height: 200,
+        alignSelf: 'center'
     },
 });
 

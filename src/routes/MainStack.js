@@ -4,19 +4,19 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 // Dashboard
-import Notifications from './notificationsStack';
+import Notifications from './ScreenStacks/notificationsStack';
 
 // Properties
-import Properties from '../routes/propertiesStack';
+import Properties from './ScreenStacks/propertiesStack';
 
 // Transactions
-import Transactions from '../routes/transactionStack';
+import Transactions from './ScreenStacks/transactionStack';
 
 // Tenants
-import Tenants from '../routes/tenantStack';
+import Tenants from './ScreenStacks/tenantStack';
 
 // Settings
-import Settings from '../routes/settingsStack';
+import Settings from './ScreenStacks/settingsStack';
 
 // Icons
 import Icon from 'react-native-vector-icons/Feather';

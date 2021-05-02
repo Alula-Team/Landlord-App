@@ -66,15 +66,11 @@ const UpdatePayment = () => {
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>No Transaction Fees</Text>
-                            </View>
-                            <View style={styles.listInline}>
-                                <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
                                 <Text style={styles.listText}>Secure Payments via Dwolla and Plaid</Text>
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>Only $10/mo per unit</Text>
+                                <Text style={styles.listText}>1.5% Transaction Fee</Text>
                             </View>
                             
                         </View>

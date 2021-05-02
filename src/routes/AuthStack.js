@@ -9,6 +9,7 @@ import Register from '../containers/auth/register';
 import ForgotPassword from '../containers/auth/forgot-password';
 import OnboardingScreen from '../containers/auth/onboarding';
 import UpdatePayment from '../containers/settings/updatePayment';
+import Loading from '../containers/auth/loading';
 
 const authStack = createStackNavigator();
 
@@ -18,15 +19,13 @@ const Routes = (props) => {
         <>
             {/* Authentication Routes */}
             <authStack.Navigator>
+                <authStack.Screen name='Loading' component={Loading} options={{ headerShown: false }} />
                 <authStack.Screen name='Login' component={Login} options={{ headerShown: false }} />
                 <authStack.Screen name='Register' component={Register} options={{ headerShown: false }} /> 
                 <authStack.Screen name='ForgotPassword' component={ForgotPassword} options={{ headerShown: false }} />
                 <authStack.Screen name='Onboarding' component={OnboardingScreen} options={{ headerShown: false }} />
                 <authStack.Screen name='UpdatePayment' component={UpdatePayment}  options={{ headerShown: false }} />
-            </authStack.Navigator>
-
-            {/* Dashboard Stack Navigator */}
-            
+            </authStack.Navigator> 
         </>
     );
 }
