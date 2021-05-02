@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React, { useState } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
@@ -345,3 +346,83 @@ const actions = {
 };
 
 export default connect(mapStateToProps, actions)(AddTransactions);
+=======
+import React, { useState, useEffect } from "react";
+import { useForm, Controller, useController } from "react-hook-form";
+import { Text, View, TextInput, Button } from "react-native";
+import DatePicker from "react-native-date-picker";
+
+const Input = ({ name, control }) => {
+  const { field } = useController({
+    control,
+    defaultValue: "",
+    name,
+    rules: { required: true },
+  });
+  return <TextInput value={field.value} onChangeText={field.onChange} />;
+};
+
+export default function AddTransactions() {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      date: new Date(),
+      date2: new Date(),
+      date3: new Date(),
+    },
+  });
+
+  const onSubmit = (data) => console.log(data);
+  return (
+    /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
+    <View style={{ paddingTop: 300 }}>
+      {/* register your input into the hook by invoking the "register" function */}
+      <Text>Date Paid:</Text>
+      <Input name="date" control={control} />
+      {errors.date && (
+        <Text
+          style={{
+            color: "#f00",
+            fontSize: 14,
+            fontWeight: "600",
+            paddingLeft: 30,
+            paddingTop: 5,
+          }}
+        >
+          This field is required
+        </Text>
+      )}
+      {/* include validation with required or other standard HTML validation rules */}
+      <Text>Some Other Thing:</Text>
+      <Input name="something" control={control} />
+      {/* errors will return when field validation fails  */}
+      {errors.something && (
+        <Text
+          style={{
+            color: "#f00",
+            fontSize: 14,
+            fontWeight: "600",
+            paddingLeft: 30,
+            paddingTop: 5,
+          }}
+        >
+          This field is required
+        </Text>
+      )}
+      <Controller
+        control={control}
+        name="date2"
+        render={({ field: { value, onChange } }) => (
+          <DatePicker date={value} onDateChange={onChange} />
+        )}
+        defaultValue={new Date()}
+      />
+
+      <Button type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />
+    </View>
+  );
+}
+>>>>>>> Stashed changes
