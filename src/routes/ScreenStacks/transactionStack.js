@@ -4,8 +4,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Transactions from '../containers/transactions/transactions';
-import AddTransactions from '../containers/transactions/addTransactions';
+import Transactions from '../../containers/transactions/transactions';
+import AddTransactions from '../../containers/transactions/addTransactions';
 
 const Stack = createStackNavigator();
 

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -11,6 +12,9 @@ import Feather from 'react-native-vector-icons/Feather';
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
+// Firebase
+import { auth } from '../../firebase/firebase';
+
 // Style Sheet
 import styles from './auth-styles';
 
@@ -18,10 +22,18 @@ const RegisterScreen = (props) => {
 
     const navigation = useNavigation();
 
-    const { control, handleSubmit } = useForm();
+    const { control, handleSubmit, errors, watch, register } = useForm();
+
+    const password = useRef({});
+    password.current = watch('password', '');
+
+    const onSubmit = (data) => {
+        const { email, password } = data;
+        auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password);
+      };
 
     return (
-        <View style={styles.container}>
+        <KeyboardAwareScrollView style={styles.container}>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}
@@ -38,55 +50,33 @@ const RegisterScreen = (props) => {
             {/* Form */}
             <View style={styles.form}>
                 <Controller
-                control={control}
-                render={({ onChange, value }) => (
-                    <View style={styles.nameInput}>
-                        <Feather 
-                            name={'user'}
-                            size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                        />
-                        <TextInput
-                            style={styles.name}
-                            placeholder='Full Name'
-                            placeholderTextColor='#ffffff50'
-                            autoCapitalize='words'
-                            autoCompleteType='name'
-                            autoCorrect={false}
-                            clearButtonMode={'while-editing'}
-                            keyboardAppearance='dark'
-                            // value={}
-                            // onChangeText={}
-                        />
-                    </View>
-                    )}
-                    name="name"
-                    rules={{ required: true }}
-                    defaultValue=""
-                />
-
-                <Controller
                     control={control}
-                    render={({ onChange, value }) => (
-                        <View style={styles.emailInput}>
-                            <Feather 
-                                name={'mail'}
-                                size={22.5}
-                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                            />
-                            <TextInput
-                                style={styles.email}
-                                placeholder='Email'
-                                placeholderTextColor='#ffffff50'
-                                autoCapitalize='none'
-                                autoCompleteType='email'
-                                autoCorrect={false}
-                                clearButtonMode={'while-editing'}
-                                keyboardType={'email-address'}
-                                keyboardAppearance='dark'
-                                // value={}
-                                // onChangeText={}
-                            />
+                    render={({ onChange, onBlur, value }) => (
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.emailInput}>
+                                <Feather 
+                                    name={'mail'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.email}
+                                    placeholder='Email'
+                                    placeholderTextColor='#ffffff50'
+                                    autoCapitalize='none'
+                                    autoCompleteType='email'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    keyboardType={'email-address'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.email && <Text style={styles.errorText}>Please enter a valid email address</Text>}
+                            </View>
                         </View>
                     )}
                     name="email"
@@ -96,27 +86,33 @@ const RegisterScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, value }) => (  
-                        <View style={styles.passwordInput}>
-                            <Feather 
-                                name={'lock'}
-                                size={22.5}
-                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                            />
-                            <TextInput
-                                style={styles.password}
-                                placeholder='Password'
-                                placeholderTextColor='#ffffff50'
-                                secureTextEntry={true}
-                                autoCapitalize='none'
-                                autoCompleteType='password'
-                                autoCorrect={false}
-                                clearButtonMode={'while-editing'}
-                                returnKeyType={'done'}
-                                keyboardAppearance='dark'
-                                // value={}
-                                // onChangeText={}
-                            />
+                    render={({ onChange, onBlur, value }) => (  
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.passwordInput}>
+                                <Feather 
+                                    name={'lock'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.password}
+                                    placeholder='Password'
+                                    placeholderTextColor='#ffffff50'
+                                    secureTextEntry={true}
+                                    autoCapitalize='none'
+                                    autoCompleteType='password'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    returnKeyType={'done'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
+                            </View>
                         </View>
                     )}
                     name="password"
@@ -124,12 +120,48 @@ const RegisterScreen = (props) => {
                     defaultValue=""
                 />
 
+                <Controller
+                    control={control}
+                    render={({ onChange, onBlur, value }) => (  
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.passwordInput}>
+                                <Feather 
+                                    name={'lock'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.password}
+                                    placeholder='Confirm Password'
+                                    placeholderTextColor='#ffffff50'
+                                    secureTextEntry={true}
+                                    autoCapitalize='none'
+                                    autoCompleteType='password'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    returnKeyType={'done'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.passwordConf && <Text style={styles.errorText}>{errors.passwordConf.message}</Text>}
+                            </View>
+                        </View>
+                    )}
+                    name="passwordConf"
+                    rules={{ required: true, validate: (value) => value === password.current || 'The passwords does not match', }}
+                    defaultValue=""
+                />
+
                 {/* Sign In Button */}
                 <TouchableOpacity 
                     style={styles.continueButton}
-                    onPress={() => navigation.navigate('Onboarding')}
+                    onPress={handleSubmit(onSubmit)}
                 >
-                    <Text style={styles.submitText}>Next</Text>
+                    <Text style={styles.submitText}>Sign Up</Text>
                 </TouchableOpacity>
 
                 {/* Terms & Conditions */}
@@ -147,7 +179,7 @@ const RegisterScreen = (props) => {
                     Already have an account? <Text style={{fontWeight: '800'}}>Login Instead</Text>
                 </Text>
             </TouchableOpacity>
-        </View>
+        </KeyboardAwareScrollView>
     );
 }
 

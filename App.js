@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
+// Navigation
 import { NavigationContainer } from "@react-navigation/native";
-import RootNavigation from "./src/routes/rootNavigation";
-import Routes from "./src/routes/routes";
+import AuthStack from "./src/routes/AuthStack";
+import MainStack from "./src/routes/MainStack";
 
 // Redux Stuff
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./src/redux/reducers";
+
+// Firebase
+import firebase from 'firebase';
+// import { auth } from './src/firebase/firebase';
 
 const store = createStore(
   rootReducer,
@@ -17,11 +22,32 @@ const store = createStore(
 );
 
 export default function App() {
+
+  const [signedIn, setSignedIn] = useState(false);
+
+  useEffect(() => {
+    checkSignedIn()
+  }, [])
+
+  checkSignedIn = () => {
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          setSignedIn(true);
+        } else {
+          setSignedIn(false);
+        }
+    });
+  }
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <RootNavigation />
-        {/* <Routes /> */}
+        {signedIn
+            ? (
+              <MainStack />
+            ) : (
+              <AuthStack />
+            )
+        }
       </NavigationContainer>
     </Provider>
   );

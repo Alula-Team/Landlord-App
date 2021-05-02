@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -11,6 +12,9 @@ import Feather from 'react-native-vector-icons/Feather';
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
+// Firebase
+import { auth } from '../../firebase/firebase';
+
 // Style Sheet
 import styles from './auth-styles';
 
@@ -18,10 +22,15 @@ const LoginScreen = (props) => {
 
     const navigation = useNavigation();
 
-    const { control, handleSubmit } = useForm();
+    const { control, handleSubmit, errors } = useForm();
+
+    const onSubmit = (data) => {
+        const { email, password } = data;
+        auth.signInWithEmailAndPassword(email.trim().toLowerCase(), password);
+    }
 
     return (
-        <View style={styles.container}>
+        <KeyboardAwareScrollView style={styles.container}>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}
@@ -40,26 +49,32 @@ const LoginScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, value }) => (
-                        <View style={styles.emailInput}>
-                            <Feather 
-                                name={'mail'}
-                                size={22.5}
-                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                            />
-                            <TextInput
-                                style={styles.email}
-                                placeholder='Email'
-                                placeholderTextColor='#ffffff50'
-                                autoCapitalize='none'
-                                autoCompleteType='email'
-                                autoCorrect={false}
-                                clearButtonMode={'while-editing'}
-                                keyboardType={'email-address'}
-                                keyboardAppearance='dark'
-                                // value={}
-                                // onChangeText={}
-                            />
+                    render={({ onChange, onBlur, value }) => (
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.emailInput}>
+                                <Feather 
+                                    name={'mail'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.email}
+                                    placeholder='Email'
+                                    placeholderTextColor='#ffffff50'
+                                    autoCapitalize='none'
+                                    autoCompleteType='email'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    keyboardType={'email-address'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.email && <Text style={styles.errorText}>Please enter a valid email address</Text>}
+                            </View>
                         </View>
                     )}
                     name="email"
@@ -69,30 +84,36 @@ const LoginScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, value }) => (
-                        <View style={styles.passwordInput}>
-                            <Feather 
-                                name={'lock'}
-                                size={22.5}
-                                style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                            />
-                            <TextInput
-                                style={styles.password}
-                                placeholder='Password'
-                                placeholderTextColor='#ffffff50'
-                                secureTextEntry={true}
-                                autoCapitalize='none'
-                                autoCompleteType='password'
-                                autoCorrect={false}
-                                clearButtonMode={'while-editing'}
-                                returnKeyType={'done'}
-                                keyboardAppearance='dark'
-                                // value={}
-                                // onChangeText={}
-                            />
+                    render={({ onChange, onBlur, value }) => (
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.passwordInput}>
+                                <Feather 
+                                    name={'lock'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.password}
+                                    placeholder='Password'
+                                    placeholderTextColor='#ffffff50'
+                                    secureTextEntry={true}
+                                    autoCapitalize='none'
+                                    autoCompleteType='password'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    returnKeyType={'done'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={(value) => onChange(value)}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                    {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
+                            </View>
                         </View>
                     )}
-                    name="email"
+                    name="password"
                     rules={{ required: true }}
                     defaultValue=""
                 />
@@ -108,7 +129,7 @@ const LoginScreen = (props) => {
                 {/* Sign In Button */}
                 <TouchableOpacity 
                     style={styles.continueButton}
-                    onPress={() => navigation.navigate('Home')}
+                    onPress={handleSubmit(onSubmit)}
                 >
                     <Text style={styles.submitText}>Login</Text>
                 </TouchableOpacity>
@@ -123,7 +144,7 @@ const LoginScreen = (props) => {
                     Need an account? <Text style={{fontWeight: '800'}}>Sign Up Instead</Text>
                 </Text>
             </TouchableOpacity>
-        </View>
+        </KeyboardAwareScrollView>
     );
 }
 

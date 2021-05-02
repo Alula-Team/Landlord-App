@@ -4,12 +4,12 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Properties from '../containers/properties/properties';
-import AddProperty from '../containers/properties/addProperties';
-import ServiceRequests from '../containers/properties/serviceRequests';
-import PropertyDetail from '../containers/properties/propertyDetail';
-import ServiceRequestDetail from '../containers/properties/serviceRequestDetail';
-import AddTenants from '../containers/properties/addTenants';
+import Properties from '../../containers/properties/properties';
+import AddProperty from '../../containers/properties/addProperties';
+import ServiceRequests from '../../containers/properties/serviceRequests';
+import PropertyDetail from '../../containers/properties/propertyDetail';
+import ServiceRequestDetail from '../../containers/properties/serviceRequestDetail';
+import AddTenants from '../../containers/properties/addTenants';
 
 const Stack = createStackNavigator();
 

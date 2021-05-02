@@ -4,8 +4,8 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
-import Tenants from '../containers/tenants/tenants';
-import TenantDetail from '../containers/tenants/tenantDetail';
+import Tenants from '../../containers/tenants/tenants';
+import TenantDetail from '../../containers/tenants/tenantDetail';
 
 const Stack = createStackNavigator();
 
