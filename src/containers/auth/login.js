@@ -68,7 +68,7 @@ const LoginScreen = (props) => {
                                     keyboardType={'email-address'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>
@@ -104,7 +104,7 @@ const LoginScreen = (props) => {
                                     returnKeyType={'done'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>

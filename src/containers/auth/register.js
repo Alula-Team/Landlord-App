@@ -22,7 +22,7 @@ const RegisterScreen = (props) => {
 
     const navigation = useNavigation();
 
-    const { control, handleSubmit, formState: { errors }, watch, register } = useForm();
+    const { control, handleSubmit, formState: { errors }, watch } = useForm();
 
     const password = useRef({});
     password.current = watch('password', '');
@@ -70,7 +70,7 @@ const RegisterScreen = (props) => {
                                     keyboardType={'email-address'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>
@@ -106,7 +106,7 @@ const RegisterScreen = (props) => {
                                     returnKeyType={'done'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>
@@ -122,7 +122,7 @@ const RegisterScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (  
+                    render={({ field: { onChange, onBlur, value} }) => (  
                         <View style={styles.authFieldContainer}>
                             <View style={styles.passwordInput}>
                                 <Feather 
@@ -142,7 +142,7 @@ const RegisterScreen = (props) => {
                                     returnKeyType={'done'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>
