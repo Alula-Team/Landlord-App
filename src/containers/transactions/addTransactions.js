@@ -38,6 +38,50 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     };
   });
 
+  const transactionTypes = [
+    { label: "Expense", value: "Expense", color: "white" },
+    { label: "Payment", value: "Payment", color: "white" },
+  ];
+
+  const categories = [
+    { label: "Appraisal", value: "Appraisal", color: "white" },
+    { label: "Cleaning", value: "Cleaning", color: "white" },
+    { label: "Inspection", value: "Inspection", color: "white" },
+    { label: "Marketing", value: "Marketing", color: "white" },
+    {
+      label: "Renovations",
+      value: "Renovations",
+      color: "white",
+    },
+    {
+      label: "Rent Payment",
+      value: "Rent Payment",
+      color: "white",
+    },
+    { label: "Repairs", value: "Repairs", color: "white" },
+    {
+      label: "Security Deposit",
+      value: "Secuirty Deposit",
+      color: "white",
+    },
+    {
+      label: "Tax Services",
+      value: "Tax Services",
+      color: "white",
+    },
+  ];
+
+  const paymentMethods = [
+    {
+      label: "Bank Transfer",
+      value: "Bank Transfer",
+      color: "white",
+    },
+    { label: "Cash", value: "Cash", color: "white" },
+    { label: "Check", value: "Check", color: "white" },
+    { label: "Other", value: "Other", color: "white" },
+  ];
+
   const addItem = (data) => {
     data.date = date.toString();
     addTransaction(data);
@@ -166,6 +210,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 onValueChange={(value) => onChange(value)}
                 items={[
                   { label: "Expense", value: "Expense", color: "white" },
@@ -175,6 +220,11 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 onValueChange={onChange}
                 value={value}
                 items={paymentTypes}
+>>>>>>> Stashed changes
+=======
+                onValueChange={onChange}
+                value={value}
+                items={transactionTypes}
 >>>>>>> Stashed changes
               />
             )}
@@ -203,6 +253,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
                 onValueChange={onChange}
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
                 items={[
                   { label: "Appraisal", value: "Appraisal", color: "white" },
@@ -234,6 +285,10 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 =======
                 value={value}
                 items={transactionCategories}
+>>>>>>> Stashed changes
+=======
+                value={value}
+                items={categories}
 >>>>>>> Stashed changes
               />
             )}
@@ -291,6 +346,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
                 onValueChange={(value) => onChange(value)}
                 items={[
                   {
@@ -302,6 +358,11 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                   { label: "Check", value: "Check", color: "white" },
                   { label: "Other", value: "Other", color: "white" },
                 ]}
+=======
+                onValueChange={onChange}
+                value={value}
+                items={paymentMethods}
+>>>>>>> Stashed changes
 =======
                 onValueChange={onChange}
                 value={value}

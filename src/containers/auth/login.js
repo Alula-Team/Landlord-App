@@ -20,6 +20,7 @@ import styles from "./auth-styles";
 
 const LoginScreen = (props) => {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     const navigation = useNavigation();
 
@@ -165,6 +166,55 @@ const LoginScreen = (props) => {
                     color: "#ffffff50",
                   }}
                 />
+=======
+  const navigation = useNavigation();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    auth.signInWithEmailAndPassword(email.trim().toLowerCase(), password);
+  };
+
+  return (
+    <KeyboardAwareScrollView style={styles.container}>
+      <Header
+        backgroundColor={"transparent"}
+        barStyle={"light-content"}
+        containerStyle={{ borderBottomWidth: 0 }}
+        centerComponent={
+          <Image
+            source={require("../../assets/favicon.jpg")}
+            style={{ width: 100, height: 100 }}
+          />
+        }
+      />
+
+      {/* Title of App */}
+      <Text style={styles.title}>Welcome</Text>
+      <Text style={styles.subTitle}>Sign in to get started!</Text>
+
+      {/* Form */}
+      <View style={styles.form}>
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <View style={styles.authFieldContainer}>
+              <View style={styles.emailInput}>
+                <Feather
+                  name={"mail"}
+                  size={22.5}
+                  style={{
+                    alignSelf: "center",
+                    marginHorizontal: 15,
+                    color: "#ffffff50",
+                  }}
+                />
+>>>>>>> Stashed changes
                 <TextInput
                   style={styles.email}
                   placeholder="Email"
@@ -176,7 +226,12 @@ const LoginScreen = (props) => {
                   keyboardType={"email-address"}
                   keyboardAppearance="dark"
                   onBlur={onBlur}
+<<<<<<< Updated upstream
                   onChangeText={(value) => onChange(value)}
+                  value={value}
+>>>>>>> Stashed changes
+=======
+                  onChangeText={onChange}
                   value={value}
 >>>>>>> Stashed changes
                 />
@@ -188,6 +243,7 @@ const LoginScreen = (props) => {
                   </Text>
                 )}
               </View>
+<<<<<<< Updated upstream
             </View>
           )}
           name="email"
@@ -234,6 +290,54 @@ const LoginScreen = (props) => {
               </View>
             </View>
           )}
+=======
+            </View>
+          )}
+          name="email"
+          rules={{ required: true }}
+          defaultValue=""
+        />
+
+        <Controller
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <View style={styles.authFieldContainer}>
+              <View style={styles.passwordInput}>
+                <Feather
+                  name={"lock"}
+                  size={22.5}
+                  style={{
+                    alignSelf: "center",
+                    marginHorizontal: 15,
+                    color: "#ffffff50",
+                  }}
+                />
+                <TextInput
+                  style={styles.password}
+                  placeholder="Password"
+                  placeholderTextColor="#ffffff50"
+                  secureTextEntry={true}
+                  autoCapitalize="none"
+                  autoCompleteType="password"
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  returnKeyType={"done"}
+                  keyboardAppearance="dark"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+              <View style={styles.errorMsg}>
+                {errors.password && (
+                  <Text style={styles.errorText}>
+                    Please enter a valid password.
+                  </Text>
+                )}
+              </View>
+            </View>
+          )}
+>>>>>>> Stashed changes
           name="password"
           rules={{ required: true }}
           defaultValue=""

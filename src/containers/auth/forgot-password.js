@@ -18,15 +18,21 @@ const ForgotPasswordScreen = (props) => {
   const navigation = useNavigation();
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     const navigation = useNavigation();
     
     const { control, handleSubmit, errors } = useForm();
 =======
+=======
+>>>>>>> Stashed changes
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm();
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   const onSubmit = (data) => {
@@ -65,6 +71,7 @@ const ForgotPasswordScreen = (props) => {
       <Text style={styles.subTitle}>Enter your email to continue!</Text>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
             {/* Form */}
             <View style={styles.form}>
                 <Controller
@@ -101,11 +108,17 @@ const ForgotPasswordScreen = (props) => {
                     rules={{ required: true }}
                     defaultValue=""
 =======
+=======
+>>>>>>> Stashed changes
       {/* Form */}
       <View style={styles.form}>
         <Controller
           control={control}
+<<<<<<< Updated upstream
           render={({ field: { onChange, onBlur, value } }) => (
+=======
+          render={({ onChange, onBlur, value }) => (
+>>>>>>> Stashed changes
             <View style={styles.authFieldContainer}>
               <View style={styles.emailInput}>
                 <Feather
@@ -130,6 +143,9 @@ const ForgotPasswordScreen = (props) => {
                   onBlur={onBlur}
                   onChangeText={(value) => onChange(value)}
                   value={value}
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
                 />
               </View>
