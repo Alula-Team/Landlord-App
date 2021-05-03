@@ -93,21 +93,14 @@ const styles = StyleSheet.create({
         marginLeft: 20
     },
     addButton: {
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
-        width: '30%',
-        height: 45,
-        alignItems: 'center',
-        justifyContent: 'center',
         flexDirection: 'row',
-        alignSelf: 'flex-end',
-        marginRight: 20,
+        marginLeft: 20,
         marginTop: 20
     },
     addButtonText: {
         fontSize: 16,
         color: '#fff',
+        // textDecorationLine: 'underline'
     },
     propertyInput: {
         color: '#fff',

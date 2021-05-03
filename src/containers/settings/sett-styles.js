@@ -9,12 +9,9 @@ const styles = StyleSheet.create({
 
     // Forms
     buttonContainer: {
-        marginHorizontal: 30,
+        marginHorizontal: 5,
         marginTop: 10,
         marginBottom: 20,
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
         height: 45,
         flexDirection: 'row',
         justifyContent: 'space-between'
@@ -45,10 +42,11 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     logoutButtonText: {
-        color: '#fff',
+        alignSelf: 'center',
+        color: '#5858FB',
         fontSize: 16,
-        fontWeight: '700',
-        textAlign: 'center'
+        fontWeight: '600',
+        marginLeft: 10
     },
     formInput: {
         color: '#fff',

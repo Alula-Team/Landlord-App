@@ -50,66 +50,70 @@ const Settings = () => {
                 />
 
                 <ScrollView style={{marginTop: 30}}>
-                    {/* User Information */}
-                        <Text style={styles.sectionText}>User Information</Text>
+                    {/* Edit Profile Button */}
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateProfile')}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Update Profile</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
 
-                        {/* Edit Profile Button */}
-                        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateProfile')}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                                <Text style={styles.buttonText}>Update Profile</Text>
-                            </View>
-                            <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
-                        </TouchableOpacity>
+                    {/* Update Password Button */}
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePassword')}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Update Password</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
 
-                        {/* Update Password Button */}
-                        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePassword')}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                                <Text style={styles.buttonText}>Update Password</Text>
-                            </View>
-                            <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
-                        </TouchableOpacity>
+                    {/* Update Payment Button */}
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePayment')}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='credit-card' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Update Payment Info</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
+                        
+                    {/* Enable Notifications Button */}
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='bell' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Enable Notifications</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
 
-                        {/* Update Payment Button */}
-                        <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePayment')}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Feather name='credit-card' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                                <Text style={styles.buttonText}>Update Payment Info</Text>
-                            </View>
-                            <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
-                        </TouchableOpacity>
-                    {/* END User Information */}
+                    {/* Generate Reports Button */}
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='activity' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Generate Reports</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
 
-                    {/* Preferences */}
-                        <Text style={styles.sectionText}>Preferences</Text>
-
-                        {/* Enable Notifications Button */}
-                        <TouchableOpacity style={styles.buttonContainer}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Feather name='bell' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                                <Text style={styles.buttonText}>Enable Notifications</Text>
-                            </View>
-                        </TouchableOpacity>
-
-                    {/* END Preferences */}
-
-                    {/* Reporting */}
-                        <Text style={styles.sectionText}>Reporting</Text>
-
-                        {/* Generate Reports Button */}
-                        <TouchableOpacity style={styles.buttonContainer}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Feather name='activity' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                                <Text style={styles.buttonText}>Generate Reports</Text>
-                            </View>
-                        </TouchableOpacity>
-                    {/* END Reporting */}
+                    {/* About Button */}
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='alert-circle' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>About</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
 
                     {/* Logout Button */}
-                        <TouchableOpacity style={styles.logoutButton} onPress={handleSignOut}>
-                            <Text style={styles.logoutButtonText}>Log Out</Text>
+                    <View style={{marginTop: 50}}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={handleSignOut}>
+                            <View style={{flexDirection: 'row'}}>
+                                <Feather name='log-out' color='#5858FB' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                                <Text style={styles.logoutButtonText}>Logout</Text>
+                            </View>
+                            <Feather name='arrow-right' color='#5858FB' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                         </TouchableOpacity>
+                    </View>
                     {/* END Logout Button */}
 
                 </ScrollView>
