@@ -38,6 +38,50 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     };
   });
 
+  const transactionTypes = [
+    { label: "Expense", value: "Expense", color: "white" },
+    { label: "Payment", value: "Payment", color: "white" },
+  ];
+
+  const categories = [
+    { label: "Appraisal", value: "Appraisal", color: "white" },
+    { label: "Cleaning", value: "Cleaning", color: "white" },
+    { label: "Inspection", value: "Inspection", color: "white" },
+    { label: "Marketing", value: "Marketing", color: "white" },
+    {
+      label: "Renovations",
+      value: "Renovations",
+      color: "white",
+    },
+    {
+      label: "Rent Payment",
+      value: "Rent Payment",
+      color: "white",
+    },
+    { label: "Repairs", value: "Repairs", color: "white" },
+    {
+      label: "Security Deposit",
+      value: "Secuirty Deposit",
+      color: "white",
+    },
+    {
+      label: "Tax Services",
+      value: "Tax Services",
+      color: "white",
+    },
+  ];
+
+  const paymentMethods = [
+    {
+      label: "Bank Transfer",
+      value: "Bank Transfer",
+      color: "white",
+    },
+    { label: "Cash", value: "Cash", color: "white" },
+    { label: "Check", value: "Check", color: "white" },
+    { label: "Other", value: "Other", color: "white" },
+  ];
+
   const addItem = (data) => {
     data.date = date.toString();
     addTransaction(data);
@@ -165,17 +209,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
-<<<<<<< Updated upstream
-                onValueChange={(value) => onChange(value)}
-                items={[
-                  { label: "Expense", value: "Expense", color: "white" },
-                  { label: "Payment", value: "Payment", color: "white" },
-                ]}
-=======
                 onValueChange={onChange}
                 value={value}
-                items={paymentTypes}
->>>>>>> Stashed changes
+                items={transactionTypes}
               />
             )}
             name="payment"
@@ -203,38 +239,8 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
                 onValueChange={onChange}
-<<<<<<< Updated upstream
-                items={[
-                  { label: "Appraisal", value: "Appraisal", color: "white" },
-                  { label: "Cleaning", value: "Cleaning", color: "white" },
-                  { label: "Inspection", value: "Inspection", color: "white" },
-                  { label: "Marketing", value: "Marketing", color: "white" },
-                  {
-                    label: "Renovations",
-                    value: "Renovations",
-                    color: "white",
-                  },
-                  {
-                    label: "Rent Payment",
-                    value: "Rent Payment",
-                    color: "white",
-                  },
-                  { label: "Repairs", value: "Repairs", color: "white" },
-                  {
-                    label: "Security Deposit",
-                    value: "Secuirty Deposit",
-                    color: "white",
-                  },
-                  {
-                    label: "Tax Services",
-                    value: "Tax Services",
-                    color: "white",
-                  },
-                ]}
-=======
                 value={value}
-                items={transactionCategories}
->>>>>>> Stashed changes
+                items={categories}
               />
             )}
             name="transactionCategory"
@@ -290,23 +296,9 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
-<<<<<<< Updated upstream
-                onValueChange={(value) => onChange(value)}
-                items={[
-                  {
-                    label: "Bank Transfer",
-                    value: "Bank Transfer",
-                    color: "white",
-                  },
-                  { label: "Cash", value: "Cash", color: "white" },
-                  { label: "Check", value: "Check", color: "white" },
-                  { label: "Other", value: "Other", color: "white" },
-                ]}
-=======
                 onValueChange={onChange}
                 value={value}
                 items={paymentMethods}
->>>>>>> Stashed changes
               />
             )}
             name="paymentMethod"
