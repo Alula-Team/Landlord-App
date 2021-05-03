@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-// Forms
-import { useForm, Controller, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 
-// Navigation
 import { useNavigation } from "@react-navigation/native";
 
 // Vector Icons
@@ -20,29 +18,25 @@ import styles from "./prop-styles";
 import { connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
 
-// THINGS I NEED
-// Function to add more units when button is pressed
-// Update handleSubmit function to reset form when submitted.
-
-const AddProperties = ({ addProperty }) => {
+const AddProperty = ({ addProperty }) => {
   const navigation = useNavigation();
 
-  const { control, handleSubmit } = useForm();
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: "units",
   });
 
-  const addItem = (data) => {
+  const onSubmit = (data) => {
     addProperty(data);
     navigation.goBack();
   };
 
-  const onSubmit = (data) => console.log(data);
-
-  const logItem = (data) => {
-    console.log(data);
-  };
   // For Picker Select
   // Styles
   const pickerStyles = {
@@ -112,7 +106,7 @@ const AddProperties = ({ addProperty }) => {
         rightComponent={
           <TouchableOpacity
             style={{ paddingTop: 32.5, paddingRight: 10 }}
-            onPress={handleSubmit(addItem)}
+            onPress={handleSubmit(onSubmit)}
           >
             <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
               Save
@@ -127,12 +121,11 @@ const AddProperties = ({ addProperty }) => {
       />
 
       <KeyboardAwareScrollView>
-        {/* Form */}
         <Text style={styles.sectionText}>Property Address</Text>
         {/* Street Address */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
@@ -140,7 +133,7 @@ const AddProperties = ({ addProperty }) => {
                 placeholderTextColor="#ffffff80"
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
-                onChangeText={(value) => onChange(value)}
+                onChangeText={onChange}
                 value={value}
               />
             </View>
@@ -149,11 +142,22 @@ const AddProperties = ({ addProperty }) => {
           rules={{ required: true }}
           defaultValue=""
         />
-
-        {/* CITY */}
+        {errors.address && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 35,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
+        {/* City */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
@@ -161,7 +165,7 @@ const AddProperties = ({ addProperty }) => {
                 placeholderTextColor="#ffffff80"
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
-                onChangeText={(value) => onChange(value)}
+                onChangeText={onChange}
                 value={value}
               />
             </View>
@@ -170,15 +174,26 @@ const AddProperties = ({ addProperty }) => {
           rules={{ required: true }}
           defaultValue=""
         />
-
+        {errors.city && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 35,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* STATE */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <RNPickerSelect
               placeholder={StatePlaceholder}
               style={pickerStyles}
-              onValueChange={(value) => onChange(value)}
+              onValueChange={onChange}
               items={[
                 { label: "A. Samoa", value: "A. Samoa", color: "white" },
                 { label: "AK", value: "AK", color: "white" },
@@ -241,14 +256,26 @@ const AddProperties = ({ addProperty }) => {
               ]}
             />
           )}
-          name="states"
+          name="state"
           rules={{ required: true }}
           defaultValue=""
         />
+        {errors.state && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 35,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* ZIP CODE */}
         <Controller
           control={control}
-          render={({ onChange, value }) => (
+          render={({ field: { value, onChange } }) => (
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
@@ -257,7 +284,7 @@ const AddProperties = ({ addProperty }) => {
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
                 keyboardType="number-pad"
-                onChangeText={(value) => onChange(value)}
+                onChangeText={onChange}
                 value={value}
               />
             </View>
@@ -266,22 +293,30 @@ const AddProperties = ({ addProperty }) => {
           rules={{ required: true }}
           defaultValue=""
         />
-
-        {/* Units */}
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <Text style={styles.sectionText}>Unit(s)</Text>
-          <Text style={{ marginTop: 15, marginLeft: 10, color: "#ffffff80" }}>
-            (if applicable)
+        {errors.zipCode && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 35,
+              marginTop: -15,
+              marginBottom: -2,
+            }}
+          >
+            This field is required
           </Text>
-        </View>
-        <Text style={{ color: "#ffffff80", marginLeft: 20 }}>
-          Please include the appropriate label to each unit.
-        </Text>
+        )}
+        {/* Units */}
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => append({ number: "Something" })}
+        >
+          <Text style={styles.addButtonText}>+ Add Unit(s) to this Property</Text>
+        </TouchableOpacity>
         {fields.map((item, index) => (
           <Controller
             key={item.id}
             control={control}
-            render={({ onChange, value }) => (
+            render={({ field: { value, onChange } }) => (
               <View style={{ flexDirection: "row" }}>
                 <View style={styles.addUnitInput}>
                   <TextInput
@@ -290,7 +325,7 @@ const AddProperties = ({ addProperty }) => {
                     placeholderTextColor="#ffffff80"
                     style={styles.propertyInput}
                     keyboardAppearance="dark"
-                    onChangeText={(value, text) => onChange(value, text, key)}
+                    onChangeText={onChange}
                     value={value}
                   />
                 </View>
@@ -302,19 +337,13 @@ const AddProperties = ({ addProperty }) => {
                 </TouchableOpacity>
               </View>
             )}
-            name={`units.${index}`}
+            name={`units[${index}].number`}
+            rules={{ required: true }}
             defaultValue=""
           />
         ))}
-        {/* Add Units Button */}
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={append({ units: "" })}
-        >
-          <Feather name="plus" size={25} style={styles.addButtonText} />
-          <Text style={styles.addButtonText}>Add Unit</Text>
-        </TouchableOpacity>
       </KeyboardAwareScrollView>
+
     </View>
   );
 };
@@ -323,4 +352,4 @@ const actions = {
   addProperty: doAddProperty,
 };
 
-export default connect(null, actions)(AddProperties);
+export default connect(null, actions)(AddProperty);
