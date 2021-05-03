@@ -302,18 +302,34 @@ const PropertyDetail = ({ route, deleteProperty }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Remove Property Button */}
-        <TouchableOpacity
-          style={{
-            backgroundColor: "red",
-            margin: 30,
-            padding: 15,
-            borderRadius: 10,
-          }}
-          onPress={deleteAlert}
-        >
-          <Text style={styles.removePropButtonText}>Delete Property</Text>
-        </TouchableOpacity>
+        {/* Button Group */}
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          {/* Edit Property Button */}
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#5858FB",
+              margin: 30,
+              padding: 15,
+              borderRadius: 10,
+            }}
+            // onPress={}
+          >
+            <Text style={styles.removePropButtonText}>Edit Property</Text>
+          </TouchableOpacity>
+
+          {/* Remove Property Button */}
+          <TouchableOpacity
+            style={{
+              backgroundColor: "red",
+              margin: 30,
+              padding: 15,
+              borderRadius: 10,
+            }}
+            onPress={deleteAlert}
+          >
+            <Text style={styles.removePropButtonText}>Delete Property</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
