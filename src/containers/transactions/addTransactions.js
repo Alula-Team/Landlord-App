@@ -83,7 +83,25 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
   ];
 
   const addItem = (data) => {
-    data.date = date.toString();
+    const year = date.getFullYear();
+    const day = date.getDate();
+    const months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const month = months[date.getMonth()];
+    const formattedDate = `${month} ${day}, ${year}`;
+    data.date = formattedDate;
     addTransaction(data);
     navigation.goBack();
   };
