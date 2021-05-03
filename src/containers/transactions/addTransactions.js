@@ -165,11 +165,8 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
-                onValueChange={onChange}
-                items={[
-                  { label: "Expense", value: "Expense", color: "white" },
-                  { label: "Payment", value: "Payment", color: "white" },
-                ]}
+                onValueChange={(value) => onChange(value)}
+                items={paymentTypes}
               />
             )}
             name="payment"
@@ -278,17 +275,8 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
-                onValueChange={onChange}
-                items={[
-                  {
-                    label: "Bank Transfer",
-                    value: "Bank Transfer",
-                    color: "white",
-                  },
-                  { label: "Cash", value: "Cash", color: "white" },
-                  { label: "Check", value: "Check", color: "white" },
-                  { label: "Other", value: "Other", color: "white" },
-                ]}
+                onValueChange={(value) => onChange(value)}
+                items={paymentMethods}
               />
             )}
             name="paymentMethod"
