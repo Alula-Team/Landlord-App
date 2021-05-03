@@ -22,15 +22,24 @@ const RegisterScreen = (props) => {
 
     const navigation = useNavigation();
 
-    const { control, handleSubmit, formState: { errors }, watch, register } = useForm();
+    const { control, handleSubmit, formState: { errors }, watch } = useForm();
 
     const password = useRef({});
     password.current = watch('password', '');
 
     const onSubmit = (data) => {
-        const { email, password } = data;
-        auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password);
-      };
+            const { email, password } = data;
+            auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
+                .catch(function(error) {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    if (errorCode == 'auth/email-already-in-use') {
+                        alert('Email already exists');
+                    } else {
+                        alert(errorMessage);
+                    }
+                });
+    };
 
     return (
         <KeyboardAwareScrollView style={styles.container}>
@@ -70,7 +79,7 @@ const RegisterScreen = (props) => {
                                     keyboardType={'email-address'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>
@@ -106,7 +115,7 @@ const RegisterScreen = (props) => {
                                     returnKeyType={'done'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>
@@ -122,7 +131,7 @@ const RegisterScreen = (props) => {
 
                 <Controller
                     control={control}
-                    render={({ onChange, onBlur, value }) => (  
+                    render={({ field: { onChange, onBlur, value} }) => (  
                         <View style={styles.authFieldContainer}>
                             <View style={styles.passwordInput}>
                                 <Feather 
@@ -142,7 +151,7 @@ const RegisterScreen = (props) => {
                                     returnKeyType={'done'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>

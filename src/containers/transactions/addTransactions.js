@@ -265,7 +265,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
-                onValueChange={(value) => onChange(value)}
+                onValueChange={onChange}
                 items={allProperties}
               />
             )}

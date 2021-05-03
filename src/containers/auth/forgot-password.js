@@ -76,7 +76,7 @@ const ForgotPasswordScreen = (props) => {
                                     keyboardType={'email-address'}
                                     keyboardAppearance='dark'
                                     onBlur={onBlur}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
                                     value={value}
                                 />
                             </View>

@@ -1,6 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
+
+// Forms
+import { useForm, Controller } from "react-hook-form";
 
 // Icons
 import Icon from 'react-native-vector-icons/EvilIcons';
@@ -15,6 +18,8 @@ import styles from './auth-styles';
 const OnboardingScreen = () => {
 
     const navigation = useNavigation();
+
+    const { control, handleSubmit, formState: { errors } } = useForm();
 
     return (
         <View style={styles.container}>
@@ -42,6 +47,42 @@ const OnboardingScreen = () => {
             <Text style={{color: '#fff', marginLeft: 30, marginTop: 40, fontSize: 18}}>Let's do a little onboarding...</Text>
 
             <View style={{marginTop: 50}}>
+                {/* Enter Users Name */}
+                <Controller
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.emailInput}>
+                                <Feather 
+                                    name={'mail'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.email}
+                                    placeholder='Full Name'
+                                    placeholderTextColor='#ffffff50'
+                                    autoCapitalize='words'
+                                    autoCompleteType='none'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    keyboardType={'default'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.users_name && <Text style={styles.errorText}>Please enter your name.</Text>}
+                            </View>
+                        </View>
+                    )}
+                    name="users_name"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
                 {/* Enable Notifications Button */}
                 <TouchableOpacity style={styles.buttonContainer}>
                     <View style={{flexDirection: 'row'}}>
