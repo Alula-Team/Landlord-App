@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
         color: 'white',
     },
     buttonContainer: {
-        marginHorizontal: 30,
+        marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
         borderColor: '#ffffff50',

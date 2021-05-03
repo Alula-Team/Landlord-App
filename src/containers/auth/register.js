@@ -28,9 +28,18 @@ const RegisterScreen = (props) => {
     password.current = watch('password', '');
 
     const onSubmit = (data) => {
-        const { email, password } = data;
-        auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password);
-      };
+            const { email, password } = data;
+            auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
+                .catch(function(error) {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    if (errorCode == 'auth/email-already-in-use') {
+                        alert('Email already exists');
+                    } else {
+                        alert(errorMessage);
+                    }
+                });
+    };
 
     return (
         <KeyboardAwareScrollView style={styles.container}>

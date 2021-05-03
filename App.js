@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./src/routes/AuthStack";
 import MainStack from "./src/routes/MainStack";
+import Onboarding from "./src/containers/auth/onboarding";
 
 // Redux Stuff
 import { Provider } from "react-redux";
