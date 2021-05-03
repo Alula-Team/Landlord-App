@@ -38,12 +38,12 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     };
   });
 
-  const transactionTypes = [
+  const paymentTypes = [
     { label: "Expense", value: "Expense", color: "white" },
     { label: "Payment", value: "Payment", color: "white" },
   ];
 
-  const categories = [
+  const transactionCategories = [
     { label: "Appraisal", value: "Appraisal", color: "white" },
     { label: "Cleaning", value: "Cleaning", color: "white" },
     { label: "Inspection", value: "Inspection", color: "white" },
@@ -209,9 +209,8 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
-                onValueChange={onChange}
-                value={value}
-                items={transactionTypes}
+                onValueChange={(value) => onChange(value)}
+                items={paymentTypes}
               />
             )}
             name="payment"
@@ -239,8 +238,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
                 onValueChange={onChange}
-                value={value}
-                items={categories}
+                items={transactionCategories}
               />
             )}
             name="transactionCategory"
@@ -268,7 +266,6 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
                 onValueChange={onChange}
-                value={value}
                 items={allProperties}
               />
             )}
@@ -296,8 +293,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
-                onValueChange={onChange}
-                value={value}
+                onValueChange={(value) => onChange(value)}
                 items={paymentMethods}
               />
             )}
