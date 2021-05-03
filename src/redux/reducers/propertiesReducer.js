@@ -25,10 +25,6 @@ const propertiesReducer = (state = initialState, action) => {
   if (action.type === "ADD_PROPERTY") {
     let propertyArray = [];
     if (action.payload.units.length) {
-      // for (var i = 0; i < action.payload.units.length; i++) {
-      //   console.log(action.payload.units[i]);
-      // }
-
       for (var i = 0; i < action.payload.units.length; i++) {
         let oneProperty = {
           id: uuid.v4(),

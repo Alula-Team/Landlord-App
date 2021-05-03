@@ -165,11 +165,17 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
+<<<<<<< Updated upstream
                 onValueChange={(value) => onChange(value)}
                 items={[
                   { label: "Expense", value: "Expense", color: "white" },
                   { label: "Payment", value: "Payment", color: "white" },
                 ]}
+=======
+                onValueChange={onChange}
+                value={value}
+                items={paymentTypes}
+>>>>>>> Stashed changes
               />
             )}
             name="payment"
@@ -197,6 +203,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
                 onValueChange={onChange}
+<<<<<<< Updated upstream
                 items={[
                   { label: "Appraisal", value: "Appraisal", color: "white" },
                   { label: "Cleaning", value: "Cleaning", color: "white" },
@@ -224,6 +231,10 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                     color: "white",
                   },
                 ]}
+=======
+                value={value}
+                items={transactionCategories}
+>>>>>>> Stashed changes
               />
             )}
             name="transactionCategory"
@@ -250,7 +261,8 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
-                onValueChange={(value) => onChange(value)}
+                onValueChange={onChange}
+                value={value}
                 items={allProperties}
               />
             )}
@@ -278,6 +290,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
+<<<<<<< Updated upstream
                 onValueChange={(value) => onChange(value)}
                 items={[
                   {
@@ -289,6 +302,11 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
                   { label: "Check", value: "Check", color: "white" },
                   { label: "Other", value: "Other", color: "white" },
                 ]}
+=======
+                onValueChange={onChange}
+                value={value}
+                items={paymentMethods}
+>>>>>>> Stashed changes
               />
             )}
             name="paymentMethod"

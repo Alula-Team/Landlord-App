@@ -32,7 +32,18 @@ import { doDeleteTransaction } from "../../redux/actions";
 const Transactions = ({ stateTransactions, deleteTransaction }) => {
   const navigation = useNavigation();
 
-  const data = stateTransactions;
+  const [data, setData] = useState(stateTransactions);
+
+  const resultsArray = stateTransactions;
+
+  const handleSearch = (text) => {
+    const newData = resultsArray.filter((item) => {
+      const itemData = `${item.transactionCategory.toUpperCase()} ${item.address.toUpperCase()}`;
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setData(newData);
+  };
 
   const ids = data.map((item) => {
     return item.id;
@@ -148,6 +159,7 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
             style={styles.searchInput}
             keyboardAppearance="dark"
             clearButtonMode="while-editing"
+            onChangeText={handleSearch}
           />
         </View>
 

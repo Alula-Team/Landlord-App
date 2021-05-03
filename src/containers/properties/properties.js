@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -7,16 +7,11 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  ActivityIndicator,
 } from "react-native";
 
-import filter from "lodash.filter";
+import { useForm, Controller } from "react-hook-form";
 
-const mockData = [
-  { id: "1", text: "Expo " },
-  { id: "2", text: "is " },
-  { id: "3", text: "Awesome!" },
-];
+import filter from "lodash.filter";
 
 import { Badge, Header, Icon } from "react-native-elements";
 
@@ -36,95 +31,201 @@ import { connect } from "react-redux";
 // Working Search Feature
 // New properties auto sorted in alpha numeric order
 
-const Properties = () => {
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState([]);
-  const [page, setPage] = useState(1);
-  const [seed, setSeed] = useState(1);
-  const [error, setError] = useState(null);
+const Properties = ({ stateProperties }) => {
+  const navigation = useNavigation();
 
-  useEffect(() => {
-    makeRemoteRequest();
-  });
+  const {
+    control,
+    formState: { isDirty },
+  } = useForm();
 
-  const makeRemoteRequest = () => {
-    const url = `https://randomuser.me/api/?seed=1&page=1&results=20`;
-    setLoading(true);
+  const [data, setData] = useState(stateProperties);
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => {
-        setData(page === 1 ? res.results : [...data, ...res.results]);
-        setError(res.error || null);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
+  const resultsArray = stateProperties;
+
+  const handleSearch = (text) => {
+    const newData = resultsArray.filter((item) => {
+      const itemData = `${item.address.toUpperCase()} ${item.city.toUpperCase()}`;
+      const textData = text.toUpperCase();
+      return itemData.indexOf(textData) > -1;
+    });
+    setData(newData);
   };
 
-  const renderFooter = () => {
-    if (!loading) return null;
-
+  function Occupied(props) {
     return (
-      <View
-        style={{
-          paddingVertical: 20,
-          borderTopWidth: 1,
-          borderColor: "#CED0CE",
-        }}
-      >
-        <ActivityIndicator animating size="large" />
-      </View>
+      <Text style={{ color: "#5CB85C", fontWeight: "700" }}>Occupied</Text>
     );
-  };
+  }
+  function Vacant(props) {
+    return <Text style={{ color: "#D9534F", fontWeight: "700" }}>Vacant</Text>;
+  }
+  function Status(props) {
+    const vacant = props.vacant;
+    if (vacant) {
+      return <Vacant />;
+    } else {
+      return <Occupied />;
+    }
+  }
 
+  // Separator
   const renderSeparator = () => {
     return (
       <View
         style={{
-          height: 1,
-          width: "86%",
-          backgroundColor: "#CED0CE",
+          height: 0.5,
+          //   width: '86%',
+          backgroundColor: "#CED0CE50",
           marginLeft: "5%",
+          marginRight: "5%",
         }}
       />
     );
   };
 
+  // Empty List Content
+  const EmptyListMessage = () => {
+    return (
+      <View style={styles.emptyList}>
+        <Image
+          source={require("../../assets/emptyPropList.png")}
+          style={styles.img}
+        />
+        <Text
+          style={{
+            color: "#fff",
+            marginHorizontal: 35,
+            alignSelf: "center",
+            fontSize: 18,
+          }}
+        >
+          Hmm... There is nothing here... Let's add your first property! Use the
+          '+' symbol at the top to get started.
+        </Text>
+      </View>
+    );
+  };
+
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingHorizontal: 20,
-        paddingVertical: 20,
-        marginTop: 40,
-      }}
-    >
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => alert("Item pressed!")}>
-            <View
-              style={{
-                flexDirection: "row",
-                padding: 16,
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ fontSize: 22 }}>
-                {item.name.first} - {item.name.last}
-              </Text>
+    <>
+      <View style={styles.container}>
+        {/* Header */}
+        <Header
+          placement={"left"}
+          centerComponent={{
+            text: "Properties",
+            style: {
+              color: "#fff",
+              fontWeight: "bold",
+              fontSize: 25,
+              paddingTop: 30,
+            },
+          }}
+          rightComponent={
+            <>
+              <Icon
+                name="plus"
+                type="feather"
+                color="#fff"
+                size={25}
+                iconStyle={{
+                  paddingTop: 30,
+                  paddingRight: 20,
+                  paddingBottom: 10,
+                }}
+                onPress={() => navigation.navigate("AddProperty")}
+              />
+            </>
+          }
+          containerStyle={{
+            backgroundColor: "#09061C",
+            justifyContent: "space-around",
+            borderBottomWidth: 0,
+          }}
+        />
+
+        {/* Search Bar */}
+        <Controller
+          control={control}
+          render={() => (
+            <View style={styles.searchContainer}>
+              <Feather
+                name="search"
+                color="#fff"
+                size={20}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                type="search"
+                placeholder="Search Properties"
+                placeholderTextColor="#ffffff75"
+                style={styles.searchInput}
+                keyboardAppearance="dark"
+                clearButtonMode="while-editing"
+                onChangeText={handleSearch}
+              />
             </View>
-          </TouchableOpacity>
+          )}
+          name="search"
+        />
+        {isDirty.search && (
+          <Text style={{ color: "red" }}>
+            This field is dry clean only. Which means, it's dirty.
+          </Text>
         )}
-        keyExtractor={(item) => item.email}
-        ItemSeparatorComponent={renderSeparator}
-        ListFooterComponent={renderFooter}
-      />
-    </View>
+
+        {/* Properties Flat List */}
+        <SafeAreaView>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.listCell}
+                onPress={() =>
+                  navigation.navigate("PropertyDetail", {
+                    itemID: item.id,
+                    itemAddress: item.address,
+                    itemUnit: item.unit,
+                    itemCity: item.city,
+                    itemState: item.state,
+                    itemZip: item.zip,
+                  })
+                }
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <Feather name="map-pin" color="#fff" size={20} />
+                  <View>
+                    <Text style={styles.listItem}>
+                      {item.address} {item.unit}
+                    </Text>
+                    <Text style={styles.status}>
+                      Status: <Status vacant={item.vacant} />
+                    </Text>
+                  </View>
+                </View>
+                <Feather
+                  name="arrow-right"
+                  color="#fff"
+                  size={20}
+                  style={styles.arrow}
+                />
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={{ paddingBottom: 350 }}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={renderSeparator}
+            ListEmptyComponent={EmptyListMessage}
+          />
+        </SafeAreaView>
+      </View>
+    </>
   );
 };
 
-export default Properties;
+const mapStateToProps = (state) => {
+  return { stateProperties: state.properties.properties };
+};
+
+export default connect(mapStateToProps)(Properties);
