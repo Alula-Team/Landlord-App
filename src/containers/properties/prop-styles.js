@@ -95,7 +95,8 @@ const styles = StyleSheet.create({
     addButton: {
         flexDirection: 'row',
         marginLeft: 20,
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 10
     },
     addButtonText: {
         fontSize: 16,
