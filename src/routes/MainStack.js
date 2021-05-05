@@ -39,7 +39,6 @@ const RootNavigation = (props) => {
                             />
                         )
                     }}
-                    
                 />
                 <Tab.Screen 
                     name={'Transactions'}

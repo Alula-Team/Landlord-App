@@ -8,6 +8,7 @@ import Settings from '../../containers/settings/settings';
 import UpdateProfile from '../../containers/settings/updateProfile';
 import UpdatePassword from '../../containers/settings/updatePassword';
 import UpdatePayment from '../../containers/settings/updatePayment';
+import About from '../../containers/settings/about';
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ const PropertiesNavigation = (props) => {
                 <Stack.Screen name='UpdateProfile' component={UpdateProfile}  options={{ headerShown: false }} />
                 <Stack.Screen name='UpdatePassword' component={UpdatePassword}  options={{ headerShown: false }} />
                 <Stack.Screen name='UpdatePayment' component={UpdatePayment}  options={{ headerShown: false }} />
+                <Stack.Screen name='About' component={About}  options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );
