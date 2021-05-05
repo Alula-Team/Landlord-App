@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -21,24 +21,21 @@ import styles from './auth-styles';
 const RegisterScreen = (props) => {
 
     const navigation = useNavigation();
-
-    const { control, handleSubmit, formState: { errors }, watch } = useForm();
-
-    const password = useRef({});
-    password.current = watch('password', '');
+    
+    const { control, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = (data) => {
-            const { email, password } = data;
-            auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
-                .catch(function(error) {
-                    const errorCode = error.code;
-                    const errorMessage = error.message;
-                    if (errorCode == 'auth/email-already-in-use') {
-                        alert('Email already exists');
-                    } else {
-                        alert(errorMessage);
-                    }
-                });
+        const { email, password } = data;
+        auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
+            .catch(function(error) {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                if (errorCode == 'auth/email-already-in-use') {
+                    alert('Email already exists');
+                } else {
+                    alert(errorMessage);
+                }
+            });
     };
 
     return (
@@ -56,8 +53,45 @@ const RegisterScreen = (props) => {
             <Text style={styles.title}>Create Account</Text>
             <Text style={styles.subTitle}>Sign up to get started!</Text>
 
-            {/* Form */}
+            {/* Register Form */}
             <View style={styles.form}>
+                {/* USERNAME */}
+                <Controller
+                    control={control}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                        <View style={styles.authFieldContainer}>
+                            <View style={styles.emailInput}>
+                                <Feather 
+                                    name={'mail'}
+                                    size={22.5}
+                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                                />
+                                <TextInput
+                                    style={styles.email}
+                                    placeholder='First & Last Name'
+                                    placeholderTextColor='#ffffff50'
+                                    autoCapitalize='words'
+                                    autoCompleteType='off'
+                                    autoCorrect={false}
+                                    clearButtonMode={'while-editing'}
+                                    keyboardType={'default'}
+                                    keyboardAppearance='dark'
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                />
+                            </View>
+                            <View style={styles.errorMsg}>
+                                {errors.username && <Text style={styles.errorText}>Please enter your first & last name</Text>}
+                            </View>
+                        </View>
+                    )}
+                    name="username"
+                    rules={{ required: true }}
+                    defaultValue=""
+                />
+
+                {/* EMAIL */}
                 <Controller
                     control={control}
                     render={({ field: { onChange, onBlur, value } }) => (
@@ -93,6 +127,7 @@ const RegisterScreen = (props) => {
                     defaultValue=""
                 />
 
+                {/* PASSWORD */}
                 <Controller
                     control={control}
                     render={({ field: { onChange, onBlur, value } }) => (  
@@ -129,46 +164,10 @@ const RegisterScreen = (props) => {
                     defaultValue=""
                 />
 
-                <Controller
-                    control={control}
-                    render={({ field: { onChange, onBlur, value} }) => (  
-                        <View style={styles.authFieldContainer}>
-                            <View style={styles.passwordInput}>
-                                <Feather 
-                                    name={'lock'}
-                                    size={22.5}
-                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                                />
-                                <TextInput
-                                    style={styles.password}
-                                    placeholder='Confirm Password'
-                                    placeholderTextColor='#ffffff50'
-                                    secureTextEntry={true}
-                                    autoCapitalize='none'
-                                    autoCompleteType='password'
-                                    autoCorrect={false}
-                                    clearButtonMode={'while-editing'}
-                                    returnKeyType={'done'}
-                                    keyboardAppearance='dark'
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                />
-                            </View>
-                            <View style={styles.errorMsg}>
-                                {errors.passwordConf && <Text style={styles.errorText}>{errors.passwordConf.message}</Text>}
-                            </View>
-                        </View>
-                    )}
-                    name="passwordConf"
-                    rules={{ required: true, validate: (value) => value === password.current || 'The passwords does not match', }}
-                    defaultValue=""
-                />
-
-                {/* Sign In Button */}
+                {/* Next Button */}
                 <TouchableOpacity 
                     style={styles.continueButton}
-                    onPress={handleSubmit(onSubmit)}
+                    onPress={() => handleSubmit(onSubmit)}
                 >
                     <Text style={styles.submitText}>Sign Up</Text>
                 </TouchableOpacity>
@@ -179,7 +178,7 @@ const RegisterScreen = (props) => {
                 </Text>
             </View>
 
-            {/* Register Button */}
+            {/* Login Button */}
             <TouchableOpacity 
                 style={styles.otherAuthButton}
                 onPress={() => navigation.navigate('Login')}

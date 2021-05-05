@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 
 // Firebase
@@ -96,7 +96,7 @@ const Settings = () => {
                     </TouchableOpacity>
 
                     {/* About Button */}
-                    <TouchableOpacity style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('About')}>
                         <View style={{flexDirection: 'row'}}>
                             <Feather name='alert-circle' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>About</Text>

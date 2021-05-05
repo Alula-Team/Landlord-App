@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
+  KeyboardAvoidingView
 } from "react-native";
 
 // Forms
@@ -25,7 +26,6 @@ import styles from "./prop-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 import { doDeleteProperty } from "../../redux/actions";
-import { KeyboardAvoidingView } from "react-native";
 
 // What I need:
 // State
