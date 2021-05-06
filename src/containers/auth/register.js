@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import firebase from 'firebase';
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -24,9 +25,16 @@ const RegisterScreen = (props) => {
     
     const { control, handleSubmit, formState: { errors } } = useForm();
 
+    const user = firebase.auth().currentUser;
+
     const onSubmit = (data) => {
-        const { email, password } = data;
+        const { username, email, password } = data;
         auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
+            .then(({username}) => {
+                user.updateProfile({
+                    displayName: ''
+                })
+            })
             .catch(function(error) {
                 const errorCode = error.code;
                 const errorMessage = error.message;
@@ -62,13 +70,13 @@ const RegisterScreen = (props) => {
                         <View style={styles.authFieldContainer}>
                             <View style={styles.emailInput}>
                                 <Feather 
-                                    name={'mail'}
+                                    name={'user'}
                                     size={22.5}
                                     style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
                                 />
                                 <TextInput
                                     style={styles.email}
-                                    placeholder='First & Last Name'
+                                    placeholder='Company or Landlord Name'
                                     placeholderTextColor='#ffffff50'
                                     autoCapitalize='words'
                                     autoCompleteType='off'
@@ -82,13 +90,13 @@ const RegisterScreen = (props) => {
                                 />
                             </View>
                             <View style={styles.errorMsg}>
-                                {errors.username && <Text style={styles.errorText}>Please enter your first & last name</Text>}
+                                {errors.username && <Text style={styles.errorText}>Please enter your company name or user name</Text>}
                             </View>
                         </View>
                     )}
                     name="username"
                     rules={{ required: true }}
-                    defaultValue=""
+                    defaultValue=''
                 />
 
                 {/* EMAIL */}
@@ -164,10 +172,10 @@ const RegisterScreen = (props) => {
                     defaultValue=""
                 />
 
-                {/* Next Button */}
+                {/* Sign Up Button */}
                 <TouchableOpacity 
                     style={styles.continueButton}
-                    onPress={() => handleSubmit(onSubmit)}
+                    onPress={handleSubmit(onSubmit)}
                 >
                     <Text style={styles.submitText}>Sign Up</Text>
                 </TouchableOpacity>

@@ -11,6 +11,9 @@ import { useNavigation } from '@react-navigation/native';
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';
 
+// Firebase
+import firebase from '../../firebase/firebase';
+
 // Style Sheet
 import styles from './sett-styles';
 
@@ -19,6 +22,11 @@ const UpdateProfile = () => {
     const navigation = useNavigation();
 
     const { control, handleSubmit } = useForm();
+
+
+    // const onSubmit = () => {
+
+    // }
 
     return (
         <>
@@ -64,7 +72,7 @@ const UpdateProfile = () => {
                             <View style={styles.buttonContainer}>
                                 <TextInput
                                     type="text"
-                                    placeholder="Enter Full Name"
+                                    placeholder="Enter Company or Landlord Name"
                                     placeholderTextColor="#ffffff80"
                                     style={styles.formInput}
                                     autoCapitalize='words'
