@@ -8,6 +8,10 @@ import { useForm, Controller } from "react-hook-form";
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
+// Firebase
+import { auth } from '../../firebase/firebase';
+import firebase from 'firebase';
+
 // Style Sheet
 import styles from './sett-styles';
 
@@ -16,6 +20,12 @@ const UpdateProfile = () => {
     const navigation = useNavigation();
 
     const { control, handleSubmit } = useForm();
+
+    const onSubmit = () => {
+        // Update Password
+        
+        // Confirm Password
+    }
 
     return (
         <>
@@ -57,7 +67,7 @@ const UpdateProfile = () => {
                     {/* Password */}
                     <Controller
                         control={control}
-                        render={({ onChange, value }) => (
+                        render={({ field: { onChange, onBlur, value } }) => (
                             <View style={styles.buttonContainer}>
                                 <TextInput
                                     type="text"
@@ -68,12 +78,13 @@ const UpdateProfile = () => {
                                     autocomplete='off'
                                     keyboardAppearance="dark"
                                     secureTextEntry={true}
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
                                     value={value}
                                 />
                             </View>
                         )}
-                        name="password"
+                        name="newPassword"
                         rules={{ required: true }}
                         defaultValue=""
                     />
@@ -81,7 +92,7 @@ const UpdateProfile = () => {
                     {/* Confirm Password */}
                     <Controller
                         control={control}
-                        render={({ onChange, value }) => (
+                        render={({ field: { onChange, onBlur, value } }) => (
                             <View style={styles.buttonContainer}>
                                 <TextInput 
                                     type='text'
@@ -92,18 +103,19 @@ const UpdateProfile = () => {
                                     autocomplete='off'
                                     keyboardAppearance='dark'
                                     secureTextEntry={true}
-                                    onChangeText={value => onChange(value)}
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
                                     value={value}
                                 />
                             </View>
                         )}
-                        name="confirm-password"
+                        name="confirm-newPassword"
                         rules={{ required: true }}
                         defaultValue=""
                     />
 
-                    {/* Conintue Button */}
-                    <TouchableOpacity style={styles.continueButton}>
+                    {/* Save Button */}
+                    <TouchableOpacity style={styles.continueButton} onPress={handleSubmit(onSubmit)}>
                         <Text style={styles.continueButtonText}>Save</Text>
                     </TouchableOpacity>
                 </ScrollView>

@@ -52,7 +52,8 @@ const Settings = () => {
                 <ScrollView style={{marginTop: 20}}>
                     {/* Profile View */}
                     <View style={{backgroundColor: '#5858FB', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
-                        <Text style={{color: '#fff', fontSize: 20, fontWeight: '600'}}>Kane Toomer</Text>
+                        <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Current User</Text>
+                        <Text style={{color: '#fff', fontSize: 20, fontWeight: '600', marginTop: 20}}>Kane Toomer</Text>
                         <Text style={{color: '#fff', fontSize: 15, marginTop: 5}}>kane@alulapm.com</Text>
                     </View>
 

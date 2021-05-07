@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import firebase from 'firebase';
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -14,7 +13,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 
 // Firebase
-import { auth } from '../../firebase/firebase';
+import { auth, firebase } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './auth-styles';
@@ -30,7 +29,7 @@ const RegisterScreen = (props) => {
     const onSubmit = (data) => {
         const { username, email, password } = data;
         auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
-            .then(({username}) => {
+            .then(() => {
                 user.updateProfile({
                     displayName: ''
                 })

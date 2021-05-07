@@ -12,7 +12,8 @@ import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Firebase
-import firebase from '../../firebase/firebase';
+import { auth } from '../../firebase/firebase';
+import firebase from 'firebase';
 
 // Style Sheet
 import styles from './sett-styles';
@@ -23,10 +24,13 @@ const UpdateProfile = () => {
 
     const { control, handleSubmit } = useForm();
 
+    const onSubmit = () => {
+        
+        // Update Display Name
+        
 
-    // const onSubmit = () => {
-
-    // }
+        // Update Email
+    }
 
     return (
         <>
@@ -68,7 +72,7 @@ const UpdateProfile = () => {
                     {/* Full Name */}
                     <Controller
                         control={control}
-                        render={({ onChange, value }) => (
+                        render={({ field: { onChange, onBlur, value } }) => (
                             <View style={styles.buttonContainer}>
                                 <TextInput
                                     type="text"
@@ -77,7 +81,8 @@ const UpdateProfile = () => {
                                     style={styles.formInput}
                                     autoCapitalize='words'
                                     keyboardAppearance="dark"
-                                    onChangeText={(value) => onChange(value)}
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
                                     value={value}
                                 />
                             </View>
@@ -90,7 +95,7 @@ const UpdateProfile = () => {
                     {/* Email Address */}
                     <Controller
                         control={control}
-                        render={({ onChange, value }) => (
+                        render={({ field: { onChange, onBlur, value } }) => (
                             <View style={styles.buttonContainer}>
                                 <TextInput 
                                     type='text'
@@ -101,34 +106,13 @@ const UpdateProfile = () => {
                                     autocomplete='off'
                                     keyboardAppearance='dark'
                                     keyboardType='email-address'
-                                    onChangeText={value => onChange(value)}
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
                                     value={value}
                                 />
                             </View>
                         )}
-                        name="email"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    />
-
-                    {/* Phone Number*/}
-                    <Controller
-                        control={control}
-                        render={({ onChange, value }) => (
-                            <View style={styles.buttonContainer}>
-                                <TextInput 
-                                    type='text'
-                                    placeholder='Enter Phone Number'
-                                    placeholderTextColor='#ffffff80'
-                                    style={styles.formInput}
-                                    keyboardAppearance='dark'
-                                    keyboardType='phone-pad'
-                                    onChangeText={value => onChange(value)}
-                                    value={value}
-                                />
-                            </View>
-                        )}
-                        name="phoneNumber"
+                        name="newEmail"
                         rules={{ required: true }}
                         defaultValue=""
                     />
