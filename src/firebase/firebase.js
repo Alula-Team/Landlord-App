@@ -1,25 +1,68 @@
 import * as firebase from 'firebase';
-import 'firebase/auth';
 import "firebase/firestore";
 
 import firebaseConfig from './firebaseConfig';
 
 // Initialize Firebase App
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export const auth = firebase.auth();
+// ***** SIGN UP ***** //
+export async function registration(email, password, username) {
+  try {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email.trim().toLowerCase(), password);
 
-export const loginWithEmail = (email, password) =>
-  auth.signInWithEmailAndPassword(email, password);
+    const currentUser = firebase.auth().currentUser;
 
-export const registerWithEmail = (email, password) =>
-  auth.createUserWithEmailAndPassword(email, password);
+    const db = firebase.firestore();
+    db.collection("users")
+      .doc(currentUser.uid)
+      .set({
+        email: currentUser.email,
+        username: username,
+      });
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/email-already-in-use') {
+        alert('Email already exists');
+    } else {
+        alert(errorMessage);
+    }
+  }
+}
+// ***** END SIGN UP ***** //
 
-export const logout = () => auth.signOut();
+// ***** SIGN IN *****//
+export async function signIn(email, password) {
+  try {
+   await firebase
+      .auth()
+      .signInWithEmailAndPassword(email.trim().toLowerCase(), password);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/invalid-email' && 'auth/invalid-password') {
+      alert('Email or password is not vaild. Please try again.');
+    } else {
+        alert(errorMessage);
+    }
+  }
+}
+// ***** END SIGN IN *****//
 
-export const passwordReset = email => auth.sendPasswordResetEmail(email);
+// ***** SIGN OUT ***** //
+export async function loggingOut() {
+  try {
+    await firebase.auth().signOut();
+  } catch (error) {
 
-export const db = firebase.firestore(); 
+  }
+}
+// ***** ENG SIGN OUT ***** //
+
+// ***** Password Reset ***** //
+// ***** END Password Reset ***** //

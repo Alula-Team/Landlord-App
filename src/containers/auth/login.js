@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -9,24 +9,23 @@ import { useForm, Controller } from "react-hook-form";
 // Icons
 import Feather from 'react-native-vector-icons/Feather';
 
-// Navigation
-import { useNavigation } from '@react-navigation/native';
-
 // Firebase
-import { auth } from '../../firebase/firebase';
+import { signIn } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './auth-styles';
 
-const LoginScreen = (props) => {
-
-    const navigation = useNavigation();
+const LoginScreen = ({ navigation }) => {
 
     const { control, handleSubmit, formState: { errors } } = useForm();
 
-    const onSubmit = (data) => {
-        const { email, password } = data;
-        auth.signInWithEmailAndPassword(email.trim().toLowerCase(), password);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const onSubmit = () => {
+        signIn(email, password);
+        setEmail('');
+        setPassword('');
     }
 
     return (

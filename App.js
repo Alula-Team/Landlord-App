@@ -13,7 +13,6 @@ import rootReducer from "./src/redux/reducers";
 
 // Firebase
 import firebase from 'firebase';
-// import { auth } from './src/firebase/firebase';
 
 const store = createStore(
   rootReducer,

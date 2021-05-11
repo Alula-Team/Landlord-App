@@ -11,6 +11,8 @@ import { useNavigation } from '@react-navigation/native';
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';
 
+import { loggingOut } from '../../firebase/firebase';
+
 // Style Sheet
 import styles from './sett-styles';
 
@@ -21,7 +23,7 @@ const Settings = () => {
     // Sign Out
     async function handleSignOut() {
         try {
-          await logout();
+          await loggingOut();
         } catch (error) {
           console.log(error);
         }

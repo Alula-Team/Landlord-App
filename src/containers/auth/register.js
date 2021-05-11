@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import firebase from 'firebase';
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -9,41 +10,35 @@ import { useForm, Controller } from "react-hook-form";
 // Icons
 import Feather from 'react-native-vector-icons/Feather';
 
-// Navigation
-import { useNavigation } from '@react-navigation/native';
-
 // Firebase
-import { auth, firebase } from '../../firebase/firebase';
+import { registration } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './auth-styles';
 
-const RegisterScreen = (props) => {
+const RegisterScreen = ({ navigation }) => {
 
-    const navigation = useNavigation();
-    
     const { control, handleSubmit, formState: { errors } } = useForm();
 
-    const user = firebase.auth().currentUser;
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const onSubmit = (data) => {
-        const { username, email, password } = data;
-        auth.createUserWithEmailAndPassword(email.trim().toLowerCase(), password)
-            .then(() => {
-                user.updateProfile({
-                    displayName: ''
-                })
-            })
-            .catch(function(error) {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                if (errorCode == 'auth/email-already-in-use') {
-                    alert('Email already exists');
-                } else {
-                    alert(errorMessage);
-                }
-            });
+    const emptyState = () => {
+        setUsername('');
+        setEmail('');
+        setPassword('');
     };
+
+    const onSubmit = () => {
+        registration(
+            email,
+            password,
+            username
+          );
+        // navigation.navigate('');
+        emptyState();
+    }
 
     return (
         <KeyboardAwareScrollView style={styles.container}>
