@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
@@ -18,8 +18,13 @@ import styles from "./prop-styles";
 import { connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
 
-const AddProperty = ({ addProperty }) => {
-  const navigation = useNavigation();
+const AddProperty = ({ addProperty, navigation }) => {
+
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [zip, setZip] = useState('');
+  const [unit, setUnit] = useState('');
 
   const {
     control,
@@ -32,9 +37,24 @@ const AddProperty = ({ addProperty }) => {
     name: "units",
   });
 
-  const onSubmit = (data) => {
-    addProperty(data);
+  const emptyState = () => {
+    setAddress('');
+    setCity('');
+    setState('');
+    setZip('');
+    setUnit('');
+  };
+
+  const onSubmit = () => {
+    addProperty(
+      address,
+      city,
+      state,
+      zip,
+      unit
+    );
     navigation.goBack();
+    emptyState();
   };
 
   // For Picker Select

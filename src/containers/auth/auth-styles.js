@@ -209,11 +209,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#09061C',
         height: '100%'
     },
-    splashImg: {
-        width: 200,
-        height: 200,
-        alignSelf: 'center'
-    },
 });
 
 export default styles;

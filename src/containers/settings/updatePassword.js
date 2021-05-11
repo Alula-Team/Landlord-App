@@ -64,6 +64,30 @@ const UpdateProfile = () => {
 
                 {/* Edit Profile Form */}
                 <ScrollView style={{marginTop: 20}}>
+                    {/* Current Password */}
+                    <Controller
+                        control={control}
+                        render={({ field: { onChange, onBlur, value } }) => (
+                            <View style={styles.buttonContainer}>
+                                <TextInput
+                                    type="text"
+                                    placeholder="Current Password"
+                                    placeholderTextColor="#ffffff80"
+                                    style={styles.formInput}
+                                    autoCapitalize='none'
+                                    autocomplete='off'
+                                    keyboardAppearance="dark"
+                                    secureTextEntry={true}
+                                    onChangeText={onChange}
+                                    onBlur={onBlur}
+                                    value={value}
+                                />
+                            </View>
+                        )}
+                        name="password"
+                        rules={{ required: true }}
+                        defaultValue=""
+                    />
                     {/* Password */}
                     <Controller
                         control={control}
@@ -71,7 +95,7 @@ const UpdateProfile = () => {
                             <View style={styles.buttonContainer}>
                                 <TextInput
                                     type="text"
-                                    placeholder="Password"
+                                    placeholder="New Password"
                                     placeholderTextColor="#ffffff80"
                                     style={styles.formInput}
                                     autoCapitalize='none'
