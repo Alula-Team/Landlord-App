@@ -174,7 +174,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 
   return (
     <>
-      <View style={styles.container}>
+      <View>
         {/* Header */}
         <Header
           centerComponent={{

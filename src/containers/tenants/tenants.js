@@ -98,7 +98,7 @@ const Tenants = ({ stateTenants }) => {
 
   return (
     <>
-      <View style={styles.container}>
+      <View>
         {/* Header */}
         <Header
           placement={"left"}

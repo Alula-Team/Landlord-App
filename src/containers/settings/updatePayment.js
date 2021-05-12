@@ -21,7 +21,7 @@ const UpdatePayment = () => {
 
     return (
         <>
-            <View style={styles.container}>
+            <View>
                 {/* Header */}
                 <Header
                     centerComponent={

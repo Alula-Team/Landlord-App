@@ -27,7 +27,7 @@ const Dashboard = () => {
     
     return(
         <>
-            <View style={styles.container}>
+            <View>
                 {/* Header */}
                 <Header placement={'left'}
                     centerComponent={{ 

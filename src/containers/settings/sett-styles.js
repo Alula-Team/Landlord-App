@@ -1,11 +1,6 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    // Body
-    container: {
-        backgroundColor: '#09061C',
-        height: '100%',
-    },
 
     // Forms
     buttonContainer: {

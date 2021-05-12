@@ -42,7 +42,7 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAwareScrollView style={styles.container}>
+        <KeyboardAwareScrollView>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}

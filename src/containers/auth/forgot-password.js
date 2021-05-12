@@ -26,7 +26,7 @@ const ForgotPasswordScreen = (props) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View>
             {/* Navbar */}
             <Header
                 backgroundColor={'transparent'}

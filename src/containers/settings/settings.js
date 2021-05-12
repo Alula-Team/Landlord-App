@@ -31,7 +31,7 @@ const Settings = () => {
     
     return (
         <>
-            <View style={styles.container}>
+            <View>
                 {/* Header */}
                 <Header 
                     placement={'left'}

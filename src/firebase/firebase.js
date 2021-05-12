@@ -79,11 +79,11 @@ export async function addProperty(address, city, state, zip, unit) {
 
 
 // ***** ADD TRANSACTIONS ***** //
-export async function addTransaction() {
+export async function addTransaction(payment, transactionCategory, address, paymentMethod, amount, date) {
   try{
     const currentUser = firebase.auth().currentUser;
 
-    const db = firebase.firestore(payment, transactionCategory, address, paymentMethod, amount, date);
+    const db = firebase.firestore();
     db.collection('transactions')
       .doc(currentUser.uid)
       .set({
@@ -102,11 +102,11 @@ export async function addTransaction() {
 
 
 // ***** ADD TENANTS ***** //
-export async function addTenant() {
+export async function addTenant(tenant, address, email, archived, rentDue, rentalRate, securityDeposit, lease) {
   try{
     const currentUser = firebase.auth().currentUser;
 
-    const db = firebase.firestore(tenant, address, email, archived, rentDue, rentalRate, securityDeposit, lease);
+    const db = firebase.firestore();
     db.collection('tenants')
       .doc(currentUser.uid)
       .set({
@@ -126,16 +126,22 @@ export async function addTenant() {
 // ***** END ADD TENANTS ***** //
 
 
+// ***** NOTIFICATIONS ***** //
+// ***** END NOTIFICATIONS ***** //
+
+
 // ***** UPDATE PROFILE ***** //
 // ***** END UPDATE PROFILE ***** //
 
+// ***** UPDATE PASSWORD ***** //
+// ***** END UPDATE PASSWORD ***** //
 
 // ***** UPDATE PAYMENT INFO ***** //
 // ***** END UPDATE PAYMENT INFO ***** //
 
 
-// ***** Password Reset ***** //
-// ***** END Password Reset ***** //
+// ***** PASSWORD RESET ***** //
+// ***** END PASSWORD RESET ***** //
 
 
 // ***** SIGN OUT ***** //

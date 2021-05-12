@@ -97,7 +97,7 @@ const AddProperty = ({ addProperty, navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View>
       {/* Header */}
       <Header
         centerComponent={{

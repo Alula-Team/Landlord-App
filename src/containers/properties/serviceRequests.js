@@ -94,7 +94,7 @@ const ServiceRequests = () => {
 
 
     return (
-        <View style={styles.container}>
+        <View>
             {/* Header */}
             <Header 
                 centerComponent={{ 
