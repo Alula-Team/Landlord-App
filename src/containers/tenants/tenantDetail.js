@@ -49,7 +49,7 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
 
   return (
     <>
-      <View>
+      <View style={styles.container}>
         {/* Header */}
         <Header
           centerComponent={{

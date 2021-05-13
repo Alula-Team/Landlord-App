@@ -4,9 +4,6 @@ import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import firebase from 'firebase';
 
-// Forms
-import { useForm, Controller } from "react-hook-form";
-
 // Icons
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -17,8 +14,6 @@ import { registration } from '../../firebase/firebase';
 import styles from './auth-styles';
 
 const RegisterScreen = ({ navigation }) => {
-
-    const { control, handleSubmit, formState: { errors } } = useForm();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -31,18 +26,13 @@ const RegisterScreen = ({ navigation }) => {
     };
 
     const onSubmit = () => {
-        <ActivityIndicator animating={true} size="large" color="#fff" />
-        registration(
-            email,
-            password,
-            username
-          );
-          navigation.navigate('Loading');
+        registration( email, password, username );
+        navigation.navigate('Loading');
         emptyState();
     }
 
     return (
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView style={styles.container}>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}
@@ -81,9 +71,6 @@ const RegisterScreen = ({ navigation }) => {
                             value={username}
                         />
                     </View>
-                    <View style={styles.errorMsg}>
-                        {errors.username && <Text style={styles.errorText}>Please enter your company name or user name</Text>}
-                    </View>
                 </View>
                     
 
@@ -109,9 +96,6 @@ const RegisterScreen = ({ navigation }) => {
                             onChangeText={(email) => setEmail(email)}
                             value={email}
                         />
-                    </View>
-                    <View style={styles.errorMsg}>
-                        {errors.email && <Text style={styles.errorText}>Please enter a valid email address</Text>}
                     </View>
                 </View>
                     
@@ -140,15 +124,12 @@ const RegisterScreen = ({ navigation }) => {
                             value={password}
                         />
                     </View>
-                    <View style={styles.errorMsg}>
-                        {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
-                    </View>
                 </View>
 
                 {/* Sign Up Button */}
                 <TouchableOpacity 
                     style={styles.continueButton}
-                    onPress={handleSubmit(onSubmit)}
+                    onPress={onSubmit}
                 >
                     <Text style={styles.submitText}>Sign Up</Text>
                 </TouchableOpacity>

@@ -8,7 +8,7 @@ const Notifications = () => {
 
     return(
         <>
-            <View>
+            <View style={styles.container}>
 
             </View>
         </>

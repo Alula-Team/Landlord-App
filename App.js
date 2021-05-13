@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import {StyleSheet} from 'react-native';
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -39,7 +38,7 @@ export default function App() {
     });
   }
   return (
-    <Provider store={store} style={styles.container}>
+    <Provider store={store}>
       <NavigationContainer>
         {signedIn
             ? (
@@ -52,12 +51,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    container: {
-      height: '100%',
-      backgroundColor: '#09061C'
-  },
-  }
-})

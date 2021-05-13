@@ -109,7 +109,7 @@ const Properties = ({ stateProperties }) => {
 
   return (
     <>
-      <View>
+      <View style={styles.container}>
         {/* Header */}
         <Header
           placement={"left"}

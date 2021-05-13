@@ -1,6 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+    container: {
+        height: '100%',
+        backgroundColor: '#09061C'
+    },
     headerText: {
         textAlign: 'center',
         fontSize: 30,
@@ -201,7 +205,9 @@ const styles = StyleSheet.create({
     // Loading Screen
     splashContainer: {
         justifyContent: 'center',
-        alignContent: 'center'
+        alignContent: 'center',
+        backgroundColor: '#09061C',
+        height: '100%'
     },
 });
 

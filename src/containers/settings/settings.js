@@ -3,15 +3,13 @@ import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 
 // Firebase
-import { logout } from '../../firebase/firebase';
+import { loggingOut } from '../../firebase/firebase';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
 
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';
-
-import { loggingOut } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './sett-styles';
@@ -31,7 +29,7 @@ const Settings = () => {
     
     return (
         <>
-            <View>
+            <View style={styles.container}>
                 {/* Header */}
                 <Header 
                     placement={'left'}
@@ -60,19 +58,10 @@ const Settings = () => {
                     </View>
 
                     {/* Edit Profile Button */}
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateProfile')}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('EditProfile')}>
                         <View style={{flexDirection: 'row'}}>
                             <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                            <Text style={styles.buttonText}>Update Profile</Text>
-                        </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
-                    </TouchableOpacity>
-
-                    {/* Update Password Button */}
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePassword')}>
-                        <View style={{flexDirection: 'row'}}>
-                            <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                            <Text style={styles.buttonText}>Update Password</Text>
+                            <Text style={styles.buttonText}>Edit Profile</Text>
                         </View>
                         <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>

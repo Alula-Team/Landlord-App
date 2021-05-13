@@ -26,12 +26,11 @@ const LoginScreen = ({ navigation }) => {
         signIn(email, password);
         setEmail('');
         setPassword('');
-
         navigation.navigate('Loading');
     }
 
     return (
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView style={styles.container}>
             <Header
                 backgroundColor={'transparent'}
                 barStyle={'light-content'}

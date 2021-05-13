@@ -8,7 +8,7 @@ const ServiceRequests = () => {
 
     return(
         <>
-            <View>
+            <View style={styles.container}>
 
             </View>
         </>

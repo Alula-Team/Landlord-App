@@ -69,7 +69,7 @@ const PropertyDetail = ({ route, deleteProperty }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       {/* Header */}
       <View style={{ top: 0, left: 0, height: 100 }}>
         <TouchableOpacity style={styles.backBtn}>

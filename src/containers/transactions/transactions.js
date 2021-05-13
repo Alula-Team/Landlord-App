@@ -108,7 +108,7 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
 
   return (
     <>
-      <View>
+      <View style={styles.container}>
         {/* Header */}
         <Header
           placement={"left"}
