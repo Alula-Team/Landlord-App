@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
@@ -16,19 +16,27 @@ import styles from "./prop-styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
-import { doAddProperty } from "../../redux/actions";
+import { doAddProperty, doUpdateProperty } from "../../redux/actions";
 
-const AddProperty = ({ addProperty, navigation }) => {
+const AddEditProperty = ({ addProperty, updateProperty, route }) => {
+  const navigation = useNavigation();
+  // const {
+  //   itemID,
+  //   itemAddress,
+  //   itemUnit,
+  //   itemCity,
+  //   itemState,
+  //   itemZip,
+  // } = route.params;
+  const isAddMode = !id;
 
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
-  const [unit, setUnit] = useState('');
-
+  // useForm() hook functions
   const {
-    control,
     handleSubmit,
+    reset,
+    setValue,
+    getValues,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -37,25 +45,52 @@ const AddProperty = ({ addProperty, navigation }) => {
     name: "units",
   });
 
-  const emptyState = () => {
-    setAddress('');
-    setCity('');
-    setState('');
-    setZip('');
-    setUnit('');
+  const onSubmit = (data) => {
+    addProperty(data);
+    // return isAddMode ? addProperty(data) : updateProperty(id, data);
   };
 
-  const onSubmit = () => {
-    addProperty(
-      address,
-      city,
-      state,
-      zip,
-      unit
-    );
-    navigation.goBack();
-    emptyState();
-  };
+  // const createProperty = (data) => {
+  //   addProperty(data);
+  // return propertyService
+  //   .create(data)
+  //   .then(() => {
+  //     alertService.success("Property added!", { keepAfterRouteChange: true });
+  //     history.push(".");
+  //   })
+  //   .catch(alertService.error);
+  // };
+
+  // const updateProperty = (data) => {
+
+  // return propertyService
+  //   .update(id, data)
+  //   .then(() => {
+  //     alertService.success("Property updated!", {
+  //       keepAfterRouteChange: true,
+  //     });
+  //     history.push("..");
+  //   })
+  //   .catch(alertService.error);
+  // };
+
+  // const [property, setProperty] = useState({});
+  // const [showPassword, setShowPassword] = useState(false);
+
+  useEffect(() => {
+    if (!isAddMode) {
+      setValue("address", "123 Who Knows");
+      setValue("city", "Whoville");
+      setValue("state", "ME");
+      setValue("zipCode", "98203");
+      // get property and set form fields
+      // propertyService.getById(id).then((property) => {
+      //   const fields = ["address", "city", "state", "zipCode"];
+      //   fields.forEach((field) => setValue(field, property[field]));
+      //   setProperty(property);
+      // });
+    }
+  }, []);
 
   // For Picker Select
   // Styles
@@ -141,7 +176,7 @@ const AddProperty = ({ addProperty, navigation }) => {
       />
 
       <KeyboardAwareScrollView>
-        <Text style={styles.sectionText}>Property Address</Text>
+        <Text style={styles.sectionText}>Add/Edit Property Address</Text>
         {/* Street Address */}
         <Controller
           control={control}
@@ -371,6 +406,7 @@ const AddProperty = ({ addProperty, navigation }) => {
 
 const actions = {
   addProperty: doAddProperty,
+  updateProperty: doUpdateProperty,
 };
 
-export default connect(null, actions)(AddProperty);
+export default connect(actions)(AddEditProperty);

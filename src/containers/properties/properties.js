@@ -134,7 +134,7 @@ const Properties = ({ stateProperties }) => {
                   paddingRight: 20,
                   paddingBottom: 10,
                 }}
-                onPress={() => navigation.navigate("AddProperty")}
+                onPress={() => navigation.navigate("AddEditProperty")}
               />
             </>
           }

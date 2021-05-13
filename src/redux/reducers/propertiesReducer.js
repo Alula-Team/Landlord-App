@@ -31,7 +31,7 @@ const propertiesReducer = (state = initialState, action) => {
           address: action.payload.address,
           unit: action.payload.units[i].number,
           city: action.payload.city,
-          state: action.payload.states,
+          state: action.payload.state,
           zip: action.payload.zipCode,
           vacant: true,
         };
@@ -57,6 +57,20 @@ const propertiesReducer = (state = initialState, action) => {
         properties,
       };
     }
+  }
+  if (action.type === "UPDATE_PROPERTY") {
+    const properties = state.properties.map((item) => {
+      if (item.id !== action.id) {
+        return item;
+      }
+      return {
+        ...item,
+        ...action.payload,
+      };
+    });
+    return {
+      properties,
+    };
   }
   if (action.type === "DELETE_PROPERTY") {
     const properties = state.properties.filter(({ id }) => id !== action.id);

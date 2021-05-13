@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   TextInput,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 
 // Forms
@@ -303,7 +303,7 @@ const PropertyDetail = ({ route, deleteProperty }) => {
         </View>
 
         {/* Button Group */}
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           {/* Edit Property Button */}
           <TouchableOpacity
             style={{
@@ -314,7 +314,21 @@ const PropertyDetail = ({ route, deleteProperty }) => {
             }}
             // onPress={}
           >
-            <Text style={styles.removePropButtonText}>Edit Property</Text>
+            <Text
+              style={styles.removePropButtonText}
+              onPress={() =>
+                navigation.navigate("AddEditProperty", {
+                  itemID: item.id,
+                  itemAddress: item.address,
+                  itemUnit: item.unit,
+                  itemCity: item.city,
+                  itemState: item.state,
+                  itemZip: item.zip,
+                })
+              }
+            >
+              Edit Property
+            </Text>
           </TouchableOpacity>
 
           {/* Remove Property Button */}

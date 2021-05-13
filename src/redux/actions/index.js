@@ -14,6 +14,14 @@ export const doAddProperty = (payload) => {
   };
 };
 
+export const doUpdateProperty = (id, payload) => {
+  return {
+    type: "UPDATE_PROPERTY",
+    id,
+    payload,
+  };
+};
+
 export const doDeleteProperty = (id) => {
   return {
     type: "DELETE_PROPERTY",
