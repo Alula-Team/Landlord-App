@@ -84,6 +84,15 @@ const Settings = () => {
                         <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
+                    {/* Enable Location Button */}
+                    <TouchableOpacity style={styles.buttonContainer}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='map-pin' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Enable Location</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
+
                     {/* Generate Reports Button */}
                     <TouchableOpacity style={styles.buttonContainer}>
                         <View style={{flexDirection: 'row'}}>

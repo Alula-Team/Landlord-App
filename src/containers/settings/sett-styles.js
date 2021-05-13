@@ -23,6 +23,13 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginLeft: 10
     },
+    deleteAccountButtonText: {
+        alignSelf: 'center',
+        color: 'red',
+        fontSize: 16,
+        fontWeight: '700',
+        marginLeft: 10
+    },
     icons: {
         alignSelf: 'center'
     },
@@ -34,12 +41,6 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginBottom: 20,
         marginLeft: 30
-    },
-    logoutButton: {
-        backgroundColor: "red",
-        margin: 30,
-        padding: 15,
-        borderRadius: 10,
     },
     logoutButtonText: {
         alignSelf: 'center',

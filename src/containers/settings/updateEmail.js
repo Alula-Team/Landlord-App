@@ -15,9 +15,10 @@ const UpdateEmail = ({ navigation }) => {
     const emptyState = () => {
         setNewEmail('');
     };
+
     const onSubmit = () => {
         updateUserEmail(newEmail);
-        navigation.navigate('Settings');
+        navigation.navigate('EditProfile');
         emptyState();
     }
 
@@ -70,7 +71,7 @@ const UpdateEmail = ({ navigation }) => {
                             autocomplete='off'
                             keyboardAppearance='dark'
                             keyboardType='email-address'
-                            onChangeText={(newEmail) => setEmail(newEmail)}
+                            onChangeText={(newEmail) => setNewEmail(newEmail)}
                             value={newEmail}
                         />
                     </View>

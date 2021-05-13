@@ -17,7 +17,7 @@ const UpdateProfile = ({ navigation }) => {
     };
     const onSubmit = () => {
         updateUsername(username);
-        navigation.navigate('Settings');
+        navigation.navigate('EditProfile');
         emptyState();
     }
 
