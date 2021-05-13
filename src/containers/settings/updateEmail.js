@@ -3,20 +3,20 @@ import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-nativ
 import { Header, Icon } from 'react-native-elements';
 
 // Firebase
-import { updateUsername } from '../../firebase/firebase';
+import { updateUserEmail } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './sett-styles';
 
-const UpdateProfile = ({ navigation }) => {
+const UpdateEmail = ({ navigation }) => {
 
-    const [username, setUsername] = useState('');
+    const [newEmail, setNewEmail] = useState('');
 
     const emptyState = () => {
-        setUsername('');
+        setNewEmail('');
     };
     const onSubmit = () => {
-        updateUsername(username);
+        updateUserEmail(newEmail);
         navigation.navigate('Settings');
         emptyState();
     }
@@ -27,7 +27,7 @@ const UpdateProfile = ({ navigation }) => {
                 {/* Header */}
                 <Header
                     centerComponent={{
-                        text: "Update Username",
+                        text: "Update Email",
                         style: {
                         color: "#fff",
                         fontWeight: "bold",
@@ -59,17 +59,19 @@ const UpdateProfile = ({ navigation }) => {
                 {/* Edit Profile Form */}
                 <ScrollView style={{marginTop: 20}}>
 
-                    {/* Username */}
+                    {/* Email Address */}
                     <View style={styles.buttonContainer}>
-                        <TextInput
-                            type="text"
-                            placeholder="Enter Company or Landlord Name"
-                            placeholderTextColor="#ffffff80"
+                        <TextInput 
+                            type='text'
+                            placeholder='Enter Email'
+                            placeholderTextColor='#ffffff80'
                             style={styles.formInput}
-                            autoCapitalize='words'
-                            keyboardAppearance="dark"
-                            onChangeText={(name) => setUsername(name)}
-                            value={username}
+                            autoCapitalize='none'
+                            autocomplete='off'
+                            keyboardAppearance='dark'
+                            keyboardType='email-address'
+                            onChangeText={(newEmail) => setEmail(newEmail)}
+                            value={newEmail}
                         />
                     </View>
 
@@ -83,4 +85,4 @@ const UpdateProfile = ({ navigation }) => {
     );
 }
 
-export default UpdateProfile;
+export default UpdateEmail;

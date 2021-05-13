@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Header } from 'react-native-elements';
 
 // Firebase
-import { logout } from '../../firebase/firebase';
+import { loggingOut } from '../../firebase/firebase';
 
 // Navigation
 import { useNavigation } from '@react-navigation/native';
@@ -21,7 +21,7 @@ const Settings = () => {
     // Sign Out
     async function handleSignOut() {
         try {
-          await logout();
+          await loggingOut();
         } catch (error) {
           console.log(error);
         }
@@ -52,24 +52,16 @@ const Settings = () => {
                 <ScrollView style={{marginTop: 20}}>
                     {/* Profile View */}
                     <View style={{backgroundColor: '#5858FB', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
-                        <Text style={{color: '#fff', fontSize: 20, fontWeight: '600'}}>Kane Toomer</Text>
+                        <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Current User</Text>
+                        <Text style={{color: '#fff', fontSize: 20, fontWeight: '600', marginTop: 20}}>Kane Toomer</Text>
                         <Text style={{color: '#fff', fontSize: 15, marginTop: 5}}>kane@alulapm.com</Text>
                     </View>
 
                     {/* Edit Profile Button */}
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateProfile')}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('EditProfile')}>
                         <View style={{flexDirection: 'row'}}>
                             <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                            <Text style={styles.buttonText}>Update Profile</Text>
-                        </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
-                    </TouchableOpacity>
-
-                    {/* Update Password Button */}
-                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePassword')}>
-                        <View style={{flexDirection: 'row'}}>
-                            <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                            <Text style={styles.buttonText}>Update Password</Text>
+                            <Text style={styles.buttonText}>Edit Profile</Text>
                         </View>
                         <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -9,24 +9,24 @@ import { useForm, Controller } from "react-hook-form";
 // Icons
 import Feather from 'react-native-vector-icons/Feather';
 
-// Navigation
-import { useNavigation } from '@react-navigation/native';
-
 // Firebase
-import { auth } from '../../firebase/firebase';
+import { signIn } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './auth-styles';
 
-const LoginScreen = (props) => {
+const LoginScreen = ({ navigation }) => {
 
-    const navigation = useNavigation();
+    // const { control, handleSubmit, formState: { errors } } = useForm();
 
-    const { control, handleSubmit, formState: { errors } } = useForm();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-    const onSubmit = (data) => {
-        const { email, password } = data;
-        auth.signInWithEmailAndPassword(email.trim().toLowerCase(), password);
+    const onSubmit = () => {
+        signIn(email, password);
+        setEmail('');
+        setPassword('');
+        navigation.navigate('Loading');
     }
 
     return (
@@ -47,76 +47,61 @@ const LoginScreen = (props) => {
             {/* Form */}
             <View style={styles.form}>
 
-                <Controller
-                    control={control}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.authFieldContainer}>
-                            <View style={styles.emailInput}>
-                                <Feather 
-                                    name={'mail'}
-                                    size={22.5}
-                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                                />
-                                <TextInput
-                                    style={styles.email}
-                                    placeholder='Email'
-                                    placeholderTextColor='#ffffff50'
-                                    autoCapitalize='none'
-                                    autoCompleteType='email'
-                                    autoCorrect={false}
-                                    clearButtonMode={'while-editing'}
-                                    keyboardType={'email-address'}
-                                    keyboardAppearance='dark'
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                />
-                            </View>
-                            <View style={styles.errorMsg}>
-                                {errors.email && <Text style={styles.errorText}>Please enter a valid email address</Text>}
-                            </View>
-                        </View>
-                    )}
-                    name="email"
-                    rules={{ required: true }}
-                    defaultValue=""
-                />
-
-                <Controller
-                    control={control}
-                    render={({ field: { onChange, onBlur, value } }) => (
-                        <View style={styles.authFieldContainer}>
-                            <View style={styles.passwordInput}>
-                                <Feather 
-                                    name={'lock'}
-                                    size={22.5}
-                                    style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
-                                />
-                                <TextInput
-                                    style={styles.password}
-                                    placeholder='Password'
-                                    placeholderTextColor='#ffffff50'
-                                    secureTextEntry={true}
-                                    autoCapitalize='none'
-                                    autoCompleteType='password'
-                                    autoCorrect={false}
-                                    clearButtonMode={'while-editing'}
-                                    returnKeyType={'done'}
-                                    keyboardAppearance='dark'
-                                    onBlur={onBlur}
-                                    onChangeText={onChange}
-                                    value={value}
-                                />
-                            </View>
-                            <View style={styles.errorMsg}>
-                                {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
-                            </View>
-                        </View>
-                    )}
-                    name="password"
-                    rules={{ required: true }}
-                    defaultValue=""
-                />
+                {/* Email */}
+                <View style={styles.authFieldContainer}>
+                    <View style={styles.emailInput}>
+                        <Feather 
+                            name={'mail'}
+                            size={22.5}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                        />
+                        <TextInput
+                            style={styles.email}
+                            placeholder='Email'
+                            placeholderTextColor='#ffffff50'
+                            autoCapitalize='none'
+                            autoCompleteType='email'
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            keyboardType={'email-address'}
+                            keyboardAppearance='dark'
+                            onChangeText={(email) => setEmail(email)}
+                            value={email}
+                        />
+                    </View>
+                    {/* <View style={styles.errorMsg}>
+                        {errors.email && <Text style={styles.errorText}>Please enter a valid email address</Text>}
+                    </View> */}
+                </View>
+            
+                {/* Password */}
+                <View style={styles.authFieldContainer}>
+                    <View style={styles.passwordInput}>
+                        <Feather 
+                            name={'lock'}
+                            size={22.5}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                        />
+                        <TextInput
+                            style={styles.password}
+                            placeholder='Password'
+                            placeholderTextColor='#ffffff50'
+                            secureTextEntry={true}
+                            autoCapitalize='none'
+                            autoCompleteType='password'
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            returnKeyType={'done'}
+                            keyboardAppearance='dark'
+                            onChangeText={(password) => setPassword(password)}
+                            value={password}
+                        />
+                    </View>
+                    {/* <View style={styles.errorMsg}>
+                        {errors.password && <Text style={styles.errorText}>Please enter a valid password.</Text>}
+                    </View> */}
+                </View>
+                    
 
                 {/* Forgot Password Button */}
                 <TouchableOpacity 
@@ -129,7 +114,7 @@ const LoginScreen = (props) => {
                 {/* Sign In Button */}
                 <TouchableOpacity 
                     style={styles.continueButton}
-                    onPress={handleSubmit(onSubmit)}
+                    onPress={onSubmit}
                 >
                     <Text style={styles.submitText}>Login</Text>
                 </TouchableOpacity>

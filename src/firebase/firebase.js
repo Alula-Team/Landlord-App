@@ -1,25 +1,240 @@
 import * as firebase from 'firebase';
-import 'firebase/auth';
 import "firebase/firestore";
 
 import firebaseConfig from './firebaseConfig';
 
 // Initialize Firebase App
-
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
 
-export const auth = firebase.auth();
+// ***** SIGN UP ***** //
+export async function registration(email, password, username) {
+  try {
+    await firebase
+      .auth()
+      .createUserWithEmailAndPassword(email.trim().toLowerCase(), password);
 
-export const loginWithEmail = (email, password) =>
-  auth.signInWithEmailAndPassword(email, password);
+    const currentUser = firebase.auth().currentUser;
 
-export const registerWithEmail = (email, password) =>
-  auth.createUserWithEmailAndPassword(email, password);
+    const db = firebase.firestore();
+    db.collection("users")
+      .doc(currentUser.uid)
+      .set({
+        email: currentUser.email,
+        username: username,
+      });
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/email-already-in-use') {
+        alert('Email already exists');
+    } else {
+        alert(errorMessage);
+    }
+  }
+}
+// ***** END SIGN UP ***** //
 
-export const logout = () => auth.signOut();
 
-export const passwordReset = email => auth.sendPasswordResetEmail(email);
+// ***** EMAIL VERIFICATION ***** //
+// ***** END EMAIL VERIFICATION ***** //
 
-export const db = firebase.firestore(); 
+
+// ***** SIGN IN *****//
+export async function signIn(email, password) {
+  try {
+   await firebase
+      .auth()
+      .signInWithEmailAndPassword(email.trim().toLowerCase(), password);
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/invalid-email' && 'auth/invalid-password') {
+      alert('Email or password is not vaild. Please try again.');
+    } else {
+        alert(errorMessage);
+    }
+  }
+}
+// ***** END SIGN IN *****//
+
+
+// ***** ADD PROPERTIES ***** //
+export async function addProperty(address, city, state, zip, unit) {
+  try{
+    const currentUser = firebase.auth().currentUser;
+
+    const db = firebase.firestore();
+    db.collection('properties')
+      .doc(currentUser.uid)
+      .set({
+        address: address,
+        city: city,
+        state: state,
+        zip: zip,
+        unit: unit
+      });
+  } catch (error) {
+
+  }
+}
+// ***** END ADD PROPERTIES ***** //
+
+
+// ***** ADD TRANSACTIONS ***** //
+export async function addTransaction(payment, transactionCategory, address, paymentMethod, amount, date) {
+  try{
+    const currentUser = firebase.auth().currentUser;
+
+    const db = firebase.firestore();
+    db.collection('transactions')
+      .doc(currentUser.uid)
+      .set({
+        payment: payment,
+        transactionCategory: transactionCategory,
+        address: address,
+        paymentMethod: paymentMethod,
+        amount: amount,
+        date: date
+      });
+  } catch (error) {
+
+  }
+}
+// ***** END ADD TRANSACTIONS ***** //
+
+
+// ***** ADD TENANTS ***** //
+export async function addTenant(tenant, address, email, archived, rentDue, rentalRate, securityDeposit, lease) {
+  try{
+    const currentUser = firebase.auth().currentUser;
+
+    const db = firebase.firestore();
+    db.collection('tenants')
+      .doc(currentUser.uid)
+      .set({
+        tenant: tenant,
+        email: email,
+        address: address,
+        archived: archived,
+        rentDue: rentDue,
+        rentalRate: rentalRate,
+        securityDeposit: securityDeposit,
+        lease: lease
+      });
+  } catch (error) {
+
+  }
+}
+// ***** END ADD TENANTS ***** //
+
+
+// ***** NOTIFICATIONS ***** //
+// ***** END NOTIFICATIONS ***** //
+
+
+// ***** UPDATE PROFILE ***** //
+export async function updateUsername(username) {
+  try {
+    const currentUser = firebase.auth().currentUser;
+    var credential;
+
+    currentUser.updateProfile({
+      username: username
+    })
+      .then(() => {
+        console.log('Username Updated');
+        currentUser.reauthenticateWithCredential(credential)
+          .then(() => {
+            console.log('User Reauthenticated');
+          })
+      });
+
+    const db = firebase.firestore();
+    db.collection("users")
+      .doc(currentUser.uid)
+      .set({
+        username: username,
+      });
+  } catch (error) {
+    const errorMessage = error.message;
+    alert(errorMessage);
+  }
+}
+// ***** END UPDATE PROFILE ***** //
+
+
+// ***** UPDATE EMAIL ***** //
+export async function updateUserEmail(newEmail) {
+  try {
+    const currentUser = firebase.auth().currentUser;
+
+    reauthenticate = (currentPassword) => {
+      var cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, currentPassword);
+      return currentUser.reauthenticateWithCredential(cred);
+    }
+
+    changeEmail = (currentPassword, newEmail) => {
+      this.reauthenticate(currentPassword)
+        .then(() => {
+          currentUser.updateEmail(newEmail).then(() => {
+            console.log("Email updated!");
+          })
+          .catch((error) => { console.log(error); });
+        })
+        .catch((error) => { console.log(error); });
+    }
+
+    const db = firebase.firestore();
+    db.collection("users")
+      .doc(currentUser.uid)
+      .set({
+        email: newEmail,
+      });
+  } catch (error) {
+    const errorMessage = error.message;
+    alert(errorMessage);
+  }
+}
+// ***** END UPDATE EMAIL ***** //
+
+
+// ***** UPDATE PASSWORD ***** //
+// ***** END UPDATE PASSWORD ***** //
+
+
+// ***** UPDATE PAYMENT INFO ***** //
+// ***** END UPDATE PAYMENT INFO ***** //
+
+
+// ***** PASSWORD RESET ***** //
+export async function handlePasswordReset(email) {
+  try {
+    await firebase
+      .auth()
+      .sendPasswordResetEmail(email.trim().toLowerCase());
+      console.log('Password reset email sent successfully');
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/user-not-found') {
+      alert('Email not found. Please sign up instead.');
+    } else {
+        alert(errorMessage);
+    }
+  }
+}
+// ***** END PASSWORD RESET ***** //
+
+
+// ***** SIGN OUT ***** //
+export async function loggingOut() {
+  try {
+    await firebase.auth().signOut();
+  } catch (error) {
+    const errorMessage = error.message;
+    alert(errorMessage);
+  }
+}
+// ***** ENG SIGN OUT ***** //
