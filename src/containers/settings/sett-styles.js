@@ -50,10 +50,11 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     formInput: {
+        flex: 1,
         color: '#fff',
         fontSize: 16,
         fontWeight: '500',
-        marginLeft: 12.5
+        marginLeft: 12.5,
     },
 
     // Update Payment Explainer
