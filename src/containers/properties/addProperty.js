@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState, useEffect } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
@@ -6,7 +6,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
-import { useNavigation } from "@react-navigation/native";
+import { addProperty, firestore } from "../../firebase/firebase";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -18,13 +18,30 @@ import styles from "./prop-styles";
 import { connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
 
-const AddProperty = ({ addProperty, navigation }) => {
+const AddProperty = ({ navigation }) => {
+  const [address, setAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [unit, setUnit] = useState("");
 
-  const [address, setAddress] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
-  const [unit, setUnit] = useState('');
+  const [property, setProperty] = useState({
+    address: "",
+    city: "",
+    state: "",
+    zip: "",
+    unit: "",
+  });
+
+  const emptyState = () => {
+    setProperty({
+      address: "",
+      city: "",
+      state: "",
+      zip: "",
+      unit: "",
+    });
+  };
 
   const {
     control,
@@ -37,25 +54,48 @@ const AddProperty = ({ addProperty, navigation }) => {
     name: "units",
   });
 
-  const emptyState = () => {
-    setAddress('');
-    setCity('');
-    setState('');
-    setZip('');
-    setUnit('');
+  const emptyStatePARTS = () => {
+    setAddress("");
+    setCity("");
+    setState("");
+    setZip("");
+    setUnit("");
   };
 
-  const onSubmit = () => {
-    addProperty(
-      address,
-      city,
-      state,
-      zip,
-      unit
-    );
-    navigation.goBack();
-    emptyState();
+  const onSubmit = async (data) => {
+    const docRef = await firestore.collection("properties").add(data);
+    const doc = await docRef.get();
+
+    const newProperty = (doc) => {
+      return { id: doc.id, ...doc.data() };
+    };
   };
+
+  // const handleCreate = async (post) => {
+  //   const docRef = await firestore.collection("posts").add(post);
+  //   const doc = await docRef.get();
+
+  //   const newPost = collectIdsAndDocs(doc);
+
+  //   setThePosts([newPost, ...thePosts]);
+  // };
+  // console.log(data);
+  // const newProperty = data.map((datum) => {
+  //   return {
+  //     address: datum.address,
+  //     city: datum.city,
+  //     state: datum.state,
+  //     zip: datum.zip,
+  //     unit: datum.unit,
+  //   };
+  // });
+  //   console.log;
+  //   setProperty(newProperty);
+
+  //   // addProperty(address, city, state, zip, unit);
+  //   navigation.goBack();
+  //   emptyState();
+  // };
 
   // For Picker Select
   // Styles
@@ -369,8 +409,8 @@ const AddProperty = ({ addProperty, navigation }) => {
   );
 };
 
-const actions = {
-  addProperty: doAddProperty,
-};
+// const actions = {
+//   addProperty: doAddProperty,
+// };
 
-export default connect(null, actions)(AddProperty);
+export default AddProperty;
