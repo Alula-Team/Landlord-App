@@ -1,5 +1,9 @@
 import * as firebase from 'firebase';
 import "firebase/firestore";
+import { Alert } from 'react-native';
+
+// Navigation
+import { useNavigation } from "@react-navigation/native";
 
 import firebaseConfig from './firebaseConfig';
 
@@ -229,10 +233,11 @@ export async function updateUserPassword(password, newPassword) {
       .then (() => {
         firebase.auth().currentUser.updatePassword(newPassword)
           .then(() => {
-            alert('Password Updated');
-          });
+            console.log('Password Updated');
+          }) 
+          .catch((error) => { alert(error); });
       });
-
+    
   } catch (error) {
     const errorMessage = error.message;
     alert(errorMessage);
@@ -255,22 +260,3 @@ export async function loggingOut() {
   }
 }
 // ***** END SIGN OUT ***** //
-
-
-// ***** DELETE ACCOUNT ***** //
-export async function deleteAccount() {
-  try {
-    const currentUser = firebase.auth().currentUser;
-    
-    
-
-    const db = firebase.firestore();
-    db.collection("users")
-      .doc(currentUser.uid)
-      .delete();
-  } catch (error) {
-    const errorMessage = error.message;
-    alert(errorMessage);
-  }
-}
-// ***** END DELETE ACCOUNT ***** //

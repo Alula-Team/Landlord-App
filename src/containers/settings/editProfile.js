@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Firebase
@@ -12,18 +12,6 @@ import Feather from 'react-native-vector-icons/Feather';
 import styles from './sett-styles';
 
 const EditProfile = ({ navigation }) => {
-
-    // async function handleDeleteAccount() {
-    //     try {
-    //       await deleteAccount();
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // }
-
-    const onSubmit = () => {
-        deleteAccount();
-    }
     
     return (
         <>
@@ -87,17 +75,6 @@ const EditProfile = ({ navigation }) => {
                         </View>
                         <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
-
-                    {/* Delete Account Button */}
-                    <View style={{marginTop: 25}}>
-                        <TouchableOpacity style={styles.buttonContainer} onPress={onSubmit}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Feather name='user-x' color='red' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
-                                <Text style={styles.deleteAccountButtonText}>Delete Account</Text>
-                            </View>
-                            <Feather name='arrow-right' color='red' size={20} style={{alignSelf: 'center', marginRight: 10}} />
-                        </TouchableOpacity>
-                    </View>
                 </ScrollView>
             </View>
         </> 
