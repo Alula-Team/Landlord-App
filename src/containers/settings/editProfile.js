@@ -13,12 +13,16 @@ import styles from './sett-styles';
 
 const EditProfile = ({ navigation }) => {
 
-    async function handleDeleteAccount() {
-        try {
-          await deleteAccount();
-        } catch (error) {
-            console.log(error);
-        }
+    // async function handleDeleteAccount() {
+    //     try {
+    //       await deleteAccount();
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
+    const onSubmit = () => {
+        deleteAccount();
     }
     
     return (
@@ -86,7 +90,7 @@ const EditProfile = ({ navigation }) => {
 
                     {/* Delete Account Button */}
                     <View style={{marginTop: 25}}>
-                        <TouchableOpacity style={styles.buttonContainer} onPress={handleDeleteAccount}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={onSubmit}>
                             <View style={{flexDirection: 'row'}}>
                                 <Feather name='user-x' color='red' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                                 <Text style={styles.deleteAccountButtonText}>Delete Account</Text>

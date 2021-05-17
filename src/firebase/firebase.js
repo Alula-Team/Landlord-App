@@ -43,24 +43,6 @@ export async function registration(email, password, username) {
 // ***** END SIGN UP ***** //
 
 
-// ***** EMAIL VERIFICATION ***** //
-export async function emailVerification(email) {
-  try {
-    const currentUser = firebase.auth().currentUser;
-
-    currentUser.sendEmailVerification()
-      .then(() => {
-        console.log('Verification Email Sent');
-      })
-
-  } catch (error) {
-    const errorMessage = error.message;
-    alert(errorMessage);
-  }
-}
-// ***** END EMAIL VERIFICATION ***** //
-
-
 // ***** SIGN IN *****//
 export async function signIn(email, password) {
   try {
@@ -205,34 +187,31 @@ export async function updateUsername(username) {
 
 
 // ***** UPDATE EMAIL ***** //
-export async function updateUserEmail(newEmail) {
+export async function updateUserEmail(email, password) {
   try {
+    var credential = firebase.auth.EmailAuthProvider.credential(firebase.auth().currentUser.email, password);
+
+    firebase.auth().currentUser.reauthenticateWithCredential(credential)
+      .then (() => {
+        firebase.auth().currentUser.updateEmail(email.trim().toLowerCase())
+          .then(() => {
+            console.log('Email Successfully Updated');
+            currentUser.sendEmailVerification()
+              .then(() => {
+                console.log('Verification Email Sent');
+              });
+          })
+      });
+
     const currentUser = firebase.auth().currentUser;
 
-    // ReAuthentication
-    reauthenticate = (currentPassword) => {
-      var cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, currentPassword);
-      return currentUser.reauthenticateWithCredential(cred);
-    }
-
-    // Update Email
-    changeEmail = (currentPassword, newEmail) => {
-      this.reauthenticate(currentPassword)
-        .then(() => {
-          currentUser.updateEmail(newEmail).then(() => {
-            console.log("Email updated!");
-          })
-          .catch((error) => { console.log(error); });
-        })
-        .catch((error) => { console.log(error); });
-    }
-    
     const db = firebase.firestore();
     db.collection("users")
       .doc(currentUser.uid)
       .update({
-        email: newEmail,
+        email: email,
       });
+
   } catch (error) {
     const errorMessage = error.message;
     alert(errorMessage);
@@ -242,35 +221,18 @@ export async function updateUserEmail(newEmail) {
 
 
 // ***** UPDATE PASSWORD ***** //
-export async function updateUserPassword(newPassword) {
+export async function updateUserPassword(password, newPassword) {
   try {
-    const currentUser = firebase.auth().currentUser;
+    var credential = firebase.auth.EmailAuthProvider.credential(firebase.auth().currentUser.email, password);
 
-    // ReAuthentication
-    reauthenticate = (currentPassword) => {
-      var cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, currentPassword);
-      return currentUser.reauthenticateWithCredential(cred);
-    }
-
-    // Update Email
-    changePassword = (currentPassword, newPassword) => {
-      this.reauthenticate(currentPassword)
-        .then(() => {
-          user.updatePassword(newPassword)
-            .then(() => {
-              console.log("Password updated!");
-            })
-            .catch((error) => { console.log(error); });
-        })
-        .catch((error) => { console.log(error); });
-    }
-    
-    const db = firebase.firestore();
-    db.collection("users")
-      .doc(currentUser.uid)
-      .update({
-        email: newEmail,
+    firebase.auth().currentUser.reauthenticateWithCredential(credential)
+      .then (() => {
+        firebase.auth().currentUser.updatePassword(newPassword)
+          .then(() => {
+            alert('Password Updated');
+          });
       });
+
   } catch (error) {
     const errorMessage = error.message;
     alert(errorMessage);

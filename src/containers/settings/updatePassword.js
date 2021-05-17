@@ -14,21 +14,22 @@ import styles from './sett-styles';
 
 const UpdateProfile = ({ navigation }) => {
 
-    // const [newPassword, setNewPassword] = useState('');
+    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     // const [confirmPassword, setConfirmPassword] = useState('');
 
     // const { control, handleSubmit } = useForm();
 
-    // const emptyState = () => {
-    //     setNewPassword('');
-    //     setConfirmPassword('');
-    // };
+    const emptyState = () => {
+        setNewPassword('');
+    };
 
-    // const onSubmit = () => {
-    //     updateUserPassword(newPassword);
-    //     navigation.navigate('EditProfile');
-    //     emptyState();
-    // }
+    const onSubmit = () => {
+        updateUserPassword(password, newPassword);
+        setPassword('');
+        emptyState();
+        navigation.navigate('EditProfile')
+    }
 
     return (
         <>
@@ -38,11 +39,11 @@ const UpdateProfile = ({ navigation }) => {
                     centerComponent={{
                         text: "Update Password",
                         style: {
-                        color: "#fff",
-                        fontWeight: "bold",
-                        fontSize: 22,
-                        paddingTop: 30,
-                        },
+                            color: "#fff",
+                            fontWeight: "bold",
+                            fontSize: 22,
+                            paddingTop: 30,
+                        }
                     }}
                     leftComponent={
                         <Icon
@@ -78,7 +79,8 @@ const UpdateProfile = ({ navigation }) => {
                             autocomplete='off'
                             keyboardAppearance="dark"
                             secureTextEntry={true}
-                            
+                            onChangeText={(password) => setPassword(password)}
+                            value={password}
                         />
                     </View>
 
@@ -93,12 +95,13 @@ const UpdateProfile = ({ navigation }) => {
                             autocomplete='off'
                             keyboardAppearance="dark"
                             secureTextEntry={true}
-                        
+                            onChangeText={(newPassword) => setNewPassword(newPassword)}
+                            value={newPassword}
                         />
                     </View>
                         
                     {/* Confirm Password */}
-                    <View style={styles.buttonContainer}>
+                    {/* <View style={styles.buttonContainer}>
                         <TextInput 
                             type='text'
                             placeholder='Confirm Password'
@@ -109,7 +112,7 @@ const UpdateProfile = ({ navigation }) => {
                             keyboardAppearance='dark'
                             secureTextEntry={true}
                         />
-                    </View>
+                    </View> */}
 
                     {/* Save Button */}
                     <TouchableOpacity style={styles.continueButton} >

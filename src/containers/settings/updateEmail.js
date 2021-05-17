@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Firebase
@@ -10,15 +10,25 @@ import styles from './sett-styles';
 
 const UpdateEmail = ({ navigation }) => {
 
-    const [newEmail, setNewEmail] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const emptyState = () => {
-        setNewEmail('');
+        setEmail('');
     };
 
     const onSubmit = () => {
-        updateUserEmail(newEmail);
-        navigation.navigate('EditProfile');
+        updateUserEmail(email, password).then(() => {
+            Alert.alert(
+                'Success!',
+                'Your email has been updated.',
+                [{
+                    text: 'Close',
+                    onPress: () => navigation.navigate('EditProfile')
+                }]
+            )
+        });
+        setPassword('');
         emptyState();
     }
 
@@ -64,15 +74,33 @@ const UpdateEmail = ({ navigation }) => {
                     <View style={styles.buttonContainer}>
                         <TextInput 
                             type='text'
-                            placeholder='Enter Email'
+                            placeholder='New Email'
                             placeholderTextColor='#ffffff80'
                             style={styles.formInput}
                             autoCapitalize='none'
                             autocomplete='off'
                             keyboardAppearance='dark'
                             keyboardType='email-address'
-                            onChangeText={(newEmail) => setNewEmail(newEmail)}
-                            value={newEmail}
+                            onChangeText={(email) => setEmail(email)}
+                            value={email}
+                        />
+                    </View>
+
+                    {/* Password */}
+                    <View style={styles.buttonContainer}>
+                        <TextInput
+                            style={styles.formInput}
+                            placeholder='Enter Password to Save Changes'
+                            placeholderTextColor='#ffffff80'
+                            secureTextEntry={true}
+                            autoCapitalize='none'
+                            autoCompleteType='password'
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            returnKeyType={'done'}
+                            keyboardAppearance='dark'
+                            onChangeText={(password) => setPassword(password)}
+                            value={password}
                         />
                     </View>
 
