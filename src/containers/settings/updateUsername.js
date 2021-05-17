@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Firebase
@@ -16,8 +16,17 @@ const UpdateProfile = ({ navigation }) => {
         setUsername('');
     };
     const onSubmit = () => {
-        updateUsername(username);
-        navigation.navigate('EditProfile');
+        updateUsername(username)
+            .then(() => {
+                Alert.alert(
+                    'Success!',
+                    'Your username has been updated.',
+                    [{
+                        text: 'Close',
+                        onPress: () => navigation.navigate('EditProfile')
+                    }]
+                )
+            })
         emptyState();
     }
 

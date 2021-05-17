@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
-import { onChange } from 'react-native-reanimated';
 
 // Forms
 // import { useForm, Controller } from "react-hook-form";
@@ -25,10 +24,19 @@ const UpdateProfile = ({ navigation }) => {
     };
 
     const onSubmit = () => {
-        updateUserPassword(password, newPassword);
+        updateUserPassword(password, newPassword)
+            .then(() => {
+                Alert.alert(
+                    'Success!',
+                    'Your password has been updated.',
+                    [{
+                        text: 'Close',
+                        onPress: () => navigation.navigate('EditProfile')
+                    }]
+                )
+            })
         setPassword('');
         emptyState();
-        navigation.navigate('EditProfile')
     }
 
     return (
@@ -115,7 +123,7 @@ const UpdateProfile = ({ navigation }) => {
                     </View> */}
 
                     {/* Save Button */}
-                    <TouchableOpacity style={styles.continueButton} >
+                    <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
                         <Text style={styles.continueButtonText}>Save</Text>
                     </TouchableOpacity>
                 </ScrollView>
