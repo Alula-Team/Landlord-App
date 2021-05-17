@@ -13,9 +13,14 @@ export async function registration(email, password, username) {
   try {
     await firebase
       .auth()
-      .createUserWithEmailAndPassword(email.trim().toLowerCase(), password);
+      .createUserWithEmailAndPassword(email.trim().toLowerCase(), password); 
 
     const currentUser = firebase.auth().currentUser;
+
+    currentUser.sendEmailVerification()
+      .then(() => {
+        console.log('Verification Email Sent');
+      });
 
     const db = firebase.firestore();
     db.collection("users")
@@ -31,14 +36,11 @@ export async function registration(email, password, username) {
         alert('Email already exists');
     } else {
         alert(errorMessage);
+        navigation.navigate('Login')
     }
   }
 }
 // ***** END SIGN UP ***** //
-
-
-// ***** EMAIL VERIFICATION ***** //
-// ***** END EMAIL VERIFICATION ***** //
 
 
 // ***** SIGN IN *****//
@@ -54,10 +56,31 @@ export async function signIn(email, password) {
       alert('Email or password is not vaild. Please try again.');
     } else {
         alert(errorMessage);
+        navigation.navigate('Login');
     }
   }
 }
 // ***** END SIGN IN *****//
+
+
+// ***** PASSWORD RESET ***** //
+export async function handlePasswordReset(email) {
+  try {
+    await firebase
+      .auth()
+      .sendPasswordResetEmail(email.trim().toLowerCase());
+      console.log('Password reset email sent successfully');
+  } catch (error) {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    if (errorCode == 'auth/user-not-found') {
+      alert('Email not found. Please sign up instead.');
+    } else {
+        alert(errorMessage);
+    }
+  }
+}
+// ***** END PASSWORD RESET ***** //
 
 
 // ***** ADD PROPERTIES ***** //
@@ -76,7 +99,8 @@ export async function addProperty(address, city, state, zip, unit) {
         unit: unit
       });
   } catch (error) {
-
+    const errorMessage = error.message;
+    alert(errorMessage);
   }
 }
 // ***** END ADD PROPERTIES ***** //
@@ -99,7 +123,8 @@ export async function addTransaction(payment, transactionCategory, address, paym
         date: date
       });
   } catch (error) {
-
+    const errorMessage = error.message;
+    alert(errorMessage);
   }
 }
 // ***** END ADD TRANSACTIONS ***** //
@@ -124,7 +149,8 @@ export async function addTenant(tenant, address, email, archived, rentDue, renta
         lease: lease
       });
   } catch (error) {
-
+    const errorMessage = error.message;
+    alert(errorMessage);
   }
 }
 // ***** END ADD TENANTS ***** //
@@ -138,23 +164,18 @@ export async function addTenant(tenant, address, email, archived, rentDue, renta
 export async function updateUsername(username) {
   try {
     const currentUser = firebase.auth().currentUser;
-    var credential;
 
     currentUser.updateProfile({
       username: username
     })
       .then(() => {
         console.log('Username Updated');
-        currentUser.reauthenticateWithCredential(credential)
-          .then(() => {
-            console.log('User Reauthenticated');
-          })
       });
 
     const db = firebase.firestore();
     db.collection("users")
       .doc(currentUser.uid)
-      .set({
+      .update({
         username: username,
       });
   } catch (error) {
@@ -166,32 +187,31 @@ export async function updateUsername(username) {
 
 
 // ***** UPDATE EMAIL ***** //
-export async function updateUserEmail(newEmail) {
+export async function updateUserEmail(email, password) {
   try {
-    const currentUser = firebase.auth().currentUser;
+    var credential = firebase.auth.EmailAuthProvider.credential(firebase.auth().currentUser.email, password);
 
-    reauthenticate = (currentPassword) => {
-      var cred = firebase.auth.EmailAuthProvider.credential(currentUser.email, currentPassword);
-      return currentUser.reauthenticateWithCredential(cred);
-    }
-
-    changeEmail = (currentPassword, newEmail) => {
-      this.reauthenticate(currentPassword)
-        .then(() => {
-          currentUser.updateEmail(newEmail).then(() => {
-            console.log("Email updated!");
+    firebase.auth().currentUser.reauthenticateWithCredential(credential)
+      .then (() => {
+        firebase.auth().currentUser.updateEmail(email.trim().toLowerCase())
+          .then(() => {
+            console.log('Email Successfully Updated');
+            currentUser.sendEmailVerification()
+              .then(() => {
+                console.log('Verification Email Sent');
+              });
           })
-          .catch((error) => { console.log(error); });
-        })
-        .catch((error) => { console.log(error); });
-    }
+      });
+
+    const currentUser = firebase.auth().currentUser;
 
     const db = firebase.firestore();
     db.collection("users")
       .doc(currentUser.uid)
-      .set({
-        email: newEmail,
+      .update({
+        email: email,
       });
+
   } catch (error) {
     const errorMessage = error.message;
     alert(errorMessage);
@@ -201,31 +221,28 @@ export async function updateUserEmail(newEmail) {
 
 
 // ***** UPDATE PASSWORD ***** //
+export async function updateUserPassword(password, newPassword) {
+  try {
+    var credential = firebase.auth.EmailAuthProvider.credential(firebase.auth().currentUser.email, password);
+
+    firebase.auth().currentUser.reauthenticateWithCredential(credential)
+      .then (() => {
+        firebase.auth().currentUser.updatePassword(newPassword)
+          .then(() => {
+            alert('Password Updated');
+          });
+      });
+
+  } catch (error) {
+    const errorMessage = error.message;
+    alert(errorMessage);
+  }
+}
 // ***** END UPDATE PASSWORD ***** //
 
 
 // ***** UPDATE PAYMENT INFO ***** //
 // ***** END UPDATE PAYMENT INFO ***** //
-
-
-// ***** PASSWORD RESET ***** //
-export async function handlePasswordReset(email) {
-  try {
-    await firebase
-      .auth()
-      .sendPasswordResetEmail(email.trim().toLowerCase());
-      console.log('Password reset email sent successfully');
-  } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    if (errorCode == 'auth/user-not-found') {
-      alert('Email not found. Please sign up instead.');
-    } else {
-        alert(errorMessage);
-    }
-  }
-}
-// ***** END PASSWORD RESET ***** //
 
 
 // ***** SIGN OUT ***** //
@@ -237,4 +254,23 @@ export async function loggingOut() {
     alert(errorMessage);
   }
 }
-// ***** ENG SIGN OUT ***** //
+// ***** END SIGN OUT ***** //
+
+
+// ***** DELETE ACCOUNT ***** //
+export async function deleteAccount() {
+  try {
+    const currentUser = firebase.auth().currentUser;
+    
+    
+
+    const db = firebase.firestore();
+    db.collection("users")
+      .doc(currentUser.uid)
+      .delete();
+  } catch (error) {
+    const errorMessage = error.message;
+    alert(errorMessage);
+  }
+}
+// ***** END DELETE ACCOUNT ***** //

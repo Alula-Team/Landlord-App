@@ -26,7 +26,6 @@ const LoginScreen = ({ navigation }) => {
         signIn(email, password);
         setEmail('');
         setPassword('');
-        navigation.navigate('Loading');
     }
 
     return (
