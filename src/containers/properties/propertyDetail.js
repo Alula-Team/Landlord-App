@@ -10,6 +10,8 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 
+import { firestore } from "../../firebase/firebase";
+
 // Forms
 import { useForm, Controller } from "react-hook-form";
 
@@ -32,18 +34,13 @@ import { doDeleteProperty } from "../../redux/actions";
 // import { State } from "react-native-gesture-handler";
 // Function that deletes property from server
 
-const PropertyDetail = ({ route, deleteProperty }) => {
+const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
+  const [properties, setProperties] = useState([...stateProperties]);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const { control, handleSubmit } = useForm();
-  const {
-    itemID,
-    itemAddress,
-    itemUnit,
-    itemCity,
-    itemState,
-    itemZip,
-  } = route.params;
+  const { itemID, itemAddress, itemUnit, itemCity, itemState, itemZip } =
+    route.params;
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
@@ -60,7 +57,13 @@ const PropertyDetail = ({ route, deleteProperty }) => {
           style: "destructive",
           // onPress: () => console.log("Deleting Item ", { itemID }),
           onPress: () => {
-            deleteProperty(itemID);
+            console.log(itemID);
+            const properties = stateProperties.filter(
+              (item) => item.id !== itemID
+            );
+            firestore.doc(`properties/${itemID}`).delete();
+            setProperties(properties);
+            // // deleteProperty(itemID);
             navigation.goBack();
           },
         },
@@ -349,8 +352,12 @@ const PropertyDetail = ({ route, deleteProperty }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return { stateProperties: state.properties.properties };
+};
+
 const actions = {
   deleteProperty: doDeleteProperty,
 };
 
-export default connect(null, actions)(PropertyDetail);
+export default connect(mapStateToProps, actions)(PropertyDetail);
