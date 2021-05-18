@@ -1,9 +1,5 @@
 import * as firebase from 'firebase';
 import "firebase/firestore";
-import { Alert } from 'react-native';
-
-// Navigation
-import { useNavigation } from "@react-navigation/native";
 
 import firebaseConfig from './firebaseConfig';
 

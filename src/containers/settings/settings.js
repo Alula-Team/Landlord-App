@@ -53,8 +53,8 @@ const Settings = () => {
                     {/* Profile View */}
                     <View style={{backgroundColor: '#5858FB', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
                         <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Current User</Text>
-                        <Text style={{color: '#fff', fontSize: 20, fontWeight: '600', marginTop: 20}}>Kane Toomer</Text>
-                        <Text style={{color: '#fff', fontSize: 15, marginTop: 5}}>kane@alulapm.com</Text>
+                        <Text style={{color: '#fff', fontSize: 20, fontWeight: '600', marginTop: 10}}>User's Name</Text>
+                        <Text style={{color: '#fff', fontSize: 15, marginTop: 5}}>User's Email</Text>
                     </View>
 
                     {/* Edit Profile Button */}
@@ -107,6 +107,15 @@ const Settings = () => {
                         <View style={{flexDirection: 'row'}}>
                             <Feather name='alert-circle' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>About</Text>
+                        </View>
+                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    </TouchableOpacity>
+
+                    {/* Invite Friends Button */}
+                    <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('About')}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Feather name='user-plus' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Text style={styles.buttonText}>Invite Friends</Text>
                         </View>
                         <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
