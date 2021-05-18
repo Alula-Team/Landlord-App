@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase/firebase";
+
 import {
   Text,
   TextInput,
@@ -35,6 +36,8 @@ import { connect } from "react-redux";
 const Properties = ({ stateProperties }) => {
   const [properties, setProperties] = useState([]);
 
+  const propRef = firestore.collection("properties");
+
   const addSomething = async () => {
     const property = {
       address: "188 This is Fake",
@@ -50,67 +53,46 @@ const Properties = ({ stateProperties }) => {
     setProperties([newProperty, ...properties]);
   };
 
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-  //   const docRef = await firestore.collection("properties").add(data);
-  //   const doc = await docRef.get();
-
-  //   const newProperty = collectIdsAndDocs(doc);
-
-  //   setProperties([newProperty, ...properties]);
-  // };
-
-  console.log(properties);
-
+  // let unsubscribe = null;
+  // useEffect(() => {
+  //   let mounted = true;
+  //   if (mounted) {
+  //     async function fetchEm() {
+  //       firestore.collection("properties").onSnapshot((snapshot) => {
+  //         const properties = snapshot.docs.map((doc) => {
+  //           return { id: doc.id, ...doc.data() };
+  //         });
+  //         setProperties(properties);
+  //       });
+  //     }
+  //     fetchEm();
+  //   } else {
+  //     return function cleanup() {
+  //       mounted = false;
+  //     };
+  //   }
+  // }, []);
   let unsubscribe = null;
-
   useEffect(() => {
-    const fetchProperties = async () => {
+    let mounted = true;
+    async function getStuffs() {
       unsubscribe = firestore
         .collection("properties")
         .onSnapshot((snapshot) => {
           const properties = snapshot.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
           });
+          if (mounted) setProperties(properties);
         });
+    }
+    getStuffs();
+    return function cleanup() {
+      unsubscribe();
+      mounted = false;
     };
-    fetchProperties();
   }, []);
 
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     unsubscribe = firestore
-  //       .collection("properties")
-  //       .onSnapshot((snapshot) => {
-  //         const posts = snapshot.docs.map((doc) => {
-  //           return { id: doc.id, ...doc.data() };
-  //         });
-  //         setProperties(posts);
-  //       });
-  //     fetchPosts();
-  //     return () => {
-  //       unsubscribe();
-  //     };
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   const fetchPosts = async () => {
-  //     const zeePosts = firestore.collection("properties").get();
-  //     console.log(zeePosts);
-  //     setProperties(zeePosts);
-  //     // .onSnapshot((snapshot) => {
-  //     //   const posts = snapshot.docs.map((doc) => {
-  //     //     return { id: doc.id, ...doc.data() };
-  //     //   });
-  //     //   setProperties(posts);
-  //     // });
-  //     fetchPosts();
-  //     return () => {
-  //       unsubscribe();
-  //     };
-  //   };
-  // }, []);
+  console.log(properties);
 
   const navigation = useNavigation();
 
@@ -215,8 +197,8 @@ const Properties = ({ stateProperties }) => {
                   paddingRight: 20,
                   paddingBottom: 10,
                 }}
-                // onPress={() => navigation.navigate("AddProperty")}
-                onPress={() => addSomething()}
+                onPress={() => navigation.navigate("AddProperty")}
+                // onPress={() => addSomething()}
               />
             </>
           }

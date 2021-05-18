@@ -23,7 +23,7 @@ const AddProperty = ({ navigation }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [zip, setZip] = useState("");
-  const [unit, setUnit] = useState("");
+  const [unit, setUnit] = useState([]);
 
   const [property, setProperty] = useState({
     address: "",
@@ -39,7 +39,7 @@ const AddProperty = ({ navigation }) => {
       city: "",
       state: "",
       zip: "",
-      unit: "",
+      unit: [],
     });
   };
 
@@ -63,39 +63,10 @@ const AddProperty = ({ navigation }) => {
   };
 
   const onSubmit = async (data) => {
-    const docRef = await firestore.collection("properties").add(data);
-    const doc = await docRef.get();
-
-    const newProperty = (doc) => {
-      return { id: doc.id, ...doc.data() };
-    };
+    navigation.goBack();
+    await firestore.collection("properties").add(data);
+    emptyState();
   };
-
-  // const handleCreate = async (post) => {
-  //   const docRef = await firestore.collection("posts").add(post);
-  //   const doc = await docRef.get();
-
-  //   const newPost = collectIdsAndDocs(doc);
-
-  //   setThePosts([newPost, ...thePosts]);
-  // };
-  // console.log(data);
-  // const newProperty = data.map((datum) => {
-  //   return {
-  //     address: datum.address,
-  //     city: datum.city,
-  //     state: datum.state,
-  //     zip: datum.zip,
-  //     unit: datum.unit,
-  //   };
-  // });
-  //   console.log;
-  //   setProperty(newProperty);
-
-  //   // addProperty(address, city, state, zip, unit);
-  //   navigation.goBack();
-  //   emptyState();
-  // };
 
   // For Picker Select
   // Styles
