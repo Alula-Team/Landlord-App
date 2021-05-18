@@ -58,7 +58,7 @@ const UpdatePayment = () => {
                         <View style={styles.listView}>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>Same Day ACH Rent Payouts</Text>
+                                <Text style={styles.listText}>Automated Record Keeping</Text>
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
@@ -66,13 +66,13 @@ const UpdatePayment = () => {
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>Secure Payments via Dwolla and Plaid</Text>
+                                <Text style={styles.listText}>Secure Payments via Dwolla</Text>
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>1.5% Transaction Fee</Text>
+                                <Text style={styles.listText}>Free for Landlords*</Text>
                             </View>
-                            
+                            <Text style={{color: '#fff', marginTop: 20, textAlign: 'center'}}>* 1% transaction fee passed onto the tenant.</Text>
                         </View>
                     </View>
 

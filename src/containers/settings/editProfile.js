@@ -1,9 +1,9 @@
 import React from 'react'
-import { Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Firebase
-import { loggingOut } from '../../firebase/firebase';
+import { deleteAccount } from '../../firebase/firebase';
 
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';

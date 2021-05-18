@@ -27,7 +27,6 @@ const RegisterScreen = ({ navigation }) => {
 
     const onSubmit = () => {
         registration( email, password, username );
-        navigation.navigate('Loading');
         emptyState();
     }
 

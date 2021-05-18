@@ -1,30 +1,42 @@
-import React from 'react';
-import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Forms
-import { useForm, Controller } from "react-hook-form";
-
-// Navigation
-import { useNavigation } from '@react-navigation/native';
+// import { useForm, Controller } from "react-hook-form";
 
 // Firebase
-import { auth } from '../../firebase/firebase';
-import firebase from 'firebase';
+import { updateUserPassword } from '../../firebase/firebase';
 
 // Style Sheet
 import styles from './sett-styles';
 
-const UpdateProfile = () => {
+const UpdateProfile = ({ navigation }) => {
 
-    const navigation = useNavigation();
+    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    // const [confirmPassword, setConfirmPassword] = useState('');
 
-    const { control, handleSubmit } = useForm();
+    // const { control, handleSubmit } = useForm();
+
+    const emptyState = () => {
+        setNewPassword('');
+    };
 
     const onSubmit = () => {
-        // Update Password
-        
-        // Confirm Password
+        updateUserPassword(password, newPassword)
+            .then(() => {
+                Alert.alert(
+                    'Success!',
+                    'Your password has been updated.',
+                    [{
+                        text: 'Close',
+                        onPress: () => navigation.navigate('EditProfile')
+                    }]
+                )
+            })
+        setPassword('');
+        emptyState();
     }
 
     return (
@@ -35,11 +47,11 @@ const UpdateProfile = () => {
                     centerComponent={{
                         text: "Update Password",
                         style: {
-                        color: "#fff",
-                        fontWeight: "bold",
-                        fontSize: 22,
-                        paddingTop: 30,
-                        },
+                            color: "#fff",
+                            fontWeight: "bold",
+                            fontSize: 22,
+                            paddingTop: 30,
+                        }
                     }}
                     leftComponent={
                         <Icon
@@ -65,81 +77,53 @@ const UpdateProfile = () => {
                 {/* Edit Profile Form */}
                 <ScrollView style={{marginTop: 20}}>
                     {/* Current Password */}
-                    <Controller
-                        control={control}
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <View style={styles.buttonContainer}>
-                                <TextInput
-                                    type="text"
-                                    placeholder="Current Password"
-                                    placeholderTextColor="#ffffff80"
-                                    style={styles.formInput}
-                                    autoCapitalize='none'
-                                    autocomplete='off'
-                                    keyboardAppearance="dark"
-                                    secureTextEntry={true}
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            </View>
-                        )}
-                        name="password"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    />
-                    {/* Password */}
-                    <Controller
-                        control={control}
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <View style={styles.buttonContainer}>
-                                <TextInput
-                                    type="text"
-                                    placeholder="New Password"
-                                    placeholderTextColor="#ffffff80"
-                                    style={styles.formInput}
-                                    autoCapitalize='none'
-                                    autocomplete='off'
-                                    keyboardAppearance="dark"
-                                    secureTextEntry={true}
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            </View>
-                        )}
-                        name="newPassword"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    />
+                    <View style={styles.buttonContainer}>
+                        <TextInput
+                            type="text"
+                            placeholder="Current Password"
+                            placeholderTextColor="#ffffff80"
+                            style={styles.formInput}
+                            autoCapitalize='none'
+                            autocomplete='off'
+                            keyboardAppearance="dark"
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                            value={password}
+                        />
+                    </View>
 
+                    {/* Password */}
+                    <View style={styles.buttonContainer}>
+                        <TextInput
+                            type="text"
+                            placeholder="New Password"
+                            placeholderTextColor="#ffffff80"
+                            style={styles.formInput}
+                            autoCapitalize='none'
+                            autocomplete='off'
+                            keyboardAppearance="dark"
+                            secureTextEntry={true}
+                            onChangeText={(newPassword) => setNewPassword(newPassword)}
+                            value={newPassword}
+                        />
+                    </View>
+                        
                     {/* Confirm Password */}
-                    <Controller
-                        control={control}
-                        render={({ field: { onChange, onBlur, value } }) => (
-                            <View style={styles.buttonContainer}>
-                                <TextInput 
-                                    type='text'
-                                    placeholder='Confirm Password'
-                                    placeholderTextColor='#ffffff80'
-                                    style={styles.formInput}
-                                    autoCapitalize='none'
-                                    autocomplete='off'
-                                    keyboardAppearance='dark'
-                                    secureTextEntry={true}
-                                    onChangeText={onChange}
-                                    onBlur={onBlur}
-                                    value={value}
-                                />
-                            </View>
-                        )}
-                        name="confirm-newPassword"
-                        rules={{ required: true }}
-                        defaultValue=""
-                    />
+                    {/* <View style={styles.buttonContainer}>
+                        <TextInput 
+                            type='text'
+                            placeholder='Confirm Password'
+                            placeholderTextColor='#ffffff80'
+                            style={styles.formInput}
+                            autoCapitalize='none'
+                            autocomplete='off'
+                            keyboardAppearance='dark'
+                            secureTextEntry={true}
+                        />
+                    </View> */}
 
                     {/* Save Button */}
-                    <TouchableOpacity style={styles.continueButton} onPress={handleSubmit(onSubmit)}>
+                    <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
                         <Text style={styles.continueButtonText}>Save</Text>
                     </TouchableOpacity>
                 </ScrollView>

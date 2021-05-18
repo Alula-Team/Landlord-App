@@ -23,6 +23,13 @@ const styles = StyleSheet.create({
         fontWeight: '600',
         marginLeft: 10
     },
+    deleteAccountButtonText: {
+        alignSelf: 'center',
+        color: 'red',
+        fontSize: 16,
+        fontWeight: '700',
+        marginLeft: 10
+    },
     icons: {
         alignSelf: 'center'
     },
@@ -35,12 +42,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 30
     },
-    logoutButton: {
-        backgroundColor: "red",
-        margin: 30,
-        padding: 15,
-        borderRadius: 10,
-    },
     logoutButtonText: {
         alignSelf: 'center',
         color: '#5858FB',
@@ -49,10 +50,11 @@ const styles = StyleSheet.create({
         marginLeft: 10
     },
     formInput: {
+        flex: 1,
         color: '#fff',
         fontSize: 16,
         fontWeight: '500',
-        marginLeft: 12.5
+        marginLeft: 12.5,
     },
 
     // Update Payment Explainer
