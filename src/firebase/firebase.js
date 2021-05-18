@@ -3,6 +3,7 @@ import "firebase/firestore";
 
 import firebaseConfig from "./firebaseConfig";
 
+
 // Initialize Firebase App
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
