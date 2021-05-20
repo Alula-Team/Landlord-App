@@ -1,26 +1,7 @@
 import uuid from "react-native-uuid";
 const initialState = {
   newTransaction: {},
-  transactions: [
-    {
-      id: uuid.v4(),
-      address: "108 Fresno Drive",
-      transactionCategory: "Payment",
-      date: "March 14th, 2021",
-      paymentMethod: "Credit Card",
-      amount: 1600,
-      payment: "Payment",
-    },
-    {
-      id: uuid.v4(),
-      address: "2566 Marigold Drive",
-      transactionCategory: "Expense",
-      date: "April 28th, 2021",
-      paymentMethod: "Credit Card",
-      amount: 888,
-      payment: "Expense",
-    },
-  ],
+  transactions: [],
 };
 
 const transactionsReducer = (state = initialState, action) => {

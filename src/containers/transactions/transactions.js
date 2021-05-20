@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+
+import { firestore } from "../../firebase/firebase";
 import {
   Alert,
   Text,
@@ -31,24 +33,40 @@ import { doDeleteTransaction } from "../../redux/actions";
 
 const Transactions = ({ stateTransactions, deleteTransaction }) => {
   const navigation = useNavigation();
+  const [transactions, setTransactions] = useState([]);
 
-  const [data, setData] = useState(stateTransactions);
+  const data = stateTransactions;
 
-  const resultsArray = stateTransactions;
+  // const addSomething = async () => {
+  //   const docRef = await firestore.collection("properties").add(property);
+  //   const doc = await docRef.get();
+  //   const newProperty = (doc) => {
+  //     return { id: doc.id, ...doc.data() };
+  //   };
+  //   setProperties([newProperty, ...properties]);
+  // };
 
-  const handleSearch = (text) => {
-    const newData = resultsArray.filter((item) => {
-      const itemData = `${item.transactionCategory.toUpperCase()} ${item.address.toUpperCase()}`;
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-    setData(newData);
-  };
+  let unsubscribe = null;
+  useEffect(() => {
+    let mounted = true;
+    async function getStuffs() {
+      unsubscribe = firestore
+        .collection("transactions")
+        .onSnapshot((snapshot) => {
+          const transactions = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+          });
+          if (mounted) setTransactions(transactions);
+        });
+    }
+    getStuffs();
+    return function cleanup() {
+      unsubscribe();
+      mounted = false;
+    };
+  }, []);
 
-  const ids = data.map((item) => {
-    return item.id;
-  });
-  // Separator
+  // // Separator
   const renderSeparator = () => {
     return (
       <View
@@ -100,7 +118,13 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
         {
           text: "Delete",
           style: "destructive",
-          onPress: () => deleteTransaction(id),
+          onPress: () => {
+            const transactions = stateTransactions.filter(
+              (item) => item.id !== id
+            );
+            firestore.docs(`transactions/${id}`).delete();
+            setTransactions(transactions);
+          },
         },
       ]
     );
@@ -159,7 +183,7 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
             style={styles.searchInput}
             keyboardAppearance="dark"
             clearButtonMode="while-editing"
-            onChangeText={handleSearch}
+            // onChangeText={handleSearch}
           />
         </View>
 
