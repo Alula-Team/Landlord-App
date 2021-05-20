@@ -4,6 +4,8 @@ import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import { firestore } from "../../firebase/firebase";
+
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 // Forms
@@ -120,6 +122,13 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     setMode(currentMode);
   };
 
+  const onSubmit = async (data) => {
+    console.log(stateProperties);
+    // navigation.goBack();
+    // await firestore.collection("transactions").add(data);
+    // emptyState();
+  };
+
   // For Picker Select
   // Styles
   const pickerStyles = {
@@ -203,7 +212,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
           rightComponent={
             <TouchableOpacity
               style={{ paddingTop: 32.5, paddingRight: 10 }}
-              onPress={handleSubmit(addItem)}
+              onPress={handleSubmit(onSubmit)}
             >
               <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
                 Save
@@ -232,7 +241,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               />
             )}
             name="payment"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.payment && (
@@ -260,7 +269,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               />
             )}
             name="transactionCategory"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.transactionCategory && (
@@ -288,8 +297,8 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               />
             )}
             name="address"
-            rules={{ required: true }}
-            defaultValue=""
+            rules={{ required: false }}
+            defaultValue="108 Verygold Lane"
           />
           {errors.address && (
             <Text
@@ -316,7 +325,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               />
             )}
             name="paymentMethod"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.paymentMethod && (
@@ -350,7 +359,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
               </View>
             )}
             name="amount"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.amount && (
@@ -395,7 +404,10 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
+  return {
+    stateProperties: state.properties.properties,
+    stateTransactions: state.transactions.transactions,
+  };
 };
 
 const actions = {
