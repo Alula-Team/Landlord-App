@@ -198,7 +198,6 @@ const Properties = ({ stateProperties }) => {
                   paddingBottom: 10,
                 }}
                 onPress={() => navigation.navigate("AddProperty")}
-                // onPress={() => addSomething()}
               />
             </>
           }
