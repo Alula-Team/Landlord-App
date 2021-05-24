@@ -33,45 +33,9 @@ import { connect } from "react-redux";
 // Working Search Feature
 // New properties auto sorted in alpha numeric order
 
-const Properties = ({ stateProperties }) => {
+const Properties = () => {
   const [properties, setProperties] = useState([]);
 
-  const propRef = firestore.collection("properties");
-
-  const addSomething = async () => {
-    const property = {
-      address: "188 This is Fake",
-      city: "Los Tacos",
-      state: "MV",
-      zip: "83901",
-    };
-    const docRef = await firestore.collection("properties").add(property);
-    const doc = await docRef.get();
-    const newProperty = (doc) => {
-      return { id: doc.id, ...doc.data() };
-    };
-    setProperties([newProperty, ...properties]);
-  };
-
-  // let unsubscribe = null;
-  // useEffect(() => {
-  //   let mounted = true;
-  //   if (mounted) {
-  //     async function fetchEm() {
-  //       firestore.collection("properties").onSnapshot((snapshot) => {
-  //         const properties = snapshot.docs.map((doc) => {
-  //           return { id: doc.id, ...doc.data() };
-  //         });
-  //         setProperties(properties);
-  //       });
-  //     }
-  //     fetchEm();
-  //   } else {
-  //     return function cleanup() {
-  //       mounted = false;
-  //     };
-  //   }
-  // }, []);
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
@@ -92,8 +56,6 @@ const Properties = ({ stateProperties }) => {
     };
   }, []);
 
-  console.log(properties);
-
   const navigation = useNavigation();
 
   const {
@@ -104,7 +66,7 @@ const Properties = ({ stateProperties }) => {
   // const [data, setData] = useState(properties);
   const data = properties;
 
-  const resultsArray = stateProperties;
+  // const resultsArray = stateProperties;
 
   const handleSearch = (text) => {
     const newData = resultsArray.filter((item) => {

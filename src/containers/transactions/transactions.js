@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import moment from "moment";
 import { firestore } from "../../firebase/firebase";
 import {
   Alert,
@@ -31,20 +31,10 @@ import { doDeleteTransaction } from "../../redux/actions";
 // New transactions auto sorted by newest to oldest
 // Separation between months/year
 
-const Transactions = ({ stateTransactions, deleteTransaction }) => {
+const Transactions = () => {
   const navigation = useNavigation();
+
   const [transactions, setTransactions] = useState([]);
-
-  const data = stateTransactions;
-
-  // const addSomething = async () => {
-  //   const docRef = await firestore.collection("properties").add(property);
-  //   const doc = await docRef.get();
-  //   const newProperty = (doc) => {
-  //     return { id: doc.id, ...doc.data() };
-  //   };
-  //   setProperties([newProperty, ...properties]);
-  // };
 
   let unsubscribe = null;
   useEffect(() => {
@@ -65,6 +55,8 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
       mounted = false;
     };
   }, []);
+
+  const data = transactions;
 
   // // Separator
   const renderSeparator = () => {
@@ -119,11 +111,10 @@ const Transactions = ({ stateTransactions, deleteTransaction }) => {
           text: "Delete",
           style: "destructive",
           onPress: () => {
-            const transactions = stateTransactions.filter(
-              (item) => item.id !== id
-            );
-            firestore.docs(`transactions/${id}`).delete();
-            setTransactions(transactions);
+            console.log("Yer trynna delete me?!");
+            // const filtered = transactions.filter((item) => item.id !== id);
+            //firestore.docs(`transactions/${id}`).delete();
+            //setTransactions(filtered);
           },
         },
       ]
