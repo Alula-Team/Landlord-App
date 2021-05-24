@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { firestore } from "../../firebase/firebase";
-
+import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 // Forms
@@ -24,8 +24,34 @@ import styles from "./trans-styles";
 import { connect } from "react-redux";
 import { doAddTransaction } from "../../redux/actions";
 
-const AddTransactions = ({ stateProperties, addTransaction }) => {
+const AddTransactions = ({ addTransaction }) => {
   const navigation = useNavigation();
+
+  const [properties, setProperties] = useState([]);
+
+  let unsubscribe = null;
+  useEffect(() => {
+    let mounted = true;
+    async function getStuffs() {
+      unsubscribe = firestore
+        .collection("properties")
+        .onSnapshot((snapshot) => {
+          const properties = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+          });
+          if (mounted) setProperties(properties);
+        });
+    }
+    getStuffs();
+    return function cleanup() {
+      unsubscribe();
+      mounted = false;
+    };
+  }, []);
+
+  console.log(properties);
+
+  const data = properties;
 
   const {
     control,
@@ -33,7 +59,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     formState: { errors },
   } = useForm();
 
-  const allProperties = stateProperties.map((item) => {
+  const allProperties = properties.map((item) => {
     return {
       label: item.address,
       value: item.address,
@@ -123,10 +149,10 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
   };
 
   const onSubmit = async (data) => {
-    console.log(stateProperties);
-    // navigation.goBack();
-    // await firestore.collection("transactions").add(data);
-    // emptyState();
+    console.log(data.date);
+    navigation.goBack();
+    await firestore.collection("transactions").add(data);
+    emptyState();
   };
 
   // For Picker Select
@@ -404,10 +430,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    stateProperties: state.properties.properties,
-    stateTransactions: state.transactions.transactions,
-  };
+  return { stateProperties: state.properties.properties };
 };
 
 const actions = {
