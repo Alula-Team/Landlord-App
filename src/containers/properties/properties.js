@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { firestore } from "../../firebase/firebase";
-
+import PropertiesContext from "./PropertiesContext";
 import {
   Text,
   TextInput,
@@ -34,27 +34,28 @@ import { connect } from "react-redux";
 // New properties auto sorted in alpha numeric order
 
 const Properties = () => {
-  const [properties, setProperties] = useState([]);
+  const { properties } = useContext(PropertiesContext);
+  console.log(properties);
 
-  let unsubscribe = null;
-  useEffect(() => {
-    let mounted = true;
-    async function getStuffs() {
-      unsubscribe = firestore
-        .collection("properties")
-        .onSnapshot((snapshot) => {
-          const properties = snapshot.docs.map((doc) => {
-            return { id: doc.id, ...doc.data() };
-          });
-          if (mounted) setProperties(properties);
-        });
-    }
-    getStuffs();
-    return function cleanup() {
-      unsubscribe();
-      mounted = false;
-    };
-  }, []);
+  // let unsubscribe = null;
+  // useEffect(() => {
+  //   let mounted = true;
+  //   async function getStuffs() {
+  //     unsubscribe = firestore
+  //       .collection("properties")
+  //       .onSnapshot((snapshot) => {
+  //         const properties = snapshot.docs.map((doc) => {
+  //           return { id: doc.id, ...doc.data() };
+  //         });
+  //         if (mounted) setProperties(properties);
+  //       });
+  //   }
+  //   getStuffs();
+  //   return function cleanup() {
+  //     unsubscribe();
+  //     mounted = false;
+  //   };
+  // }, []);
 
   const navigation = useNavigation();
 
@@ -64,7 +65,22 @@ const Properties = () => {
   } = useForm();
 
   // const [data, setData] = useState(properties);
+  // const data = [
+  //   {
+  //     address: "108 Verygold Lane",
+  //     city: "Los Tacos",
+  //     state: "Nevada",
+  //   },
+  //   {
+  //     address: "7070 Notsmuch Blvd",
+  //     city: "West Tacos",
+  //     state: "Ohio",
+  //   },
+  // ];
+
   const data = properties;
+
+  console.log(data);
 
   // const resultsArray = stateProperties;
 
@@ -250,8 +266,4 @@ const Properties = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-export default connect(mapStateToProps)(Properties);
+export default Properties;
