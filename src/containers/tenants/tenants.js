@@ -111,6 +111,7 @@ const Tenants = ({ stateTenants }) => {
               paddingTop: 30,
             },
           }}
+          rightComponent={ <Icon name="plus" type="feather" color="transparent" size={25} iconStyle={{paddingTop: 30, paddingRight: 20, paddingBottom: 10}} /> }
           containerStyle={{
             backgroundColor: "#09061C",
             justifyContent: "space-around",
