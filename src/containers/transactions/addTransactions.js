@@ -20,11 +20,7 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./trans-styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doAddTransaction } from "../../redux/actions";
-
-const AddTransactions = ({ addTransaction }) => {
+const AddTransactions = () => {
   const navigation = useNavigation();
 
   const [properties, setProperties] = useState([]);
@@ -130,7 +126,7 @@ const AddTransactions = ({ addTransaction }) => {
     const month = months[date.getMonth()];
     const formattedDate = `${month} ${day}, ${year}`;
     data.date = formattedDate;
-    addTransaction(data);
+    // addTransaction(data);
     navigation.goBack();
   };
 
@@ -429,12 +425,4 @@ const AddTransactions = ({ addTransaction }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-const actions = {
-  addTransaction: doAddTransaction,
-};
-
-export default connect(mapStateToProps, actions)(AddTransactions);
+export default AddTransactions;

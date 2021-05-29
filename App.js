@@ -4,35 +4,39 @@ import PropertiesContext from "./src/containers/properties/PropertiesContext";
 import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./src/routes/AuthStack";
 import MainStack from "./src/routes/MainStack";
-
-// Redux Stuff
-// import { Provider } from "react-redux";
-// import { createStore, applyMiddleware } from "redux";
-// import thunk from "redux-thunk";
-// import rootReducer from "./src/redux/reducers";
-
 // Firebase
 import firebase from "firebase";
 import firestore from "./src/firebase/firebase";
-// const store = createStore(
-//   rootReducer,
-//   applyMiddleware(thunk),
-//   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-// );
+// Redux
+import rootReducer from "./src/redux/reducers";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+
+const store = createStore(rootReducer);
 
 export default function App() {
   const [signedIn, setSignedIn] = useState(false);
   const [properties, setProperties] = useState([]);
+
+  let unsubscribe = null;
   useEffect(() => {
-    const zeeProperties = firestore
-      .collection("properties")
-      .get.then((querySnapshot) => {
-        querySnapshot.map((doc) => {
-          return { id: doc.id, ...doc.data() };
+    let mounted = true;
+    async function getStuffs() {
+      unsubscribe = firestore
+        .collections("properties")
+        .onSnapshot((snapshot) => {
+          const properties = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+          });
+          if (mounted) setProperties(properties);
         });
-      });
-    setProperties(zeeProperties);
-  });
+    }
+    getStuffs();
+    return function cleanUp() {
+      unsubscribe();
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     checkSignedIn();
@@ -48,10 +52,10 @@ export default function App() {
     });
   };
   return (
-    <NavigationContainer>
-      <PropertiesContext.Provider value={{ properties }}>
+    <Provider store={store}>
+      <NavigationContainer>
         {signedIn ? <MainStack /> : <AuthStack />}
-      </PropertiesContext.Provider>
-    </NavigationContainer>
+      </NavigationContainer>
+    </Provider>
   );
 }

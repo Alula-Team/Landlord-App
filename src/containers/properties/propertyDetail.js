@@ -25,17 +25,13 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 // Style Sheet
 import styles from "./prop-styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doDeleteProperty } from "../../redux/actions";
-
 // What I need:
 // State
 // import { State } from "react-native-gesture-handler";
 // Function that deletes property from server
 
-const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
-  const [properties, setProperties] = useState([...stateProperties]);
+const PropertyDetail = ({ route }) => {
+  const [properties, setProperties] = useState([]);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const { control, handleSubmit } = useForm();
@@ -58,11 +54,11 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           // onPress: () => console.log("Deleting Item ", { itemID }),
           onPress: () => {
             console.log(itemID);
-            const properties = stateProperties.filter(
+            const newProperties = properties.filter(
               (item) => item.id !== itemID
             );
             firestore.doc(`properties/${itemID}`).delete();
-            setProperties(properties);
+            setProperties(newProperties);
             // // deleteProperty(itemID);
             navigation.goBack();
           },
@@ -352,12 +348,4 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-const actions = {
-  deleteProperty: doDeleteProperty,
-};
-
-export default connect(mapStateToProps, actions)(PropertyDetail);
+export default PropertyDetail;

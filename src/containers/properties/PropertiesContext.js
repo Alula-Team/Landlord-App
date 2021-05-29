@@ -1,2 +1,4 @@
 import React from "react";
-export default PropertiesContext = React.createContext();
+const PropertiesContext = React.createContext();
+
+export default PropertiesContext;

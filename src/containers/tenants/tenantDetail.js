@@ -11,10 +11,6 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./tenant-styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doDeleteTenant } from "../../redux/actions";
-
 import "./getInitials";
 // Things I need
 // Actions button pops up modal with options to:
@@ -22,7 +18,7 @@ import "./getInitials";
 // remove lease (if there is a lease),
 // renew lease (once lease term is set to expire in 60d)
 
-const TenantDetailScreen = ({ route, deleteTenant }) => {
+const TenantDetailScreen = ({ route }) => {
   const navigation = useNavigation();
   const { itemID, itemName, itemEmail, itemPhone } = route.params;
   const itemInitials = itemName.getInitials();
@@ -40,8 +36,8 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
         {
           text: "Delete",
           style: "destructive",
-          //   onPress: () => console.log("Delete Pressed"),
-          onPress: (id) => deleteTenant(itemID),
+          onPress: () => console.log("Delete Pressed"),
+          //onPress: (id) => deleteTenant(itemID),
         },
       ]
     );
@@ -292,8 +288,4 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
   );
 };
 
-const actions = {
-  deleteTenant: doDeleteTenant,
-};
-
-export default connect(null, actions)(TenantDetailScreen);
+export default TenantDetailScreen;

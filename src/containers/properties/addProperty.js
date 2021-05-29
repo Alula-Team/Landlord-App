@@ -14,10 +14,6 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./prop-styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doAddProperty } from "../../redux/actions";
-
 const AddProperty = ({ navigation }) => {
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
@@ -379,9 +375,5 @@ const AddProperty = ({ navigation }) => {
     </View>
   );
 };
-
-// const actions = {
-//   addProperty: doAddProperty,
-// };
 
 export default AddProperty;

@@ -13,8 +13,6 @@ import {
 
 import { useForm, Controller } from "react-hook-form";
 
-import filter from "lodash.filter";
-
 import { Badge, Header, Icon } from "react-native-elements";
 
 // Navigation
@@ -26,36 +24,38 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./prop-styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
+// Redux
+import { useSelector } from "react-redux";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New properties auto sorted in alpha numeric order
 
 const Properties = () => {
-  const { properties } = useContext(PropertiesContext);
-  console.log(properties);
+  // const initialProperties = useSelector((state) => state.properties.properties);
+  let [properties, setProperties] = useState([]);
 
-  // let unsubscribe = null;
-  // useEffect(() => {
-  //   let mounted = true;
-  //   async function getStuffs() {
-  //     unsubscribe = firestore
-  //       .collection("properties")
-  //       .onSnapshot((snapshot) => {
-  //         const properties = snapshot.docs.map((doc) => {
-  //           return { id: doc.id, ...doc.data() };
-  //         });
-  //         if (mounted) setProperties(properties);
-  //       });
-  //   }
-  //   getStuffs();
-  //   return function cleanup() {
-  //     unsubscribe();
-  //     mounted = false;
-  //   };
-  // }, []);
+  // console.log(properties);
+
+  let unsubscribe = null;
+  useEffect(() => {
+    let mounted = true;
+    async function getStuffs() {
+      unsubscribe = firestore
+        .collection("properties")
+        .onSnapshot((snapshot) => {
+          const properties = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+          });
+          if (mounted) setProperties(properties);
+        });
+    }
+    getStuffs();
+    return function cleanup() {
+      unsubscribe();
+      mounted = false;
+    };
+  }, []);
 
   const navigation = useNavigation();
 
@@ -64,25 +64,9 @@ const Properties = () => {
     formState: { isDirty },
   } = useForm();
 
-  // const [data, setData] = useState(properties);
-  // const data = [
-  //   {
-  //     address: "108 Verygold Lane",
-  //     city: "Los Tacos",
-  //     state: "Nevada",
-  //   },
-  //   {
-  //     address: "7070 Notsmuch Blvd",
-  //     city: "West Tacos",
-  //     state: "Ohio",
-  //   },
-  // ];
-
   const data = properties;
 
   console.log(data);
-
-  // const resultsArray = stateProperties;
 
   const handleSearch = (text) => {
     const newData = resultsArray.filter((item) => {

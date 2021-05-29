@@ -22,10 +22,6 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./trans-styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doDeleteTransaction } from "../../redux/actions";
-
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New transactions auto sorted by newest to oldest
@@ -246,14 +242,4 @@ const Transactions = () => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    stateTransactions: state.transactions.transactions,
-  };
-};
-
-const actions = {
-  deleteTransaction: doDeleteTransaction,
-};
-
-export default connect(mapStateToProps, actions)(Transactions);
+export default Transactions;

@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
 
@@ -18,9 +18,6 @@ import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
 import styles from "./tenant-styles";
-
-// Redux Stuff
-import { connect } from "react-redux";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -86,15 +83,25 @@ const Tenants = ({ stateTenants }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
-    return(
+    return (
       <View style={styles.emptyList}>
-        <Image source={require('../../assets/tenantEmptyList.png')} style={styles.img} />
-        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
+        <Image
+          source={require("../../assets/tenantEmptyList.png")}
+          style={styles.img}
+        />
+        <Text
+          style={{
+            color: "#fff",
+            marginHorizontal: 35,
+            alignSelf: "center",
+            fontSize: 18,
+          }}
+        >
           When you invite tenants to connect, they will show up here!
         </Text>
       </View>
     );
-  }
+  };
 
   return (
     <>
@@ -132,7 +139,7 @@ const Tenants = ({ stateTenants }) => {
             placeholderTextColor="#ffffff75"
             style={styles.searchInput}
             keyboardAppearance="dark"
-            clearButtonMode='while-editing'
+            clearButtonMode="while-editing"
           />
         </View>
 
@@ -183,10 +190,4 @@ const Tenants = ({ stateTenants }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    stateTenants: state.tenants.tenants,
-  };
-};
-
-export default connect(mapStateToProps)(Tenants);
+export default Tenants;
