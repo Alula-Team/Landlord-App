@@ -263,9 +263,6 @@ const Properties = ({ stateProperties }) => {
                     <Text style={styles.listItem}>
                       {item.address} {item.unit}
                     </Text>
-                    <Text style={styles.status}>
-                      Status: <Status vacant={item.vacant} />
-                    </Text>
                   </View>
                 </View>
                 <Feather
