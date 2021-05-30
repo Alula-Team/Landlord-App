@@ -1,5 +1,5 @@
 import React, { useState} from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
 import { Header } from 'react-native-elements';
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import firebase from 'firebase';
@@ -65,7 +65,6 @@ const RegisterScreen = ({ navigation }) => {
                             clearButtonMode={'while-editing'}
                             keyboardType={'default'}
                             keyboardAppearance='dark'
-                            // onBlur={onBlur}
                             onChangeText={(name) => setUsername(name)}
                             value={username}
                         />
@@ -91,7 +90,6 @@ const RegisterScreen = ({ navigation }) => {
                             clearButtonMode={'while-editing'}
                             keyboardType={'email-address'}
                             keyboardAppearance='dark'
-                            // onBlur={onBlur}
                             onChangeText={(email) => setEmail(email)}
                             value={email}
                         />
@@ -118,7 +116,6 @@ const RegisterScreen = ({ navigation }) => {
                             clearButtonMode={'while-editing'}
                             returnKeyType={'done'}
                             keyboardAppearance='dark'
-                            // onBlur={onBlur}
                             onChangeText={(password) => setPassword(password)}
                             value={password}
                         />
@@ -126,10 +123,7 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
 
                 {/* Sign Up Button */}
-                <TouchableOpacity 
-                    style={styles.continueButton}
-                    onPress={onSubmit}
-                >
+                <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
                     <Text style={styles.submitText}>Sign Up</Text>
                 </TouchableOpacity>
 

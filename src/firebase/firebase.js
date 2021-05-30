@@ -59,6 +59,24 @@ export async function signIn(email, password) {
 }
 // ***** END SIGN IN *****//
 
+// ***** GET USER INFORMATION ***** //
+export async function getUser(email, username) {
+  try {
+    const currentUser = firebase.auth().currentUser;
+    var name, email, uid, emailVerified;
+
+      if (user != null) {
+        name = currentUser.username;
+        email = currentUser.email;
+        emailVerified = currentUser.emailVerified;
+        uid = user.uid;
+      }
+  } catch (error) {
+
+  }
+}
+// ***** END GET USER INFORMATION ***** //
+
 // ***** PASSWORD RESET ***** //
 export async function handlePasswordReset(email) {
   try {

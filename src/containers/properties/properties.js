@@ -160,7 +160,6 @@ const Properties = () => {
                   paddingBottom: 10,
                 }}
                 onPress={() => navigation.navigate("AddProperty")}
-                // onPress={() => addSomething()}
               />
             </>
           }
@@ -225,9 +224,6 @@ const Properties = () => {
                   <View>
                     <Text style={styles.listItem}>
                       {item.address} {item.unit}
-                    </Text>
-                    <Text style={styles.status}>
-                      Status: <Status vacant={item.vacant} />
                     </Text>
                   </View>
                 </View>
