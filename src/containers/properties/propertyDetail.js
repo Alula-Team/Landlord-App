@@ -6,14 +6,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
-  TextInput,
-  KeyboardAvoidingView,
 } from "react-native";
 
-import { firestore } from "../../firebase/firebase";
+import { Header, Icon } from 'react-native-elements';
 
-// Forms
-import { useForm, Controller } from "react-hook-form";
+import { firestore } from "../../firebase/firebase";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
@@ -38,10 +35,10 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
   const [properties, setProperties] = useState([...stateProperties]);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const { control, handleSubmit } = useForm();
-  const { itemID, itemAddress, itemUnit, itemCity, itemState, itemZip } =
+  const { itemID, itemAddress, itemUnit } =
     route.params;
-  // Delete Alert Pop Up
+  
+    // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
       "Delete Property?",
@@ -71,157 +68,174 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
     );
   };
 
+  // View Service Requests
+  const viewServiceRequests = () => {
+    navigation.navigate('ServiceRequests');
+    setModalVisible(!modalVisible);
+  }
+
   return (
     <View style={styles.container}>
       {/* Header */}
-      <View style={{ top: 0, left: 0, height: 100 }}>
-        <TouchableOpacity style={styles.backBtn}>
-          <Feather
+      <Header
+        centerComponent={
+          <Text style={{color: '#fff', fontSize: 17, fontWeight: '600', paddingTop: 32.5}}>{itemAddress}</Text>
+        }
+        leftComponent={
+          <Icon
             name="arrow-left"
-            size={25}
+            type="feather"
             color="#fff"
+            size={25}
+            iconStyle={{
+              paddingTop: 30,
+              paddingLeft: 10
+            }}
             onPress={() => navigation.goBack()}
           />
-        </TouchableOpacity>
-        <View style={styles.sectionSpacing}>
-          <Text style={styles.propertyDetailTitle}>
-            {/* Property Address: */}
-            {itemAddress} {itemUnit}
-          </Text>
-          <View style={{ flexDirection: "row", marginTop: 5 }}>
-            <Feather
-              name="map-pin"
-              color="white"
-              size={12}
-              style={{ marginRight: 5, marginTop: 1, color: "#ffffff90" }}
-            />
-            <Text style={styles.propertyDetailSubText}>
-              {itemCity}, {itemState} {itemZip}
-            </Text>
-          </View>
-        </View>
-      </View>
+        }
+        rightComponent={
+          <Icon
+            name="more-horizontal"
+            type="feather"
+            color="#fff"
+            size={27.5}
+            iconStyle={{
+              paddingTop: 30,
+              paddingRight: 10
+            }}
+            onPress={() => setModalVisible(true)}
+          />
+        }
+        containerStyle={{
+          backgroundColor: "#09061C",
+          justifyContent: "space-around",
+          borderBottomWidth: 0,
+        }}
+      />
 
       <ScrollView style={{ marginTop: 30 }}>
+        {/* Property Information */}
+        <Text style={styles.sectionTitle}>Property Information</Text>
+
+        <View style={{backgroundColor: '#EE6D66', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
+          {/* Year to Date */}
+          <View>
+            <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Year to Date:</Text>
+
+            {/* Revenue */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+              <Text style={{color: '#fff', fontSize: 16}}>Revenue:</Text>
+              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$7,500</Text>
+            </View>
+
+            {/* Expenses */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+              <Text style={{color: '#fff', fontSize: 16}}>Expenses:</Text>
+              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$830</Text>
+            </View>
+
+            {/* Profit */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+              <Text style={{color: '#fff', fontSize: 16}}>Profit:</Text>
+              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$6,670</Text>
+            </View>
+          </View>
+
+          {/* **** Separator **** */}
+          <View
+            style={{
+              marginVertical: 30,
+              height: 2,
+              //   width: '86%',
+              backgroundColor: "#ffffff90",
+              marginLeft: "5%",
+              marginRight: "5%",
+            }}
+          />
+          {/* **** END Separator **** */}
+
+          {/* All Time */}
+          <View>
+            <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>All Time:</Text>
+
+            {/* Revenue */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+              <Text style={{color: '#fff', fontSize: 16}}>Revenue:</Text>
+              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$27,00</Text>
+            </View>
+
+            {/* Expenses */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+              <Text style={{color: '#fff', fontSize: 16}}>Expenses:</Text>
+              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$3,259</Text>
+            </View>
+
+            {/* Profit */}
+            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+              <Text style={{color: '#fff', fontSize: 16}}>Profit:</Text>
+              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$23,741</Text>
+            </View>
+          </View>
+        </View>
+
+
         {/* Tenant Information */}
         <Text style={styles.sectionTitle}>Tenant Information</Text>
-        {/* <View
-          style={{
-            backgroundColor: "#ffffff20",
-            borderRadius: 10,
-            marginHorizontal: 30,
-            marginTop: 10,
-            padding: 10,
-          }}
-        > */}
-        {/* <Text style={styles.tenantName}>Tenant Name</Text> */}
 
-        {/* Lease Type */}
-        {/* <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: 10,
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Feather name="edit-3" color="#ffffff90" size={16} />
-              <Text style={styles.infoTitle}>Lease Type:</Text>
-            </View>
-            <Text style={styles.infoText}></Text>
-          </View> */}
+        <View style={{backgroundColor: '#5858FB', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
+          <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Tenant:</Text>
 
-        {/* Lease Period */}
-        {/* <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: 10,
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Feather name="clock" color="#ffffff90" size={16} />
-              <Text style={styles.infoTitle}>Lease Period:</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+            <View style={styles.tenantInitials}>
+              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>TN</Text>
             </View>
-            <Text style={styles.infoText}></Text>
-          </View> */}
+            <View>
+              <Text style={{color: '#fff', fontSize: 20, fontWeight: '600', marginLeft: 10}}>Tenant's Name</Text>
+              <Text style={{color: '#ffffff90', fontSize: 15, marginTop: 5, marginLeft: 10}}>tenant@tenant.com</Text>
+            </View>
+          </View>
 
-        {/* Rental Rate */}
-        {/* <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: 10,
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Feather name="dollar-sign" color="#ffffff90" size={16} />
-              <Text style={styles.infoTitle}>Rental Rate:</Text>
-            </View>
-            <Text style={styles.infoText}></Text>
-          </View> */}
+          <Text style={{color: '#ffffff90', fontSize: 14, marginTop: 20, fontWeight: '600'}}>Leasing Information:</Text>
+          
+          {/* Rental Rate */}
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <Text style={{color: '#fff', fontSize: 16}}>Rental Rate:</Text>
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$1,500</Text>
+          </View>
 
-        {/* Security Deposit */}
-        {/* <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: 10,
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Feather name="dollar-sign" color="#ffffff90" size={16} />
-              <Text style={styles.infoTitle}>Security Deposit:</Text>
-            </View>
-            <Text style={styles.infoText}></Text>
-          </View> */}
+          {/* Security Deposit */}
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <Text style={{color: '#fff', fontSize: 16}}>Security Deposit:</Text>
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$750</Text>
+          </View>
 
-        {/* Rent Due */}
-        {/* <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginLeft: 10,
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Feather name="calendar" color="#ffffff90" size={16} />
-              <Text style={styles.infoTitle}>Rent Due:</Text>
-            </View>
-            <Text style={styles.infoText}></Text>
-          </View> */}
-        {/* </View> */}
+          {/* Lease Type */}
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <Text style={{color: '#fff', fontSize: 16}}>Lease Type:</Text>
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>Fixed</Text>
+          </View>
 
-        {/* Add Tenant Button */}
-        <View style={{ marginHorizontal: 10 }}>
-          <TouchableOpacity
-            style={styles.serviceRequestsButton}
-            onPress={() => setModalVisible(true)}
-          >
-            <View style={{ flexDirection: "row", alignSelf: "center" }}>
-              <Feather
-                name="user-plus"
-                color="#fff"
-                size={20}
-                style={{ marginLeft: 10, alignSelf: "center" }}
-              />
-              <Text style={styles.serviceRequestsText}>Add Tenant</Text>
-            </View>
-            <Feather
-              name="arrow-right"
-              color="#fff"
-              size={20}
-              style={{ marginRight: 10, alignSelf: "center" }}
-            />
+          {/* Lease Length */}
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <Text style={{color: '#fff', fontSize: 16}}>Lease Length:</Text>
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>12 mo</Text>
+          </View>
+
+          {/* Payment Due */}
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
+            <Text style={{color: '#fff', fontSize: 16}}>Rent Due On:</Text>
+            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>1st /mo</Text>
+          </View>
+
+          {/* Remove Tenant Button */}
+          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 50, justifyContent: 'center'}}>
+            <Feather name='x' size={22.5} color='#fff' />
+            <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Remove Tenant</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Add Tenant Modal */}
+        {/* Actions Modal */}
         <Modal
           animationType="slide"
           transparent={true}
@@ -232,121 +246,33 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           }}
         >
           <View style={styles.overlay}>
-            <KeyboardAvoidingView behavior="position" enabled>
               <View style={styles.modalContainer}>
-                {/* Close modal button */}
-                <TouchableOpacity
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Feather
-                    name="x"
-                    size={25}
-                    color="#fff"
-                    style={{ marginLeft: 20, marginTop: 20 }}
-                  />
+
+                <Text style={{color: '#fff', fontSize: 18, fontWeight: '600', textAlign: 'center', marginTop: 20}}>Actions</Text>
+
+                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', paddingTop: 30, paddingLeft: 20}}>
+                  <Feather name='edit-3' size={22.5} color='#fff' />
+                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Edit Property</Text>
                 </TouchableOpacity>
 
-                <Text style={styles.modalText}>
-                  Invite your tenant to connect...
-                </Text>
-
-                {/* Email Field */}
-                <Controller
-                  control={control}
-                  render={({ field: { value, onChange } }) => (
-                    <View style={styles.tenantInputContainer}>
-                      <TextInput
-                        type="text"
-                        placeholder="Enter Tenant Email..."
-                        placeholderTextColor="#ffffff90"
-                        style={styles.tenantInput}
-                        keyboardAppearance="dark"
-                        onChangeText={onChange}
-                        value={value}
-                      />
-                    </View>
-                  )}
-                  name="address"
-                  rules={{ required: true }}
-                  defaultValue=""
-                />
-
-                {/* Invite Button */}
-                <TouchableOpacity style={styles.modalButton}>
-                  <Text style={styles.modalButtonText}>Invite</Text>
+                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', paddingTop: 30, paddingLeft: 20}} onPress={viewServiceRequests}>
+                  <Feather name='tool' size={22.5} color='#fff' />
+                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>View Service Requests</Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', paddingTop: 30, paddingLeft: 20}} onPress={deleteAlert}>
+                  <Feather name='trash' size={22.5} color='red' />
+                  <Text style={{ color: 'red', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Delete Property</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 50, justifyContent: 'center'}} onPress={() => setModalVisible(!modalVisible)}>
+                  <Feather name='x' size={22.5} color='#fff' />
+                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Cancel</Text>
+                </TouchableOpacity>
+
               </View>
-            </KeyboardAvoidingView>
           </View>
         </Modal>
-
-        {/* Service Requests */}
-        <Text style={styles.sectionTitle}>Service Requests</Text>
-        <View style={{ marginHorizontal: 10 }}>
-          <TouchableOpacity
-            style={styles.serviceRequestsButton}
-            onPress={() => navigation.navigate("ServiceRequests")}
-          >
-            <View style={{ flexDirection: "row", alignSelf: "center" }}>
-              <Feather
-                name="tool"
-                color="#fff"
-                size={20}
-                style={{ marginLeft: 10, alignSelf: "center" }}
-              />
-              <Text style={styles.serviceRequestsText}>Service Requests</Text>
-            </View>
-            <Feather
-              name="arrow-right"
-              color="#fff"
-              size={20}
-              style={{ marginRight: 10, alignSelf: "center" }}
-            />
-          </TouchableOpacity>
-        </View>
-
-        {/* Button Group */}
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          {/* Edit Property Button */}
-          <TouchableOpacity
-            style={{
-              backgroundColor: "#5858FB",
-              margin: 30,
-              padding: 15,
-              borderRadius: 10,
-            }}
-            // onPress={}
-          >
-            <Text
-              style={styles.removePropButtonText}
-              onPress={() =>
-                navigation.navigate("AddEditProperty", {
-                  itemID: item.id,
-                  itemAddress: item.address,
-                  itemUnit: item.unit,
-                  itemCity: item.city,
-                  itemState: item.state,
-                  itemZip: item.zip,
-                })
-              }
-            >
-              Edit Property
-            </Text>
-          </TouchableOpacity>
-
-          {/* Remove Property Button */}
-          <TouchableOpacity
-            style={{
-              backgroundColor: "red",
-              margin: 30,
-              padding: 15,
-              borderRadius: 10,
-            }}
-            onPress={deleteAlert}
-          >
-            <Text style={styles.removePropButtonText}>Delete Property</Text>
-          </TouchableOpacity>
-        </View>
       </ScrollView>
     </View>
   );
