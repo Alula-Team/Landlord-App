@@ -191,7 +191,7 @@ const Properties = () => {
                 style={styles.searchInput}
                 keyboardAppearance="dark"
                 clearButtonMode="while-editing"
-                onChangeText={handleSearch}
+                onChangeText={handleQuery}
               />
             </View>
           )}
