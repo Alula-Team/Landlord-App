@@ -223,6 +223,7 @@ const Properties = ({ stateProperties }) => {
                 type="search"
                 placeholder="Search Properties"
                 placeholderTextColor="#ffffff75"
+                autoCorrect='false'
                 style={styles.searchInput}
                 keyboardAppearance="dark"
                 clearButtonMode="while-editing"
