@@ -172,6 +172,37 @@ const Properties = () => {
           }}
         />
         {/* Search Bar */}
+
+        <Controller
+          control={control}
+          render={() => (
+            <View style={styles.searchContainer}>
+              <Feather
+                name="search"
+                color="#fff"
+                size={20}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                type="search"
+                placeholder="Search Properties"
+                placeholderTextColor="#ffffff75"
+                autoCorrect='false'
+                style={styles.searchInput}
+                keyboardAppearance="dark"
+                clearButtonMode="while-editing"
+                onChangeText={handleSearch}
+              />
+            </View>
+          )}
+          name="search"
+        />
+        {isDirty.search && (
+          <Text style={{ color: "red" }}>
+            This field is dry clean only. Which means, it's dirty.
+          </Text>
+        )}
+
         <View style={styles.searchContainer}>
           <Feather
             name="search"
@@ -189,6 +220,7 @@ const Properties = () => {
             onChangeText={handleQuery}
           />
         </View>
+
 
         {/* Properties Flat List */}
         <SafeAreaView>

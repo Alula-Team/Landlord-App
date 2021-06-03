@@ -4,12 +4,19 @@ import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+// Form
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
+// Firebase
 import { addProperty, firestore } from "../../firebase/firebase";
+
+
+// Google Places
+import { apiKey } from '../../googlePlaces/googlePlacesConfig';
 
 import faker from "faker";
 faker.locale = "en_US";
+
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -176,7 +183,7 @@ const AddProperty = ({ navigation }) => {
             <View style={styles.addInputContainer}>
               <TextInput
                 type="text"
-                placeholder="Enter Street Address..."
+                placeholder="Enter Property Address..."
                 placeholderTextColor="#ffffff80"
                 style={styles.propertyInput}
                 keyboardAppearance="dark"
@@ -201,6 +208,7 @@ const AddProperty = ({ navigation }) => {
             This field is required
           </Text>
         )}
+
         {/* City */}
         <Controller
           control={control}
@@ -352,6 +360,7 @@ const AddProperty = ({ navigation }) => {
             This field is required
           </Text>
         )}
+
         {/* Units */}
         <TouchableOpacity
           style={styles.addButton}

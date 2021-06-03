@@ -71,6 +71,15 @@ const Transactions = ({ navigation }) => {
     );
   };
 
+  // Flatlist Header
+  const HeaderComponent = () => {
+    return(
+      <View style={{ backgroundColor: '#09061C'}}>
+        <TextInput style={styles.sectionText}>Vacant</TextInput>
+      </View>
+    );
+  }
+
   // Empty List Content
   const EmptyListMessage = () => {
     return (
@@ -169,6 +178,7 @@ const Transactions = ({ navigation }) => {
             type="search"
             placeholder="Search Transactions"
             placeholderTextColor="#ffffff75"
+            autoCorrect='false'
             style={styles.searchInput}
             keyboardAppearance="dark"
             clearButtonMode="while-editing"
@@ -236,6 +246,8 @@ const Transactions = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
               ListEmptyComponent={EmptyListMessage}
+              ListHeaderComponent={HeaderComponent}
+              stickyHeaderIndices={[0]}
             />
           </View>
         </SafeAreaView>
