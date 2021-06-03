@@ -164,7 +164,15 @@ const AddProperty = ({ navigation }) => {
           }}
           // onPress={}
         >
-          <Text style={styles.removePropButtonText} onPress={fakeIt}>
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "bold",
+              color: "white",
+              textAlign: "center",
+            }}
+            onPress={fakeIt}
+          >
             Fake It!
           </Text>
         </TouchableOpacity>
