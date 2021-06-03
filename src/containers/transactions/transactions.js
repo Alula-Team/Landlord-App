@@ -31,9 +31,7 @@ import { doDeleteTransaction } from "../../redux/actions";
 // New transactions auto sorted by newest to oldest
 // Separation between months/year
 
-const Transactions = () => {
-  const navigation = useNavigation();
-
+const Transactions = ({ navigation }) => {
   const [transactions, setTransactions] = useState([]);
 
   let unsubscribe = null;
@@ -205,12 +203,12 @@ const Transactions = () => {
                   {/* Property */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="map-pin" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.address}</Text>
+                    <Text style={styles.listItem}>What</Text>
                   </View>
                   {/* Date */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="clock" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.date}</Text>
+                    <Text style={styles.listItem}>December 12, 1912</Text>
                   </View>
                   {/* Payment Type */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>

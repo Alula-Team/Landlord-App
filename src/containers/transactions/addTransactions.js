@@ -8,6 +8,9 @@ import { firestore } from "../../firebase/firebase";
 import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
 
+import faker from "faker";
+faker.locale = "en_US";
+
 // Forms
 import { useForm, Controller } from "react-hook-form";
 
@@ -53,8 +56,34 @@ const AddTransactions = ({ addTransaction }) => {
 
   const data = properties;
 
+  const fakeIt = () => {
+    setValue("payment", faker.random.arrayElement(["Expense", "Payment"]));
+    setValue(
+      "transactionCategory",
+      faker.random.arrayElement([
+        "Appraisal",
+        "Cleaning",
+        "Inspection",
+        "Marketing",
+        "Renovations",
+        "Rent Payment",
+        "Report",
+        "Repairs",
+        "Security Deposit",
+        "Tax Services",
+      ])
+    );
+    setValue("property", faker.random.arrayElement(properties));
+    setValue(
+      "paymentMethod",
+      faker.random.arrayElement(["Bank Transfer", "Cash", "Check", "Other"])
+    );
+    setValue("amount", faker.datatype.number({ min: 640, max: 1650 }));
+  };
+
   const {
     control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -110,7 +139,7 @@ const AddTransactions = ({ addTransaction }) => {
     { label: "Other", value: "Other", color: "white" },
   ];
 
-  const addItem = (data) => {
+  const makeDate = (data) => {
     const year = date.getFullYear();
     const day = date.getDate();
     const months = [
@@ -129,7 +158,11 @@ const AddTransactions = ({ addTransaction }) => {
     ];
     const month = months[date.getMonth()];
     const formattedDate = `${month} ${day}, ${year}`;
-    data.date = formattedDate;
+    return (data.date = formattedDate);
+  };
+
+  const addItem = (data) => {
+    makeDate(data.date);
     addTransaction(data);
     navigation.goBack();
   };
@@ -148,10 +181,10 @@ const AddTransactions = ({ addTransaction }) => {
     setMode(currentMode);
   };
 
-  const onSubmit = async (data) => {
-    console.log(data.date);
+  const onSubmit = (data) => {
+    makeDate(data.date);
+    firestore.collection("transactions").add(data);
     navigation.goBack();
-    await firestore.collection("transactions").add(data);
     emptyState();
   };
 
@@ -254,6 +287,27 @@ const AddTransactions = ({ addTransaction }) => {
 
         {/* Content */}
         <KeyboardAwareScrollView>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#5858FB",
+              margin: 30,
+              padding: 15,
+              borderRadius: 10,
+            }}
+            // onPress={}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "white",
+                textAlign: "center",
+              }}
+              onPress={fakeIt}
+            >
+              Fake It!
+            </Text>
+          </TouchableOpacity>
           {/* Transaction Type */}
           <Text style={styles.sectionText}>Transaction Type</Text>
           <Controller

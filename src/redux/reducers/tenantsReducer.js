@@ -1,4 +1,3 @@
-import uuid from "react-native-uuid";
 const initialState = {
   newTenant: {},
   tenants: [],
@@ -7,7 +6,6 @@ const initialState = {
 const tenantsReducer = (state = initialState, action) => {
   if (action.type === "ADD_TENANT") {
     const newTenant = {
-      id: uuid.v4(),
       name: action.payload.tenantName,
       email: action.payload.tenantEmail,
       phone: action.payload.tenantPhoneNumber,
