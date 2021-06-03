@@ -9,7 +9,6 @@ import AddProperty from "../../containers/properties/addProperty";
 import ServiceRequests from "../../containers/properties/serviceRequests";
 import PropertyDetail from "../../containers/properties/propertyDetail";
 import ServiceRequestDetail from "../../containers/properties/serviceRequestDetail";
-import AddTenants from "../../containers/properties/addTenants";
 
 const Stack = createStackNavigator();
 
@@ -35,11 +34,6 @@ const PropertiesNavigation = (props) => {
         <Stack.Screen
           name="PropertyDetail"
           component={PropertyDetail}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="AddTenants"
-          component={AddTenants}
           options={{ headerShown: false }}
         />
         <Stack.Screen

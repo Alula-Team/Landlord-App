@@ -42,7 +42,7 @@ const EditProfile = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#45435C",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}

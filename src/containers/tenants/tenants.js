@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -6,7 +6,9 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
+  Modal,
+  KeyboardAvoidingView
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
 
@@ -28,6 +30,9 @@ import { connect } from "react-redux";
 
 const Tenants = ({ stateTenants }) => {
   const navigation = useNavigation();
+
+  const [modalVisible, setModalVisible] = useState(false);
+
   const data = stateTenants;
   const datas = [
     {
@@ -111,7 +116,22 @@ const Tenants = ({ stateTenants }) => {
               paddingTop: 30,
             },
           }}
-          rightComponent={ <Icon name="plus" type="feather" color="transparent" size={25} iconStyle={{paddingTop: 30, paddingRight: 20, paddingBottom: 10}} /> }
+          rightComponent={
+            <>
+              <Icon
+                name="plus"
+                type="feather"
+                color="#fff"
+                size={25}
+                iconStyle={{
+                  paddingTop: 30,
+                  paddingRight: 20,
+                  paddingBottom: 10,
+                }}
+                onPress={() => setModalVisible(true)}
+              />
+            </>
+          }
           containerStyle={{
             backgroundColor: "#09061C",
             justifyContent: "space-around",
@@ -136,6 +156,57 @@ const Tenants = ({ stateTenants }) => {
             clearButtonMode='while-editing'
           />
         </View>
+
+        {/* Add Tenant Modal */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.overlay}>
+            <KeyboardAvoidingView behavior="position" enabled>
+              <View style={styles.modalContainer}>
+                {/* Close modal button */}
+                <TouchableOpacity
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Feather
+                    name="x"
+                    size={25}
+                    color="#fff"
+                    style={{ marginLeft: 20, marginTop: 20 }}
+                  />
+                </TouchableOpacity>
+
+                <Text style={styles.modalText}>
+                  Invite your tenant to connect...
+                </Text>
+
+                {/* Email Field */}
+                <View style={styles.tenantInputContainer}>
+                  <TextInput
+                    type="text"
+                    placeholder="Enter Tenant Email..."
+                    placeholderTextColor="#ffffff90"
+                    style={styles.tenantInput}
+                    keyboardAppearance="dark"
+                    // onChangeText={}
+                    // value={}
+                  />
+                </View>
+
+                {/* Invite Button */}
+                <TouchableOpacity style={styles.modalButton}>
+                  <Text style={styles.modalButtonText}>Invite</Text>
+                </TouchableOpacity>
+              </View>
+            </KeyboardAvoidingView>
+          </View>
+        </Modal>
 
         {/* Properties Flat List */}
         <SafeAreaView>
