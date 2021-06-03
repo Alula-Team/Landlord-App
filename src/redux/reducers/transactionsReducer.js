@@ -1,4 +1,3 @@
-import uuid from "react-native-uuid";
 const initialState = {
   newTransaction: {},
   transactions: [],
@@ -7,7 +6,6 @@ const initialState = {
 const transactionsReducer = (state = initialState, action) => {
   if (action.type === "ADD_TRANSACTION") {
     const newTransaction = {
-      id: uuid.v4(),
       address: action.payload.address,
       transactionCategory: action.payload.transactionCategory,
       date: action.payload.date,

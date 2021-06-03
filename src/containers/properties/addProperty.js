@@ -8,6 +8,9 @@ import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 import { addProperty, firestore } from "../../firebase/firebase";
 
+import faker from "faker";
+faker.locale = "en_US";
+
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
@@ -46,6 +49,7 @@ const AddProperty = ({ navigation }) => {
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
 
@@ -54,18 +58,17 @@ const AddProperty = ({ navigation }) => {
     name: "units",
   });
 
-  const emptyStatePARTS = () => {
-    setAddress("");
-    setCity("");
-    setState("");
-    setZip("");
-    setUnit("");
+  const fakeIt = () => {
+    setValue("address", faker.address.streetAddress());
+    setValue("city", faker.address.city());
+    setValue("state", "NV");
+    setValue("zip", faker.address.zipCode());
   };
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
+    firestore.collection("properties").add(data);
     navigation.goBack();
-    await firestore.collection("properties").add(data);
-    emptyState();
+    // emptyState();
   };
 
   // For Picker Select
@@ -152,6 +155,19 @@ const AddProperty = ({ navigation }) => {
       />
 
       <KeyboardAwareScrollView>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#5858FB",
+            margin: 30,
+            padding: 15,
+            borderRadius: 10,
+          }}
+          // onPress={}
+        >
+          <Text style={styles.removePropButtonText} onPress={fakeIt}>
+            Fake It!
+          </Text>
+        </TouchableOpacity>
         <Text style={styles.sectionText}>Property Address</Text>
         {/* Street Address */}
         <Controller
@@ -320,11 +336,11 @@ const AddProperty = ({ navigation }) => {
               />
             </View>
           )}
-          name="zipCode"
+          name="zip"
           rules={{ required: true }}
           defaultValue=""
         />
-        {errors.zipCode && (
+        {errors.zip && (
           <Text
             style={{
               color: "red",
