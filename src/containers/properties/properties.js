@@ -206,26 +206,6 @@ const Properties = () => {
           </Text>
         )}
 
-        <View style={styles.searchContainer}>
-          <Feather
-            name="search"
-            color="#fff"
-            size={20}
-            style={styles.searchIcon}
-          />
-          <TextInput
-            type="search"
-            placeholder="Search Properties"
-            placeholderTextColor="#ffffff75"
-            autoCorrect="false"
-            style={styles.searchInput}
-            keyboardAppearance="dark"
-            clearButtonMode="while-editing"
-            onChangeText={handleQuery}
-            value={query}
-          />
-        </View>
-
 
         {/* Properties Flat List */}
         <SafeAreaView>
