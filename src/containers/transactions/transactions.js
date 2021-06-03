@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import moment from "moment";
 import { firestore } from "../../firebase/firebase";
 import {
   Alert,
@@ -48,6 +47,7 @@ const Transactions = ({ navigation }) => {
         });
     }
     getStuffs();
+    console.log(transactions);
     return function cleanup() {
       unsubscribe();
       mounted = false;
@@ -112,16 +112,15 @@ const Transactions = ({ navigation }) => {
         {
           text: "Cancel",
           style: "cancel",
-          onPress: () => console.log("Cancel Pressed"),
+          onPress: () => console.log("Cancel Pressed", id),
         },
         {
           text: "Delete",
           style: "destructive",
           onPress: () => {
-            console.log("Yer trynna delete me?!");
-            // const filtered = transactions.filter((item) => item.id !== id);
-            //firestore.docs(`transactions/${id}`).delete();
-            //setTransactions(filtered);
+            const filtered = transactions.filter((item) => item.id !== id);
+            firestore.doc(`transactions/${id}`).delete();
+            setTransactions(filtered);
           },
         },
       ]
@@ -213,12 +212,12 @@ const Transactions = ({ navigation }) => {
                   {/* Property */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="map-pin" color="#fff" size={15} />
-                    <Text style={styles.listItem}>What</Text>
+                    <Text style={styles.listItem}>{item.address}</Text>
                   </View>
                   {/* Date */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="clock" color="#fff" size={15} />
-                    <Text style={styles.listItem}>December 12, 1912</Text>
+                    <Text style={styles.listItem}>{item.date}</Text>
                   </View>
                   {/* Payment Type */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>

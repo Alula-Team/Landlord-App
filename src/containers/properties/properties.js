@@ -37,8 +37,8 @@ const Properties = () => {
   const [properties, setProperties] = useState([]);
   const [query, setQuery] = useState("");
 
-  const handleQuery = (e) => {
-    setQuery(e);
+  const handleQuery = (text) => {
+    setQuery(text);
   };
 
   const filteredProperties = properties.filter((item) => {
@@ -161,7 +161,10 @@ const Properties = () => {
                   paddingRight: 20,
                   paddingBottom: 10,
                 }}
-                onPress={() => navigation.navigate("AddProperty")}
+                onPress={() => {
+                  setQuery("");
+                  navigation.navigate("AddProperty");
+                }}
               />
             </>
           }
@@ -214,10 +217,12 @@ const Properties = () => {
             type="search"
             placeholder="Search Properties"
             placeholderTextColor="#ffffff75"
+            autoCorrect="false"
             style={styles.searchInput}
             keyboardAppearance="dark"
             clearButtonMode="while-editing"
             onChangeText={handleQuery}
+            value={query}
           />
         </View>
 
