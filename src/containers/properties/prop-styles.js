@@ -29,26 +29,6 @@ const styles = StyleSheet.create({
         width: '85%'
     },
 
-    // Service Request Button
-    serviceRequestsButton: {
-        marginHorizontal: 20,
-        marginTop: 10,
-        marginBottom: 20,
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    serviceRequestsText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '700',
-        marginLeft: 10,
-        alignSelf: 'center'
-    },
-
     // Flatlist
     listCell: {
         paddingVertical: 20,
@@ -156,114 +136,37 @@ const styles = StyleSheet.create({
     },
 
     // ** PROPERTY DETAIL SCREEN ** //
-    backBtn: {
-        top: 70, 
-        left: 30,
-        borderRadius: 10,
-    },
-    sectionSpacing: {
-        marginTop: 37,
-        left: 100
-    },
-    propertyDetailTitle: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '700',
-        textAlign: 'left', 
-    },
-    propertyDetailSubText: {
-        color: '#ffffff90',
-        fontSize: 14,
-        fontWeight: '500',
-    },
     sectionTitle: {
         color: '#fff',
         fontSize: 16,
         fontWeight: '600',
         marginLeft: 30,
-        marginTop: 30,
+        marginTop: 10,
         marginBottom: 20
     },
-    infoTitle: {
-        color: '#ffffff90',
-        fontSize: 16,
-        marginLeft: 10,
-        marginVertical: 10
+    tenantCard: {
+
     },
-    infoText: {
-        color: '#fff',
-        fontSize: 16,
-        marginRight: 10,
-        marginVertical: 10
-    },
-    tenantName: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '700',
-        marginLeft: 10,
-        marginVertical: 10
-    },
-    removePropButton: {
-        marginHorizontal: 20,
-        marginTop: 10,
-        marginBottom: 20,
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        width: 100
-    },
-    removePropButtonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '700',
-        textAlign: 'center'
+    tenantInitials: {
+        width: 50, 
+        height: 50, 
+        borderRadius: 80/2, 
+        borderColor: '#fff',
+        borderWidth: 3,
+        justifyContent: 'center', 
+        alignItems: 'center',
+        alignSelf: 'center'
     },
     overlay: {
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: '#00000050',
         flex: 1,
         justifyContent: 'flex-end',
     },
     modalContainer: {
-        backgroundColor: '#5858FB',
+        backgroundColor: '#2a2933',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        height: 325
-    },
-    modalText: {
-        color: '#fff',
-        textAlign: 'center',
-        marginVertical: 20,
-        fontSize: 18
-    },
-    modalButton: {
-        backgroundColor: '#fff',
-        padding: 15,
-        marginTop: 20,
-        marginHorizontal: '20%',
-        borderRadius: 10,
-    },
-    modalButtonText: {
-        fontSize: 18,
-        fontWeight: '600',
-        alignSelf: 'center',
-        color: '#5858FB'
-    },
-    tenantInputContainer: {
-        marginHorizontal: 20,
-        marginTop: 10,
-        marginBottom: 20,
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        flexDirection: 'row',
-        borderColor: '#ffffff60'
-    },
-    tenantInput: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '500',
-        marginLeft: 12.5
+        height: '40%'
     }
 });
 
