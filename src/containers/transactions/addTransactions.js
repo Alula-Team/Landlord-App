@@ -5,7 +5,7 @@ import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { firestore } from "../../firebase/firebase";
-import moment from "moment";
+
 import DateTimePicker from "@react-native-community/datetimepicker";
 
 import faker from "faker";
@@ -52,33 +52,34 @@ const AddTransactions = ({ addTransaction }) => {
     };
   }, []);
 
-  console.log(properties);
-
-  const data = properties;
+  const paymentArray = ["Expense", "Payment"];
+  const transactionCategoryArray = [
+    "Appraisal",
+    "Cleaning",
+    "Inspection",
+    "Marketing",
+    "Renovations",
+    "Rent Payment",
+    "Report",
+    "Repairs",
+    "Security Deposit",
+    "Tax Services",
+  ];
+  const addressArray = properties.map((property) => {
+    return property.address;
+  });
+  const paymentMethodArray = ["Bank Transfer", "Cash", "Check", "Other"];
 
   const fakeIt = () => {
-    setValue("payment", faker.random.arrayElement(["Expense", "Payment"]));
+    setValue("payment", faker.random.arrayElement(paymentArray));
     setValue(
       "transactionCategory",
-      faker.random.arrayElement([
-        "Appraisal",
-        "Cleaning",
-        "Inspection",
-        "Marketing",
-        "Renovations",
-        "Rent Payment",
-        "Report",
-        "Repairs",
-        "Security Deposit",
-        "Tax Services",
-      ])
+      faker.random.arrayElement(transactionCategoryArray)
     );
-    setValue("property", faker.random.arrayElement(properties));
-    setValue(
-      "paymentMethod",
-      faker.random.arrayElement(["Bank Transfer", "Cash", "Check", "Other"])
-    );
+    setValue("address", faker.random.arrayElement(addressArray));
+    setValue("paymentMethod", faker.random.arrayElement(paymentMethodArray));
     setValue("amount", faker.datatype.number({ min: 640, max: 1650 }));
+    setValue("date", faker.date.past());
   };
 
   const {
@@ -139,9 +140,9 @@ const AddTransactions = ({ addTransaction }) => {
     { label: "Other", value: "Other", color: "white" },
   ];
 
-  const makeDate = (data) => {
-    const year = date.getFullYear();
-    const day = date.getDate();
+  const makeDate = (dateObj) => {
+    const year = dateObj.getFullYear();
+    const day = dateObj.getDate();
     const months = [
       "Jan",
       "Feb",
@@ -156,16 +157,15 @@ const AddTransactions = ({ addTransaction }) => {
       "Nov",
       "Dec",
     ];
-    const month = months[date.getMonth()];
-    const formattedDate = `${month} ${day}, ${year}`;
-    return (data.date = formattedDate);
+    const month = months[dateObj.getMonth()];
+    return `${month} ${day}, ${year}`;
   };
 
-  const addItem = (data) => {
-    makeDate(data.date);
-    addTransaction(data);
-    navigation.goBack();
-  };
+  // const addItem = (data) => {
+  //   makeDate(data.date);
+  //   addTransaction(data);
+  //   navigation.goBack();
+  // };
 
   // Date
   const [date, setDate] = useState(new Date());
@@ -175,6 +175,7 @@ const AddTransactions = ({ addTransaction }) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
+    console.log(date);
   };
   const showMode = (currentMode) => {
     setShow(true);
@@ -182,10 +183,9 @@ const AddTransactions = ({ addTransaction }) => {
   };
 
   const onSubmit = (data) => {
-    makeDate(data.date);
+    data.date = makeDate(data.date);
     firestore.collection("transactions").add(data);
     navigation.goBack();
-    emptyState();
   };
 
   // For Picker Select
@@ -294,7 +294,7 @@ const AddTransactions = ({ addTransaction }) => {
               padding: 15,
               borderRadius: 10,
             }}
-            // onPress={}
+            onPress={fakeIt}
           >
             <Text
               style={{
@@ -303,7 +303,6 @@ const AddTransactions = ({ addTransaction }) => {
                 color: "white",
                 textAlign: "center",
               }}
-              onPress={fakeIt}
             >
               Fake It!
             </Text>
