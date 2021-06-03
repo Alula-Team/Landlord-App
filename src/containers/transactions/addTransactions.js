@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import { firestore } from "../../firebase/firebase";
-
+import moment from "moment";
 import DateTimePicker from "@react-native-community/datetimepicker";
+
+import faker from "faker";
+faker.locale = "en_US";
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
@@ -24,16 +27,68 @@ import styles from "./trans-styles";
 import { connect } from "react-redux";
 import { doAddTransaction } from "../../redux/actions";
 
-const AddTransactions = ({ stateProperties, addTransaction }) => {
+const AddTransactions = ({ addTransaction }) => {
   const navigation = useNavigation();
+
+  const [properties, setProperties] = useState([]);
+
+  let unsubscribe = null;
+  useEffect(() => {
+    let mounted = true;
+    async function getStuffs() {
+      unsubscribe = firestore
+        .collection("properties")
+        .onSnapshot((snapshot) => {
+          const properties = snapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+          });
+          if (mounted) setProperties(properties);
+        });
+    }
+    getStuffs();
+    return function cleanup() {
+      unsubscribe();
+      mounted = false;
+    };
+  }, []);
+
+  console.log(properties);
+
+  const data = properties;
+
+  const fakeIt = () => {
+    setValue("payment", faker.random.arrayElement(["Expense", "Payment"]));
+    setValue(
+      "transactionCategory",
+      faker.random.arrayElement([
+        "Appraisal",
+        "Cleaning",
+        "Inspection",
+        "Marketing",
+        "Renovations",
+        "Rent Payment",
+        "Report",
+        "Repairs",
+        "Security Deposit",
+        "Tax Services",
+      ])
+    );
+    setValue("property", faker.random.arrayElement(properties));
+    setValue(
+      "paymentMethod",
+      faker.random.arrayElement(["Bank Transfer", "Cash", "Check", "Other"])
+    );
+    setValue("amount", faker.datatype.number({ min: 640, max: 1650 }));
+  };
 
   const {
     control,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const allProperties = stateProperties.map((item) => {
+  const allProperties = properties.map((item) => {
     return {
       label: item.address,
       value: item.address,
@@ -84,7 +139,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     { label: "Other", value: "Other", color: "white" },
   ];
 
-  const addItem = (data) => {
+  const makeDate = (data) => {
     const year = date.getFullYear();
     const day = date.getDate();
     const months = [
@@ -103,7 +158,11 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     ];
     const month = months[date.getMonth()];
     const formattedDate = `${month} ${day}, ${year}`;
-    data.date = formattedDate;
+    return (data.date = formattedDate);
+  };
+
+  const addItem = (data) => {
+    makeDate(data.date);
     addTransaction(data);
     navigation.goBack();
   };
@@ -122,11 +181,11 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
     setMode(currentMode);
   };
 
-  const onSubmit = async (data) => {
-    console.log(stateProperties);
-    // navigation.goBack();
-    // await firestore.collection("transactions").add(data);
-    // emptyState();
+  const onSubmit = (data) => {
+    makeDate(data.date);
+    firestore.collection("transactions").add(data);
+    navigation.goBack();
+    emptyState();
   };
 
   // For Picker Select
@@ -228,6 +287,27 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 
         {/* Content */}
         <KeyboardAwareScrollView>
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#5858FB",
+              margin: 30,
+              padding: 15,
+              borderRadius: 10,
+            }}
+            // onPress={}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                color: "white",
+                textAlign: "center",
+              }}
+              onPress={fakeIt}
+            >
+              Fake It!
+            </Text>
+          </TouchableOpacity>
           {/* Transaction Type */}
           <Text style={styles.sectionText}>Transaction Type</Text>
           <Controller
@@ -404,10 +484,7 @@ const AddTransactions = ({ stateProperties, addTransaction }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    stateProperties: state.properties.properties,
-    stateTransactions: state.transactions.transactions,
-  };
+  return { stateProperties: state.properties.properties };
 };
 
 const actions = {

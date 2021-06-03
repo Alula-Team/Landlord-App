@@ -1,4 +1,3 @@
-import uuid from "react-native-uuid";
 const initialState = {
   newProperty: {},
   properties: [],
@@ -10,7 +9,6 @@ const propertiesReducer = (state = initialState, action) => {
     if (action.payload.units.length) {
       for (var i = 0; i < action.payload.units.length; i++) {
         let oneProperty = {
-          id: uuid.v4(),
           address: action.payload.address,
           unit: action.payload.units[i].number,
           city: action.payload.city,
@@ -26,7 +24,6 @@ const propertiesReducer = (state = initialState, action) => {
       };
     } else {
       const newProperty = {
-        id: uuid.v4(),
         address: action.payload.address,
         unit: action.payload.units,
         city: action.payload.city,

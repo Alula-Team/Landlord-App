@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { firestore } from "../../firebase/firebase";
 
 import {
@@ -33,48 +33,22 @@ import { connect } from "react-redux";
 // Working Search Feature
 // New properties auto sorted in alpha numeric order
 
-const Properties = ({ stateProperties }) => {
+const Properties = () => {
   const [properties, setProperties] = useState([]);
+  const [query, setQuery] = useState("");
 
-  const propRef = firestore.collection("properties");
-
-  const addSomething = async () => {
-    const property = {
-      address: "188 This is Fake",
-      city: "Los Tacos",
-      state: "MV",
-      zip: "83901",
-    };
-    const docRef = await firestore.collection("properties").add(property);
-    const doc = await docRef.get();
-    const newProperty = (doc) => {
-      return { id: doc.id, ...doc.data() };
-    };
-    setProperties([newProperty, ...properties]);
+  const handleQuery = (e) => {
+    setQuery(e);
   };
 
-  // let unsubscribe = null;
-  // useEffect(() => {
-  //   let mounted = true;
-  //   if (mounted) {
-  //     async function fetchEm() {
-  //       firestore.collection("properties").onSnapshot((snapshot) => {
-  //         const properties = snapshot.docs.map((doc) => {
-  //           return { id: doc.id, ...doc.data() };
-  //         });
-  //         setProperties(properties);
-  //       });
-  //     }
-  //     fetchEm();
-  //   } else {
-  //     return function cleanup() {
-  //       mounted = false;
-  //     };
-  //   }
-  // }, []);
+  const filteredProperties = properties.filter((item) => {
+    return item.address.toLowerCase().includes(query.toLowerCase());
+  });
+
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
+    console.log("Im back here!");
     async function getStuffs() {
       unsubscribe = firestore
         .collection("properties")
@@ -88,11 +62,10 @@ const Properties = ({ stateProperties }) => {
     getStuffs();
     return function cleanup() {
       unsubscribe();
+      console.log("Im outta here!");
       mounted = false;
     };
   }, []);
-
-  console.log(properties);
 
   const navigation = useNavigation();
 
@@ -101,19 +74,7 @@ const Properties = ({ stateProperties }) => {
     formState: { isDirty },
   } = useForm();
 
-  // const [data, setData] = useState(properties);
-  const data = properties;
-
-  const resultsArray = stateProperties;
-
-  const handleSearch = (text) => {
-    const newData = resultsArray.filter((item) => {
-      const itemData = `${item.address.toUpperCase()} ${item.city.toUpperCase()}`;
-      const textData = text.toUpperCase();
-      return itemData.indexOf(textData) > -1;
-    });
-    setData(newData);
-  };
+  const data = filteredProperties;
 
   function Occupied(props) {
     return (
@@ -149,6 +110,10 @@ const Properties = ({ stateProperties }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
+    let message =
+      properties.length === 0
+        ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
+        : `Your search returned 0 properties. Back up and try again.`;
     return (
       <View style={styles.emptyList}>
         <Image
@@ -163,8 +128,7 @@ const Properties = ({ stateProperties }) => {
             fontSize: 18,
           }}
         >
-          Hmm... There is nothing here... Let's add your first property! Use the
-          '+' symbol at the top to get started.
+          {message}
         </Text>
       </View>
     );
@@ -207,8 +171,8 @@ const Properties = ({ stateProperties }) => {
             borderBottomWidth: 0,
           }}
         />
-
         {/* Search Bar */}
+
         <Controller
           control={control}
           render={() => (
@@ -238,6 +202,25 @@ const Properties = ({ stateProperties }) => {
             This field is dry clean only. Which means, it's dirty.
           </Text>
         )}
+
+        <View style={styles.searchContainer}>
+          <Feather
+            name="search"
+            color="#fff"
+            size={20}
+            style={styles.searchIcon}
+          />
+          <TextInput
+            type="search"
+            placeholder="Search Properties"
+            placeholderTextColor="#ffffff75"
+            style={styles.searchInput}
+            keyboardAppearance="dark"
+            clearButtonMode="while-editing"
+            onChangeText={handleQuery}
+          />
+        </View>
+
 
         {/* Properties Flat List */}
         <SafeAreaView>

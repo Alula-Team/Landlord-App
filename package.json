@@ -20,6 +20,7 @@
     "expo-status-bar": "~1.0.3",
     "firebase": "^8.4.3",
     "lodash.filter": "^4.6.0",
+    "moment": "^2.29.1",
     "react": "16.13.1",
     "react-devtools": "^4.10.1",
     "react-dom": "16.13.1",
