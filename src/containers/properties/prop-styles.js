@@ -84,6 +84,7 @@ const styles = StyleSheet.create({
         // textDecorationLine: 'underline'
     },
     propertyInput: {
+        backgroundColor: 'transparent',
         color: '#fff',
         fontSize: 16,
         fontWeight: '500',
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         height: 45,
         flexDirection: 'row',
-        borderColor: '#ffffff50'
+        borderColor: '#ffffff50',
+        backgroundColor: 'transparent'
     },
 
     // ** SERVICE REQUEST Screen ** //
