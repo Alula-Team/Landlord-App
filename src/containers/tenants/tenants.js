@@ -144,7 +144,7 @@ const Tenants = ({ stateTenants, navigation }) => {
                   onPress={() => setShouldShow(!shouldShow)}
                 />
 
-                {/* ADD PROPERTY */}
+                {/* ADD Tenant */}
                 <Icon
                   name="plus"
                   type="feather"
@@ -155,10 +155,7 @@ const Tenants = ({ stateTenants, navigation }) => {
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
-                  onPress={() => {
-                    setQuery("");
-                    navigation.navigate("AddProperty");
-                  }}
+                  onPress={() => setModalVisible(true)}
                 />
               </View>
             </>
@@ -184,7 +181,7 @@ const Tenants = ({ stateTenants, navigation }) => {
                 />
                 <TextInput
                   type="search"
-                  placeholder="Search Properties"
+                  placeholder="Search Tenants"
                   placeholderTextColor="#ffffff75"
                   autoFocus={true}
                   autoCorrect={false}

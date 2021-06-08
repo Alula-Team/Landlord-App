@@ -185,7 +185,7 @@ const Transactions = ({ navigation }) => {
                   }}
                   onPress={() => {
                     setQuery("");
-                    navigation.navigate("AddProperty");
+                    navigation.navigate("AddTransactions");
                   }}
                 />
               </View>
@@ -212,7 +212,7 @@ const Transactions = ({ navigation }) => {
                 />
                 <TextInput
                   type="search"
-                  placeholder="Search Properties"
+                  placeholder="Search Transactions"
                   placeholderTextColor="#ffffff75"
                   autoFocus={true}
                   autoCorrect={false}
