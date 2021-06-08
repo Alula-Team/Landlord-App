@@ -184,6 +184,7 @@ const Properties = ({ navigation }) => {
                   type="search"
                   placeholder="Search Properties"
                   placeholderTextColor="#ffffff75"
+                  autoFocus={true}
                   autoCorrect={false}
                   style={styles.searchInput}
                   keyboardAppearance="dark"
