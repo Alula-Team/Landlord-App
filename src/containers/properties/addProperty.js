@@ -9,6 +9,7 @@ import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 // Firebase
 import { addProperty, firestore } from "../../firebase/firebase";
+import firebase from "firebase/app";
 
 // Google Places
 import { apiKey } from "../../googlePlaces/googlePlacesConfig";
@@ -25,6 +26,8 @@ import styles from "./prop-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
+
+const auth = firebase.auth();
 
 const AddProperty = ({ navigation }) => {
   const [address, setAddress] = useState("");
@@ -69,6 +72,7 @@ const AddProperty = ({ navigation }) => {
     setValue("state", "NV");
     setValue("zip", faker.address.zipCode());
     setValue("vacant", faker.datatype.boolean());
+    setValue("author", auth.currentUser.uid);
   };
 
   const onSubmit = (data) => {
