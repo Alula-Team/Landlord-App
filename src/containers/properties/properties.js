@@ -17,11 +17,11 @@ import { Badge, Header, Icon } from "react-native-elements";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // Screens
-import Occupied from './occupied';
-import Vacant from './vacant';
+import Occupied from "./occupied";
+import Vacant from "./vacant";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -39,10 +39,6 @@ const Properties = () => {
   const handleQuery = (text) => {
     setQuery(text);
   };
-
-  const filteredProperties = properties.filter((item) => {
-    return item.address.toLowerCase().includes(query.toLowerCase());
-  });
 
   let unsubscribe = null;
   useEffect(() => {
@@ -70,9 +66,12 @@ const Properties = () => {
 
   const Tab = createMaterialTopTabNavigator();
 
-  const { control, formState: { isDirty } } = useForm();
+  const {
+    control,
+    formState: { isDirty },
+  } = useForm();
 
-  const data = filteredProperties;
+  const data = properties;
 
   // Separator
   const renderSeparator = () => {
@@ -189,11 +188,11 @@ const Properties = () => {
         {/* END Search Bar */}
 
         {/* Stepper */}
-        <Tab.Navigator 
+        <Tab.Navigator
           tabBarOptions={{
-              indicatorStyle: { backgroundColor: '#5858FB'},
-              labelStyle: { fontSize: 14, color: '#fff' },
-              style: { backgroundColor: 'transparent'},
+            indicatorStyle: { backgroundColor: "#5858FB" },
+            labelStyle: { fontSize: 14, color: "#fff" },
+            style: { backgroundColor: "transparent" },
           }}
         >
           <Tab.Screen name="Occupied" component={Occupied} />

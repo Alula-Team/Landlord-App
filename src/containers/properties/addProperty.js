@@ -10,13 +10,11 @@ import { useForm, useFieldArray, Controller } from "react-hook-form";
 // Firebase
 import { addProperty, firestore } from "../../firebase/firebase";
 
-
 // Google Places
-import { apiKey } from '../../googlePlaces/googlePlacesConfig';
+import { apiKey } from "../../googlePlaces/googlePlacesConfig";
 
 import faker from "faker";
 faker.locale = "en_US";
-
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -70,9 +68,11 @@ const AddProperty = ({ navigation }) => {
     setValue("city", faker.address.city());
     setValue("state", "NV");
     setValue("zip", faker.address.zipCode());
+    setValue("vacant", faker.datatype.boolean());
   };
 
   const onSubmit = (data) => {
+    console.log(data);
     firestore.collection("properties").add(data);
     navigation.goBack();
     // emptyState();
