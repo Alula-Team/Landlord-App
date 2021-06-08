@@ -13,8 +13,6 @@ import {
 
 import { useForm, Controller } from "react-hook-form";
 
-import filter from "lodash.filter";
-
 import { Badge, Header, Icon } from "react-native-elements";
 
 // Navigation
@@ -72,10 +70,7 @@ const Properties = () => {
 
   const Tab = createMaterialTopTabNavigator();
 
-  const {
-    control,
-    formState: { isDirty },
-  } = useForm();
+  const { control, formState: { isDirty } } = useForm();
 
   const data = filteredProperties;
 

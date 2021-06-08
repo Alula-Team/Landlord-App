@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import { View, Text, TouchableOpacity, FlatList, SafeAreaView, Image } from 'react-native';
 
 // Vector Icons
@@ -7,18 +7,12 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./prop-styles";
 
+// Redux Stuff
+import { connect } from "react-redux";
+
 const Vacant = ({ navigation }) => {
 
     const [properties, setProperties] = useState([]);
-    const [query, setQuery] = useState("");
-
-    const handleQuery = (text) => {
-        setQuery(text);
-    };
-
-    const filteredProperties = properties.filter((item) => {
-        return item.address.toLowerCase().includes(query.toLowerCase());
-    });
 
     // Separator
     const renderSeparator = () => {
@@ -108,7 +102,11 @@ const Vacant = ({ navigation }) => {
             </SafeAreaView>
             
         </View>
-    )
+    );
 }
 
-export default Vacant;
+const mapStateToProps = (state) => {
+    return { stateProperties: state.properties.properties };
+};
+
+export default connect(mapStateToProps)(Vacant);
