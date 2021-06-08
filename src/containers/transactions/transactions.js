@@ -96,8 +96,7 @@ const Transactions = ({ navigation }) => {
             fontSize: 18,
           }}
         >
-          Hmm... There is nothing here... Use the '+' symbol at the top to get
-          started.
+          Hmm... No transactions yet
         </Text>
       </View>
     );
@@ -177,7 +176,7 @@ const Transactions = ({ navigation }) => {
             type="search"
             placeholder="Search Transactions"
             placeholderTextColor="#ffffff75"
-            autoCorrect='false'
+            autoCorrect={false}
             style={styles.searchInput}
             keyboardAppearance="dark"
             clearButtonMode="while-editing"
@@ -245,7 +244,7 @@ const Transactions = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
               ListEmptyComponent={EmptyListMessage}
-              ListHeaderComponent={HeaderComponent}
+              ListHeaderComponent={() => data.length > 0 && (HeaderComponent)}
               stickyHeaderIndices={[0]}
             />
           </View>

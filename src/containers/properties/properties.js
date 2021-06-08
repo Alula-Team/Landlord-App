@@ -13,12 +13,15 @@ import {
 
 import { useForm, Controller } from "react-hook-form";
 
-import filter from "lodash.filter";
-
 import { Badge, Header, Icon } from "react-native-elements";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+
+// Screens
+import Occupied from './occupied';
+import Vacant from './vacant';
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -28,10 +31,6 @@ import styles from "./prop-styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
-
-// THINGS I NEED FOR THIS SCREEN
-// Working Search Feature
-// New properties auto sorted in alpha numeric order
 
 const Properties = () => {
   const [properties, setProperties] = useState([]);
@@ -69,29 +68,11 @@ const Properties = () => {
 
   const navigation = useNavigation();
 
-  const {
-    control,
-    formState: { isDirty },
-  } = useForm();
+  const Tab = createMaterialTopTabNavigator();
+
+  const { control, formState: { isDirty } } = useForm();
 
   const data = filteredProperties;
-
-  function Occupied(props) {
-    return (
-      <Text style={{ color: "#5CB85C", fontWeight: "700" }}>Occupied</Text>
-    );
-  }
-  function Vacant(props) {
-    return <Text style={{ color: "#D9534F", fontWeight: "700" }}>Vacant</Text>;
-  }
-  function Status(props) {
-    const vacant = props.vacant;
-    if (vacant) {
-      return <Vacant />;
-    } else {
-      return <Occupied />;
-    }
-  }
 
   // Separator
   const renderSeparator = () => {
@@ -174,8 +155,8 @@ const Properties = () => {
             borderBottomWidth: 0,
           }}
         />
-        {/* Search Bar */}
 
+        {/* Search Bar */}
         <Controller
           control={control}
           render={() => (
@@ -190,7 +171,7 @@ const Properties = () => {
                 type="search"
                 placeholder="Search Properties"
                 placeholderTextColor="#ffffff75"
-                autoCorrect='false'
+                autoCorrect={false}
                 style={styles.searchInput}
                 keyboardAppearance="dark"
                 clearButtonMode="while-editing"
@@ -205,10 +186,23 @@ const Properties = () => {
             This field is dry clean only. Which means, it's dirty.
           </Text>
         )}
+        {/* END Search Bar */}
 
+        {/* Stepper */}
+        <Tab.Navigator 
+          tabBarOptions={{
+              indicatorStyle: { backgroundColor: '#5858FB'},
+              labelStyle: { fontSize: 14, color: '#fff' },
+              style: { backgroundColor: 'transparent'},
+          }}
+        >
+          <Tab.Screen name="Occupied" component={Occupied} />
+          <Tab.Screen name="Vacant" component={Vacant} />
+        </Tab.Navigator>
+        {/* END Stepper */}
 
         {/* Properties Flat List */}
-        <SafeAreaView>
+        {/* <SafeAreaView>
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}
@@ -247,7 +241,7 @@ const Properties = () => {
             ItemSeparatorComponent={renderSeparator}
             ListEmptyComponent={EmptyListMessage}
           />
-        </SafeAreaView>
+        </SafeAreaView> */}
       </View>
     </>
   );
