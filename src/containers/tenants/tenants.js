@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -10,10 +10,10 @@ import {
   Modal,
   KeyboardAvoidingView
 } from "react-native";
-import { Header, Icon } from "react-native-elements";
 
-// Navigation
-import { useNavigation } from "@react-navigation/native";
+import { useForm, Controller } from "react-hook-form";
+
+import { Header, Icon } from "react-native-elements";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -28,10 +28,21 @@ import { connect } from "react-redux";
 // Working Search Feature
 // New tenants auto sorted by first name
 
-const Tenants = ({ stateTenants }) => {
-  const navigation = useNavigation();
+const Tenants = ({ stateTenants, navigation }) => {
+
+  const [query, setQuery] = useState("");
+  const [shouldShow, setShouldShow] = useState(false);
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  const handleQuery = (text) => {
+    setQuery(text);
+  };
+
+  const {
+    control,
+    formState: { isDirty },
+  } = useForm();
 
   const data = stateTenants;
   const datas = [
@@ -118,18 +129,38 @@ const Tenants = ({ stateTenants }) => {
           }}
           rightComponent={
             <>
-              <Icon
-                name="plus"
-                type="feather"
-                color="#fff"
-                size={25}
-                iconStyle={{
-                  paddingTop: 30,
-                  paddingRight: 20,
-                  paddingBottom: 10,
-                }}
-                onPress={() => setModalVisible(true)}
-              />
+              <View style={{flexDirection: 'row'}}>
+                {/* SEARCH */}
+                <Icon
+                  name="search"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  onPress={() => setShouldShow(!shouldShow)}
+                />
+
+                {/* ADD PROPERTY */}
+                <Icon
+                  name="plus"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  onPress={() => {
+                    setQuery("");
+                    navigation.navigate("AddProperty");
+                  }}
+                />
+              </View>
             </>
           }
           containerStyle={{
@@ -140,22 +171,33 @@ const Tenants = ({ stateTenants }) => {
         />
 
         {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <Feather
+        {shouldShow ? (
+          <Controller
+            control={control}
+            render={() => (
+              <View style={styles.searchContainer}>
+                <Feather
+                  name="search"
+                  color="#fff"
+                  size={20}
+                  style={styles.searchIcon}
+                />
+                <TextInput
+                  type="search"
+                  placeholder="Search Properties"
+                  placeholderTextColor="#ffffff75"
+                  autoCorrect={false}
+                  style={styles.searchInput}
+                  keyboardAppearance="dark"
+                  clearButtonMode="while-editing"
+                  onChangeText={handleQuery}
+                />
+              </View>
+            )}
             name="search"
-            color="#fff"
-            size={20}
-            style={styles.searchIcon}
           />
-          <TextInput
-            type="search"
-            placeholder="Search Tenants"
-            placeholderTextColor="#ffffff75"
-            style={styles.searchInput}
-            keyboardAppearance="dark"
-            clearButtonMode='while-editing'
-          />
-        </View>
+        ): null }
+        {/* END Search Bar */}
 
         {/* Add Tenant Modal */}
         <Modal
@@ -256,9 +298,7 @@ const Tenants = ({ stateTenants }) => {
 };
 
 const mapStateToProps = (state) => {
-  return {
-    stateTenants: state.tenants.tenants,
-  };
+  return { stateTenants: state.tenants.tenants };
 };
 
 export default connect(mapStateToProps)(Tenants);

@@ -10,6 +10,9 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
+
+import { useForm, Controller } from "react-hook-form";
+
 import { Header, Icon } from "react-native-elements";
 
 // Navigation
@@ -32,6 +35,12 @@ import { doDeleteTransaction } from "../../redux/actions";
 
 const Transactions = ({ navigation }) => {
   const [transactions, setTransactions] = useState([]);
+  const [query, setQuery] = useState("");
+  const [shouldShow, setShouldShow] = useState(false);
+
+  const handleQuery = (text) => {
+    setQuery(text);
+  };
 
   let unsubscribe = null;
   useEffect(() => {
@@ -53,6 +62,11 @@ const Transactions = ({ navigation }) => {
       mounted = false;
     };
   }, []);
+
+  const {
+    control,
+    formState: { isDirty },
+  } = useForm();
 
   const data = transactions;
 
@@ -143,18 +157,38 @@ const Transactions = ({ navigation }) => {
           }}
           rightComponent={
             <>
-              <Icon
-                name="plus"
-                type="feather"
-                color="#fff"
-                size={25}
-                iconStyle={{
-                  paddingTop: 30,
-                  paddingRight: 20,
-                  paddingBottom: 10,
-                }}
-                onPress={() => navigation.navigate("AddTransactions")}
-              />
+              <View style={{flexDirection: 'row'}}>
+                {/* SEARCH */}
+                <Icon
+                  name="search"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  onPress={() => setShouldShow(!shouldShow)}
+                />
+
+                {/* ADD PROPERTY */}
+                <Icon
+                  name="plus"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  onPress={() => {
+                    setQuery("");
+                    navigation.navigate("AddProperty");
+                  }}
+                />
+              </View>
             </>
           }
           containerStyle={{
@@ -165,24 +199,33 @@ const Transactions = ({ navigation }) => {
         />
 
         {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <Feather
+        {shouldShow ? (
+          <Controller
+            control={control}
+            render={() => (
+              <View style={styles.searchContainer}>
+                <Feather
+                  name="search"
+                  color="#fff"
+                  size={20}
+                  style={styles.searchIcon}
+                />
+                <TextInput
+                  type="search"
+                  placeholder="Search Properties"
+                  placeholderTextColor="#ffffff75"
+                  autoCorrect={false}
+                  style={styles.searchInput}
+                  keyboardAppearance="dark"
+                  clearButtonMode="while-editing"
+                  onChangeText={handleQuery}
+                />
+              </View>
+            )}
             name="search"
-            color="#fff"
-            size={20}
-            style={styles.searchIcon}
           />
-          <TextInput
-            type="search"
-            placeholder="Search Transactions"
-            placeholderTextColor="#ffffff75"
-            autoCorrect={false}
-            style={styles.searchInput}
-            keyboardAppearance="dark"
-            clearButtonMode="while-editing"
-            // onChangeText={handleSearch}
-          />
-        </View>
+        ): null }
+        {/* END Search Bar */}
 
         {/* Transactions Flat List */}
         <SafeAreaView>
