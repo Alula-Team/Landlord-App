@@ -16,7 +16,6 @@ import { useForm, Controller } from "react-hook-form";
 import { Badge, Header, Icon } from "react-native-elements";
 
 // Navigation
-import { useNavigation } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 // Screens
@@ -32,9 +31,10 @@ import styles from "./prop-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 
-const Properties = () => {
+const Properties = ({ navigation }) => {
   const [properties, setProperties] = useState([]);
   const [query, setQuery] = useState("");
+  const [shouldShow, setShouldShow] = useState(false);
 
   const handleQuery = (text) => {
     setQuery(text);
@@ -61,8 +61,6 @@ const Properties = () => {
       mounted = false;
     };
   }, []);
-
-  const navigation = useNavigation();
 
   const Tab = createMaterialTopTabNavigator();
 
@@ -131,21 +129,38 @@ const Properties = () => {
           }}
           rightComponent={
             <>
-              <Icon
-                name="plus"
-                type="feather"
-                color="#fff"
-                size={25}
-                iconStyle={{
-                  paddingTop: 30,
-                  paddingRight: 20,
-                  paddingBottom: 10,
-                }}
-                onPress={() => {
-                  setQuery("");
-                  navigation.navigate("AddProperty");
-                }}
-              />
+              <View style={{flexDirection: 'row'}}>
+                {/* SEARCH */}
+                <Icon
+                  name="search"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  onPress={() => setShouldShow(!shouldShow)}
+                />
+
+                {/* ADD PROPERTY */}
+                <Icon
+                  name="plus"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  onPress={() => {
+                    setQuery("");
+                    navigation.navigate("AddProperty");
+                  }}
+                />
+              </View>
             </>
           }
           containerStyle={{
@@ -156,35 +171,32 @@ const Properties = () => {
         />
 
         {/* Search Bar */}
-        <Controller
-          control={control}
-          render={() => (
-            <View style={styles.searchContainer}>
-              <Feather
-                name="search"
-                color="#fff"
-                size={20}
-                style={styles.searchIcon}
-              />
-              <TextInput
-                type="search"
-                placeholder="Search Properties"
-                placeholderTextColor="#ffffff75"
-                autoCorrect={false}
-                style={styles.searchInput}
-                keyboardAppearance="dark"
-                clearButtonMode="while-editing"
-                onChangeText={handleQuery}
-              />
-            </View>
-          )}
-          name="search"
-        />
-        {isDirty.search && (
-          <Text style={{ color: "red" }}>
-            This field is dry clean only. Which means, it's dirty.
-          </Text>
-        )}
+        {shouldShow ? (
+          <Controller
+            control={control}
+            render={() => (
+              <View style={styles.searchContainer}>
+                <Feather
+                  name="search"
+                  color="#fff"
+                  size={20}
+                  style={styles.searchIcon}
+                />
+                <TextInput
+                  type="search"
+                  placeholder="Search Properties"
+                  placeholderTextColor="#ffffff75"
+                  autoCorrect={false}
+                  style={styles.searchInput}
+                  keyboardAppearance="dark"
+                  clearButtonMode="while-editing"
+                  onChangeText={handleQuery}
+                />
+              </View>
+            )}
+            name="search"
+          />
+        ): null }
         {/* END Search Bar */}
 
         {/* Stepper */}
@@ -199,48 +211,6 @@ const Properties = () => {
           <Tab.Screen name="Vacant" component={Vacant} />
         </Tab.Navigator>
         {/* END Stepper */}
-
-        {/* Properties Flat List */}
-        {/* <SafeAreaView>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.listCell}
-                onPress={() =>
-                  navigation.navigate("PropertyDetail", {
-                    itemID: item.id,
-                    itemAddress: item.address,
-                    itemUnit: item.unit,
-                    itemCity: item.city,
-                    itemState: item.state,
-                    itemZip: item.zip,
-                  })
-                }
-              >
-                <View style={{ flexDirection: "row" }}>
-                  <Feather name="map-pin" color="#fff" size={20} />
-                  <View>
-                    <Text style={styles.listItem}>
-                      {item.address} {item.unit}
-                    </Text>
-                  </View>
-                </View>
-                <Feather
-                  name="arrow-right"
-                  color="#fff"
-                  size={20}
-                  style={styles.arrow}
-                />
-              </TouchableOpacity>
-            )}
-            contentContainerStyle={{ paddingBottom: 350 }}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={renderSeparator}
-            ListEmptyComponent={EmptyListMessage}
-          />
-        </SafeAreaView> */}
       </View>
     </>
   );
