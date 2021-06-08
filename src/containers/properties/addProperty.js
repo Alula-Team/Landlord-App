@@ -162,7 +162,7 @@ const AddProperty = ({ navigation }) => {
             padding: 15,
             borderRadius: 10,
           }}
-          // onPress={}
+          onPress={fakeIt}
         >
           <Text
             style={{
@@ -171,7 +171,6 @@ const AddProperty = ({ navigation }) => {
               color: "white",
               textAlign: "center",
             }}
-            onPress={fakeIt}
           >
             Fake It!
           </Text>
