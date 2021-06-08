@@ -18,9 +18,15 @@ import styles from "./prop-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 
-const Occupied = ({ navigation }) => {
+const Occupied = ({ navigation, initialParams }) => {
   const [properties, setProperties] = useState([]);
-  const [data, setData] = useState([]);
+
+  const [query, setQuery] = useState("");
+
+  const handleQuery = (text) => {
+    setQuery(text);
+  };
+
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
@@ -32,9 +38,9 @@ const Occupied = ({ navigation }) => {
           const properties = snapshot.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
           });
-          const occupied = properties.filter((property) => !property.vacant);
+          //   const occupied = properties.filter((property) => !property.vacant);
           //   properties.filter((property) => !property.vacant);
-          if (mounted) setProperties(occupied);
+          if (mounted) setProperties(properties);
         });
     }
     getStuffs();

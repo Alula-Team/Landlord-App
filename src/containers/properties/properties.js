@@ -69,8 +69,6 @@ const Properties = ({ navigation }) => {
     formState: { isDirty },
   } = useForm();
 
-  const data = properties;
-
   // Separator
   const renderSeparator = () => {
     return (
