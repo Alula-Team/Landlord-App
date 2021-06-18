@@ -4,7 +4,9 @@ import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+// Firebase
 import { firestore } from "../../firebase/firebase";
+import firebase from "firebase/app";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -26,6 +28,8 @@ import styles from "./trans-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 import { doAddTransaction } from "../../redux/actions";
+
+const auth = firebase.auth();
 
 const AddTransactions = ({ addTransaction }) => {
   const navigation = useNavigation();
@@ -52,7 +56,7 @@ const AddTransactions = ({ addTransaction }) => {
     };
   }, []);
 
-  const paymentArray = ["Expense", "Payment"];
+  const transactionTypeArray = ["Expense", "Payment"];
   const transactionCategoryArray = [
     "Appraisal",
     "Cleaning",
@@ -65,21 +69,29 @@ const AddTransactions = ({ addTransaction }) => {
     "Security Deposit",
     "Tax Services",
   ];
+  const paymentMethodArray = ["Bank Transfer", "Cash", "Check", "Other"];
+
   const addressArray = properties.map((property) => {
     return property.address;
   });
-  const paymentMethodArray = ["Bank Transfer", "Cash", "Check", "Other"];
 
   const fakeIt = () => {
-    setValue("payment", faker.random.arrayElement(paymentArray));
+    setValue(
+      "transactionType",
+      faker.random.arrayElement(transactionTypeArray)
+    );
     setValue(
       "transactionCategory",
       faker.random.arrayElement(transactionCategoryArray)
     );
     setValue("address", faker.random.arrayElement(addressArray));
     setValue("paymentMethod", faker.random.arrayElement(paymentMethodArray));
-    setValue("amount", faker.datatype.number({ min: 640, max: 1650 }));
+    setValue(
+      "amount",
+      faker.datatype.number({ min: 640, max: 1650 }).toString()
+    );
     setValue("date", faker.date.past());
+    setValue("author", auth.currentUser.uid);
   };
 
   const {
@@ -140,26 +152,26 @@ const AddTransactions = ({ addTransaction }) => {
     { label: "Other", value: "Other", color: "white" },
   ];
 
-  const makeDate = (dateObj) => {
-    const year = dateObj.getFullYear();
-    const day = dateObj.getDate();
-    const months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    const month = months[dateObj.getMonth()];
-    return `${month} ${day}, ${year}`;
-  };
+  // const makeDate = (dateObj) => {
+  //   const year = dateObj.getFullYear();
+  //   const day = dateObj.getDate();
+  //   const months = [
+  //     "Jan",
+  //     "Feb",
+  //     "Mar",
+  //     "Apr",
+  //     "May",
+  //     "Jun",
+  //     "Jul",
+  //     "Aug",
+  //     "Sep",
+  //     "Oct",
+  //     "Nov",
+  //     "Dec",
+  //   ];
+  //   const month = months[dateObj.getMonth()];
+  //   return Date.parse(`${month} ${day}, ${year}`);
+  // };
 
   // const addItem = (data) => {
   //   makeDate(data.date);
@@ -171,19 +183,26 @@ const AddTransactions = ({ addTransaction }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const onChange = (event, selectedDate) => {
+
+  const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
     setDate(currentDate);
     console.log(date);
   };
+
   const showMode = (currentMode) => {
     setShow(true);
     setMode(currentMode);
   };
 
   const onSubmit = (data) => {
-    data.date = makeDate(data.date);
+    console.log(data);
+    // data.date = new Date(data.date).toLocaleDateString("en-us", {
+    //   year: "numeric",
+    //   month: "long",
+    //   day: "numeric",
+    // });
     firestore.collection("transactions").add(data);
     navigation.goBack();
   };
@@ -315,12 +334,13 @@ const AddTransactions = ({ addTransaction }) => {
               <RNPickerSelect
                 placeholder={TransactionPlaceholder}
                 style={pickerStyles}
-                onValueChange={(value) => onChange(value)}
+                value={value}
+                onValueChange={onChange}
                 items={paymentTypes}
               />
             )}
-            name="payment"
-            rules={{ required: false }}
+            name="transactionType"
+            rules={{ required: true }}
             defaultValue=""
           />
           {errors.payment && (
@@ -343,12 +363,13 @@ const AddTransactions = ({ addTransaction }) => {
               <RNPickerSelect
                 placeholder={CategoryPlaceholder}
                 style={pickerStyles}
+                value={value}
                 onValueChange={onChange}
                 items={transactionCategories}
               />
             )}
             name="transactionCategory"
-            rules={{ required: false }}
+            rules={{ required: true }}
             defaultValue=""
           />
           {errors.transactionCategory && (
@@ -371,12 +392,13 @@ const AddTransactions = ({ addTransaction }) => {
               <RNPickerSelect
                 placeholder={PropertyPlaceholder}
                 style={pickerStyles}
+                value={value}
                 onValueChange={onChange}
                 items={allProperties}
               />
             )}
             name="address"
-            rules={{ required: false }}
+            rules={{ required: true }}
             defaultValue="108 Verygold Lane"
           />
           {errors.address && (
@@ -399,12 +421,13 @@ const AddTransactions = ({ addTransaction }) => {
               <RNPickerSelect
                 placeholder={PaymentPlaceholder}
                 style={pickerStyles}
-                onValueChange={(value) => onChange(value)}
+                value={value}
+                onValueChange={onChange}
                 items={paymentMethods}
               />
             )}
             name="paymentMethod"
-            rules={{ required: false }}
+            rules={{ required: true }}
             defaultValue=""
           />
           {errors.paymentMethod && (
@@ -438,7 +461,7 @@ const AddTransactions = ({ addTransaction }) => {
               </View>
             )}
             name="amount"
-            rules={{ required: false }}
+            rules={{ required: true }}
             defaultValue=""
           />
           {errors.amount && (
@@ -470,7 +493,7 @@ const AddTransactions = ({ addTransaction }) => {
                     marginTop: 20,
                     width: "100%",
                   }}
-                  onChange={onChange}
+                  onChange={handleDateChange}
                 />
               </View>
             )}

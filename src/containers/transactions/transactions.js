@@ -38,6 +38,18 @@ const Transactions = ({ navigation }) => {
   const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
 
+  const makeDate = (dateObj) => {
+    const zeeDate = new Date(dateObj.seconds * 1000).toLocaleDateString(
+      "en-us",
+      {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      }
+    );
+    return zeeDate;
+  };
+
   const handleQuery = (text) => {
     setQuery(text);
   };
@@ -48,6 +60,7 @@ const Transactions = ({ navigation }) => {
     async function getStuffs() {
       unsubscribe = firestore
         .collection("transactions")
+        .orderBy("date", "desc")
         .onSnapshot((snapshot) => {
           const transactions = snapshot.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
@@ -87,12 +100,12 @@ const Transactions = ({ navigation }) => {
 
   // Flatlist Header
   const HeaderComponent = () => {
-    return(
-      <View style={{ backgroundColor: '#09061C'}}>
+    return (
+      <View style={{ backgroundColor: "#09061C" }}>
         <TextInput style={styles.sectionText}>Vacant</TextInput>
       </View>
     );
-  }
+  };
 
   // Empty List Content
   const EmptyListMessage = () => {
@@ -157,7 +170,7 @@ const Transactions = ({ navigation }) => {
           }}
           rightComponent={
             <>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: "row" }}>
                 {/* SEARCH */}
                 <Icon
                   name="search"
@@ -225,7 +238,7 @@ const Transactions = ({ navigation }) => {
             )}
             name="search"
           />
-        ): null }
+        ) : null}
         {/* END Search Bar */}
 
         {/* Transactions Flat List */}
@@ -234,61 +247,65 @@ const Transactions = ({ navigation }) => {
             <FlatList
               data={data}
               keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <View style={styles.listCell}>
-                  {/* Transaction Category and Amount*/}
-                  <View style={styles.itemCenter}>
-                    <Text style={styles.transactionType}>
-                      {item.transactionCategory}
-                    </Text>
-                    <Text
-                      style={{
-                        color:
-                          item.payment === "Payment" ? "#5CB85C" : "#D9534F",
-                        fontWeight: "700",
-                        fontSize: 18,
-                      }}
-                    >
-                      ${item.amount}
-                    </Text>
+              renderItem={({ item }) => {
+                return (
+                  <View style={styles.listCell}>
+                    {/* Transaction Category and Amount*/}
+                    <View style={styles.itemCenter}>
+                      <Text style={styles.transactionType}>
+                        {item.transactionCategory}
+                      </Text>
+                      <Text
+                        style={{
+                          color:
+                            item.transactionType === "Payment"
+                              ? "#5CB85C"
+                              : "#D9534F",
+                          fontWeight: "700",
+                          fontSize: 18,
+                        }}
+                      >
+                        ${item.amount}
+                      </Text>
+                    </View>
+                    {/* Property */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                      <Feather name="map-pin" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{item.address}</Text>
+                    </View>
+                    {/* Date */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                      <Feather name="clock" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{makeDate(item.date)}</Text>
+                    </View>
+                    {/* Payment Type */}
+                    <View style={{ flexDirection: "row", marginTop: 10 }}>
+                      <Feather name="credit-card" color="#fff" size={15} />
+                      <Text style={styles.listItem}>{item.paymentMethod}</Text>
+                    </View>
+                    {/* Actions */}
+                    <View>
+                      <TouchableOpacity
+                        style={styles.actionsBtn}
+                        onPress={() => deleteAlert(item.id)}
+                      >
+                        <Feather
+                          name="trash-2"
+                          color="#fff"
+                          size={20}
+                          style={{ marginRight: 10 }}
+                        />
+                        <Text style={styles.actionsText}>Delete</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                  {/* Property */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="map-pin" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.address}</Text>
-                  </View>
-                  {/* Date */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="clock" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.date}</Text>
-                  </View>
-                  {/* Payment Type */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="credit-card" color="#fff" size={15} />
-                    <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                  </View>
-                  {/* Actions */}
-                  <View>
-                    <TouchableOpacity
-                      style={styles.actionsBtn}
-                      onPress={() => deleteAlert(item.id)}
-                    >
-                      <Feather
-                        name="trash-2"
-                        color="#fff"
-                        size={20}
-                        style={{ marginRight: 10 }}
-                      />
-                      <Text style={styles.actionsText}>Delete</Text>
-                    </TouchableOpacity>
-                  </View>
-                </View>
-              )}
+                );
+              }}
               contentContainerStyle={{ paddingBottom: 350 }}
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
               ListEmptyComponent={EmptyListMessage}
-              ListHeaderComponent={() => data.length > 0 && (HeaderComponent)}
+              ListHeaderComponent={() => data.length > 0 && HeaderComponent}
               stickyHeaderIndices={[0]}
             />
           </View>
