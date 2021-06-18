@@ -38,9 +38,9 @@ const Occupied = ({ navigation, initialParams }) => {
           const properties = snapshot.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
           });
-          //   const occupied = properties.filter((property) => !property.vacant);
-          //   properties.filter((property) => !property.vacant);
-          if (mounted) setProperties(properties);
+          const occupied = properties.filter((property) => !property.vacant);
+          properties.filter((property) => !property.vacant);
+          if (mounted) setProperties(occupied);
         });
     }
     getStuffs();

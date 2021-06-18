@@ -28,17 +28,15 @@ import styles from "./prop-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
-import { onChange } from "react-native-reanimated";
 
 const auth = firebase.auth();
 
 const AddProperty = ({ navigation }) => {
-  const mapRef = useRef("NY");
-  const stateRef = useRef("NY");
+  const mapRef = useRef("");
+  const stateRef = useRef("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
-  const [stateErrors, setStateErrors] = useState([]);
   const [zip, setZip] = useState("");
   const [unit, setUnit] = useState([]);
 
@@ -72,42 +70,29 @@ const AddProperty = ({ navigation }) => {
     name: "units",
   });
 
+  // const handleChange = (value) => {
+  //   stateRef.current = value;
+  //   setState(value);
+  //   setValue("state", state);
+  // };
+
   const fakeIt = (data) => {
     const [zeeAddress, zeeCity, stateZip] = data.split(", ");
     const [zeeState, zeeZip] = stateZip.split(" ");
+    // stateRef.current = zeeState;
     setValue("address", zeeAddress);
     setValue("city", zeeCity);
-    setState(zeeState);
     setValue("state", zeeState);
     setValue("zip", zeeZip);
     setValue("vacant", faker.datatype.boolean());
     setValue("author", auth.currentUser.uid);
   };
 
-  const breakIntoUnits = (data) => {
-    let addresses = [];
-    for (var i = 0; i < data.units.length; i++) {
-      addresses.push({
-        address: data.address,
-        author: data.author,
-        city: data.city,
-        state: data.state,
-        unit: data.units[i].number,
-        vacant: data.vacant,
-        zip: data.zip,
-      });
-    }
-    return addresses;
-  };
-
   const onSubmit = (data) => {
-    if (data.units.length > 0) {
-      const datums = breakIntoUnits(data);
-      datums.forEach((datum) => {
-        firestore.collection("properties").add(datum);
-      });
-    } else firestore.collection("properties").add(data);
+    console.log(data);
+    firestore.collection("properties").add(data);
     navigation.goBack();
+    // emptyState();
   };
 
   // For Picker Select
@@ -298,93 +283,76 @@ const AddProperty = ({ navigation }) => {
           </Text>
         )}
         {/* STATE */}
-        <Controller
+        {/* <Controller
           control={control}
-          render={({ field: { value, onChange } }) => (
-            <RNPickerSelect
-              ref={stateRef}
-              placeholder={StatePlaceholder}
-              style={pickerStyles}
-              value={value}
-              onValueChange={onChange}
-              items={[
-                { label: "A. Samoa", value: "A. Samoa", color: "white" },
-                { label: "AK", value: "AK", color: "white" },
-                { label: "AL", value: "AL", color: "white" },
-                { label: "AR", value: "AR", color: "white" },
-                { label: "AZ", value: "AZ", color: "white" },
-                { label: "CA", value: "CA", color: "white" },
-                { label: "CO", value: "CO", color: "white" },
-                { label: "CT", value: "CT", color: "white" },
-                { label: "DC", value: "DC", color: "white" },
-                { label: "DE", value: "DE", color: "white" },
-                { label: "FL", value: "FL", color: "white" },
-                { label: "GA", value: "GA", color: "white" },
-                { label: "Guam", value: "Guam", color: "white" },
-                { label: "HI", value: "HI", color: "white" },
-                { label: "IA", value: "IA", color: "white" },
-                { label: "ID", value: "ID", color: "white" },
-                { label: "IL", value: "IL", color: "white" },
-                { label: "IN", value: "IN", color: "white" },
-                { label: "KS", value: "KS", color: "white" },
-                { label: "KY", value: "KY", color: "white" },
-                { label: "LA", value: "LA", color: "white" },
-                { label: "MA", value: "MA", color: "white" },
-                { label: "MD", value: "MD", color: "white" },
-                { label: "ME", value: "ME", color: "white" },
-                { label: "MI", value: "MI", color: "white" },
-                { label: "MO", value: "MO", color: "white" },
-                { label: "MN", value: "MN", color: "white" },
-                { label: "MS", value: "MS", color: "white" },
-                { label: "MT", value: "MT", color: "white" },
-                { label: "NC", value: "NC", color: "white" },
-                { label: "ND", value: "ND", color: "white" },
-                { label: "NE", value: "NE", color: "white" },
-                { label: "NH", value: "NH", color: "white" },
-                { label: "NJ", value: "NJ", color: "white" },
-                { label: "NM", value: "NM", color: "white" },
-                { label: "NV", value: "NV", color: "white" },
-                { label: "NY", value: "NY", color: "white" },
-                { label: "OH", value: "OH", color: "white" },
-                { label: "OK", value: "OK", color: "white" },
-                { label: "OR", value: "OR", color: "white" },
-                { label: "PA", value: "PA", color: "white" },
-                {
-                  label: "Puerto Rico",
-                  value: "Puerto Rico",
-                  color: "white",
-                },
-                { label: "RI", value: "RI", color: "white" },
-                { label: "SC", value: "SC", color: "white" },
-                { label: "SD", value: "SD", color: "white" },
-                { label: "TN", value: "TN", color: "white" },
-                { label: "TX", value: "TX", color: "white" },
-                { label: "UT", value: "UT", color: "white" },
-                { label: "VA", value: "VA", color: "white" },
-                { label: "VT", value: "VT", color: "white" },
-                { label: "WA", value: "WA", color: "white" },
-                { label: "WI", value: "WI", color: "white" },
-                { label: "WV", value: "WV", color: "white" },
-                { label: "WY", value: "WY", color: "white" },
-              ]}
-            />
-          )}
-          name="state"
-          rules={{ required: true }}
-          defaultValue=""
+          render={({ field: { value, onChange } }) => ( */}
+        <RNPickerSelect
+          ref={stateRef}
+          placeholder={StatePlaceholder}
+          style={pickerStyles}
+          onValueChange={(value) => console.log(value)}
+          items={[
+            { label: "A. Samoa", value: "A. Samoa", color: "white" },
+            { label: "AK", value: "AK", color: "white" },
+            { label: "AL", value: "AL", color: "white" },
+            { label: "AR", value: "AR", color: "white" },
+            { label: "AZ", value: "AZ", color: "white" },
+            { label: "CA", value: "CA", color: "white" },
+            { label: "CO", value: "CO", color: "white" },
+            { label: "CT", value: "CT", color: "white" },
+            { label: "DC", value: "DC", color: "white" },
+            { label: "DE", value: "DE", color: "white" },
+            { label: "FL", value: "FL", color: "white" },
+            { label: "GA", value: "GA", color: "white" },
+            { label: "Guam", value: "Guam", color: "white" },
+            { label: "HI", value: "HI", color: "white" },
+            { label: "IA", value: "IA", color: "white" },
+            { label: "ID", value: "ID", color: "white" },
+            { label: "IL", value: "IL", color: "white" },
+            { label: "IN", value: "IN", color: "white" },
+            { label: "KS", value: "KS", color: "white" },
+            { label: "KY", value: "KY", color: "white" },
+            { label: "LA", value: "LA", color: "white" },
+            { label: "MA", value: "MA", color: "white" },
+            { label: "MD", value: "MD", color: "white" },
+            { label: "ME", value: "ME", color: "white" },
+            { label: "MI", value: "MI", color: "white" },
+            { label: "MO", value: "MO", color: "white" },
+            { label: "MN", value: "MN", color: "white" },
+            { label: "MS", value: "MS", color: "white" },
+            { label: "MT", value: "MT", color: "white" },
+            { label: "NC", value: "NC", color: "white" },
+            { label: "ND", value: "ND", color: "white" },
+            { label: "NE", value: "NE", color: "white" },
+            { label: "NH", value: "NH", color: "white" },
+            { label: "NJ", value: "NJ", color: "white" },
+            { label: "NM", value: "NM", color: "white" },
+            { label: "NV", value: "NV", color: "white" },
+            { label: "NY", value: "NY", color: "white" },
+            { label: "OH", value: "OH", color: "white" },
+            { label: "OK", value: "OK", color: "white" },
+            { label: "OR", value: "OR", color: "white" },
+            { label: "PA", value: "PA", color: "white" },
+            {
+              label: "Puerto Rico",
+              value: "Puerto Rico",
+              color: "white",
+            },
+            { label: "RI", value: "RI", color: "white" },
+            { label: "SC", value: "SC", color: "white" },
+            { label: "SD", value: "SD", color: "white" },
+            { label: "TN", value: "TN", color: "white" },
+            { label: "TX", value: "TX", color: "white" },
+            { label: "UT", value: "UT", color: "white" },
+            { label: "VA", value: "VA", color: "white" },
+            { label: "VT", value: "VT", color: "white" },
+            { label: "WA", value: "WA", color: "white" },
+            { label: "WI", value: "WI", color: "white" },
+            { label: "WV", value: "WV", color: "white" },
+            { label: "WY", value: "WY", color: "white" },
+          ]}
         />
-        {errors.state && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
+
         {/* ZIP CODE */}
         <Controller
           control={control}

@@ -56,9 +56,9 @@ const Properties = ({ navigation }) => {
     }
     getStuffs();
     return function cleanup() {
-      unsubscribe();
       console.log("Im outta here!");
       mounted = false;
+      unsubscribe();
     };
   }, []);
 
@@ -127,7 +127,7 @@ const Properties = ({ navigation }) => {
           }}
           rightComponent={
             <>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: "row" }}>
                 {/* SEARCH */}
                 <Icon
                   name="search"
@@ -195,7 +195,7 @@ const Properties = ({ navigation }) => {
             )}
             name="search"
           />
-        ): null }
+        ) : null}
         {/* END Search Bar */}
 
         {/* Stepper */}
@@ -215,8 +215,4 @@ const Properties = ({ navigation }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-export default connect(mapStateToProps)(Properties);
+export default Properties;
