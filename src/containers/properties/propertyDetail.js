@@ -8,7 +8,7 @@ import {
   Modal,
 } from "react-native";
 
-import { Header, Icon } from 'react-native-elements';
+import { Header, Icon } from "react-native-elements";
 
 import { firestore } from "../../firebase/firebase";
 
@@ -35,10 +35,9 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
   const [properties, setProperties] = useState([...stateProperties]);
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
-  const { itemID, itemAddress, itemUnit } =
-    route.params;
-  
-    // Delete Alert Pop Up
+  const { itemID, itemAddress, itemUnit } = route.params;
+
+  // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
       "Delete Property?",
@@ -60,7 +59,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             );
             firestore.doc(`properties/${itemID}`).delete();
             setProperties(properties);
-            // // deleteProperty(itemID);
+            // deleteProperty(itemID);
             navigation.goBack();
           },
         },
@@ -70,16 +69,25 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
 
   // View Service Requests
   const viewServiceRequests = () => {
-    navigation.navigate('ServiceRequests');
+    navigation.navigate("ServiceRequests");
     setModalVisible(!modalVisible);
-  }
+  };
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <Header
         centerComponent={
-          <Text style={{color: '#fff', fontSize: 17, fontWeight: '600', paddingTop: 32.5}}>{itemAddress}</Text>
+          <Text
+            style={{
+              color: "#fff",
+              fontSize: 17,
+              fontWeight: "600",
+              paddingTop: 32.5,
+            }}
+          >
+            {itemAddress}
+          </Text>
         }
         leftComponent={
           <Icon
@@ -89,7 +97,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             size={25}
             iconStyle={{
               paddingTop: 30,
-              paddingLeft: 10
+              paddingLeft: 10,
             }}
             onPress={() => navigation.goBack()}
           />
@@ -102,7 +110,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             size={27.5}
             iconStyle={{
               paddingTop: 30,
-              paddingRight: 10
+              paddingRight: 10,
             }}
             onPress={() => setModalVisible(true)}
           />
@@ -118,27 +126,63 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
         {/* Property Information */}
         <Text style={styles.sectionTitle}>Property Information</Text>
 
-        <View style={{backgroundColor: '#EE6D66', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
+        <View
+          style={{
+            backgroundColor: "#EE6D66",
+            marginHorizontal: 20,
+            padding: 20,
+            marginBottom: 20,
+            borderRadius: 20,
+          }}
+        >
           {/* Year to Date */}
           <View>
-            <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Year to Date:</Text>
+            <Text
+              style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}
+            >
+              Year to Date:
+            </Text>
 
             {/* Revenue */}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Text style={{color: '#fff', fontSize: 16}}>Revenue:</Text>
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$7,500</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+                $7,500
+              </Text>
             </View>
 
             {/* Expenses */}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Text style={{color: '#fff', fontSize: 16}}>Expenses:</Text>
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$830</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+                $830
+              </Text>
             </View>
 
             {/* Profit */}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Text style={{color: '#fff', fontSize: 16}}>Profit:</Text>
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$6,670</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#fff", fontSize: 16 }}>Profit:</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+                $6,670
+              </Text>
             </View>
           </View>
 
@@ -157,81 +201,211 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
 
           {/* All Time */}
           <View>
-            <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>All Time:</Text>
+            <Text
+              style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}
+            >
+              All Time:
+            </Text>
 
             {/* Revenue */}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Text style={{color: '#fff', fontSize: 16}}>Revenue:</Text>
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$27,00</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+                $27,00
+              </Text>
             </View>
 
             {/* Expenses */}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Text style={{color: '#fff', fontSize: 16}}>Expenses:</Text>
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$3,259</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+                $3,259
+              </Text>
             </View>
 
             {/* Profit */}
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-              <Text style={{color: '#fff', fontSize: 16}}>Profit:</Text>
-              <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$23,741</Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#fff", fontSize: 16 }}>Profit:</Text>
+              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+                $23,741
+              </Text>
             </View>
           </View>
         </View>
 
-
         {/* Tenant Information */}
         <Text style={styles.sectionTitle}>Tenant Information</Text>
 
-        <View style={{backgroundColor: '#5858FB', marginHorizontal: 20, padding: 20, marginBottom: 20, borderRadius: 20}}>
-          <Text style={{color: '#ffffff90', fontSize: 14, fontWeight: '600'}}>Tenant:</Text>
+        <View
+          style={{
+            backgroundColor: "#5858FB",
+            marginHorizontal: 20,
+            padding: 20,
+            marginBottom: 20,
+            borderRadius: 20,
+          }}
+        >
+          <Text style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}>
+            Tenant:
+          </Text>
 
-          <View style={{flexDirection: 'row', alignItems: 'center', marginTop: 20}}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 20,
+            }}
+          >
             <View style={styles.tenantInitials}>
-              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>TN</Text>
+              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+                TN
+              </Text>
             </View>
             <View>
-              <Text style={{color: '#fff', fontSize: 20, fontWeight: '600', marginLeft: 10}}>Tenant's Name</Text>
-              <Text style={{color: '#ffffff90', fontSize: 15, marginTop: 5, marginLeft: 10}}>tenant@tenant.com</Text>
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 20,
+                  fontWeight: "600",
+                  marginLeft: 10,
+                }}
+              >
+                Tenant's Name
+              </Text>
+              <Text
+                style={{
+                  color: "#ffffff90",
+                  fontSize: 15,
+                  marginTop: 5,
+                  marginLeft: 10,
+                }}
+              >
+                tenant@tenant.com
+              </Text>
             </View>
           </View>
 
-          <Text style={{color: '#ffffff90', fontSize: 14, marginTop: 20, fontWeight: '600'}}>Leasing Information:</Text>
-          
+          <Text
+            style={{
+              color: "#ffffff90",
+              fontSize: 14,
+              marginTop: 20,
+              fontWeight: "600",
+            }}
+          >
+            Leasing Information:
+          </Text>
+
           {/* Rental Rate */}
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-            <Text style={{color: '#fff', fontSize: 16}}>Rental Rate:</Text>
-            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$1,500</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Rental Rate:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              $1,500
+            </Text>
           </View>
 
           {/* Security Deposit */}
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-            <Text style={{color: '#fff', fontSize: 16}}>Security Deposit:</Text>
-            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>$750</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>
+              Security Deposit:
+            </Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              $750
+            </Text>
           </View>
 
           {/* Lease Type */}
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-            <Text style={{color: '#fff', fontSize: 16}}>Lease Type:</Text>
-            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>Fixed</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Lease Type:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              Fixed
+            </Text>
           </View>
 
           {/* Lease Length */}
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-            <Text style={{color: '#fff', fontSize: 16}}>Lease Length:</Text>
-            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>12 mo</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Lease Length:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              12 mo
+            </Text>
           </View>
 
           {/* Payment Due */}
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20}}>
-            <Text style={{color: '#fff', fontSize: 16}}>Rent Due On:</Text>
-            <Text style={{color: '#fff', fontSize: 16, fontWeight: '600'}}>1st /mo</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Rent Due On:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              1st /mo
+            </Text>
           </View>
 
           {/* Remove Tenant Button */}
-          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 50, justifyContent: 'center'}}>
-            <Feather name='x' size={22.5} color='#fff' />
-            <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Remove Tenant</Text>
+          <TouchableOpacity
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              marginTop: 50,
+              justifyContent: "center",
+            }}
+          >
+            <Feather name="x" size={22.5} color="#fff" />
+            <Text
+              style={{
+                color: "#fff",
+                fontSize: 16,
+                fontWeight: "600",
+                marginLeft: 10,
+              }}
+            >
+              Remove Tenant
+            </Text>
           </TouchableOpacity>
         </View>
 
@@ -246,31 +420,106 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           }}
         >
           <View style={styles.overlay}>
-              <View style={styles.modalContainer}>
+            <View style={styles.modalContainer}>
+              <Text
+                style={{
+                  color: "#fff",
+                  fontSize: 18,
+                  fontWeight: "600",
+                  textAlign: "center",
+                  marginTop: 20,
+                }}
+              >
+                Actions
+              </Text>
 
-                <Text style={{color: '#fff', fontSize: 18, fontWeight: '600', textAlign: 'center', marginTop: 20}}>Actions</Text>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingTop: 30,
+                  paddingLeft: 20,
+                }}
+              >
+                <Feather name="edit-3" size={22.5} color="#fff" />
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 16,
+                    fontWeight: "600",
+                    marginLeft: 10,
+                  }}
+                >
+                  Edit Property
+                </Text>
+              </TouchableOpacity>
 
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', paddingTop: 30, paddingLeft: 20}}>
-                  <Feather name='edit-3' size={22.5} color='#fff' />
-                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Edit Property</Text>
-                </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingTop: 30,
+                  paddingLeft: 20,
+                }}
+                onPress={viewServiceRequests}
+              >
+                <Feather name="tool" size={22.5} color="#fff" />
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 16,
+                    fontWeight: "600",
+                    marginLeft: 10,
+                  }}
+                >
+                  View Service Requests
+                </Text>
+              </TouchableOpacity>
 
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', paddingTop: 30, paddingLeft: 20}} onPress={viewServiceRequests}>
-                  <Feather name='tool' size={22.5} color='#fff' />
-                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>View Service Requests</Text>
-                </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingTop: 30,
+                  paddingLeft: 20,
+                }}
+                onPress={deleteAlert}
+              >
+                <Feather name="trash" size={22.5} color="red" />
+                <Text
+                  style={{
+                    color: "red",
+                    fontSize: 16,
+                    fontWeight: "600",
+                    marginLeft: 10,
+                  }}
+                >
+                  Delete Property
+                </Text>
+              </TouchableOpacity>
 
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', paddingTop: 30, paddingLeft: 20}} onPress={deleteAlert}>
-                  <Feather name='trash' size={22.5} color='red' />
-                  <Text style={{ color: 'red', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Delete Property</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginTop: 50, justifyContent: 'center'}} onPress={() => setModalVisible(!modalVisible)}>
-                  <Feather name='x' size={22.5} color='#fff' />
-                  <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginLeft: 10}}>Cancel</Text>
-                </TouchableOpacity>
-
-              </View>
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  marginTop: 50,
+                  justifyContent: "center",
+                }}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Feather name="x" size={22.5} color="#fff" />
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 16,
+                    fontWeight: "600",
+                    marginLeft: 10,
+                  }}
+                >
+                  Cancel
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </Modal>
       </ScrollView>

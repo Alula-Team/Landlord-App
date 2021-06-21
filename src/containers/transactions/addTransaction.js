@@ -31,9 +31,7 @@ import { doAddTransaction } from "../../redux/actions";
 
 const auth = firebase.auth();
 
-const AddTransactions = ({ addTransaction }) => {
-  const navigation = useNavigation();
-
+const AddTransaction = ({ navigation }) => {
   const [properties, setProperties] = useState([]);
 
   let unsubscribe = null;
@@ -509,8 +507,4 @@ const mapStateToProps = (state) => {
   return { stateProperties: state.properties.properties };
 };
 
-const actions = {
-  addTransaction: doAddTransaction,
-};
-
-export default connect(mapStateToProps, actions)(AddTransactions);
+export default AddTransaction;

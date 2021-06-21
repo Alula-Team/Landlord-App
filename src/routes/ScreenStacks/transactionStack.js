@@ -1,23 +1,31 @@
-import React from 'react';
+import React from "react";
 
 // Navigation
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import Transactions from '../../containers/transactions/transactions';
-import AddTransactions from '../../containers/transactions/addTransactions';
+import Transactions from "../../containers/transactions/transactions";
+import AddTransaction from "../../containers/transactions/addTransaction";
 
 const Stack = createStackNavigator();
 
 const TransactionsNavigation = (props) => {
-    return(
-        <>
-            <Stack.Navigator>
-                <Stack.Screen name='Transactions' component={Transactions} options={{ headerShown: false }} />
-                <Stack.Screen name='AddTransactions' component={AddTransactions} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </>
-    );
-}
+  return (
+    <>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Transactions"
+          component={Transactions}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AddTransaction"
+          component={AddTransaction}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    </>
+  );
+};
 
 export default TransactionsNavigation;

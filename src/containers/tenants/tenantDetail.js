@@ -15,6 +15,8 @@ import styles from "./tenant-styles";
 import { connect } from "react-redux";
 import { doDeleteTenant } from "../../redux/actions";
 
+import firestore from "../../firebase/firebase";
+
 import "./getInitials";
 // Things I need
 // Actions button pops up modal with options to:
@@ -22,8 +24,7 @@ import "./getInitials";
 // remove lease (if there is a lease),
 // renew lease (once lease term is set to expire in 60d)
 
-const TenantDetailScreen = ({ route, deleteTenant }) => {
-  const navigation = useNavigation();
+const TenantDetailScreen = ({ route, navigation }) => {
   const { itemID, itemName, itemEmail, itemPhone } = route.params;
   const itemInitials = itemName.getInitials();
   // Delete Alert Pop Up
@@ -41,7 +42,14 @@ const TenantDetailScreen = ({ route, deleteTenant }) => {
           text: "Delete",
           style: "destructive",
           //   onPress: () => console.log("Delete Pressed"),
-          onPress: (id) => deleteTenant(itemID),
+          // onPress: (id) => deleteTenant(itemID),
+
+          onPress: () => {
+            // const filtered = tenants.filter((item) => item.id !== id);
+            firestore.doc(`tenants/${id}`).delete();
+            // setTenants(filtered);
+            navigation.goBack();
+          },
         },
       ]
     );
