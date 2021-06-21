@@ -25,7 +25,7 @@ const Vacant = ({ navigation }) => {
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
-    console.log("Im back here!");
+    console.log("Vacant back here!");
     async function getStuffs() {
       unsubscribe = firestore
         .collection("properties")
@@ -40,7 +40,7 @@ const Vacant = ({ navigation }) => {
     getStuffs();
     return function cleanup() {
       unsubscribe();
-      console.log("Im outta here!");
+      console.log("Vacant outta here!");
       mounted = false;
     };
   }, []);

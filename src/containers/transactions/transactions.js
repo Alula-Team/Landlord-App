@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { firestore } from "../../firebase/firebase";
 import {
   Alert,
@@ -54,9 +54,16 @@ const Transactions = ({ navigation }) => {
     setQuery(text);
   };
 
+  const filteredList = transactions.filter(
+    (item) =>
+      item.transactionType.toLowerCase().includes(query.toLowerCase()) ||
+      item.transactionCategory.toLowerCase().includes(query.toLowerCase())
+  );
+
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
+    console.log("Transaction Time");
     async function getStuffs() {
       unsubscribe = firestore
         .collection("transactions")
@@ -69,19 +76,17 @@ const Transactions = ({ navigation }) => {
         });
     }
     getStuffs();
-    console.log(transactions);
+
     return function cleanup() {
       unsubscribe();
+      console.log("No mas transactions");
       mounted = false;
     };
   }, []);
 
-  const {
-    control,
-    formState: { isDirty },
-  } = useForm();
+  let data = filteredList;
 
-  const data = transactions;
+  const { control } = useForm();
 
   // // Separator
   const renderSeparator = () => {
@@ -215,7 +220,7 @@ const Transactions = ({ navigation }) => {
         {shouldShow ? (
           <Controller
             control={control}
-            render={() => (
+            render={({ field: { value, onChange } }) => (
               <View style={styles.searchContainer}>
                 <Feather
                   name="search"
@@ -233,6 +238,7 @@ const Transactions = ({ navigation }) => {
                   keyboardAppearance="dark"
                   clearButtonMode="while-editing"
                   onChangeText={handleQuery}
+                  value={query}
                 />
               </View>
             )}

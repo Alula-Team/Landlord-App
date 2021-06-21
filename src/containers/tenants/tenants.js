@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   Image,
   Modal,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -24,59 +24,51 @@ import styles from "./tenant-styles";
 // Redux Stuff
 import { connect } from "react-redux";
 
+import { firestore } from "../../firebase/firebase";
+
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New tenants auto sorted by first name
 
-const Tenants = ({ stateTenants, navigation }) => {
-
+const Tenants = ({ navigation }) => {
+  const [tenants, setTenants] = useState([]);
   const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
-
   const [modalVisible, setModalVisible] = useState(false);
 
-  const handleQuery = (text) => {
-    setQuery(text);
-  };
+  let unsubscribe = null;
+
+  useEffect(() => {
+    let mounted = true;
+    async function getStuffs() {
+      unsubscribe = firestore.collection("tenants").onSnapshot((snapshot) => {
+        const tenants = snapshot.docs.map((doc) => {
+          return { id: doc.id, ...doc.data() };
+        });
+        if (mounted) setTenants(tenants);
+      });
+    }
+    getStuffs();
+    return function cleanup() {
+      mounted = false;
+      unsubscribe();
+    };
+  }, []);
 
   const {
     control,
     formState: { isDirty },
   } = useForm();
 
-  const data = stateTenants;
-  const datas = [
-    {
-      id: 0,
-      tenant: "Kane Toomer",
-      address: "5612 Harmony Ave",
-      archived: true,
-    },
-    {
-      id: 1,
-      tenant: "Jaida Nash",
-      address: "123 Main Street",
-      archived: true,
-    },
-    {
-      id: 2,
-      tenant: "Xochitl Gonzales-Lopez",
-      address: "595 S. Green Valley Pkwy Apt 121",
-      archived: true,
-    },
-    {
-      id: 3,
-      tenant: "John Smith",
-      address: "561 Harrington Ct",
-      archived: false,
-    },
-    {
-      id: 4,
-      tenant: "Jane Doe",
-      address: "1012 Horizon Ridge",
-      archived: false,
-    },
-  ];
+  const handleQuery = (text) => {
+    setQuery(text);
+  };
+
+  const filteredList = tenants.filter((item) =>
+    item.firstName.toLowerCase().includes(query.trim().toLowerCase())
+  );
+
+  const data = filteredList;
 
   function Active(props) {
     return <Text style={{ color: "#5CB85C", fontWeight: "700" }}>Active</Text>;
@@ -102,15 +94,25 @@ const Tenants = ({ stateTenants, navigation }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
-    return(
+    return (
       <View style={styles.emptyList}>
-        <Image source={require('../../assets/tenantEmptyList.png')} style={styles.img} />
-        <Text style={{color: '#fff', marginHorizontal: 35, alignSelf: 'center', fontSize: 18}}>
+        <Image
+          source={require("../../assets/tenantEmptyList.png")}
+          style={styles.img}
+        />
+        <Text
+          style={{
+            color: "#fff",
+            marginHorizontal: 35,
+            alignSelf: "center",
+            fontSize: 18,
+          }}
+        >
           When you invite tenants to connect, they will show up here!
         </Text>
       </View>
     );
-  }
+  };
 
   return (
     <>
@@ -129,7 +131,7 @@ const Tenants = ({ stateTenants, navigation }) => {
           }}
           rightComponent={
             <>
-              <View style={{flexDirection: 'row'}}>
+              <View style={{ flexDirection: "row" }}>
                 {/* SEARCH */}
                 <Icon
                   name="search"
@@ -155,7 +157,11 @@ const Tenants = ({ stateTenants, navigation }) => {
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
-                  onPress={() => setModalVisible(true)}
+                  // onPress={() => setModalVisible(true)}
+                  onPress={() => {
+                    // setQuery("");
+                    navigation.navigate("AddTenant");
+                  }}
                 />
               </View>
             </>
@@ -194,7 +200,7 @@ const Tenants = ({ stateTenants, navigation }) => {
             )}
             name="search"
           />
-        ): null }
+        ) : null}
         {/* END Search Bar */}
 
         {/* Add Tenant Modal */}
@@ -260,7 +266,7 @@ const Tenants = ({ stateTenants, navigation }) => {
                   onPress={() =>
                     navigation.navigate("TenantDetail", {
                       itemID: item.id,
-                      itemName: item.name,
+                      itemName: `${item.firstName} ${item.lastName}`,
                       itemEmail: item.email,
                       itemPhone: item.phone,
                     })
@@ -269,9 +275,8 @@ const Tenants = ({ stateTenants, navigation }) => {
                   <View style={{ flexDirection: "row" }}>
                     <Feather name="user" color="#fff" size={20} />
                     <View>
-                      <Text style={styles.listItem}>{item.name}</Text>
-                      <Text style={styles.status}>
-                        Status: <Status archived={item.archived} />
+                      <Text style={styles.listItem}>
+                        {item.firstName} {item.lastName}
                       </Text>
                     </View>
                   </View>

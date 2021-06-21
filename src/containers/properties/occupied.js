@@ -30,7 +30,7 @@ const Occupied = ({ navigation, initialParams }) => {
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
-    console.log("Im back here!");
+    console.log("Occupied back here!");
     async function getStuffs() {
       unsubscribe = firestore
         .collection("properties")
@@ -46,7 +46,7 @@ const Occupied = ({ navigation, initialParams }) => {
     getStuffs();
     return function cleanup() {
       unsubscribe();
-      console.log("Im outta here!");
+      console.log("Occupied outta here!");
       mounted = false;
     };
   }, []);
@@ -139,8 +139,4 @@ const Occupied = ({ navigation, initialParams }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-export default connect(mapStateToProps)(Occupied);
+export default Occupied;

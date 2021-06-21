@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { firestore } from "../../firebase/firebase";
 
 import {
@@ -40,6 +40,12 @@ const Properties = ({ navigation }) => {
     setQuery(text);
   };
 
+  const filteredList = properties.filter((item) =>
+    item.address.toLowerCase().includes(query.trim().toLowerCase())
+  );
+
+  const data = filteredList;
+
   let unsubscribe = null;
   useEffect(() => {
     let mounted = true;
@@ -62,7 +68,7 @@ const Properties = ({ navigation }) => {
     };
   }, []);
 
-  const Tab = createMaterialTopTabNavigator();
+  // const Tab = createMaterialTopTabNavigator();
 
   const {
     control,
@@ -154,7 +160,7 @@ const Properties = ({ navigation }) => {
                     paddingBottom: 10,
                   }}
                   onPress={() => {
-                    setQuery("");
+                    // setQuery("");
                     navigation.navigate("AddProperty");
                   }}
                 />
@@ -167,7 +173,6 @@ const Properties = ({ navigation }) => {
             borderBottomWidth: 0,
           }}
         />
-
         {/* Search Bar */}
         {shouldShow ? (
           <Controller
@@ -190,15 +195,58 @@ const Properties = ({ navigation }) => {
                   keyboardAppearance="dark"
                   clearButtonMode="while-editing"
                   onChangeText={handleQuery}
+                  value={query}
                 />
               </View>
             )}
             name="search"
           />
         ) : null}
-        {/* END Search Bar */}
 
-        {/* Stepper */}
+        {/* Properties Flat List */}
+        <SafeAreaView>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.listCell}
+                onPress={() =>
+                  navigation.navigate("PropertyDetail", {
+                    itemID: item.id,
+                    itemAddress: item.address,
+                    itemUnit: item.unit,
+                    itemCity: item.city,
+                    itemState: item.state,
+                    itemZip: item.zip,
+                  })
+                }
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <Feather name="map-pin" color="#fff" size={20} />
+                  <View>
+                    <Text style={styles.listItem}>
+                      {item.address} {item.unit}
+                    </Text>
+                  </View>
+                </View>
+                <Feather
+                  name="arrow-right"
+                  color="#fff"
+                  size={20}
+                  style={styles.arrow}
+                />
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={{ paddingBottom: 350 }}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={renderSeparator}
+            ListEmptyComponent={EmptyListMessage}
+          />
+        </SafeAreaView>
+
+        {/* END Search Bar */}
+        {/* Stepper
         <Tab.Navigator
           tabBarOptions={{
             indicatorStyle: { backgroundColor: "#5858FB" },
@@ -208,7 +256,7 @@ const Properties = ({ navigation }) => {
         >
           <Tab.Screen name="Occupied" component={Occupied} />
           <Tab.Screen name="Vacant" component={Vacant} />
-        </Tab.Navigator>
+        </Tab.Navigator> */}
         {/* END Stepper */}
       </View>
     </>
