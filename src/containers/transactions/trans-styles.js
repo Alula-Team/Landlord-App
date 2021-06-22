@@ -175,6 +175,19 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         marginLeft: 12.5
     },
+
+    // Modal
+    modalContainer: {
+        backgroundColor: '#2a2933',
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        height: '40%'
+    },
+    overlay: {
+        backgroundColor: '#00000050',
+        flex: 1,
+        justifyContent: 'flex-end',
+    },
 });
 
 export default styles;

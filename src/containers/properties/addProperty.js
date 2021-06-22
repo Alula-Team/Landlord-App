@@ -192,25 +192,43 @@ const AddProperty = ({ navigation }) => {
           borderBottomWidth: 0,
         }}
       />
+      
+      <Text style={styles.sectionText}>Property Address</Text>
       <GooglePlacesAutocomplete
-        placeholder="Enter Address..."
-        fetchDetails
-        onPress={(data, details) => {
-          fakeIt(details.formatted_address);
-        }}
-        query={{
-          key: GOOGLE_PLACES_API_KEY,
-          language: "en",
-        }}
-        styles={{
-          container: {
-            flex: 0,
-          },
-          textInput: {
-            marginHorizontal: 20,
-          },
-        }}
-      />
+          placeholder="Enter Address..."
+          fetchDetails
+          
+          onPress={(data, details) => {
+            fakeIt(details.formatted_address);
+          }}
+          query={{
+            key: GOOGLE_PLACES_API_KEY,
+            language: "en",
+          }}
+          textInputProps={{ 
+            placeholderTextColor: '#ffffff90',
+            fontSize: 16,
+            fontWeight: '500',
+            color: '#fff',
+            keyboardAppearance: 'dark'
+          }}
+          styles={{
+            container: {
+              flex: 0,
+            },
+            textInput: {
+              marginHorizontal: 20,
+              marginTop: 10,
+              marginBottom: 20,
+              borderRadius: 10,
+              borderWidth: 1,
+              height: 45,
+              flexDirection: 'row',
+              borderColor: '#ffffff50',
+              backgroundColor: 'transparent'
+            },
+          }}
+        />
       <KeyboardAwareScrollView>
         {/* <TouchableOpacity
           style={{
@@ -232,39 +250,7 @@ const AddProperty = ({ navigation }) => {
             Fake It!
           </Text>
         </TouchableOpacity> */}
-        <Text style={styles.sectionText}>Property Address</Text>
-        {/* Street Address */}
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.addInputContainer}>
-              <TextInput
-                type="text"
-                placeholder="Enter Property Address..."
-                placeholderTextColor="#ffffff80"
-                style={styles.propertyInput}
-                keyboardAppearance="dark"
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
-          )}
-          name="address"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.address && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
+        
         {/* City */}
         <Controller
           control={control}

@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  Modal
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -37,6 +38,7 @@ const Transactions = ({ navigation }) => {
   const [transactions, setTransactions] = useState([]);
   const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const makeDate = (dateObj) => {
     const zeeDate = new Date(dateObj.seconds * 1000).toLocaleDateString(
@@ -190,7 +192,7 @@ const Transactions = ({ navigation }) => {
                   onPress={() => setShouldShow(!shouldShow)}
                 />
 
-                {/* ADD PROPERTY */}
+                {/* ADD Transaction */}
                 <Icon
                   name="plus"
                   type="feather"
@@ -255,7 +257,7 @@ const Transactions = ({ navigation }) => {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => {
                 return (
-                  <View style={styles.listCell}>
+                  <TouchableOpacity style={styles.listCell} onPress={() => setModalVisible(true)}>
                     {/* Transaction Category and Amount*/}
                     <View style={styles.itemCenter}>
                       <Text style={styles.transactionType}>
@@ -288,23 +290,8 @@ const Transactions = ({ navigation }) => {
                     <View style={{ flexDirection: "row", marginTop: 10 }}>
                       <Feather name="credit-card" color="#fff" size={15} />
                       <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                    </View>
-                    {/* Actions */}
-                    <View>
-                      <TouchableOpacity
-                        style={styles.actionsBtn}
-                        onPress={() => deleteAlert(item.id)}
-                      >
-                        <Feather
-                          name="trash-2"
-                          color="#fff"
-                          size={20}
-                          style={{ marginRight: 10 }}
-                        />
-                        <Text style={styles.actionsText}>Delete</Text>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
+                    </View>   
+                  </TouchableOpacity>
                 );
               }}
               contentContainerStyle={{ paddingBottom: 350 }}
@@ -315,6 +302,98 @@ const Transactions = ({ navigation }) => {
               stickyHeaderIndices={[0]}
             />
           </View>
+
+          {/* Actions Modal */}
+          <Modal
+            animationType="slide"
+            transparent={true}
+            visible={modalVisible}
+            onRequestClose={() => {
+              Alert.alert("Modal has been closed.");
+              setModalVisible(!modalVisible);
+            }}
+          >
+            <View style={styles.overlay}>
+              <View style={styles.modalContainer}>
+                <Text
+                  style={{
+                    color: "#fff",
+                    fontSize: 18,
+                    fontWeight: "600",
+                    textAlign: "center",
+                    marginTop: 20,
+                  }}
+                >
+                  Actions
+                </Text>
+
+                <TouchableOpacity
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingTop: 30,
+                    paddingLeft: 20,
+                  }}
+                >
+                  <Feather name="edit-3" size={22.5} color="#fff" />
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontSize: 16,
+                      fontWeight: "600",
+                      marginLeft: 10,
+                    }}
+                  >
+                    Edit Transaction
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingTop: 30,
+                    paddingLeft: 20,
+                  }}
+                  onPress={deleteAlert}
+                >
+                  <Feather name="trash" size={22.5} color="red" />
+                  <Text
+                    style={{
+                      color: "red",
+                      fontSize: 16,
+                      fontWeight: "600",
+                      marginLeft: 10,
+                    }}
+                  >
+                    Delete Transaction
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginTop: 50,
+                    justifyContent: "center",
+                  }}
+                  onPress={() => setModalVisible(!modalVisible)}
+                >
+                  <Feather name="x" size={22.5} color="#fff" />
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontSize: 16,
+                      fontWeight: "600",
+                      marginLeft: 10,
+                    }}
+                  >
+                    Cancel
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
         </SafeAreaView>
       </View>
     </>
