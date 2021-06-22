@@ -193,30 +193,8 @@ const AddProperty = ({ navigation }) => {
         }}
       />
       
-      <KeyboardAwareScrollView>
-        {/* <TouchableOpacity
-          style={{
-            backgroundColor: "#5858FB",
-            margin: 30,
-            padding: 15,
-            borderRadius: 10,
-          }}
-          onPress={fakeIt}
-        >
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "bold",
-              color: "white",
-              textAlign: "center",
-            }}
-          >
-            Fake It!
-          </Text>
-        </TouchableOpacity> */}
-        <Text style={styles.sectionText}>Property Address</Text>
-        {/* Street Address */}
-        <GooglePlacesAutocomplete
+      <Text style={styles.sectionText}>Property Address</Text>
+      <GooglePlacesAutocomplete
           placeholder="Enter Address..."
           fetchDetails
           
@@ -251,6 +229,28 @@ const AddProperty = ({ navigation }) => {
             },
           }}
         />
+      <KeyboardAwareScrollView>
+        {/* <TouchableOpacity
+          style={{
+            backgroundColor: "#5858FB",
+            margin: 30,
+            padding: 15,
+            borderRadius: 10,
+          }}
+          onPress={fakeIt}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              fontWeight: "bold",
+              color: "white",
+              textAlign: "center",
+            }}
+          >
+            Fake It!
+          </Text>
+        </TouchableOpacity> */}
+        
         {/* City */}
         <Controller
           control={control}
