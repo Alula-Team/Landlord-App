@@ -29,6 +29,7 @@ const auth = firebase.auth();
 
 const AddTenant = ({ navigation }) => {
   const [tenants, setTenants] = useState([]);
+  const [properties, setProperties] = useState([]);
 
   let unsubscribe = null;
   useEffect(() => {
@@ -75,6 +76,7 @@ const AddTenant = ({ navigation }) => {
     inputIOS: {
       marginHorizontal: 20,
       marginTop: 15,
+      marginBottom: 15,
       borderColor: "#ffffff50",
       borderRadius: 10,
       borderWidth: 1,
@@ -88,6 +90,7 @@ const AddTenant = ({ navigation }) => {
     inputAndroid: {
       marginHorizontal: 20,
       marginTop: 15,
+      marginBottom: 15,
       borderColor: "#ffffff50",
       borderRadius: 10,
       borderWidth: 1,
@@ -99,6 +102,23 @@ const AddTenant = ({ navigation }) => {
       fontWeight: "500",
     },
   };
+  // Placeholders
+  const PropertyPlaceholder = {
+    label: "Select Property...",
+    value: null,
+    color: "#fff",
+  };
+
+  const addressArray = properties.map((property) => {
+    return property.address;
+  });
+
+  const allProperties = properties.map((item) => {
+    return {
+      label: item.address,
+      value: item.address,
+    };
+  });
 
   return (
     <>
@@ -167,6 +187,36 @@ const AddTenant = ({ navigation }) => {
               Fake It!
             </Text>
           </TouchableOpacity>
+
+          {/* Property */}
+          <Text style={styles.sectionText}>Property</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={PropertyPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={allProperties}
+              />
+            )}
+            name="address"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.address && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
           {/* First Name */}
           <Text style={styles.sectionText}>First Name</Text>
           <Controller
