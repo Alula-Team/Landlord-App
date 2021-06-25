@@ -15,14 +15,14 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 30,
         fontWeight: '800',
-        color: '#f3f3f3',
+        color: '#34383D',
         marginTop: 60,
         left: 20
     },
     subTitle: {
         fontSize: 22,
         fontWeight: '500',
-        color: '#f3f3f3',
+        color: '#34383D80',
         left: 20
     },
     form: {

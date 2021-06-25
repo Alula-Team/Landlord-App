@@ -2,13 +2,6 @@ import React from 'react';
 import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native';
 import { Badge, Header } from 'react-native-elements';
 
-// Navigation
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-// Screens
-import ServiceRequests from './serviceRequests';
-import Notifications from './notifications';
-
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -22,8 +15,6 @@ import styles from './notif-styles';
 
 
 const Dashboard = () => {
-
-    const Tab = createMaterialTopTabNavigator();
     
     return(
         <>
@@ -40,26 +31,13 @@ const Dashboard = () => {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: '#09061C',
+                        backgroundColor: '#D59166',
                         justifyContent: 'space-around',
                         borderBottomWidth: 0
                     }}
                 />
 
-                {/* Stepper */}
-                <Tab.Navigator 
-                    tabBarOptions={{
-                        indicatorStyle: { backgroundColor: '#5858FB'},
-                        labelStyle: { fontSize: 14, color: '#fff' },
-                        style: { 
-                            backgroundColor: 'transparent',
-                            marginTop: 20
-                        },
-                    }}
-                >
-                    <Tab.Screen name="ServiceRequests" component={ServiceRequests} options={{ tabBarLabel: 'Service Requests' }} />
-                    <Tab.Screen name="Notifications" component={Notifications} />
-                </Tab.Navigator>
+            
             </View>
         </>
     );

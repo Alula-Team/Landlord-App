@@ -24,9 +24,15 @@ const UpdatePayment = () => {
             <View style={styles.container}>
                 {/* Header */}
                 <Header
-                    centerComponent={
-                        <Image source={require('../../assets/favicon.jpg')} style={{width: 75, height: 75}} />
-                    }
+                    centerComponent={{
+                            text: "Update Payment",
+                            style: {
+                            color: "#fff",
+                            fontWeight: "bold",
+                            fontSize: 22,
+                            paddingTop: 30,
+                            },
+                    }}
                     leftComponent={
                         <Icon
                         name="arrow-left"
@@ -42,7 +48,7 @@ const UpdatePayment = () => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#D59166",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}

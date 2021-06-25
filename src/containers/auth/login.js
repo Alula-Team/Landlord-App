@@ -52,12 +52,12 @@ const LoginScreen = ({ navigation }) => {
                         <Feather 
                             name={'mail'}
                             size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
                             style={styles.email}
                             placeholder='Email'
-                            placeholderTextColor='#ffffff50'
+                            placeholderTextColor='#34383D80'
                             autoCapitalize='none'
                             autoCompleteType='email'
                             autoCorrect={false}

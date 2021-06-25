@@ -75,14 +75,21 @@ const AddTenant = ({ navigation }) => {
   const pickerStyles = {
     inputIOS: {
       marginHorizontal: 20,
-      marginTop: 15,
-      marginBottom: 15,
-      borderColor: "#ffffff50",
+      marginTop: 10,
+      marginBottom: 20,
       borderRadius: 10,
-      borderWidth: 1,
+      shadowColor: "#000",
+      shadowOffset: {
+          width: 0,
+          height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
       height: 45,
-      flexDirection: "row",
-      color: "#fff",
+      flexDirection: 'row',
+      backgroundColor: '#fff',
+      color: "#34383D",
       paddingLeft: 15,
       fontSize: 16,
       fontWeight: "500",
@@ -90,23 +97,23 @@ const AddTenant = ({ navigation }) => {
     inputAndroid: {
       marginHorizontal: 20,
       marginTop: 15,
-      marginBottom: 15,
       borderColor: "#ffffff50",
       borderRadius: 10,
       borderWidth: 1,
       height: 45,
       flexDirection: "row",
-      color: "#fff",
+      color: "#34383D",
       paddingLeft: 15,
       fontSize: 16,
       fontWeight: "500",
     },
   };
+
   // Placeholders
   const PropertyPlaceholder = {
     label: "Select Property...",
     value: null,
-    color: "#fff",
+    color: "#34383D",
   };
 
   const addressArray = properties.map((property) => {
@@ -159,7 +166,7 @@ const AddTenant = ({ navigation }) => {
             </TouchableOpacity>
           }
           containerStyle={{
-            backgroundColor: "#09061C",
+            backgroundColor: "#D59166",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -218,17 +225,16 @@ const AddTenant = ({ navigation }) => {
             </Text>
           )}
           {/* First Name */}
-          <Text style={styles.sectionText}>First Name</Text>
+          <Text style={styles.sectionText}>Tenant Name</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.tenantInputContainer}>
+              <View style={styles.searchContainer}>
                 <TextInput
                   type="text"
-                  placeholder="First Name..."
-                  placeholderTextColor="#ffffff80"
+                  placeholder="Tenant Name"
+                  placeholderTextColor="#34383D70"
                   style={styles.tenantInput}
-                  keyboardAppearance="dark"
                   onChangeText={onChange}
                   value={value}
                 />
@@ -250,50 +256,17 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
-          {/* Last Name */}
-          <Text style={styles.sectionText}>Last Name</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <View style={styles.tenantInputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Last Name..."
-                  placeholderTextColor="#ffffff80"
-                  style={styles.tenantInput}
-                  keyboardAppearance="dark"
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            )}
-            name="lastName"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-          {errors.lastName && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: -15,
-                marginBottom: -2,
-              }}
-            >
-              This field is required
-            </Text>
-          )}
+          
           <Text style={styles.sectionText}>Email</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.tenantInputContainer}>
+              <View style={styles.searchContainer}>
                 <TextInput
                   type="text"
-                  placeholder="Email..."
-                  placeholderTextColor="#ffffff80"
+                  placeholder="Email"
+                  placeholderTextColor="#34383D70"
                   style={styles.tenantInput}
-                  keyboardAppearance="dark"
                   onChangeText={onChange}
                   value={value}
                 />
@@ -319,13 +292,12 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.tenantInputContainer}>
+              <View style={styles.searchContainer}>
                 <TextInput
                   type="text"
-                  placeholder="Phone..."
-                  placeholderTextColor="#ffffff80"
+                  placeholder="Phone"
+                  placeholderTextColor="#34383D70"
                   style={styles.tenantInput}
-                  keyboardAppearance="dark"
                   onChangeText={onChange}
                   value={value}
                 />

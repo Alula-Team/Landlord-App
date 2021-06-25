@@ -61,7 +61,7 @@ const UpdateEmail = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#D59166",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -75,7 +75,7 @@ const UpdateEmail = ({ navigation }) => {
                         <TextInput 
                             type='text'
                             placeholder='New Email'
-                            placeholderTextColor='#ffffff80'
+                            placeholderTextColor='#34383D80'
                             style={styles.formInput}
                             autoCapitalize='none'
                             autocomplete='off'
@@ -91,7 +91,7 @@ const UpdateEmail = ({ navigation }) => {
                         <TextInput
                             style={styles.formInput}
                             placeholder='Enter Password to Save Changes'
-                            placeholderTextColor='#ffffff80'
+                            placeholderTextColor='#34383D80'
                             secureTextEntry={true}
                             autoCapitalize='none'
                             autoCompleteType='password'

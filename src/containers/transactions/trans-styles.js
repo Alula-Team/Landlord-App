@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const styles = StyleSheet.create({
     // Body
     container: {
-        backgroundColor: '#09061C',
+        backgroundColor: '#ffffff80',
         height: '100%',
     },
 
@@ -13,18 +13,26 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 20,
         borderRadius: 10,
-        borderWidth: 1,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
         height: 45,
         flexDirection: 'row',
-        backgroundColor: '#ffffff30'
+        backgroundColor: '#fff'
     },
     searchIcon: {
         alignSelf: 'center',
         marginLeft: 10
     },
     searchInput: {
-        color: '#fff',
+        color: '#34383D',
         fontSize: 18,
+        fontWeight: '500',
         marginHorizontal: 12.5,
         width: '85%'
     },
@@ -80,11 +88,11 @@ const styles = StyleSheet.create({
         paddingLeft: 12.5,
         fontSize: 14,
         fontWeight: '600',
-        color: '#fff',
+        color: '#34383D80',
         alignSelf: 'center',
     },
     transactionType: {
-        color: '#fff',
+        color: '#34383D',
         fontSize: 18,
         fontWeight: '600',
     },
@@ -125,7 +133,7 @@ const styles = StyleSheet.create({
     sectionText: {
         fontSize: 16,
         fontWeight: '600',
-        color: '#fff',
+        color: '#34383D',
         textAlign: 'left',
         marginTop: 30,
         marginLeft: 20
@@ -170,7 +178,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     dateText: {
-        color: '#fff',
+        color: '#34383D',
         fontSize: 16,
         fontWeight: '500',
         marginLeft: 12.5
@@ -181,7 +189,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2a2933',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        height: '40%'
+        height: 275
     },
     overlay: {
         backgroundColor: '#00000050',

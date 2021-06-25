@@ -18,7 +18,7 @@ import Tenants from './ScreenStacks/tenantStack';
 // Settings
 import Settings from './ScreenStacks/settingsStack';
 
-// Icons
+// Iconss
 import Icon from 'react-native-vector-icons/Feather';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -26,7 +26,7 @@ const Tab = createMaterialBottomTabNavigator();
 const RootNavigation = (props) => {
     return (
         <>
-            <Tab.Navigator activeColor='white' barStyle={{backgroundColor: '#09061C'}} >
+            <Tab.Navigator activeColor='#D59166' inactiveColor='#34383D60' barStyle={{backgroundColor: '#fff'}} >
                 <Tab.Screen 
                     name={'Properties'}
                     component={Properties}

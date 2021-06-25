@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const styles = StyleSheet.create({
     // Body
     container: {
-        backgroundColor: '#09061C',
+        backgroundColor: '#ffffff90',
         height: '100%',
     },
 

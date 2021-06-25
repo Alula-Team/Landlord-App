@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     // Body
     container: {
-        backgroundColor: '#09061C',
+        backgroundColor: '#ffffff90',
         height: '100%',
     },
 
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         alignSelf: 'center',
-        color: '#fff',
+        color: '#34383D',
         fontSize: 16,
         fontWeight: '600',
         marginLeft: 10
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     },
     logoutButtonText: {
         alignSelf: 'center',
-        color: '#5858FB',
+        color: 'red',
         fontSize: 16,
         fontWeight: '600',
         marginLeft: 10
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         },
         // Explainer
         title: {
-            color: '#fff',
+            color: '#34383D',
             fontSize: 20,
             fontWeight: '600',
             textAlign: 'center',
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
             flexDirection: 'row',
         },
         listText: {
-            color: '#fff',
+            color: '#34383D',
             fontSize: 18,
             fontWeight: '600',
             marginBottom: 20

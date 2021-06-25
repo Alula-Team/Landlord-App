@@ -33,8 +33,6 @@ import { firestore } from "../../firebase/firebase";
 const Tenants = ({ navigation }) => {
   const [tenants, setTenants] = useState([]);
   const [query, setQuery] = useState("");
-  const [shouldShow, setShouldShow] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   let unsubscribe = null;
 
@@ -89,7 +87,7 @@ const Tenants = ({ navigation }) => {
 
   // Separator
   const renderSeparator = () => {
-    return <View style={{ height: 0.5, backgroundColor: "#CED0CE50" }} />;
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
   };
 
   // Empty List Content
@@ -131,21 +129,7 @@ const Tenants = ({ navigation }) => {
           }}
           rightComponent={
             <>
-              <View style={{ flexDirection: "row" }}>
-                {/* SEARCH */}
-                <Icon
-                  name="search"
-                  type="feather"
-                  color="#fff"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 30,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  onPress={() => setShouldShow(!shouldShow)}
-                />
-
+              <View>
                 {/* ADD Tenant */}
                 <Icon
                   name="plus"
@@ -167,32 +151,30 @@ const Tenants = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#09061C",
+            backgroundColor: "#D59166",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
         />
 
         {/* Search Bar */}
-        {shouldShow ? (
           <Controller
             control={control}
             render={() => (
               <View style={styles.searchContainer}>
                 <Feather
                   name="search"
-                  color="#fff"
+                  color="#34383D80"
                   size={20}
                   style={styles.searchIcon}
                 />
                 <TextInput
                   type="search"
                   placeholder="Search Tenants"
-                  placeholderTextColor="#ffffff75"
-                  autoFocus={true}
+                  placeholderTextColor="#34383D80"
+                  autoFocus={false}
                   autoCorrect={false}
                   style={styles.searchInput}
-                  keyboardAppearance="dark"
                   clearButtonMode="while-editing"
                   onChangeText={handleQuery}
                 />
@@ -200,59 +182,9 @@ const Tenants = ({ navigation }) => {
             )}
             name="search"
           />
-        ) : null}
         {/* END Search Bar */}
 
-        {/* Add Tenant Modal */}
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.overlay}>
-            <KeyboardAvoidingView behavior="position" enabled>
-              <View style={styles.modalContainer}>
-                {/* Close modal button */}
-                <TouchableOpacity
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Feather
-                    name="x"
-                    size={25}
-                    color="#fff"
-                    style={{ marginLeft: 20, marginTop: 20 }}
-                  />
-                </TouchableOpacity>
-
-                <Text style={styles.modalText}>
-                  Invite your tenant to connect...
-                </Text>
-
-                {/* Email Field */}
-                <View style={styles.tenantInputContainer}>
-                  <TextInput
-                    type="text"
-                    placeholder="Enter Tenant Email..."
-                    placeholderTextColor="#ffffff90"
-                    style={styles.tenantInput}
-                    keyboardAppearance="dark"
-                    // onChangeText={}
-                    // value={}
-                  />
-                </View>
-
-                {/* Invite Button */}
-                <TouchableOpacity style={styles.modalButton}>
-                  <Text style={styles.modalButtonText}>Invite</Text>
-                </TouchableOpacity>
-              </View>
-            </KeyboardAvoidingView>
-          </View>
-        </Modal>
+        
 
         {/* Properties Flat List */}
         <SafeAreaView>
@@ -273,7 +205,7 @@ const Tenants = ({ navigation }) => {
                   }
                 >
                   <View style={{ flexDirection: "row" }}>
-                    <Feather name="user" color="#fff" size={20} />
+                    <Feather name="user" color="#34383D90" size={20} />
                     <View>
                       <Text style={styles.listItem}>
                         {item.firstName} {item.lastName}
@@ -282,7 +214,7 @@ const Tenants = ({ navigation }) => {
                   </View>
                   <Feather
                     name="arrow-right"
-                    color="#fff"
+                    color="#34383D90"
                     size={20}
                     style={styles.arrow}
                   />
