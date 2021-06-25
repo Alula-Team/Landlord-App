@@ -68,7 +68,7 @@ const UpdateProfile = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#D59166",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -81,7 +81,7 @@ const UpdateProfile = ({ navigation }) => {
                         <TextInput
                             type="text"
                             placeholder="Current Password"
-                            placeholderTextColor="#ffffff80"
+                            placeholderTextColor="#34383D80"
                             style={styles.formInput}
                             autoCapitalize='none'
                             autocomplete='off'
@@ -97,7 +97,7 @@ const UpdateProfile = ({ navigation }) => {
                         <TextInput
                             type="text"
                             placeholder="New Password"
-                            placeholderTextColor="#ffffff80"
+                            placeholderTextColor="#34383D80"
                             style={styles.formInput}
                             autoCapitalize='none'
                             autocomplete='off'
@@ -113,7 +113,7 @@ const UpdateProfile = ({ navigation }) => {
                         <TextInput 
                             type='text'
                             placeholder='Confirm Password'
-                            placeholderTextColor='#ffffff80'
+                            placeholderTextColor='#34383D80'
                             style={styles.formInput}
                             autoCapitalize='none'
                             autocomplete='off'

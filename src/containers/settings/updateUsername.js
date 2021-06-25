@@ -59,7 +59,7 @@ const UpdateProfile = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#D59166",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -73,7 +73,7 @@ const UpdateProfile = ({ navigation }) => {
                         <TextInput
                             type="text"
                             placeholder="Enter Company or Landlord Name"
-                            placeholderTextColor="#ffffff80"
+                            placeholderTextColor="#34383D80"
                             style={styles.formInput}
                             autoCapitalize='words'
                             keyboardAppearance="dark"

@@ -116,140 +116,35 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           />
         }
         containerStyle={{
-          backgroundColor: "#09061C",
+          backgroundColor: "#D59166",
           justifyContent: "space-around",
           borderBottomWidth: 0,
         }}
       />
 
-      <ScrollView style={{ marginTop: 30 }}>
+      <ScrollView>
         {/* Property Information */}
+        <View style={{marginTop: 30}}></View>
+
         <Text style={styles.sectionTitle}>Property Information</Text>
 
-        <View
-          style={{
-            backgroundColor: "#EE6D66",
-            marginHorizontal: 20,
-            padding: 20,
-            marginBottom: 20,
-            borderRadius: 20,
-          }}
-        >
-          {/* Year to Date */}
-          <View>
-            <Text
-              style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}
-            >
-              Year to Date:
-            </Text>
-
-            {/* Revenue */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
-              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-                $7,500
-              </Text>
-            </View>
-
-            {/* Expenses */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
-              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-                $830
-              </Text>
-            </View>
-
-            {/* Profit */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Profit:</Text>
-              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-                $6,670
-              </Text>
-            </View>
+        <View style={styles.propInfo}>
+          <Text style={styles.propInfoLabel}>Address Unit</Text>
+          <Text style={styles.propInfoLabel}>City, State, Zip Code</Text>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, alignItems: 'center'}}>
+            <Text style={{color: "#34383D", fontSize: 16 }}>Revenue:</Text>
+            <Text style={styles.propInfoLabel}>$42,000</Text>
           </View>
-
-          {/* **** Separator **** */}
-          <View
-            style={{
-              marginVertical: 30,
-              height: 2,
-              //   width: '86%',
-              backgroundColor: "#ffffff90",
-              marginLeft: "5%",
-              marginRight: "5%",
-            }}
-          />
-          {/* **** END Separator **** */}
-
-          {/* All Time */}
-          <View>
-            <Text
-              style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}
-            >
-              All Time:
-            </Text>
-
-            {/* Revenue */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
-              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-                $27,00
-              </Text>
-            </View>
-
-            {/* Expenses */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
-              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-                $3,259
-              </Text>
-            </View>
-
-            {/* Profit */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#fff", fontSize: 16 }}>Profit:</Text>
-              <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
-                $23,741
-              </Text>
-            </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Text style={{color: "#34383D", fontSize: 16 }}>Expenses:</Text>
+            <Text style={styles.propInfoLabel}>- $14,450</Text>
+          </View>
+          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Text style={{color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
+            <Text style={styles.propInfoLabel}>$27,550</Text>
           </View>
         </View>
+          
 
         {/* Tenant Information */}
         <Text style={styles.sectionTitle}>Tenant Information</Text>
@@ -260,7 +155,15 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             marginHorizontal: 20,
             padding: 20,
             marginBottom: 20,
-            borderRadius: 20,
+            borderRadius: 10,
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
           }}
         >
           <Text style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}>
@@ -386,6 +289,46 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             </Text>
           </View>
 
+          {/* Lease Created */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Lease Created:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              02/05/2021
+            </Text>
+          </View>
+
+          {/* Lease Accepted */}
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Tenant Accepted Lease:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+              02/05/2021
+            </Text>
+          </View>
+
+          {/* Payment Due */}
+          <View
+            style={{
+              marginTop: 20,
+            }}
+          >
+            <Text style={{ color: "#fff", fontSize: 16 }}>Lease Notes:</Text>
+            <Text style={{ color: "#fff", fontSize: 16, marginTop: 10 }}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </Text>
+          </View>
+
           {/* Remove Tenant Button */}
           <TouchableOpacity
             style={{
@@ -411,7 +354,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
 
         {/* Actions Modal */}
         <Modal
-          animationType="slide"
+          animationType='fade'
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {

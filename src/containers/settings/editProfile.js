@@ -42,7 +42,7 @@ const EditProfile = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#D59166",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -52,28 +52,28 @@ const EditProfile = ({ navigation }) => {
                     {/* Edit Username Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateUsername')}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='user' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Update Username</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* Edit Email Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateEmail')}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='mail' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='mail' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Update Email</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* Update Password Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePassword')}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='lock' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Update Password</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
                 </ScrollView>
             </View>

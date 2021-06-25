@@ -117,12 +117,12 @@ const AddProperty = ({ navigation }) => {
       marginHorizontal: 20,
       marginTop: 10,
       marginBottom: 20,
-      borderColor: "#ffffff50",
+      borderColor: "#34383D",
       borderRadius: 10,
       borderWidth: 1,
       height: 45,
       flexDirection: "row",
-      color: "#fff",
+      color: "#34383D",
       paddingLeft: 15,
       fontSize: 16,
       fontWeight: "500",
@@ -131,12 +131,12 @@ const AddProperty = ({ navigation }) => {
       marginHorizontal: 20,
       marginTop: 10,
       marginBottom: 20,
-      borderColor: "#ffffff50",
+      borderColor: "#34383D",
       borderRadius: 10,
       borderWidth: 1,
       height: 45,
       flexDirection: "row",
-      color: "#fff",
+      color: "#34383D",
       paddingLeft: 15,
       fontSize: 16,
       fontWeight: "500",
@@ -146,7 +146,7 @@ const AddProperty = ({ navigation }) => {
   const StatePlaceholder = {
     label: "Select State...",
     value: null,
-    color: "#fff",
+    color: "#34383D",
   };
 
   return (
@@ -187,48 +187,37 @@ const AddProperty = ({ navigation }) => {
           </TouchableOpacity>
         }
         containerStyle={{
-          backgroundColor: "#09061C",
+          backgroundColor: "#D59166",
           justifyContent: "space-around",
           borderBottomWidth: 0,
         }}
       />
       
-      <Text style={styles.sectionText}>Property Address</Text>
-      <GooglePlacesAutocomplete
-          placeholder="Enter Address..."
-          fetchDetails
-          
-          onPress={(data, details) => {
-            fakeIt(details.formatted_address);
-          }}
-          query={{
-            key: GOOGLE_PLACES_API_KEY,
-            language: "en",
-          }}
-          textInputProps={{ 
-            placeholderTextColor: '#ffffff90',
-            fontSize: 16,
-            fontWeight: '500',
-            color: '#fff',
-            keyboardAppearance: 'dark'
-          }}
-          styles={{
-            container: {
-              flex: 0,
-            },
-            textInput: {
-              marginHorizontal: 20,
-              marginTop: 10,
-              marginBottom: 20,
-              borderRadius: 10,
-              borderWidth: 1,
-              height: 45,
-              flexDirection: 'row',
-              borderColor: '#ffffff50',
-              backgroundColor: 'transparent'
-            },
-          }}
+      <View style={styles.searchContainer}>
+        <Feather
+          name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
         />
+        <GooglePlacesAutocomplete
+            placeholder="Search Property Address"
+            fetchDetails
+            onPress={(data, details) => {
+              fakeIt(details.formatted_address);
+            }}
+            query={{
+              key: GOOGLE_PLACES_API_KEY,
+              language: "en",
+            }}
+            textInputProps={{ 
+              placeholderTextColor: '#34383D80',
+              fontSize: 18,
+              fontWeight: '500',
+              color: '#34383D',
+            }}
+          />
+      </View>
       <KeyboardAwareScrollView>
         {/* <TouchableOpacity
           style={{
@@ -250,160 +239,11 @@ const AddProperty = ({ navigation }) => {
             Fake It!
           </Text>
         </TouchableOpacity> */}
-        
-        {/* City */}
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.addInputContainer}>
-              <TextInput
-                type="text"
-                placeholder="Enter City..."
-                placeholderTextColor="#ffffff80"
-                style={styles.propertyInput}
-                keyboardAppearance="dark"
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
-          )}
-          name="city"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.city && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
-        {/* STATE */}
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <RNPickerSelect
-              ref={stateRef}
-              placeholder={StatePlaceholder}
-              style={pickerStyles}
-              value={value}
-              onValueChange={onChange}
-              items={[
-                { label: "A. Samoa", value: "A. Samoa", color: "white" },
-                { label: "AK", value: "AK", color: "white" },
-                { label: "AL", value: "AL", color: "white" },
-                { label: "AR", value: "AR", color: "white" },
-                { label: "AZ", value: "AZ", color: "white" },
-                { label: "CA", value: "CA", color: "white" },
-                { label: "CO", value: "CO", color: "white" },
-                { label: "CT", value: "CT", color: "white" },
-                { label: "DC", value: "DC", color: "white" },
-                { label: "DE", value: "DE", color: "white" },
-                { label: "FL", value: "FL", color: "white" },
-                { label: "GA", value: "GA", color: "white" },
-                { label: "Guam", value: "Guam", color: "white" },
-                { label: "HI", value: "HI", color: "white" },
-                { label: "IA", value: "IA", color: "white" },
-                { label: "ID", value: "ID", color: "white" },
-                { label: "IL", value: "IL", color: "white" },
-                { label: "IN", value: "IN", color: "white" },
-                { label: "KS", value: "KS", color: "white" },
-                { label: "KY", value: "KY", color: "white" },
-                { label: "LA", value: "LA", color: "white" },
-                { label: "MA", value: "MA", color: "white" },
-                { label: "MD", value: "MD", color: "white" },
-                { label: "ME", value: "ME", color: "white" },
-                { label: "MI", value: "MI", color: "white" },
-                { label: "MO", value: "MO", color: "white" },
-                { label: "MN", value: "MN", color: "white" },
-                { label: "MS", value: "MS", color: "white" },
-                { label: "MT", value: "MT", color: "white" },
-                { label: "NC", value: "NC", color: "white" },
-                { label: "ND", value: "ND", color: "white" },
-                { label: "NE", value: "NE", color: "white" },
-                { label: "NH", value: "NH", color: "white" },
-                { label: "NJ", value: "NJ", color: "white" },
-                { label: "NM", value: "NM", color: "white" },
-                { label: "NV", value: "NV", color: "white" },
-                { label: "NY", value: "NY", color: "white" },
-                { label: "OH", value: "OH", color: "white" },
-                { label: "OK", value: "OK", color: "white" },
-                { label: "OR", value: "OR", color: "white" },
-                { label: "PA", value: "PA", color: "white" },
-                {
-                  label: "Puerto Rico",
-                  value: "Puerto Rico",
-                  color: "white",
-                },
-                { label: "RI", value: "RI", color: "white" },
-                { label: "SC", value: "SC", color: "white" },
-                { label: "SD", value: "SD", color: "white" },
-                { label: "TN", value: "TN", color: "white" },
-                { label: "TX", value: "TX", color: "white" },
-                { label: "UT", value: "UT", color: "white" },
-                { label: "VA", value: "VA", color: "white" },
-                { label: "VT", value: "VT", color: "white" },
-                { label: "WA", value: "WA", color: "white" },
-                { label: "WI", value: "WI", color: "white" },
-                { label: "WV", value: "WV", color: "white" },
-                { label: "WY", value: "WY", color: "white" },
-              ]}
-            />
-          )}
-          name="state"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.state && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
-        {/* ZIP CODE */}
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.addInputContainer}>
-              <TextInput
-                type="text"
-                placeholder="Enter Zip Code..."
-                placeholderTextColor="#ffffff80"
-                style={styles.propertyInput}
-                keyboardAppearance="dark"
-                keyboardType="number-pad"
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
-          )}
-          name="zip"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.zip && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
+  
+        <Text style={styles.sectionText}>Property Address:</Text>
+        <Text style={styles.sectionLabel}>Address</Text>
+        <Text style={styles.sectionLabel}>City, State, Zip Code</Text>
+
         {/* Units */}
         <TouchableOpacity
           style={styles.addButton}
@@ -423,7 +263,7 @@ const AddProperty = ({ navigation }) => {
                   <TextInput
                     type="text"
                     placeholder="i.e Apt, Unit, Suite, etc..."
-                    placeholderTextColor="#ffffff80"
+                    placeholderTextColor="#34383D80"
                     style={styles.propertyInput}
                     keyboardAppearance="dark"
                     onChangeText={onChange}
@@ -434,7 +274,7 @@ const AddProperty = ({ navigation }) => {
                   style={{ alignSelf: "center", marginBottom: 12.5 }}
                   onPress={() => remove(index)}
                 >
-                  <Feather name="trash" color="#fff" size={20} />
+                  <Feather name="trash" color="#34383D80" size={20} />
                 </TouchableOpacity>
               </View>
             )}

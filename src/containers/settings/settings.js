@@ -43,7 +43,7 @@ const Settings = () => {
                         }
                     }}
                     containerStyle={{
-                        backgroundColor: '#09061C',
+                        backgroundColor: '#D59166',
                         justifyContent: 'space-around',
                         borderBottomWidth: 0
                     }}
@@ -60,64 +60,64 @@ const Settings = () => {
                     {/* Edit Profile Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('EditProfile')}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='user' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='user' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Edit Profile</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* Update Payment Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdatePayment')}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='credit-card' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='credit-card' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Update Payment Info</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
                         
                     {/* Enable Notifications Button */}
                     <TouchableOpacity style={styles.buttonContainer}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='bell' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='bell' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Enable Notifications</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* Enable Location Button */}
                     <TouchableOpacity style={styles.buttonContainer}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='map-pin' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='map-pin' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Enable Location</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* Generate Reports Button */}
                     <TouchableOpacity style={styles.buttonContainer}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='activity' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='activity' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>Generate Reports</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* About Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('About')}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='alert-circle' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='alert-circle' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.buttonText}>About</Text>
                         </View>
-                        <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                     {/* Logout Button */}
                     <TouchableOpacity style={styles.buttonContainer} onPress={handleSignOut}>
                         <View style={{flexDirection: 'row'}}>
-                            <Feather name='log-out' color='#5858FB' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                            <Feather name='log-out' color='red' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                             <Text style={styles.logoutButtonText}>Logout</Text>
                         </View>
-                        <Feather name='arrow-right' color='#5858FB' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                        <Feather name='arrow-right' color='red' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                     </TouchableOpacity>
 
                 </ScrollView>

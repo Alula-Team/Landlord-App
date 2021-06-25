@@ -3,7 +3,7 @@ import { StyleSheet, Dimensions } from 'react-native';
 const styles = StyleSheet.create({
     // Body
     container: {
-        backgroundColor: '#09061C',
+        backgroundColor: '#ffffff80',
         height: '100%',
     },
 
@@ -13,18 +13,26 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginBottom: 20,
         borderRadius: 10,
-        borderWidth: 1,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
         height: 45,
         flexDirection: 'row',
-        backgroundColor: '#ffffff30'
+        backgroundColor: '#fff'
     },
     searchIcon: {
         alignSelf: 'center',
         marginLeft: 10
     },
     searchInput: {
-        color: '#fff',
+        color: '#34383D',
         fontSize: 18,
+        fontWeight: '500',
         marginHorizontal: 12.5,
         width: '85%'
     },
@@ -44,9 +52,10 @@ const styles = StyleSheet.create({
     },
     listItem: {
         paddingLeft: 12.5,
-        fontSize: 16,
-        fontWeight: '700',
-        color: '#fff',
+        fontSize: 15,
+        fontWeight: '600',
+        color: '#34383D',
+        alignSelf: 'center',
     },
     status: {
         color: '#fff',
@@ -65,34 +74,15 @@ const styles = StyleSheet.create({
 
     // ADD TENANT
     overlay: {
-        backgroundColor: 'rgba(0,0,0,0.5)',
+        backgroundColor: '#00000050',
         flex: 1,
         justifyContent: 'flex-end',
     },
     modalContainer: {
-        backgroundColor: '#5858FB',
+        backgroundColor: '#2a2933',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        height: 325
-    },
-    modalText: {
-        color: '#fff',
-        textAlign: 'center',
-        marginVertical: 20,
-        fontSize: 18
-    },
-    modalButton: {
-        backgroundColor: '#fff',
-        padding: 15,
-        marginTop: 20,
-        marginHorizontal: '20%',
-        borderRadius: 10,
-    },
-    modalButtonText: {
-        fontSize: 18,
-        fontWeight: '600',
-        alignSelf: 'center',
-        color: '#5858FB'
+        height: 275
     },
     tenantInputContainer: {
         marginHorizontal: 20,
@@ -117,7 +107,7 @@ const styles = StyleSheet.create({
         height: 70, 
         borderRadius: 80/2, 
         borderColor: '#fff',
-        borderWidth: 3,
+        borderWidth: 4,
         justifyContent: 'center', 
         alignItems: 'center',
         alignSelf: 'center'
@@ -133,13 +123,14 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
     },
-    sectionTitle: {
-        color: '#fff',
+    sectionText: {
         fontSize: 16,
         fontWeight: '600',
-        marginLeft: 30,
+        color: '#34383D',
+        textAlign: 'left',
         marginTop: 30,
-        marginBottom: 20
+        marginBottom: 20,
+        marginLeft: 20
     },
     infoTitle: {
         color: '#ffffff90',
@@ -176,6 +167,29 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center'
     },
+    propInfo: {
+        flexDirection: 'row',
+        backgroundColor: "#5858FB",
+        marginHorizontal: 20,
+        padding: 20,
+        marginBottom: 20,
+        marginTop: 30,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    cardText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "500",
+        marginLeft: 5,
+    }
 });
 
 export default styles;

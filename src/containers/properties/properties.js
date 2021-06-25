@@ -34,7 +34,6 @@ import { connect } from "react-redux";
 const Properties = ({ navigation }) => {
   const [properties, setProperties] = useState([]);
   const [query, setQuery] = useState("");
-  const [shouldShow, setShouldShow] = useState(false);
 
   const handleQuery = (text) => {
     setQuery(text);
@@ -82,7 +81,7 @@ const Properties = ({ navigation }) => {
         style={{
           height: 0.5,
           //   width: '86%',
-          backgroundColor: "#CED0CE50",
+          backgroundColor: "#CED0CE",
           marginLeft: "5%",
           marginRight: "5%",
         }}
@@ -104,7 +103,7 @@ const Properties = ({ navigation }) => {
         />
         <Text
           style={{
-            color: "#fff",
+            color: "#34383D",
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
@@ -134,9 +133,9 @@ const Properties = ({ navigation }) => {
           rightComponent={
             <>
               <View style={{ flexDirection: "row" }}>
-                {/* SEARCH */}
+                {/* SERVICE REQUESTS */}
                 <Icon
-                  name="search"
+                  name="message-circle"
                   type="feather"
                   color="#fff"
                   size={25}
@@ -145,7 +144,7 @@ const Properties = ({ navigation }) => {
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
-                  onPress={() => setShouldShow(!shouldShow)}
+                  // onPress={() => }
                 />
 
                 {/* ADD PROPERTY */}
@@ -168,40 +167,37 @@ const Properties = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#09061C",
+            backgroundColor: "#D59166",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
         />
         {/* Search Bar */}
-        {shouldShow ? (
-          <Controller
-            control={control}
-            render={() => (
-              <View style={styles.searchContainer}>
-                <Feather
-                  name="search"
-                  color="#fff"
-                  size={20}
-                  style={styles.searchIcon}
-                />
-                <TextInput
-                  type="search"
-                  placeholder="Search Properties"
-                  placeholderTextColor="#ffffff75"
-                  autoFocus={true}
-                  autoCorrect={false}
-                  style={styles.searchInput}
-                  keyboardAppearance="dark"
-                  clearButtonMode="while-editing"
-                  onChangeText={handleQuery}
-                  value={query}
-                />
-              </View>
-            )}
-            name="search"
-          />
-        ) : null}
+        <Controller
+          control={control}
+          render={() => (
+            <View style={styles.searchContainer}>
+              <Feather
+                name="search"
+                color="#34383D80"
+                size={20}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                type="search"
+                placeholder="Search Properties"
+                placeholderTextColor="#34383D80"
+                autoFocus={false}
+                autoCorrect={false}
+                style={styles.searchInput}
+                clearButtonMode="while-editing"
+                onChangeText={handleQuery}
+                value={query}
+              />
+            </View>
+          )}
+          name="search"
+        />
 
         {/* Properties Flat List */}
         <SafeAreaView>
@@ -223,7 +219,7 @@ const Properties = ({ navigation }) => {
                 }
               >
                 <View style={{ flexDirection: "row" }}>
-                  <Feather name="map-pin" color="#fff" size={20} />
+                  <Feather name="map-pin" color="#34383D80" size={20} />
                   <View>
                     <Text style={styles.listItem}>
                       {item.address} {item.unit}
@@ -232,7 +228,7 @@ const Properties = ({ navigation }) => {
                 </View>
                 <Feather
                   name="arrow-right"
-                  color="#fff"
+                  color="#34383D90"
                   size={20}
                   style={styles.arrow}
                 />

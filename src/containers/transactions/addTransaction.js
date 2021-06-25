@@ -210,13 +210,21 @@ const AddTransaction = ({ navigation }) => {
   const pickerStyles = {
     inputIOS: {
       marginHorizontal: 20,
-      marginTop: 15,
-      borderColor: "#ffffff50",
+      marginTop: 10,
+      marginBottom: 20,
       borderRadius: 10,
-      borderWidth: 1,
+      shadowColor: "#000",
+      shadowOffset: {
+          width: 0,
+          height: 2,
+      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
       height: 45,
-      flexDirection: "row",
-      color: "#fff",
+      flexDirection: 'row',
+      backgroundColor: '#fff',
+      color: "#34383D",
       paddingLeft: 15,
       fontSize: 16,
       fontWeight: "500",
@@ -229,32 +237,33 @@ const AddTransaction = ({ navigation }) => {
       borderWidth: 1,
       height: 45,
       flexDirection: "row",
-      color: "#fff",
+      color: "#34383D",
       paddingLeft: 15,
       fontSize: 16,
       fontWeight: "500",
     },
   };
+  
   // Placeholders
   const TransactionPlaceholder = {
     label: "Select Transaction Type...",
     value: null,
-    color: "#fff",
+    color: "#34383D80",
   };
   const PropertyPlaceholder = {
     label: "Select Property...",
     value: null,
-    color: "#fff",
+    color: "#34383D80",
   };
   const PaymentPlaceholder = {
     label: "Select Payment Method...",
     value: null,
-    color: "#fff",
+    color: "#34383D80",
   };
   const CategoryPlaceholder = {
     label: "Select Category...",
     value: null,
-    color: "#fff",
+    color: "#34383D80",
   };
 
   return (
@@ -296,7 +305,7 @@ const AddTransaction = ({ navigation }) => {
             </TouchableOpacity>
           }
           containerStyle={{
-            backgroundColor: "#09061C",
+            backgroundColor: "#D59166",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -324,6 +333,7 @@ const AddTransaction = ({ navigation }) => {
               Fake It!
             </Text>
           </TouchableOpacity>
+
           {/* Transaction Type */}
           <Text style={styles.sectionText}>Transaction Type</Text>
           <Controller
@@ -445,13 +455,12 @@ const AddTransaction = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.amountContainer}>
+              <View style={styles.searchContainer}>
                 <TextInput
                   type="text"
                   placeholder="i.e 1500"
-                  placeholderTextColor="#ffffff80"
+                  placeholderTextColor="#34383D70"
                   style={styles.dateText}
-                  keyboardAppearance="dark"
                   keyboardType="numeric"
                   onChangeText={onChange}
                   value={value}

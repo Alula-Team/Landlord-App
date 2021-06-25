@@ -97,7 +97,7 @@ const Transactions = ({ navigation }) => {
         style={{
           height: 0.5,
           //   width: '86%',
-          backgroundColor: "#CED0CE50",
+          backgroundColor: "#CED0CE",
           marginLeft: "5%",
           marginRight: "5%",
         }}
@@ -177,21 +177,7 @@ const Transactions = ({ navigation }) => {
           }}
           rightComponent={
             <>
-              <View style={{ flexDirection: "row" }}>
-                {/* SEARCH */}
-                <Icon
-                  name="search"
-                  type="feather"
-                  color="#fff"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 30,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  onPress={() => setShouldShow(!shouldShow)}
-                />
-
+              <View>
                 {/* ADD Transaction */}
                 <Icon
                   name="plus"
@@ -205,39 +191,37 @@ const Transactions = ({ navigation }) => {
                   }}
                   onPress={() => {
                     setQuery("");
-                    navigation.navigate("AddTransactions");
+                    navigation.navigate("AddTransaction");
                   }}
                 />
               </View>
             </>
           }
           containerStyle={{
-            backgroundColor: "#09061C",
+            backgroundColor: "#D59166",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
         />
 
         {/* Search Bar */}
-        {shouldShow ? (
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
               <View style={styles.searchContainer}>
                 <Feather
                   name="search"
-                  color="#fff"
+                  color="#34383D80"
                   size={20}
                   style={styles.searchIcon}
                 />
                 <TextInput
                   type="search"
                   placeholder="Search Transactions"
-                  placeholderTextColor="#ffffff75"
-                  autoFocus={true}
+                  placeholderTextColor="#34383D80"
+                  autoFocus={false}
                   autoCorrect={false}
                   style={styles.searchInput}
-                  keyboardAppearance="dark"
                   clearButtonMode="while-editing"
                   onChangeText={handleQuery}
                   value={query}
@@ -246,7 +230,6 @@ const Transactions = ({ navigation }) => {
             )}
             name="search"
           />
-        ) : null}
         {/* END Search Bar */}
 
         {/* Transactions Flat List */}
@@ -278,17 +261,17 @@ const Transactions = ({ navigation }) => {
                     </View>
                     {/* Property */}
                     <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="map-pin" color="#fff" size={15} />
+                      <Feather name="map-pin" color="#34383D80" size={15} />
                       <Text style={styles.listItem}>{item.address}</Text>
                     </View>
                     {/* Date */}
                     <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="clock" color="#fff" size={15} />
+                      <Feather name="clock" color="#34383D80" size={15} />
                       <Text style={styles.listItem}>{makeDate(item.date)}</Text>
                     </View>
                     {/* Payment Type */}
                     <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="credit-card" color="#fff" size={15} />
+                      <Feather name="credit-card" color="#34383D80" size={15} />
                       <Text style={styles.listItem}>{item.paymentMethod}</Text>
                     </View>   
                   </TouchableOpacity>
@@ -305,7 +288,7 @@ const Transactions = ({ navigation }) => {
 
           {/* Actions Modal */}
           <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
