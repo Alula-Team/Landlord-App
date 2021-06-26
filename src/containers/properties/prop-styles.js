@@ -7,14 +7,6 @@ const styles = StyleSheet.create({
     height: "100%",
   },
 
-  googleSearchContainer: {
-    marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
-    flex: 1,
-    flexDirection: "row",
-  },
-
   // Searchbar
   searchContainer: {
     marginHorizontal: 20,
@@ -39,7 +31,7 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     color: "#34383D",
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: "500",
     marginHorizontal: 12.5,
     width: "85%",
