@@ -68,7 +68,7 @@ const UpdatePayment = () => {
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>Unlimited Transactions</Text>
+                                <Text style={styles.listText}>Unlimited Properties, Tenants & Transactions</Text>
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
@@ -78,7 +78,7 @@ const UpdatePayment = () => {
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
                                 <Text style={styles.listText}>Free for Landlords*</Text>
                             </View>
-                            <Text style={{color: '#fff', marginTop: 20, textAlign: 'center'}}>* 1% transaction fee passed onto the tenant.</Text>
+                            <Text style={{color: '#34383D80', marginTop: 20, textAlign: 'center'}}>* 1% transaction fee passed onto the tenant.</Text>
                         </View>
                     </View>
 

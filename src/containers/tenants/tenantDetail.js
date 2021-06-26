@@ -248,73 +248,55 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 1st /mo
               </Text>
             </View>
-
-            {/* Lease Created */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Created:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-                02/05/2021
-              </Text>
-            </View>
-
-            {/* Lease Accepted */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Tenant Accepted Lease:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-                02/05/2021
-              </Text>
-            </View>
-
-            {/* Payment Due */}
-            <View
-              style={{
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Notes:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, marginTop: 10 }}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </Text>
-            </View>
-
-            {/* Remove Tenant Button */}
-            <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                alignItems: "center",
-                marginTop: 50,
-                justifyContent: "center",
-              }}
-            >
-              <Feather name="x" size={22.5} color="#34383D" />
-              <Text
-                style={{
-                  color: "#34383D",
-                  fontSize: 16,
-                  fontWeight: "600",
-                  marginLeft: 10,
-                }}
-              >
-                Remove Tenant
-              </Text>
-            </TouchableOpacity>
           </View>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#fff",
+              marginHorizontal: 20,
+              padding: 20,
+              marginBottom: 20,
+              borderRadius: 10,
+              shadowColor: "#000",
+              shadowOffset: {
+                  width: 0,
+                  height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+              flexDirection: 'row'
+            }}
+          >
+            <Feather name='upload' size={18} color="#34383D80" />
+            <Text style={{fontSize: 16, fontWeight: '500', color: '#34383D', marginLeft: 10}}>Upload Lease</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: "#fff",
+              marginHorizontal: 20,
+              padding: 20,
+              marginBottom: 20,
+              borderRadius: 10,
+              shadowColor: "#000",
+              shadowOffset: {
+                  width: 0,
+                  height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
+              flexDirection: 'row'
+            }}
+          >
+            <Feather name='eye' size={18} color="#34383D80" />
+            <Text style={{fontSize: 16, fontWeight: '500', color: '#34383D', marginLeft: 10}}>View Lease</Text>
+          </TouchableOpacity>
           
           {/* Actions Modal */}
         <Modal
-          animationType='fade'
+          animationType='slide'
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -353,7 +335,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                     marginLeft: 10,
                   }}
                 >
-                  Edit Property
+                  Edit Tenant
                 </Text>
               </TouchableOpacity>
 
@@ -375,7 +357,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                     marginLeft: 10,
                   }}
                 >
-                  Delete Property
+                  Delete Tenant
                 </Text>
               </TouchableOpacity>
 

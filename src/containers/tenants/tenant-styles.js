@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         borderColor: '#ffffff60'
     },
     tenantInput: {
-        color: '#fff',
+        color: '#34383D',
         fontSize: 16,
         fontWeight: '500',
         marginLeft: 12.5
