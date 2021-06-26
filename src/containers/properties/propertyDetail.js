@@ -124,27 +124,45 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
 
       <ScrollView>
         {/* Property Information */}
-        <View style={{marginTop: 30}}></View>
+        <View style={{ marginTop: 30 }}></View>
 
         <Text style={styles.sectionTitle}>Property Information</Text>
 
         <View style={styles.propInfo}>
           <Text style={styles.propInfoLabel}>Address Unit</Text>
           <Text style={styles.propInfoLabel}>City, State, Zip Code</Text>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 20, alignItems: 'center'}}>
-            <Text style={{color: "#34383D", fontSize: 16 }}>Revenue:</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
             <Text style={styles.propInfoLabel}>$42,000</Text>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Text style={{color: "#34383D", fontSize: 16 }}>Expenses:</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
             <Text style={styles.propInfoLabel}>- $14,450</Text>
           </View>
-          <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Text style={{color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
             <Text style={styles.propInfoLabel}>$27,550</Text>
           </View>
         </View>
-          
 
         {/* Tenant Information */}
         <Text style={styles.sectionTitle}>Tenant Information</Text>
@@ -158,8 +176,8 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             borderRadius: 10,
             shadowColor: "#000",
             shadowOffset: {
-                width: 0,
-                height: 2,
+              width: 0,
+              height: 2,
             },
             shadowOpacity: 0.25,
             shadowRadius: 3.84,
@@ -311,7 +329,9 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Tenant Accepted Lease:</Text>
+            <Text style={{ color: "#fff", fontSize: 16 }}>
+              Tenant Accepted Lease:
+            </Text>
             <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
               02/05/2021
             </Text>
@@ -325,7 +345,13 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           >
             <Text style={{ color: "#fff", fontSize: 16 }}>Lease Notes:</Text>
             <Text style={{ color: "#fff", fontSize: 16, marginTop: 10 }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
             </Text>
           </View>
 
@@ -354,7 +380,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
 
         {/* Actions Modal */}
         <Modal
-          animationType='fade'
+          animationType="slide"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
