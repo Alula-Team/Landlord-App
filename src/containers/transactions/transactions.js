@@ -9,7 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  Modal
+  Modal,
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -205,31 +205,31 @@ const Transactions = ({ navigation }) => {
         />
 
         {/* Search Bar */}
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <View style={styles.searchContainer}>
-                <Feather
-                  name="search"
-                  color="#34383D80"
-                  size={20}
-                  style={styles.searchIcon}
-                />
-                <TextInput
-                  type="search"
-                  placeholder="Search Transactions"
-                  placeholderTextColor="#34383D80"
-                  autoFocus={false}
-                  autoCorrect={false}
-                  style={styles.searchInput}
-                  clearButtonMode="while-editing"
-                  onChangeText={handleQuery}
-                  value={query}
-                />
-              </View>
-            )}
-            name="search"
-          />
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <View style={styles.searchContainer}>
+              <Feather
+                name="search"
+                color="#34383D80"
+                size={20}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                type="search"
+                placeholder="Search Transactions"
+                placeholderTextColor="#34383D80"
+                autoFocus={false}
+                autoCorrect={false}
+                style={styles.searchInput}
+                clearButtonMode="while-editing"
+                onChangeText={handleQuery}
+                value={query}
+              />
+            </View>
+          )}
+          name="search"
+        />
         {/* END Search Bar */}
 
         {/* Transactions Flat List */}
@@ -240,7 +240,10 @@ const Transactions = ({ navigation }) => {
               keyExtractor={(item) => item.id}
               renderItem={({ item }) => {
                 return (
-                  <TouchableOpacity style={styles.listCell} onPress={() => setModalVisible(true)}>
+                  <TouchableOpacity
+                    style={styles.listCell}
+                    onPress={() => setModalVisible(true)}
+                  >
                     {/* Transaction Category and Amount*/}
                     <View style={styles.itemCenter}>
                       <Text style={styles.transactionType}>
@@ -273,7 +276,7 @@ const Transactions = ({ navigation }) => {
                     <View style={{ flexDirection: "row", marginTop: 10 }}>
                       <Feather name="credit-card" color="#34383D80" size={15} />
                       <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                    </View>   
+                    </View>
                   </TouchableOpacity>
                 );
               }}
@@ -288,7 +291,7 @@ const Transactions = ({ navigation }) => {
 
           {/* Actions Modal */}
           <Modal
-            animationType="fade"
+            animationType="slide"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {

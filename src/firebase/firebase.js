@@ -3,7 +3,6 @@ import "firebase/firestore";
 
 import firebaseConfig from "./firebaseConfig";
 
-
 // Initialize Firebase App
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -65,15 +64,13 @@ export async function getUser(email, username) {
     const currentUser = firebase.auth().currentUser;
     var name, email, uid, emailVerified;
 
-      if (user != null) {
-        name = currentUser.username;
-        email = currentUser.email;
-        emailVerified = currentUser.emailVerified;
-        uid = user.uid;
-      }
-  } catch (error) {
-
-  }
+    if (user != null) {
+      name = currentUser.username;
+      email = currentUser.email;
+      emailVerified = currentUser.emailVerified;
+      uid = user.uid;
+    }
+  } catch (error) {}
 }
 // ***** END GET USER INFORMATION ***** //
 
@@ -281,3 +278,18 @@ export async function loggingOut() {
 // ***** END SIGN OUT ***** //
 
 export const firestore = firebase.firestore();
+
+export const auth = firebase.auth();
+
+export async function getUserDocument(uid) {
+  if (!uid) return null;
+  try {
+    const userDocument = await firestore.collection("users").doc(uid).get();
+    return {
+      uid,
+      ...userDocument.data(),
+    };
+  } catch (error) {
+    console.error("Error fetching user", error.message);
+  }
+}
