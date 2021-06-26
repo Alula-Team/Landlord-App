@@ -9,31 +9,24 @@ const styles = StyleSheet.create({
 
     // Notifications
     notificationContainer: {
-        marginTop: 20,
-        marginHorizontal: 20,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-        width: 0,
-        height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        backgroundColor: "#fff",
+        paddingVertical: 20,
+        paddingHorizontal: 25,
     },
     notificationTitle: {
+        color: '#34383D',
         fontSize: 18,
-        fontWeight: '500',
-        padding: 20,
-        color: '#34383D'
+        fontWeight: '600',
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        marginTop: 10, 
+        alignItems: 'center',
     },
     notificationText: {
-        marginLeft: 5,
-        fontSize: 16,
-        fontWeight: '500',
-        color: '#34383D90',
-        marginBottom: 10
+        paddingLeft: 12.5,
+        fontSize: 14,
+        fontWeight: '600',
+        color: '#34383D80',
+        alignSelf: 'center',
     },
 });
 

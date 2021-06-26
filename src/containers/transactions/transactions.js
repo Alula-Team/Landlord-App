@@ -93,15 +93,7 @@ const Transactions = ({ navigation }) => {
   // // Separator
   const renderSeparator = () => {
     return (
-      <View
-        style={{
-          height: 0.5,
-          //   width: '86%',
-          backgroundColor: "#CED0CE",
-          marginLeft: "5%",
-          marginRight: "5%",
-        }}
-      />
+      <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />
     );
   };
 
@@ -109,7 +101,7 @@ const Transactions = ({ navigation }) => {
   const HeaderComponent = () => {
     return (
       <View style={{ backgroundColor: "#09061C" }}>
-        <TextInput style={styles.sectionText}>Vacant</TextInput>
+        <TextInput style={styles.sectionText}>Date</TextInput>
       </View>
     );
   };
@@ -177,7 +169,20 @@ const Transactions = ({ navigation }) => {
           }}
           rightComponent={
             <>
-              <View>
+              <View style={{ flexDirection: "row" }}>
+                {/* Dashboard */}
+                <Icon
+                  name="activity"
+                  type="feather"
+                  color="#fff"
+                  size={25}
+                  iconStyle={{
+                    paddingTop: 30,
+                    paddingRight: 20,
+                    paddingBottom: 10,
+                  }}
+                  // onPress={() => }
+                />
                 {/* ADD Transaction */}
                 <Icon
                   name="plus"

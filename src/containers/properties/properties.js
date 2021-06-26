@@ -15,13 +15,6 @@ import { useForm, Controller } from "react-hook-form";
 
 import { Badge, Header, Icon } from "react-native-elements";
 
-// Navigation
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-
-// Screens
-import Occupied from "./occupied";
-import Vacant from "./vacant";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
@@ -77,15 +70,7 @@ const Properties = ({ navigation }) => {
   // Separator
   const renderSeparator = () => {
     return (
-      <View
-        style={{
-          height: 0.5,
-          //   width: '86%',
-          backgroundColor: "#CED0CE",
-          marginLeft: "5%",
-          marginRight: "5%",
-        }}
-      />
+      <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />
     );
   };
 
@@ -134,18 +119,25 @@ const Properties = ({ navigation }) => {
             <>
               <View style={{ flexDirection: "row" }}>
                 {/* SERVICE REQUESTS */}
-                <Icon
-                  name="message-circle"
-                  type="feather"
-                  color="#fff"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 30,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  // onPress={() => }
-                />
+                <View>
+                  <Icon
+                    name="message-circle"
+                    type="feather"
+                    color="#fff"
+                    size={25}
+                    iconStyle={{
+                      paddingTop: 30,
+                      paddingRight: 20,
+                      paddingBottom: 10,
+                    }}
+                    onPress={() => navigation.navigate("ServiceRequests")}
+                  />
+                  <Badge 
+                    status="error" 
+                    containerStyle={{ position: 'absolute', top: 30, right: 20, border: 'none'}}
+                    badgeStyle={{ height: 10, width: 10, borderWidth: 0, borderRadius: 10/2}}
+                  />
+                </View>
 
                 {/* ADD PROPERTY */}
                 <Icon
