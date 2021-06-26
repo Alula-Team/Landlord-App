@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -13,9 +19,7 @@ import firebase from "firebase/app";
 
 // Google Places
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_PLACES_API_KEY } from "../../googlePlaces";
-import GooglePlacesInput from "./GooglePlacesInput";
-
+import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
 import faker from "faker";
 faker.locale = "en_US";
 
@@ -192,8 +196,7 @@ const AddProperty = ({ navigation }) => {
           borderBottomWidth: 0,
         }}
       />
-      
-      <View style={styles.searchContainer}>
+      <View style={styles.googleSearchContainer}>
         <Feather
           name="search"
           color="#34383D80"
@@ -201,23 +204,60 @@ const AddProperty = ({ navigation }) => {
           style={styles.searchIcon}
         />
         <GooglePlacesAutocomplete
-            placeholder="Search Property Address"
-            fetchDetails
-            onPress={(data, details) => {
-              fakeIt(details.formatted_address);
-            }}
-            query={{
-              key: GOOGLE_PLACES_API_KEY,
-              language: "en",
-            }}
-            textInputProps={{ 
-              placeholderTextColor: '#34383D80',
-              fontSize: 18,
-              fontWeight: '500',
-              color: '#34383D',
-            }}
-          />
+          placeholder="Search"
+          query={{
+            key: GOOGLE_PLACES_API_KEY,
+            language: "en", // language of the results
+          }}
+          fetchDetails
+          onPress={(data, details) => fakeIt(details.formatted_address)}
+          onFail={(error) => console.error(error)}
+          textInputProps={{
+            borderRadius: 10,
+            shadowColor: "#000",
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+            height: 45,
+            flexDirection: "row",
+            backgroundColor: "#fff",
+            paddingLeft: 45,
+          }}
+        />
       </View>
+      {/* <View style={styles.googleSearchContainer}>
+        <Feather
+          name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
+        />
+        <GooglePlacesAutocomplete
+          placeholder="Search Property Address..."
+          fetchDetails
+          onPress={(data, details) => {
+            fakeIt(details.formatted_address);
+          }}
+          query={{
+            key: GOOGLE_PLACES_API_KEY,
+            language: "en",
+          }}
+          requestUrl={{
+            useOnPlatform: "web",
+            url: "https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api",
+          }}
+          textInputProps={{
+            placeholderTextColor: "#34383D80",
+            fontSize: 18,
+            fontWeight: "500",
+            color: "#34383D",
+          }}
+        />
+      </View> */}
       <KeyboardAwareScrollView>
         {/* <TouchableOpacity
           style={{
@@ -239,10 +279,10 @@ const AddProperty = ({ navigation }) => {
             Fake It!
           </Text>
         </TouchableOpacity> */}
-  
-        <Text style={styles.sectionText}>Property Address:</Text>
+
+        {/* <Text style={styles.sectionText}>Property Address:</Text>
         <Text style={styles.sectionLabel}>Address</Text>
-        <Text style={styles.sectionLabel}>City, State, Zip Code</Text>
+        <Text style={styles.sectionLabel}>City, State, Zip Code</Text> */}
 
         {/* Units */}
         <TouchableOpacity
