@@ -29,15 +29,11 @@ const ServiceRequestDetailScreen = () => {
             <View style={styles.container}>
                 {/* Header */}
                 <Header 
-                    centerComponent={{ 
-                        text: 'Service Request', 
-                        style: { 
-                            color: '#fff', 
-                            fontWeight: 'bold', 
-                            fontSize: 22, 
-                            paddingTop: 30
-                        }
-                    }}
+                    placement={"right"}
+                    centerComponent={
+                        <TouchableOpacity style={{ paddingTop: 32.5, borderBottomWidth: 1, borderBottomColor: '#fff', borderStyle: 'solid' }}>
+                            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600", paddingBottom: 2}}>Mark Complete</Text>
+                        </TouchableOpacity>}
                     leftComponent={
                         <Icon 
                             name='arrow-left'
@@ -53,7 +49,7 @@ const ServiceRequestDetailScreen = () => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: '#09061C',
+                        backgroundColor: '#D59166',
                         justifyContent: 'space-around',
                         borderBottomWidth: 0
                     }}
@@ -67,21 +63,25 @@ const ServiceRequestDetailScreen = () => {
                     
                     {/* Property Address */}
                     <View style={styles.propertySectionSpacing}>
-                        <Text style={styles.propertyServiceTitle}>Property Address</Text>
+                        <Text style={styles.notificationTitle}>Property Address</Text>
                         <View style={{flexDirection: 'row', marginTop: 5}}>
-                            <Feather name='map-pin' color='white' size={15} style={{marginRight: 5, marginTop: 1, color: '#ffffff90'}} />
-                            <Text style={styles.propertyServiceSubText}>City, State, Zip</Text>
+                            <Feather name='map-pin' color='white' size={15} style={{marginTop: 1, color: '#34383D80'}} />
+                            <Text style={styles.notificationText}>City, State, Zip</Text>
+                        </View>
+                        <View style={{ flexDirection: "row", marginTop: 15 }}>
+                            <Feather name="tool" color="#34383D80" size={15} />
+                            <Text style={styles.statusText}>Status</Text>
                         </View>
                     </View>
 
                     {/* Service Title */}
                     <View style={styles.propertySectionSpacing}>
-                        <Text style={styles.propertyServiceTitle}>Service Request Title</Text>
+                        <Text style={styles.notificationTitle}>Service Request Title</Text>
                     </View>
 
                     {/* Description */}
                     <View style={styles.descriptionSectionSpacing}>
-                        <Text style={{color: '#fff', fontSize: 15, fontWeight: '600', marginBottom: 12}}>Description:</Text>
+                        <Text style={{color: '#34383D80', fontSize: 15, fontWeight: '600', marginTop: 30, marginBottom: 20, marginLeft: 20}}>Description:</Text>
                         <Text style={styles.descriptionText}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</Text>
                     </View> 
 

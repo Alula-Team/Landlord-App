@@ -137,26 +137,41 @@ const styles = StyleSheet.create({
 
   // ** SERVICE REQUEST Screen ** //
   propertySectionSpacing: {
-    marginTop: 37,
-    marginLeft: 30,
+    marginTop: 30,
+    marginLeft: 20,
   },
-  propertyServiceTitle: {
-    color: "#34383D",
-    fontSize: 18,
-    fontWeight: "700",
-    textAlign: "left",
+  notificationContainer: {
+    paddingVertical: 20,
+    paddingHorizontal: 25,
   },
-  propertyServiceSubText: {
-    color: "#34383D80",
-    fontSize: 16,
-    fontWeight: "500",
+  notificationTitle: {
+      color: '#34383D',
+      fontSize: 18,
+      fontWeight: '600',
+      flexDirection: 'row', 
+      justifyContent: 'space-between', 
+      marginTop: 10, 
+      alignItems: 'center',
   },
-  descriptionSectionSpacing: {
-    margin: 30,
+  notificationText: {
+      paddingLeft: 12.5,
+      fontSize: 14,
+      fontWeight: '600',
+      color: '#34383D80',
+      alignSelf: 'center',
+  },
+  statusText: {
+    paddingLeft: 12.5,
+    fontSize: 14,
+    fontWeight: '800',
+    color: '#34383D90',
+    alignSelf: 'center',
   },
   descriptionText: {
-    color: "#34383D",
-    fontSize: 16,
+    paddingHorizontal: 20,
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#34383D',
   },
 
   // ** PROPERTY DETAIL SCREEN ** //
