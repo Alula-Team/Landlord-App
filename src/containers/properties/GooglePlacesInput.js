@@ -1,14 +1,14 @@
 import * as React from "react";
-import { View, StyleSheet, TextInput } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_PLACES_API_KEY } from "../../googlePlaces";
 
-const GooglePlacesInput = ({ onPress }) => {
+const GooglePlacesInput = () => {
   return (
     <GooglePlacesAutocomplete
       // ref={ref}
       placeholder="Enter Address..."
-      onPress={(data, details = null) => {
+      fetchDetails
+      onPress={(data, details) => {
         console.log(data, details);
       }}
       query={{
