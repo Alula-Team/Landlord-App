@@ -38,7 +38,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
                         name={'arrow-left'}
                         size={25}
                         style={{
-                            color: 'white',
+                            color: '#34383D80',
                             marginTop: 40,
                             marginLeft: 20
                         }}
@@ -58,16 +58,16 @@ const ForgotPasswordScreen = ({ navigation }) => {
             <View style={styles.form}>
                 {/* Email */}
                 <View style={styles.authFieldContainer}>
-                    <View style={styles.emailInput}>
+                    <View style={styles.inputContainer}>
                         <Feather 
                             name={'mail'}
                             size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
-                            style={styles.email}
+                            style={styles.inputField}
                             placeholder='Email'
-                            placeholderTextColor='#ffffff50'
+                            placeholderTextColor='#34383D80'
                             autoCapitalize='none'
                             autoCompleteType='email'
                             autoCorrect={false}

@@ -38,7 +38,7 @@ const Loading = () => {
     return(
         <View style={styles.splashContainer}>
             <Animated.Image source={require('../../assets/favicon.jpg')} style={{width: 200, height: 200, alignSelf: 'center', transform: [{rotate: spin}]}} />
-            <Text style={{color: '#fff', fontSize: 18, fontWeight: '700', textAlign: 'center'}}>Loading ...</Text>
+            <Text style={{color: '#34383D80', fontSize: 18, fontWeight: '700', textAlign: 'center'}}>Loading ...</Text>
         </View>
     );
 }

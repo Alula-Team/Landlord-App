@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     },
     searchInput: {
         color: '#34383D',
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: '500',
         marginHorizontal: 12.5,
         width: '85%'

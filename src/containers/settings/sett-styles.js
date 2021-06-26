@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     },
     formInput: {
         flex: 1,
-        color: '#fff',
+        color: '#34383D',
         fontSize: 16,
         fontWeight: '500',
         marginLeft: 12.5,

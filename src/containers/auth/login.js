@@ -48,14 +48,14 @@ const LoginScreen = ({ navigation }) => {
 
                 {/* Email */}
                 <View style={styles.authFieldContainer}>
-                    <View style={styles.emailInput}>
+                    <View style={styles.inputContainer}>
                         <Feather 
                             name={'mail'}
                             size={22.5}
                             style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
-                            style={styles.email}
+                            style={styles.inputField}
                             placeholder='Email'
                             placeholderTextColor='#34383D80'
                             autoCapitalize='none'
@@ -75,16 +75,16 @@ const LoginScreen = ({ navigation }) => {
             
                 {/* Password */}
                 <View style={styles.authFieldContainer}>
-                    <View style={styles.passwordInput}>
+                    <View style={styles.inputContainer}>
                         <Feather 
                             name={'lock'}
                             size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
-                            style={styles.password}
+                            style={styles.inputField}
                             placeholder='Password'
-                            placeholderTextColor='#ffffff50'
+                            placeholderTextColor='#34383D80'
                             secureTextEntry={true}
                             autoCapitalize='none'
                             autoCompleteType='password'

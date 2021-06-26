@@ -49,16 +49,16 @@ const RegisterScreen = ({ navigation }) => {
             <View style={styles.form}>
                 {/* USERNAME */}
                 <View style={styles.authFieldContainer}>
-                    <View style={styles.emailInput}>
+                    <View style={styles.inputContainer}>
                         <Feather 
                             name={'user'}
                             size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
-                            style={styles.email}
+                            style={styles.inputField}
                             placeholder='Company or Landlord Name'
-                            placeholderTextColor='#ffffff50'
+                            placeholderTextColor='#34383D80'
                             autoCapitalize='words'
                             autoCompleteType='off'
                             autoCorrect={false}
@@ -74,16 +74,16 @@ const RegisterScreen = ({ navigation }) => {
 
                 {/* EMAIL */}
                 <View style={styles.authFieldContainer}>
-                    <View style={styles.emailInput}>
+                    <View style={styles.inputContainer}>
                         <Feather 
                             name={'mail'}
                             size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
-                            style={styles.email}
+                            style={styles.inputField}
                             placeholder='Email'
-                            placeholderTextColor='#ffffff50'
+                            placeholderTextColor='#34383D80'
                             autoCapitalize='none'
                             autoCompleteType='email'
                             autoCorrect={false}
@@ -99,16 +99,16 @@ const RegisterScreen = ({ navigation }) => {
 
                 {/* PASSWORD */}
                 <View style={styles.authFieldContainer}>
-                    <View style={styles.passwordInput}>
+                    <View style={styles.inputContainer}>
                         <Feather 
                             name={'lock'}
                             size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#ffffff50'}}
+                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
                         />
                         <TextInput
-                            style={styles.password}
+                            style={styles.inputField}
                             placeholder='Password'
-                            placeholderTextColor='#ffffff50'
+                            placeholderTextColor='#34383D80'
                             secureTextEntry={true}
                             autoCapitalize='none'
                             autoCompleteType='password'

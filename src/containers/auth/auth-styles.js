@@ -3,7 +3,9 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         height: '100%',
-        backgroundColor: '#09061C'
+        backgroundColor: '#ffffff'
+    },
+    image: {
     },
     headerText: {
         textAlign: 'center',
@@ -31,73 +33,38 @@ const styles = StyleSheet.create({
     authFieldContainer: {
         marginBottom: 25
     },
-    nameInput: {
+    inputContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#323f4b',
-        color: '#fff',
-        height: 55,
         marginHorizontal: 20,
         marginTop: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        height: 45,
+        flexDirection: "row",
+        backgroundColor: "#fff",
     },
-    nameIcon: {
+    inputField: {
+        color: "#34383D",
+        fontSize: 16,
+        fontWeight: "500",
+        width: "85%",
+    },
+    inputIcon: {
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 10,
         marginRight: 10,
         paddingVertical: 17.5,
         paddingHorizontal: 5,
-        color: '#ffffff70'
-    },
-    name: {
-        flex: 1,
-        backgroundColor: '#323f4b',
-        color: '#fff',
-        fontSize: 16,
-    },
-    emailInput: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#323f4b',
-        height: 55,
-        marginHorizontal: 20,
-        borderRadius: 10
-    },
-    emailIcon: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10,
-        paddingVertical: 17.5,
-        paddingHorizontal: 5,
-        color: '#ffffff70'
-    },
-    email: {
-        flex: 1,
-        backgroundColor: '#323f4b',
-        color: '#fff',
-        fontSize: 16,
-    },
-    passwordInput: { 
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#323f4b',
-        height: 55,
-        marginHorizontal: 20,
-        borderRadius: 10
-    },
-    passwordIcon: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10,
-        paddingVertical: 17.5,
-        paddingLeft: 4,
-        paddingRight: 1,
         color: '#ffffff70'
     },
     errorMsg: {
@@ -143,7 +110,7 @@ const styles = StyleSheet.create({
     },
     otherAuthText: {
         fontSize: 16,
-        color: 'white'
+        color: '#34383D'
     },
     forgotPasswordButton: {
         alignItems: 'flex-end',
@@ -152,7 +119,7 @@ const styles = StyleSheet.create({
     forgotPasswordText: {
         fontSize: 16,
         fontWeight: '700',
-        color: '#f3f3f3'
+        color: '#34383D90'
     },
     pressables: {
         marginTop: 60
@@ -206,7 +173,7 @@ const styles = StyleSheet.create({
     splashContainer: {
         justifyContent: 'center',
         alignContent: 'center',
-        backgroundColor: '#09061C',
+        backgroundColor: '#fff',
         height: '100%'
     },
 });
