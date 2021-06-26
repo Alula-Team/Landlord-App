@@ -40,6 +40,7 @@ const Settings = ({ navigation }) => {
               fontWeight: "bold",
               fontSize: 25,
               paddingTop: 30,
+              paddingBottom: 7
             },
           }}
           containerStyle={{
@@ -144,7 +145,7 @@ const Settings = ({ navigation }) => {
           </TouchableOpacity>
 
           {/* Enable Location Button */}
-          <TouchableOpacity style={styles.buttonContainer}>
+          {/* <TouchableOpacity style={styles.buttonContainer}>
             <View style={{ flexDirection: "row" }}>
               <Feather
                 name="map-pin"
@@ -160,10 +161,10 @@ const Settings = ({ navigation }) => {
               size={20}
               style={{ alignSelf: "center", marginRight: 10 }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* Generate Reports Button */}
-          <TouchableOpacity style={styles.buttonContainer}>
+          {/* <TouchableOpacity style={styles.buttonContainer}>
             <View style={{ flexDirection: "row" }}>
               <Feather
                 name="activity"
@@ -179,7 +180,7 @@ const Settings = ({ navigation }) => {
               size={20}
               style={{ alignSelf: "center", marginRight: 10 }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* About Button */}
           <TouchableOpacity

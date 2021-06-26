@@ -64,7 +64,6 @@ const RegisterScreen = ({ navigation }) => {
                             autoCorrect={false}
                             clearButtonMode={'while-editing'}
                             keyboardType={'default'}
-                            keyboardAppearance='dark'
                             onChangeText={(name) => setUsername(name)}
                             value={username}
                         />
@@ -89,7 +88,6 @@ const RegisterScreen = ({ navigation }) => {
                             autoCorrect={false}
                             clearButtonMode={'while-editing'}
                             keyboardType={'email-address'}
-                            keyboardAppearance='dark'
                             onChangeText={(email) => setEmail(email)}
                             value={email}
                         />
@@ -115,7 +113,6 @@ const RegisterScreen = ({ navigation }) => {
                             autoCorrect={false}
                             clearButtonMode={'while-editing'}
                             returnKeyType={'done'}
-                            keyboardAppearance='dark'
                             onChangeText={(password) => setPassword(password)}
                             value={password}
                         />

@@ -27,7 +27,8 @@ const Dashboard = () => {
                             color: '#fff', 
                             fontWeight: 'bold', 
                             fontSize: 25, 
-                            paddingTop: 30
+                            paddingTop: 30,
+                            paddingBottom: 7
                         }
                     }}
                     containerStyle={{
@@ -37,6 +38,24 @@ const Dashboard = () => {
                     }}
                 />
 
+                <View style={styles.notificationContainer}>
+                    <Text style={styles.notificationTitle}>Passed Due Balance:</Text>
+                    <View style={{ flexDirection: 'row', marginLeft: 20 }}>
+                        <Feather name="map-pin" color="#34383D80" size={15} />
+                        <Text style={styles.notificationText}>5612 Harmony Ave</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', marginLeft: 20 }}>
+                        <Feather name="clock" color="#34383D80" size={15} />
+                        <Text style={styles.notificationText}>01/01/21</Text>
+                    </View>
+                </View>
+
+                {/* Flatlist */}
+                {/* <SafeAreaView>
+                    <FlatList 
+
+                    />
+                </SafeAreaView> */}
             
             </View>
         </>

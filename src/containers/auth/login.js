@@ -63,7 +63,6 @@ const LoginScreen = ({ navigation }) => {
                             autoCorrect={false}
                             clearButtonMode={'while-editing'}
                             keyboardType={'email-address'}
-                            keyboardAppearance='dark'
                             onChangeText={(email) => setEmail(email)}
                             value={email}
                         />
@@ -91,7 +90,6 @@ const LoginScreen = ({ navigation }) => {
                             autoCorrect={false}
                             clearButtonMode={'while-editing'}
                             returnKeyType={'done'}
-                            keyboardAppearance='dark'
                             onChangeText={(password) => setPassword(password)}
                             value={password}
                         />

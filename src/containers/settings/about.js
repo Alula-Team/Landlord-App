@@ -44,7 +44,7 @@ const About = () => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#09061C",
+                        backgroundColor: "#D59166",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -52,26 +52,26 @@ const About = () => {
 
                 {/* Current Version */}
                 <View style={{margin: 20, flexDirection: "row"}}>
-                    <Text style={{color: '#fff', marginRight: 10, fontSize: 16, fontWeight: '700'}}>Current Version:</Text>
-                    <Text style={{color: '#fff', fontSize: 16, fontWeight: '700'}}>1.0.0 Beta</Text>
+                    <Text style={{color: '#34383D80', marginRight: 10, fontSize: 16, fontWeight: '700'}}>Current Version:</Text>
+                    <Text style={{color: '#34383D', fontSize: 16, fontWeight: '700'}}>1.0.0 Beta</Text>
                 </View>
 
                 {/* Privacy Policy */}
                 <TouchableOpacity style={styles.buttonContainer}>
                     <View style={{flexDirection: 'row'}}>
-                        <Feather name='lock' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                        <Feather name='lock' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                         <Text style={styles.buttonText}>Privacy Policy</Text>
                     </View>
-                    <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                 </TouchableOpacity>
 
                 {/* Privacy Policy */}
                 <TouchableOpacity style={styles.buttonContainer}>
                     <View style={{flexDirection: 'row'}}>
-                        <Feather name='archive' color='#fff' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
+                        <Feather name='archive' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                         <Text style={styles.buttonText}>Terms & Conditions</Text>
                     </View>
-                    <Feather name='arrow-right' color='#fff' size={20} style={{alignSelf: 'center', marginRight: 10}} />
+                    <Feather name='arrow-right' color='#34383D80' size={20} style={{alignSelf: 'center', marginRight: 10}} />
                 </TouchableOpacity>
             </View>
         </>

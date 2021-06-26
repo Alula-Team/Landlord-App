@@ -7,35 +7,33 @@ const styles = StyleSheet.create({
         height: '100%',
     },
 
-    // Flatlist
-    flatlistTitle: {
+    // Notifications
+    notificationContainer: {
+        marginTop: 20,
+        marginHorizontal: 20,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        backgroundColor: "#fff",
+    },
+    notificationTitle: {
         fontSize: 18,
-        fontWeight: '600',
-        textDecorationLine: 'underline',
-        color: '#fff',
-        left: 30
+        fontWeight: '500',
+        padding: 20,
+        color: '#34383D'
     },
-    listCell: {
-        paddingVertical: 20,
-        paddingHorizontal: 25,
-        flexDirection: 'row',
-        justifyContent: 'space-between'
-    },
-    listItem: {
-        paddingLeft: 12.5,
-        fontSize: 15,
-        fontWeight: '600',
-        color: '#fff',
-        alignSelf: 'center',
-    },
-    emptyList: {
-        marginTop: 100,
-    },
-    img: {
-        width: '100%',
-        height: 300,
-        resizeMode: 'contain',
-        alignSelf: 'center'
+    notificationText: {
+        marginLeft: 5,
+        fontSize: 16,
+        fontWeight: '500',
+        color: '#34383D90',
+        marginBottom: 10
     },
 });
 
