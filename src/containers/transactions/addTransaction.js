@@ -567,6 +567,17 @@ const AddTransaction = ({ navigation }) => {
               >
                 Upload Receipt
               </Text>
+              <Text 
+                style={{ 
+                  alignSelf: 'center', 
+                  color: '#34383D90', 
+                  fontSize: 14, 
+                  fontWeight: '600',
+                  marginLeft: 5,
+                }}
+              >
+                - PDF, JPG or PNG
+              </Text>
             </View>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
