@@ -289,7 +289,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
           </TouchableOpacity>
 
           {/* Upload New Lease */}
-          <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')}
+          <TouchableOpacity
             style={{
               marginHorizontal: 5,
               marginTop: 10,
@@ -315,18 +315,13 @@ const TenantDetailScreen = ({ route, navigation }) => {
                   color: '#34383D', 
                   fontSize: 16, 
                   fontWeight: '600',
-                  marginLeft: 10 
+                  marginLeft: 10,
+                  textDecorationLine: 'underline'
                 }}
               >
                 Upload New Lease
               </Text>
             </View>
-            <Feather
-              name="arrow-right"
-              color="#34383D80"
-              size={20}
-              style={{ alignSelf: "center", marginRight: 10 }}
-            />
           </TouchableOpacity>
           
           {/* Actions Modal */}
@@ -353,6 +348,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                   Actions
                 </Text>
 
+                {/* Edit Tenant */}
                 <TouchableOpacity
                   style={{
                     flexDirection: "row",
@@ -374,6 +370,29 @@ const TenantDetailScreen = ({ route, navigation }) => {
                   </Text>
                 </TouchableOpacity>
 
+                {/* Edit Lease Information */}
+                <TouchableOpacity
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    paddingTop: 30,
+                    paddingLeft: 20,
+                  }}
+                >
+                  <Feather name="edit-3" size={22.5} color="#fff" />
+                  <Text
+                    style={{
+                      color: "#fff",
+                      fontSize: 16,
+                      fontWeight: "600",
+                      marginLeft: 10,
+                    }}
+                  >
+                    Edit Lease Information
+                  </Text>
+                </TouchableOpacity>
+
+                {/* Delete Tenant */}
                 <TouchableOpacity
                   style={{
                     flexDirection: "row",
