@@ -17,7 +17,6 @@ import { useNavigation } from "@react-navigation/native";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 // Style Sheet
 import styles from "./prop-styles";
@@ -116,7 +115,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           />
         }
         containerStyle={{
-          backgroundColor: "#D59166",
+          backgroundColor: "#232256",
           justifyContent: "space-around",
           borderBottomWidth: 0,
         }}
@@ -308,27 +307,45 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           </View>
         </View>
 
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#fff",
-            marginHorizontal: 20,
-            padding: 20,
-            marginBottom: 20,
-            borderRadius: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-                width: 0,
-                height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-            flexDirection: 'row'
-          }}
-        >
-          <Feather name='eye' size={18} color="#34383D80" />
-          <Text style={{fontSize: 16, fontWeight: '500', color: '#34383D', marginLeft: 10}}>View Lease</Text>
-        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')}
+            style={{
+              marginHorizontal: 5,
+              marginTop: 10,
+              marginBottom: 20,
+              height: 45,
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <Feather 
+                name='eye' 
+                size={18} 
+                color="#34383D80" 
+                style={{ 
+                  alignSelf: "center", 
+                  marginLeft: 20 
+                }} 
+              />
+              <Text 
+                style={{ 
+                  alignSelf: 'center', 
+                  color: '#34383D', 
+                  fontSize: 16, 
+                  fontWeight: '600',
+                  marginLeft: 10 
+                }}
+              >
+                View Current Lease
+              </Text>
+            </View>
+            <Feather
+              name="arrow-right"
+              color="#34383D80"
+              size={20}
+              style={{ alignSelf: "center", marginRight: 10 }}
+            />
+          </TouchableOpacity>
 
         {/* Actions Modal */}
         <Modal
@@ -372,28 +389,6 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
                   }}
                 >
                   Edit Property
-                </Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingTop: 30,
-                  paddingLeft: 20,
-                }}
-                onPress={viewServiceRequests}
-              >
-                <Feather name="tool" size={22.5} color="#fff" />
-                <Text
-                  style={{
-                    color: "#fff",
-                    fontSize: 16,
-                    fontWeight: "600",
-                    marginLeft: 10,
-                  }}
-                >
-                  View Service Requests
                 </Text>
               </TouchableOpacity>
 

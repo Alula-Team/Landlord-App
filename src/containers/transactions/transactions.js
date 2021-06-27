@@ -181,7 +181,7 @@ const Transactions = ({ navigation }) => {
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
-                  // onPress={() => }
+                  onPress={() => setShouldShow(!shouldShow)}
                 />
                 {/* ADD Transaction */}
                 <Icon
@@ -203,7 +203,7 @@ const Transactions = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#D59166",
+            backgroundColor: "#232256",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -236,6 +236,47 @@ const Transactions = ({ navigation }) => {
           name="search"
         />
         {/* END Search Bar */}
+
+        {/* Revenue Overview */}
+        {shouldShow ? (
+        <View style={styles.moneyBox}>
+          <Text style={{ fontWeight: '500', color: '#34383D80'}}>Financial Activity</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>$42,000</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>- $14,450</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>$27,550</Text>
+          </View>
+        </View>
+        ): null }
+        {/* END Revenue Overview */}
 
         {/* Transactions Flat List */}
         <SafeAreaView>

@@ -215,16 +215,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
   },
-  overlay: {
-    backgroundColor: "#00000050",
-    flex: 1,
-    justifyContent: "flex-end",
-  },
   modalContainer: {
-    backgroundColor: "#2a2933",
+    backgroundColor: '#2a2933',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    height: 325,
+    height: 275
+  },
+  overlay: {
+      backgroundColor: '#00000050',
+      flex: 1,
+      justifyContent: 'flex-end',
   },
 });
 

@@ -7,6 +7,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Tenants from "../../containers/tenants/tenants";
 import AddTenant from "../../containers/tenants/addTenant";
 import TenantDetail from "../../containers/tenants/tenantDetail";
+import CurrentLease from "../../containers/tenants/currentLease";
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,11 @@ const TenantsNavigation = (props) => {
         <Stack.Screen
           name="AddTenant"
           component={AddTenant}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="CurrentLease"
+          component={CurrentLease}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

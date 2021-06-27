@@ -159,7 +159,7 @@ const Properties = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#D59166",
+            backgroundColor: "#232256",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
