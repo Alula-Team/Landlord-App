@@ -305,7 +305,7 @@ const AddTransaction = ({ navigation }) => {
             </TouchableOpacity>
           }
           containerStyle={{
-            backgroundColor: "#D59166",
+            backgroundColor: "#232256",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -363,6 +363,7 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
           {/* Category */}
           <Text style={styles.sectionText}>Category</Text>
           <Controller
@@ -392,6 +393,7 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
           {/* Property */}
           <Text style={styles.sectionText}>Property</Text>
           <Controller
@@ -421,6 +423,7 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
           {/* Payment Method */}
           <Text style={styles.sectionText}>Payment Method</Text>
           <Controller
@@ -450,6 +453,7 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
           {/* Amount */}
           <Text style={styles.sectionText}>Amount</Text>
           <Controller
@@ -483,6 +487,29 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
+          {/* Description */}
+          <Text style={styles.sectionText}>Description</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.textArea}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Transaction Description ..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.dateText}
+                  multiline={true}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="amount"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+
           {/* Date Paid */}
           <Controller
             control={control}
@@ -506,6 +533,53 @@ const AddTransaction = ({ navigation }) => {
             )}
             name="date"
           />
+
+          {/* Upload Receipt - PDF, JPG or PNG */}
+          <TouchableOpacity
+            style={{
+              marginHorizontal: 5,
+              marginTop: 50,
+              marginBottom: 30,
+              height: 45,
+              flexDirection: 'row',
+              justifyContent: 'space-between'
+            }}
+          >
+            <View style={{ flexDirection: 'row' }}>
+              <Feather 
+                name='upload' 
+                size={18} 
+                color="#34383D80" 
+                style={{ 
+                  alignSelf: "center", 
+                  marginLeft: 20 
+                }} 
+              />
+              <Text 
+                style={{ 
+                  alignSelf: 'center', 
+                  color: '#34383D', 
+                  fontSize: 16, 
+                  fontWeight: '600',
+                  marginLeft: 10,
+                  textDecorationLine: 'underline'
+                }}
+              >
+                Upload Receipt
+              </Text>
+              <Text 
+                style={{ 
+                  alignSelf: 'center', 
+                  color: '#34383D90', 
+                  fontSize: 14, 
+                  fontWeight: '600',
+                  marginLeft: 5,
+                }}
+              >
+                - PDF, JPG or PNG
+              </Text>
+            </View>
+          </TouchableOpacity>
         </KeyboardAwareScrollView>
       </View>
     </>

@@ -38,39 +38,21 @@ const styles = StyleSheet.create({
     },
 
     // Money Boxes
-    moneyInCell: {
+    moneyBox: {
         marginHorizontal: 20,
-        padding: 10,
-        backgroundColor: '#5CB85C',
+        marginTop: 10,
+        marginBottom: 20,
         borderRadius: 10,
-    },
-    moneyOutCell: {
-        marginTop: 15,
-        marginHorizontal: 20,
-        marginBottom: 30,
-        padding: 10,
-        backgroundColor: '#D9534F',
-        borderRadius: 10,
-    },
-    netGainsCellTitle: {
-        fontSize: 18,
-        fontWeight: '700',
-        color: '#fff',
-        marginLeft: 10
-    },
-    netGainsCellSubTitle: {
-        fontSize: 14,
-        fontWeight: '500',
-        color: '#fff',
-        opacity: 0.5,
-        marginLeft: 10
-    },
-    netGainsCellNumber: {
-        fontSize: 26,
-        fontWeight: '700',
-        color: '#fff',
-        marginVertical: 10,
-        marginLeft: 10
+        padding: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        backgroundColor: '#fff'
     },
 
     // Flatlist
@@ -138,25 +120,22 @@ const styles = StyleSheet.create({
         marginTop: 30,
         marginLeft: 20
     },
-    upload: {
-        marginHorizontal: 30,
+    textArea: {
+        marginHorizontal: 20,
         marginTop: 10,
         marginBottom: 20,
-        borderColor: '#ffffff50',
         borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        flexDirection: 'row'
-    },
-    textArea: {
-        marginHorizontal: 30,
-        marginTop: 10,
-        marginBottom: 50,
-        borderColor: '#ffffff50',
-        borderRadius: 10,
-        borderWidth: 1,
-        height: 45,
-        flexDirection: 'row'
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        height: 200,
+        flexDirection: 'row',
+        backgroundColor: '#fff'
     },
     amountContainer: {
         marginHorizontal: 20,
@@ -183,6 +162,44 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         marginLeft: 12.5
     },
+
+    // Manage Transaction Screen
+    propertySectionSpacing: {
+        marginTop: 30,
+        marginLeft: 20,
+      },
+      notificationContainer: {
+        paddingVertical: 20,
+        paddingHorizontal: 25,
+      },
+      notificationTitle: {
+          color: '#34383D',
+          fontSize: 18,
+          fontWeight: '600',
+          flexDirection: 'row', 
+          justifyContent: 'space-between', 
+          marginTop: 10, 
+          alignItems: 'center',
+      },
+      notificationText: {
+          paddingLeft: 12.5,
+          fontSize: 14,
+          fontWeight: '600',
+          color: '#34383D80',
+          alignSelf: 'center',
+      },
+      statusText: {
+        marginTop: 10,
+        fontSize: 16,
+        fontWeight: '700',
+        color: '#34383D90',
+      },
+      descriptionText: {
+        paddingHorizontal: 20,
+        fontSize: 14,
+        fontWeight: '500',
+        color: '#34383D',
+      },
 
     // Modal
     modalContainer: {

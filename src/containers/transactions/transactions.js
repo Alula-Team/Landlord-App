@@ -16,9 +16,6 @@ import { useForm, Controller } from "react-hook-form";
 
 import { Header, Icon } from "react-native-elements";
 
-// Navigation
-import { useNavigation } from "@react-navigation/native";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
@@ -181,7 +178,7 @@ const Transactions = ({ navigation }) => {
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
-                  // onPress={() => }
+                  onPress={() => setShouldShow(!shouldShow)}
                 />
                 {/* ADD Transaction */}
                 <Icon
@@ -203,7 +200,7 @@ const Transactions = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#D59166",
+            backgroundColor: "#232256",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -237,6 +234,47 @@ const Transactions = ({ navigation }) => {
         />
         {/* END Search Bar */}
 
+        {/* Revenue Overview */}
+        {shouldShow ? (
+        <View style={styles.moneyBox}>
+          <Text style={{ fontWeight: '500', color: '#34383D80'}}>Financial Activity</Text>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 20,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>$42,000</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>- $14,450</Text>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              marginTop: 10,
+              alignItems: "center",
+            }}
+          >
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>$27,550</Text>
+          </View>
+        </View>
+        ): null }
+        {/* END Revenue Overview */}
+
         {/* Transactions Flat List */}
         <SafeAreaView>
           <View style={styles.listView}>
@@ -247,7 +285,7 @@ const Transactions = ({ navigation }) => {
                 return (
                   <TouchableOpacity
                     style={styles.listCell}
-                    onPress={() => setModalVisible(true)}
+                    onPress={() => navigation.navigate('ManageTransaction')}
                   >
                     {/* Transaction Category and Amount*/}
                     <View style={styles.itemCenter}>
@@ -293,98 +331,6 @@ const Transactions = ({ navigation }) => {
               stickyHeaderIndices={[0]}
             />
           </View>
-
-          {/* Actions Modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.overlay}>
-              <View style={styles.modalContainer}>
-                <Text
-                  style={{
-                    color: "#fff",
-                    fontSize: 18,
-                    fontWeight: "600",
-                    textAlign: "center",
-                    marginTop: 20,
-                  }}
-                >
-                  Actions
-                </Text>
-
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingTop: 30,
-                    paddingLeft: 20,
-                  }}
-                >
-                  <Feather name="edit-3" size={22.5} color="#fff" />
-                  <Text
-                    style={{
-                      color: "#fff",
-                      fontSize: 16,
-                      fontWeight: "600",
-                      marginLeft: 10,
-                    }}
-                  >
-                    Edit Transaction
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    paddingTop: 30,
-                    paddingLeft: 20,
-                  }}
-                  onPress={deleteAlert}
-                >
-                  <Feather name="trash" size={22.5} color="red" />
-                  <Text
-                    style={{
-                      color: "red",
-                      fontSize: 16,
-                      fontWeight: "600",
-                      marginLeft: 10,
-                    }}
-                  >
-                    Delete Transaction
-                  </Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginTop: 50,
-                    justifyContent: "center",
-                  }}
-                  onPress={() => setModalVisible(!modalVisible)}
-                >
-                  <Feather name="x" size={22.5} color="#fff" />
-                  <Text
-                    style={{
-                      color: "#fff",
-                      fontSize: 16,
-                      fontWeight: "600",
-                      marginLeft: 10,
-                    }}
-                  >
-                    Cancel
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
         </SafeAreaView>
       </View>
     </>

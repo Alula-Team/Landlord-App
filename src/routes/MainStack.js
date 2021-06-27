@@ -26,7 +26,7 @@ const Tab = createMaterialBottomTabNavigator();
 const RootNavigation = (props) => {
     return (
         <>
-            <Tab.Navigator activeColor='#D59166' inactiveColor='#34383D60' barStyle={{backgroundColor: '#fff'}} >
+            <Tab.Navigator activeColor='#655CA0' inactiveColor='#9E9CD390' barStyle={{backgroundColor: '#fff'}} >
                 <Tab.Screen 
                     name={'Properties'}
                     component={Properties}

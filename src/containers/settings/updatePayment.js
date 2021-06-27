@@ -48,7 +48,7 @@ const UpdatePayment = () => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#D59166",
+                        backgroundColor: "#232256",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -76,9 +76,9 @@ const UpdatePayment = () => {
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>Free for Landlords*</Text>
+                                <Text style={styles.listText}>No Monthly Subscription*</Text>
                             </View>
-                            <Text style={{color: '#34383D80', marginTop: 20, textAlign: 'center'}}>* 1% transaction fee passed onto the tenant.</Text>
+                            <Text style={{color: '#34383D80', marginTop: 20, textAlign: 'center'}}>* 1% transaction fee on rent payments</Text>
                         </View>
                     </View>
 

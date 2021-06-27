@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#2a2933',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        height: 275
+        height: 325
     },
     tenantInputContainer: {
         marginHorizontal: 20,
