@@ -498,7 +498,13 @@ const AddTransaction = ({ navigation }) => {
                   type="text"
                   placeholder="Enter Transaction Description ..."
                   placeholderTextColor="#34383D70"
-                  style={styles.dateText}
+                  style={{
+                    color: '#34383D',
+                    fontSize: 16,
+                    fontWeight: '500',
+                    marginLeft: 12.5,
+                    paddingTop: 10
+                  }}
                   multiline={true}
                   onChangeText={onChange}
                   value={value}
