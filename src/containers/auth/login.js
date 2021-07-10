@@ -16,30 +16,31 @@ import { signIn } from "../../firebase/firebase";
 import styles from "./auth-styles";
 
 const LoginScreen = ({ navigation }) => {
+  // const { control, handleSubmit, formState: { errors } } = useForm();
 
-    // const { control, handleSubmit, formState: { errors } } = useForm();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const onSubmit = () => {
+    signIn(email, password);
+    setEmail("");
+    setPassword("");
+  };
 
-    const onSubmit = () => {
-        signIn(email, password);
-        setEmail('');
-        setPassword('');
-    }
+  return (
+    <KeyboardAwareScrollView style={styles.container}>
+      <Header
+        backgroundColor={"transparent"}
+        barStyle={"light-content"}
+        containerStyle={{ borderBottomWidth: 0 }}
+        centerComponent={
+          <Image
+            source={require("../../assets/favicon.png")}
+            style={{ width: 100, height: 100 }}
+          />
+        }
+      />
 
-    return (
-        <KeyboardAwareScrollView style={styles.container}>
-            <Header
-                backgroundColor={'transparent'}
-                barStyle={'light-content'}
-                containerStyle={{ borderBottomWidth: 0}}
-                centerComponent={
-                    <Image source={require('../../assets/favicon.png')} style={{width: 100, height: 100}} />
-                }
-
-
-      {/* Title of App */}
       <Text style={styles.title}>Welcome</Text>
       <Text style={styles.subTitle}>Sign in to get started!</Text>
 

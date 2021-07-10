@@ -14,32 +14,34 @@ import { registration } from "../../firebase/firebase";
 import styles from "./auth-styles";
 
 const RegisterScreen = ({ navigation }) => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const emptyState = () => {
+    setUsername("");
+    setEmail("");
+    setPassword("");
+  };
 
-    const emptyState = () => {
-        setUsername('');
-        setEmail('');
-        setPassword('');
-    };
+  const onSubmit = () => {
+    registration(email, password, username);
+    emptyState();
+  };
 
-    const onSubmit = () => {
-        registration( email, password, username );
-        emptyState();
-    }
-
-    return (
-        <KeyboardAwareScrollView style={styles.container}>
-            <Header
-                backgroundColor={'transparent'}
-                barStyle={'light-content'}
-                containerStyle={{ borderBottomWidth: 0}}
-                centerComponent={
-                    <Image source={require('../../assets/favicon.png')} style={{width: 100, height: 100}} />
-                }
-  
+  return (
+    <KeyboardAwareScrollView style={styles.container}>
+      <Header
+        backgroundColor={"transparent"}
+        barStyle={"light-content"}
+        containerStyle={{ borderBottomWidth: 0 }}
+        centerComponent={
+          <Image
+            source={require("../../assets/favicon.png")}
+            style={{ width: 100, height: 100 }}
+          />
+        }
+      />
 
       {/* Title of App */}
       <Text style={styles.title}>Create Account</Text>
