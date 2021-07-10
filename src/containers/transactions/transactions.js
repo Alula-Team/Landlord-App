@@ -87,18 +87,9 @@ const Transactions = ({ navigation }) => {
 
   const { control } = useForm();
 
-  // // Separator
+  // Separator
   const renderSeparator = () => {
     return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
-  };
-
-  // Flatlist Header
-  const HeaderComponent = () => {
-    return (
-      <View style={{ backgroundColor: "#09061C" }}>
-        <TextInput style={styles.sectionText}>Date</TextInput>
-      </View>
-    );
   };
 
   // Empty List Content
@@ -235,9 +226,14 @@ const Transactions = ({ navigation }) => {
         {/* Revenue Overview */}
         {shouldShow ? (
           <View style={styles.moneyBox}>
-            <Text style={{ fontWeight: "500", color: "#34383D80" }}>
-              Financial Activity
-            </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={{ fontWeight: "500", color: "#34383D80", marginRight: 5 }}>
+                Financial Activity
+              </Text>
+              <Text style={{ fontSize: 12, fontWeight: "500", color: "#34383D80" }}>
+                (year to date)
+              </Text> 
+            </View>
             <View
               style={{
                 flexDirection: "row",
@@ -341,7 +337,6 @@ const Transactions = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
               ListEmptyComponent={EmptyListMessage}
-              stickyHeaderIndices={[0]}
             />
           </View>
         </SafeAreaView>
