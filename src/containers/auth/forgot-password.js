@@ -24,32 +24,29 @@ const ForgotPasswordScreen = ({ navigation }) => {
     navigation.navigate("Login");
   };
 
-  return (
-    <View style={styles.container}>
-      {/* Navbar */}
-      <Header
-        backgroundColor={"transparent"}
-        barStyle={"light-content"}
-        containerStyle={{ borderBottomWidth: 0 }}
-        leftComponent={
-          <Feather
-            name={"arrow-left"}
-            size={25}
-            style={{
-              color: "#34383D80",
-              marginTop: 40,
-              marginLeft: 20,
-            }}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        centerComponent={
-          <Image
-            source={require("../../assets/favicon.svg")}
-            style={{ width: 100, height: 100 }}
-          />
-        }
-      />
+    return (
+        <View style={styles.container}>
+            {/* Navbar */}
+            <Header
+                backgroundColor={'transparent'}
+                barStyle={'light-content'}
+                containerStyle={{ borderBottomWidth: 0}}
+                leftComponent={
+                    <Feather 
+                        name={'arrow-left'}
+                        size={25}
+                        style={{
+                            color: '#34383D80',
+                            marginTop: 40,
+                            marginLeft: 20
+                        }}
+                        onPress={() => navigation.goBack()}
+                    />
+                }
+                centerComponent={
+                    <Image source={require('../../assets/favicon.png')} style={{width: 100, height: 100}} />
+                }
+            />
 
       {/* Greeting*/}
       <Text style={styles.title}>Forgot Password</Text>
