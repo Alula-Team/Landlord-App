@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./src/routes/AuthStack";
 import MainStack from "./src/routes/MainStack";
 
-import UserProvider from "./src/providers/UserProvider";
+// import UserProvider from "./src/providers/UserProvider";
 
 // Redux Stuff
 import { Provider } from "react-redux";
@@ -40,11 +40,9 @@ export default function App() {
   };
   return (
     <Provider store={store}>
-      <UserProvider>
-        <NavigationContainer>
-          {signedIn ? <MainStack /> : <AuthStack />}
-        </NavigationContainer>
-      </UserProvider>
+      <NavigationContainer>
+        {signedIn ? <MainStack /> : <AuthStack />}
+      </NavigationContainer>
     </Provider>
   );
 }
