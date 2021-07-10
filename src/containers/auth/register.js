@@ -37,7 +37,7 @@ const RegisterScreen = ({ navigation }) => {
                 barStyle={'light-content'}
                 containerStyle={{ borderBottomWidth: 0}}
                 centerComponent={
-                    <Image source={require('../../assets/favicon.jpg')} style={{width: 100, height: 100}} />
+                    <Image source={require('../../assets/favicon.png')} style={{width: 100, height: 100}} />
                 }
             />
 
