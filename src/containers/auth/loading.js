@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, Animated, Easing } from 'react-native';
+import React, { useState, useEffect } from "react";
+import { View, Text, Animated, Easing } from "react-native";
 
 // Navigation
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 // Style Sheet
-import styles from './auth-styles';
+import styles from "./auth-styles";
 
 const Loading = () => {
 

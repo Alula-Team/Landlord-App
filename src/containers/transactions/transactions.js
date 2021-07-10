@@ -20,7 +20,7 @@ import { Header, Icon } from "react-native-elements";
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./trans-styles";
+import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
@@ -89,9 +89,7 @@ const Transactions = ({ navigation }) => {
 
   // // Separator
   const renderSeparator = () => {
-    return (
-      <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />
-    );
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
   };
 
   // Flatlist Header
@@ -236,43 +234,59 @@ const Transactions = ({ navigation }) => {
 
         {/* Revenue Overview */}
         {shouldShow ? (
-        <View style={styles.moneyBox}>
-          <Text style={{ fontWeight: '500', color: '#34383D80'}}>Financial Activity</Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>$42,000</Text>
+          <View style={styles.moneyBox}>
+            <Text style={{ fontWeight: "500", color: "#34383D80" }}>
+              Financial Activity
+            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "500" }}
+              >
+                $42,000
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 10,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "500" }}
+              >
+                - $14,450
+              </Text>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 10,
+                alignItems: "center",
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Net Profit:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "500" }}
+              >
+                $27,550
+              </Text>
+            </View>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>- $14,450</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 10,
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: '500' }}>$27,550</Text>
-          </View>
-        </View>
-        ): null }
+        ) : null}
         {/* END Revenue Overview */}
 
         {/* Transactions Flat List */}
@@ -285,7 +299,7 @@ const Transactions = ({ navigation }) => {
                 return (
                   <TouchableOpacity
                     style={styles.listCell}
-                    onPress={() => navigation.navigate('ManageTransaction')}
+                    onPress={() => navigation.navigate("ManageTransaction")}
                   >
                     {/* Transaction Category and Amount*/}
                     <View style={styles.itemCenter}>
@@ -327,7 +341,6 @@ const Transactions = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
               ListEmptyComponent={EmptyListMessage}
-              ListHeaderComponent={() => data.length > 0 && HeaderComponent}
               stickyHeaderIndices={[0]}
             />
           </View>

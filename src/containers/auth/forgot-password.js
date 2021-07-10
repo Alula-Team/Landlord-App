@@ -1,30 +1,28 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
-import { Header } from 'react-native-elements';
+import React, { useState } from "react";
+import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { Header } from "react-native-elements";
 
 // Forms
 import { useForm, Controller } from "react-hook-form";
 
 // Navigaiton
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 // Icons
-import Feather from 'react-native-vector-icons/Feather';
+import Feather from "react-native-vector-icons/Feather";
 
 // Styles
-import styles from './auth-styles';
-import { handlePasswordReset } from '../../firebase/firebase';
-
+import styles from "./auth-styles";
+import { handlePasswordReset } from "../../firebase/firebase";
 
 const ForgotPasswordScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
 
-    const [email, setEmail] = useState('');
-
-    const onSubmit = () => {
-        handlePasswordReset(email);
-        setEmail(email);
-        navigation.navigate('Login');
-    }
+  const onSubmit = () => {
+    handlePasswordReset(email);
+    setEmail(email);
+    navigation.navigate("Login");
+  };
 
     return (
         <View style={styles.container}>
@@ -50,42 +48,46 @@ const ForgotPasswordScreen = ({ navigation }) => {
                 }
             />
 
-            {/* Greeting*/}
-            <Text style={styles.title}>Forgot Password</Text>
-            <Text style={styles.subTitle}>Enter your email to continue!</Text>
+      {/* Greeting*/}
+      <Text style={styles.title}>Forgot Password</Text>
+      <Text style={styles.subTitle}>Enter your email to continue!</Text>
 
-            {/* Form */}
-            <View style={styles.form}>
-                {/* Email */}
-                <View style={styles.authFieldContainer}>
-                    <View style={styles.inputContainer}>
-                        <Feather 
-                            name={'mail'}
-                            size={22.5}
-                            style={{alignSelf: 'center', marginHorizontal: 15, color:'#34383D80'}}
-                        />
-                        <TextInput
-                            style={styles.inputField}
-                            placeholder='Email'
-                            placeholderTextColor='#34383D80'
-                            autoCapitalize='none'
-                            autoCompleteType='email'
-                            autoCorrect={false}
-                            clearButtonMode={'while-editing'}
-                            keyboardType={'email-address'}
-                            onChangeText={(email) => setEmail(email)}
-                            value={email}
-                        />
-                    </View>
-                </View>
-                
-                {/* Sign In Button */}
-                <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
-                    <Text style={styles.submitText}>Submit</Text>
-                </TouchableOpacity>
-            </View>
+      {/* Form */}
+      <View style={styles.form}>
+        {/* Email */}
+        <View style={styles.authFieldContainer}>
+          <View style={styles.inputContainer}>
+            <Feather
+              name={"mail"}
+              size={22.5}
+              style={{
+                alignSelf: "center",
+                marginHorizontal: 15,
+                color: "#34383D80",
+              }}
+            />
+            <TextInput
+              style={styles.inputField}
+              placeholder="Email"
+              placeholderTextColor="#34383D80"
+              autoCapitalize="none"
+              autoCompleteType="email"
+              autoCorrect={false}
+              clearButtonMode={"while-editing"}
+              keyboardType={"email-address"}
+              onChangeText={(email) => setEmail(email)}
+              value={email}
+            />
+          </View>
         </View>
-    );
-}
+
+        {/* Sign In Button */}
+        <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
+          <Text style={styles.submitText}>Submit</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 export default ForgotPasswordScreen;
