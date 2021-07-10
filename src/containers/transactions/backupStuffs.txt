@@ -1,0 +1,204 @@
+<Text style={styles.sectionText}>Transaction Type</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={TransactionPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={paymentTypes}
+              />
+            )}
+            name="transactionType"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.payment && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Category */}
+          <Text style={styles.sectionText}>Category</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={CategoryPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={transactionCategories}
+              />
+            )}
+            name="transactionCategory"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.transactionCategory && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Property */}
+          <Text style={styles.sectionText}>Property</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={PropertyPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={allProperties}
+              />
+            )}
+            name="address"
+            rules={{ required: true }}
+            defaultValue="108 Verygold Lane"
+          />
+          {errors.address && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Payment Method */}
+          <Text style={styles.sectionText}>Payment Method</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={PaymentPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={paymentMethods}
+              />
+            )}
+            name="paymentMethod"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.paymentMethod && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Amount */}
+          <Text style={styles.sectionText}>Amount</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="i.e 1500"
+                  placeholderTextColor="#34383D70"
+                  style={styles.dateText}
+                  keyboardType="numeric"
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="amount"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.amount && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Description */}
+          <Text style={styles.sectionText}>Description</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.textArea}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Transaction Description ..."
+                  placeholderTextColor="#34383D70"
+                  style={{
+                    color: "#34383D",
+                    fontSize: 16,
+                    fontWeight: "500",
+                    marginLeft: 12.5,
+                    paddingTop: 10,
+                  }}
+                  multiline={true}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="amount"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+
+          {/* Date Paid */}
+          <Controller
+            control={control}
+            render={() => (
+              <View style={{ flexDirection: "row", marginTop: 20 }}>
+                <Text style={styles.sectionText}>Date Paid:</Text>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode={mode}
+                  display="default"
+                  textColor="#fff"
+                  style={{
+                    marginLeft: 10,
+                    marginTop: 20,
+                    width: "100%",
+                  }}
+                  onChange={handleDateChange}
+                />
+              </View>
+            )}
+            name="date"
+          />
