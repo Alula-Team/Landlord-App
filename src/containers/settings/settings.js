@@ -40,7 +40,7 @@ const Settings = ({ navigation }) => {
               fontWeight: "bold",
               fontSize: 25,
               paddingTop: 30,
-              paddingBottom: 7
+              paddingBottom: 7,
             },
           }}
           containerStyle={{
@@ -51,36 +51,6 @@ const Settings = ({ navigation }) => {
         />
 
         <ScrollView style={{ marginTop: 20 }}>
-          {/* Profile View */}
-          <View
-            style={{
-              backgroundColor: "#5858FB",
-              marginHorizontal: 20,
-              padding: 20,
-              marginBottom: 20,
-              borderRadius: 20,
-            }}
-          >
-            <Text
-              style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}
-            >
-              Current User: {user}
-            </Text>
-            <Text
-              style={{
-                color: "#fff",
-                fontSize: 20,
-                fontWeight: "600",
-                marginTop: 10,
-              }}
-            >
-              Username
-            </Text>
-            <Text style={{ color: "#fff", fontSize: 15, marginTop: 10 }}>
-              {auth.currentUser.email}
-            </Text>
-          </View>
-
           {/* Edit Profile Button */}
           <TouchableOpacity
             style={styles.buttonContainer}

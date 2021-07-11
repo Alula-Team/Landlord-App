@@ -87,18 +87,9 @@ const Transactions = ({ navigation }) => {
 
   const { control } = useForm();
 
-  // // Separator
+  // Separator
   const renderSeparator = () => {
     return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
-  };
-
-  // Flatlist Header
-  const HeaderComponent = () => {
-    return (
-      <View style={{ backgroundColor: "#09061C" }}>
-        <TextInput style={styles.sectionText}>Date</TextInput>
-      </View>
-    );
   };
 
   // Empty List Content
@@ -341,7 +332,6 @@ const Transactions = ({ navigation }) => {
               showsVerticalScrollIndicator={false}
               ItemSeparatorComponent={renderSeparator}
               ListEmptyComponent={EmptyListMessage}
-              stickyHeaderIndices={[0]}
             />
           </View>
         </SafeAreaView>
