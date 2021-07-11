@@ -32,15 +32,6 @@ const RootNavigation = (props) => {
         barStyle={{ backgroundColor: "#fff" }}
       >
         <Tab.Screen
-          name={"Properties"}
-          component={Properties}
-          options={{
-            tabBarIcon: ({ color }) => (
-              <Icon name={"key"} size={22} color={color} />
-            ),
-          }}
-        />
-        <Tab.Screen
           name={"Transactions"}
           component={Transactions}
           options={{
@@ -49,6 +40,16 @@ const RootNavigation = (props) => {
             ),
           }}
         />
+        <Tab.Screen
+          name={"Properties"}
+          component={Properties}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Icon name={"key"} size={22} color={color} />
+            ),
+          }}
+        />
+
         <Tab.Screen
           name={"Tenants"}
           component={Tenants}
