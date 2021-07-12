@@ -1,11 +1,12 @@
-import * as firebase from "firebase";
+import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
 
-import firebaseConfig from "./firebaseConfig";
+import config from "./config";
 
 // Initialize Firebase App
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(config);
 }
 
 // ***** SIGN UP ***** //
@@ -277,10 +278,6 @@ export async function loggingOut() {
 }
 // ***** END SIGN OUT ***** //
 
-export const firestore = firebase.firestore();
-
-export const auth = firebase.auth();
-
 export async function getUserDocument(uid) {
   if (!uid) return null;
   try {
@@ -293,3 +290,7 @@ export async function getUserDocument(uid) {
     console.error("Error fetching user", error.message);
   }
 }
+
+export default firebase;
+export const db = firebase.firestore();
+export const auth = firebase.auth();

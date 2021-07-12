@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   // Body
@@ -6,12 +6,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff80",
     height: "100%",
   },
-
+  fieldError: {
+    color: "red",
+    paddingLeft: 35,
+    marginTop: -10,
+    marginBottom: 0,
+  },
   // Searchbar
   searchContainer: {
     marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
+    marginVertical: 15,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -145,33 +149,33 @@ const styles = StyleSheet.create({
     paddingHorizontal: 25,
   },
   notificationTitle: {
-      color: '#34383D',
-      fontSize: 18,
-      fontWeight: '600',
-      flexDirection: 'row', 
-      justifyContent: 'space-between', 
-      marginTop: 10, 
-      alignItems: 'center',
+    color: "#34383D",
+    fontSize: 18,
+    fontWeight: "600",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+    alignItems: "center",
   },
   notificationText: {
-      paddingLeft: 12.5,
-      fontSize: 14,
-      fontWeight: '600',
-      color: '#34383D80',
-      alignSelf: 'center',
+    paddingLeft: 12.5,
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#34383D80",
+    alignSelf: "center",
   },
   statusText: {
     paddingLeft: 12.5,
     fontSize: 14,
-    fontWeight: '800',
-    color: '#34383D90',
-    alignSelf: 'center',
+    fontWeight: "800",
+    color: "#34383D90",
+    alignSelf: "center",
   },
   descriptionText: {
     paddingHorizontal: 20,
     fontSize: 14,
-    fontWeight: '500',
-    color: '#34383D',
+    fontWeight: "500",
+    color: "#34383D",
   },
 
   // ** PROPERTY DETAIL SCREEN ** //
@@ -216,16 +220,77 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   modalContainer: {
-    backgroundColor: '#2a2933',
+    backgroundColor: "#2a2933",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
-    height: 275
+    height: 275,
   },
   overlay: {
-      backgroundColor: '#00000050',
-      flex: 1,
-      justifyContent: 'flex-end',
+    backgroundColor: "#00000050",
+    flex: 1,
+    justifyContent: "flex-end",
   },
 });
 
+const pickerStyles = {
+  inputIOS: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 20,
+    borderColor: "#34383D",
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 45,
+    flexDirection: "row",
+    color: "#34383D",
+    paddingLeft: 15,
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  inputAndroid: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    marginBottom: 20,
+    borderColor: "#34383D",
+    borderRadius: 10,
+    borderWidth: 1,
+    height: 45,
+    flexDirection: "row",
+    color: "#34383D",
+    paddingLeft: 15,
+    fontSize: 16,
+    fontWeight: "500",
+  },
+};
+
+const googlePlacesStyles = {
+  container: {
+    flex: 0,
+  },
+  textInputContainer: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+  },
+  textInput: {
+    height: 45,
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+};
+
 export default styles;
+export { pickerStyles, googlePlacesStyles };

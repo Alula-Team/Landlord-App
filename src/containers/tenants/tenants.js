@@ -19,12 +19,14 @@ import { Header, Icon } from "react-native-elements";
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./tenant-styles";
+import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
 
-import { firestore } from "../../firebase/firebase";
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
+import { collectIdsAndData } from "../../utilities";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -38,17 +40,17 @@ const Tenants = ({ navigation }) => {
 
   useEffect(() => {
     let mounted = true;
+    console.log("Tenants Mounted!");
     async function getStuffs() {
-      unsubscribe = firestore.collection("tenants").onSnapshot((snapshot) => {
-        const tenants = snapshot.docs.map((doc) => {
-          return { id: doc.id, ...doc.data() };
-        });
+      unsubscribe = db.collection("tenants").onSnapshot((snapshot) => {
+        const tenants = snapshot.docs.map(collectIdsAndData);
         if (mounted) setTenants(tenants);
       });
     }
     getStuffs();
     return function cleanup() {
       mounted = false;
+      console.log("Tenants Unmounted!");
       unsubscribe();
     };
   }, []);
@@ -63,7 +65,7 @@ const Tenants = ({ navigation }) => {
   };
 
   const filteredList = tenants.filter((item) =>
-    item.firstName.toLowerCase().includes(query.trim().toLowerCase())
+    item.name.toLowerCase().includes(query.trim().toLowerCase())
   );
 
   const data = filteredList;
@@ -158,33 +160,31 @@ const Tenants = ({ navigation }) => {
         />
 
         {/* Search Bar */}
-          <Controller
-            control={control}
-            render={() => (
-              <View style={styles.searchContainer}>
-                <Feather
-                  name="search"
-                  color="#34383D80"
-                  size={20}
-                  style={styles.searchIcon}
-                />
-                <TextInput
-                  type="search"
-                  placeholder="Search Tenants"
-                  placeholderTextColor="#34383D80"
-                  autoFocus={false}
-                  autoCorrect={false}
-                  style={styles.searchInput}
-                  clearButtonMode="while-editing"
-                  onChangeText={handleQuery}
-                />
-              </View>
-            )}
-            name="search"
-          />
+        <Controller
+          control={control}
+          render={() => (
+            <View style={styles.searchContainer}>
+              <Feather
+                name="search"
+                color="#34383D80"
+                size={20}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                type="search"
+                placeholder="Search Tenants"
+                placeholderTextColor="#34383D80"
+                autoFocus={false}
+                autoCorrect={false}
+                style={styles.searchInput}
+                clearButtonMode="while-editing"
+                onChangeText={handleQuery}
+              />
+            </View>
+          )}
+          name="search"
+        />
         {/* END Search Bar */}
-
-        
 
         {/* Properties Flat List */}
         <SafeAreaView>
@@ -198,18 +198,17 @@ const Tenants = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("TenantDetail", {
                       itemID: item.id,
-                      itemName: `${item.firstName} ${item.lastName}`,
+                      itemName: `${item.name}`,
                       itemEmail: item.email,
                       itemPhone: item.phone,
+                      property: item.property,
                     })
                   }
                 >
                   <View style={{ flexDirection: "row" }}>
                     <Feather name="user" color="#34383D90" size={20} />
                     <View>
-                      <Text style={styles.listItem}>
-                        {item.firstName} {item.lastName}
-                      </Text>
+                      <Text style={styles.listItem}>{item.name}</Text>
                     </View>
                   </View>
                   <Feather

@@ -28,8 +28,17 @@ import styles from "./styles";
 
 const auth = firebase.auth();
 
-const AddTransaction = ({ navigation }) => {
-  const [properties, setProperties] = useState([]);
+const AddTransaction = ({ navigation, stateProperties }) => {
+  const [properties, setProperties] = useState(stateProperties);
+  const addressArray = properties.map((property) => {
+    return property.address;
+  });
+  const allProperties = properties.map((item) => {
+    return {
+      label: item.address,
+      value: item.id,
+    };
+  });
 
   let unsubscribe = null;
   useEffect(() => {
@@ -285,4 +294,4 @@ const mapStateToProps = (state) => {
   return { stateProperties: state.properties.properties };
 };
 
-export default AddTransaction;
+export default connect(mapStateToProps)(AddTransaction);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { firestore } from "../../firebase/firebase";
+
 import {
   Alert,
   Text,
@@ -25,6 +25,9 @@ import { styles } from "./styles";
 // Redux Stuff
 import { connect } from "react-redux";
 import { doDeleteTransaction } from "../../redux/actions";
+
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -64,7 +67,7 @@ const Transactions = ({ navigation }) => {
     let mounted = true;
     console.log("Transaction Time");
     async function getStuffs() {
-      unsubscribe = firestore
+      unsubscribe = db
         .collection("transactions")
         .orderBy("date", "desc")
         .onSnapshot((snapshot) => {
@@ -130,7 +133,7 @@ const Transactions = ({ navigation }) => {
           style: "destructive",
           onPress: () => {
             const filtered = transactions.filter((item) => item.id !== id);
-            firestore.doc(`transactions/${id}`).delete();
+            db.doc(`transactions/${id}`).delete();
             setTransactions(filtered);
           },
         },

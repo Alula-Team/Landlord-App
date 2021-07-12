@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { firestore } from "../../firebase/firebase";
+import React, { useState, useEffect, useContext } from "react";
 
 import {
   Text,
@@ -19,48 +18,53 @@ import { Badge, Header, Icon } from "react-native-elements";
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./prop-styles";
+import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
 
-const Properties = ({ navigation }) => {
-  const [properties, setProperties] = useState([]);
-  const [query, setQuery] = useState("");
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
 
+import { PropertiesContext } from "../../providers/PropertiesProvider";
+
+const Properties = ({ navigation }) => {
+  // const [properties, setProperties] = useState([]);
+  const properties = useContext(PropertiesContext);
+  const [query, setQuery] = useState("");
   const handleQuery = (text) => {
     setQuery(text);
   };
+
+  // let unsubscribe = null;
+  // useEffect(() => {
+  //   let mounted = true;
+  //   console.log("Im back here!");
+  //   async function getStuffs() {
+  //     unsubscribe = db
+  //       .collection("properties")
+  //       .orderBy("address", "asc")
+  //       .orderBy("unit", "asc")
+  //       .onSnapshot((snapshot) => {
+  //         const properties = snapshot.docs.map((doc) => {
+  //           return { id: doc.id, ...doc.data() };
+  //         });
+  //         if (mounted) setProperties(properties);
+  //       });
+  //   }
+  //   getStuffs();
+  //   return function cleanup() {
+  //     console.log("Im outta here!");
+  //     mounted = false;
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   const filteredList = properties.filter((item) =>
     item.address.toLowerCase().includes(query.trim().toLowerCase())
   );
 
   const data = filteredList;
-
-  let unsubscribe = null;
-  useEffect(() => {
-    let mounted = true;
-    console.log("Im back here!");
-    async function getStuffs() {
-      unsubscribe = firestore
-        .collection("properties")
-        .onSnapshot((snapshot) => {
-          const properties = snapshot.docs.map((doc) => {
-            return { id: doc.id, ...doc.data() };
-          });
-          if (mounted) setProperties(properties);
-        });
-    }
-    getStuffs();
-    return function cleanup() {
-      console.log("Im outta here!");
-      mounted = false;
-      unsubscribe();
-    };
-  }, []);
-
-  // const Tab = createMaterialTopTabNavigator();
 
   const {
     control,
@@ -69,9 +73,7 @@ const Properties = ({ navigation }) => {
 
   // Separator
   const renderSeparator = () => {
-    return (
-      <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />
-    );
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
   };
 
   // Empty List Content
@@ -132,10 +134,20 @@ const Properties = ({ navigation }) => {
                     }}
                     onPress={() => navigation.navigate("ServiceRequests")}
                   />
-                  <Badge 
-                    status="error" 
-                    containerStyle={{ position: 'absolute', top: 30, right: 20, border: 'none'}}
-                    badgeStyle={{ height: 10, width: 10, borderWidth: 0, borderRadius: 10/2}}
+                  <Badge
+                    status="error"
+                    containerStyle={{
+                      position: "absolute",
+                      top: 30,
+                      right: 20,
+                      border: "none",
+                    }}
+                    badgeStyle={{
+                      height: 10,
+                      width: 10,
+                      borderWidth: 0,
+                      borderRadius: 10 / 2,
+                    }}
                   />
                 </View>
 

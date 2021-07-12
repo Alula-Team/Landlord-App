@@ -10,8 +10,6 @@ import {
 
 import { Header, Icon } from "react-native-elements";
 
-import { firestore } from "../../firebase/firebase";
-
 // Navigation
 import { useNavigation } from "@react-navigation/native";
 
@@ -19,20 +17,22 @@ import { useNavigation } from "@react-navigation/native";
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./prop-styles";
+import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
 import { doDeleteProperty } from "../../redux/actions";
+
+// Firebase
+import { db } from "../../firebase/firebase";
 
 // What I need:
 // State
 // import { State } from "react-native-gesture-handler";
 // Function that deletes property from server
 
-const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
+const PropertyDetail = ({ navigation, route, stateProperties }) => {
   const [properties, setProperties] = useState([...stateProperties]);
-  const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const { itemID, itemAddress, itemUnit } = route.params;
 
@@ -56,7 +56,7 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
             const properties = stateProperties.filter(
               (item) => item.id !== itemID
             );
-            firestore.doc(`properties/${itemID}`).delete();
+            db.doc(`properties/${itemID}`).delete();
             setProperties(properties);
             // deleteProperty(itemID);
             navigation.goBack();
@@ -307,45 +307,46 @@ const PropertyDetail = ({ route, stateProperties, deleteProperty }) => {
           </View>
         </View>
 
-        <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')}
-            style={{
-              marginHorizontal: 5,
-              marginTop: 10,
-              marginBottom: 20,
-              height: 45,
-              flexDirection: 'row',
-              justifyContent: 'space-between'
-            }}
-          >
-            <View style={{ flexDirection: 'row' }}>
-              <Feather 
-                name='eye' 
-                size={18} 
-                color="#34383D80" 
-                style={{ 
-                  alignSelf: "center", 
-                  marginLeft: 20 
-                }} 
-              />
-              <Text 
-                style={{ 
-                  alignSelf: 'center', 
-                  color: '#34383D', 
-                  fontSize: 16, 
-                  fontWeight: '600',
-                  marginLeft: 10 
-                }}
-              >
-                View Current Lease
-              </Text>
-            </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("CurrentLease")}
+          style={{
+            marginHorizontal: 5,
+            marginTop: 10,
+            marginBottom: 20,
+            height: 45,
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flexDirection: "row" }}>
             <Feather
-              name="arrow-right"
+              name="eye"
+              size={18}
               color="#34383D80"
-              size={20}
-              style={{ alignSelf: "center", marginRight: 10 }}
+              style={{
+                alignSelf: "center",
+                marginLeft: 20,
+              }}
             />
-          </TouchableOpacity>
+            <Text
+              style={{
+                alignSelf: "center",
+                color: "#34383D",
+                fontSize: 16,
+                fontWeight: "600",
+                marginLeft: 10,
+              }}
+            >
+              View Current Lease
+            </Text>
+          </View>
+          <Feather
+            name="arrow-right"
+            color="#34383D80"
+            size={20}
+            style={{ alignSelf: "center", marginRight: 10 }}
+          />
+        </TouchableOpacity>
 
         {/* Actions Modal */}
         <Modal

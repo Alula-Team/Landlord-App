@@ -13,6 +13,8 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./src/redux/reducers";
 
+import PropertiesProvider from "./src/providers/PropertiesProvider";
+
 // Firebase
 import firebase from "firebase";
 
@@ -40,9 +42,11 @@ export default function App() {
   };
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        {signedIn ? <MainStack /> : <AuthStack />}
-      </NavigationContainer>
+      <PropertiesProvider>
+        <NavigationContainer>
+          {signedIn ? <MainStack /> : <AuthStack />}
+        </NavigationContainer>
+      </PropertiesProvider>
     </Provider>
   );
 }

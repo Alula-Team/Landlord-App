@@ -6,10 +6,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
-// Firebase
-import { firestore } from "../../firebase/firebase";
-import firebase from "firebase/app";
-
 // Faker
 import faker from "faker";
 faker.locale = "en_US";
@@ -20,16 +16,29 @@ import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
+
+// Redux
+import { connect } from "react-redux";
+
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
 
-const auth = firebase.auth();
+const AddTransaction = ({ navigation, stateProperties }) => {
+  const [properties, setProperties] = useState(stateProperties);
 
-const AddTransaction = ({ navigation }) => {
-  const [properties, setProperties] = useState([]);
   const addressArray = properties.map((property) => {
     return property.address;
   });
+
+  const allProperties = properties.map((item) => {
+    return {
+      label: item.address,
+      value: item.id,
+    };
+  });
+
   const {
     control,
     setValue,
@@ -63,7 +72,7 @@ const AddTransaction = ({ navigation }) => {
   // Date
   const onSubmit = (data) => {
     console.log(data);
-    firestore.collection("transactions").add(data);
+    db.collection("transactions").add(data);
     navigation.goBack();
   };
 
@@ -142,7 +151,7 @@ const AddTransaction = ({ navigation }) => {
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
-                items={paymentTypes}
+                items={SelectOptions.paymentTypes}
               />
             )}
             name="transactionType"
@@ -172,7 +181,7 @@ const AddTransaction = ({ navigation }) => {
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
-                items={transactionCategories}
+                items={SelectOptions.transactionCategories}
               />
             )}
             name="transactionCategory"
@@ -343,4 +352,8 @@ const AddTransaction = ({ navigation }) => {
   );
 };
 
-export default AddTransaction;
+const mapStateToProps = (state) => {
+  return { stateProperties: state.properties.properties };
+};
+
+export default connect(mapStateToProps)(AddTransaction);
