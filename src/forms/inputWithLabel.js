@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, TextInput } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 
-import { styles } from "./styles";
+import styles from "./styles";
 import { nameify } from "./nameify";
 
 const InputWithLabel = ({
@@ -27,13 +27,7 @@ const InputWithLabel = ({
               type="text"
               placeholder={placeholder}
               placeholderTextColor="#34383D70"
-              style={{
-                color: "#34383D",
-                fontSize: 16,
-                fontWeight: "500",
-                marginLeft: 12.5,
-                paddingTop: 10,
-              }}
+              style={styles.searchInput}
               multiline={multiline}
               onChangeText={onChange}
               value={value}

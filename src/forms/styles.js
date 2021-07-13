@@ -6,12 +6,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#ffffff80",
     height: "100%",
   },
-
+  fieldError: {
+    color: "red",
+    paddingLeft: 35,
+    marginTop: -10,
+    marginBottom: 0,
+  },
   // Searchbar
   searchContainer: {
     marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
+    marginVertical: 15,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -250,4 +254,5 @@ const pickerStyles = StyleSheet.create({
   },
 });
 
-export { styles, pickerStyles };
+export default styles;
+export { pickerStyles };

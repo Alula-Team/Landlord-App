@@ -11,11 +11,12 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 // Form
 import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { InputWithLabel } from "../../forms";
 
 // Google Places
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
-import faker from "faker";
+import faker, { database } from "faker";
 faker.locale = "en_US";
 
 // Vector Icons
@@ -58,17 +59,17 @@ const AddProperty = ({ navigation }) => {
 
   const breakIntoUnits = (data) => {
     let addresses = [];
-    for (let i = 0; i < data.units.length; i++) {
+    data.units.forEach((item, index) => {
       addresses.push({
         address: data.address,
         author: data.author,
         city: data.city,
         state: data.state,
-        unit: data.units[i].number,
+        unit: data.units[index].number,
         tenants: data.tenants,
         zip: data.zip,
       });
-    }
+    });
     return addresses;
   };
 
@@ -95,6 +96,7 @@ const AddProperty = ({ navigation }) => {
       batch.commit();
     } else {
       delete data.units;
+      data.unit = "";
       db.collection("properties")
         .add(data)
         .then((doc) => console.log(doc.id))
