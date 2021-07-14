@@ -147,6 +147,7 @@ const Properties = ({ navigation }) => {
                       borderWidth: 0,
                       borderRadius: 10 / 2,
                     }}
+                  />
                 </View>
 
                 {/* ADD PROPERTY */}
