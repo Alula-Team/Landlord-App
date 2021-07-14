@@ -24,7 +24,7 @@ import styles from "./trans-styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
-import { doAddTransaction } from "../../redux/actions";
+import { doAddTransaction } from "../../store/actions";
 
 import {
   InputWithLabel,

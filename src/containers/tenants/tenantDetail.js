@@ -17,7 +17,7 @@ import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
-import { doDeleteTenant } from "../../redux/actions";
+import { doDeleteTenant } from "../../store/actions";
 
 import firestore, { db } from "../../firebase/firebase";
 

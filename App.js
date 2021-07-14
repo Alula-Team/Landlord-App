@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -12,7 +12,7 @@ import MainStack from "./src/routes/MainStack";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import rootReducer from "./src/redux/reducers";
+import rootReducer from "./src/store/reducers";
 
 import PropertiesProvider from "./src/providers/PropertiesProvider";
 
@@ -44,11 +44,9 @@ export default function App() {
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-        <PropertiesProvider>
-          <NavigationContainer>
-            {signedIn ? <MainStack /> : <AuthStack />}
-          </NavigationContainer>
-        </PropertiesProvider>
+        <NavigationContainer>
+          {signedIn ? <MainStack /> : <AuthStack />}
+        </NavigationContainer>
       </Provider>
     </SafeAreaProvider>
   );

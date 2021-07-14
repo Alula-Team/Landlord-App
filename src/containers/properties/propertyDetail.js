@@ -18,7 +18,7 @@ import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
-import { doDeleteProperty } from "../../redux/actions";
+import { doDeleteProperty } from "../../store/actions";
 
 // Firebase
 import { db } from "../../firebase/firebase";
@@ -94,7 +94,7 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
             iconStyle={{
               paddingTop: 20,
               paddingLeft: 10,
-              paddingBottom: 10
+              paddingBottom: 10,
             }}
             onPress={() => navigation.goBack()}
           />
