@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import {
   Text,
   TextInput,
@@ -11,57 +11,39 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 // Form
 import { useForm, useFieldArray, Controller } from "react-hook-form";
-
-// Firebase
-import { addProperty, firestore } from "../../firebase/firebase";
-import firebase from "firebase/app";
+import { InputWithLabel } from "../../forms";
 
 // Google Places
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
-import faker from "faker";
+import faker, { database } from "faker";
 faker.locale = "en_US";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./prop-styles";
+import styles, { googlePlacesStyles } from "./styles";
 
 // Redux Stuff
-import { connect } from "react-redux";
+import { batch, connect } from "react-redux";
 import { doAddProperty } from "../../redux/actions";
 import { onChange } from "react-native-reanimated";
 
-const auth = firebase.auth();
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
 
 const AddProperty = ({ navigation }) => {
-  const mapRef = useRef("NY");
-  const stateRef = useRef("NY");
-  const [address, setAddress] = useState("");
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
-  const [stateErrors, setStateErrors] = useState([]);
-  const [zip, setZip] = useState("");
-  const [unit, setUnit] = useState([]);
-
-  const [property, setProperty] = useState({
+  const INITIAL_STATE = {
     address: "",
+    author: "",
     city: "",
     state: "",
-    zip: "",
+    tenants: "",
     unit: "",
-  });
-
-  const emptyState = () => {
-    setProperty({
-      address: "",
-      city: "",
-      state: "",
-      zip: "",
-      unit: [],
-    });
+    zip: "",
   };
+  const [property, setProperty] = useState(INITIAL_STATE);
 
   const {
     control,
@@ -77,62 +59,49 @@ const AddProperty = ({ navigation }) => {
 
   const breakIntoUnits = (data) => {
     let addresses = [];
-    for (var i = 0; i < data.units.length; i++) {
+    data.units.forEach((item, index) => {
       addresses.push({
         address: data.address,
-        author: data.author,
+        author: auth.currentUser.uid,
         city: data.city,
         state: data.state,
-        unit: data.units[i].number,
-        vacant: data.vacant,
+        tenants: [],
+        unit: data.units[index].number,
         zip: data.zip,
       });
-    }
+    });
     return addresses;
   };
 
+  const fillForm = (property) => {
+    const [address, city, stateZip, country] = property.split(", ");
+    const [state, zip] = stateZip.split(" ");
+    setValue("address", address);
+    setValue("city", city);
+    setValue("state", state);
+    setValue("zip", zip);
+  };
+
   const onSubmit = (data) => {
-    if (data.units.length > 0) {
-      const datums = breakIntoUnits(data);
-      datums.forEach((datum) => {
-        firestore.collection("properties").add(datum);
+    if (data.units.length) {
+      let batch = db.batch();
+      const docs = breakIntoUnits(data);
+      docs.forEach((doc) => {
+        var docRef = db.collection("properties").doc();
+        batch.set(docRef, doc);
       });
-    } else firestore.collection("properties").add(data);
+      batch.commit();
+    } else {
+      delete data.units;
+      data.unit = "";
+      db.collection("properties")
+        .add(data)
+        .then((doc) => console.log(doc.id))
+        .catch((error) => console.error(error));
+    }
     navigation.goBack();
   };
 
-  // For Picker Select
-  // Styles
-  const pickerStyles = {
-    inputIOS: {
-      marginHorizontal: 20,
-      marginTop: 10,
-      marginBottom: 20,
-      borderColor: "#34383D",
-      borderRadius: 10,
-      borderWidth: 1,
-      height: 45,
-      flexDirection: "row",
-      color: "#34383D",
-      paddingLeft: 15,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    inputAndroid: {
-      marginHorizontal: 20,
-      marginTop: 10,
-      marginBottom: 20,
-      borderColor: "#34383D",
-      borderRadius: 10,
-      borderWidth: 1,
-      height: 45,
-      flexDirection: "row",
-      color: "#34383D",
-      paddingLeft: 15,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-  };
   // Placeholder
   const StatePlaceholder = {
     label: "Select State...",
@@ -183,58 +152,114 @@ const AddProperty = ({ navigation }) => {
           borderBottomWidth: 0,
         }}
       />
-      
+
       <GooglePlacesAutocomplete
         placeholder="Search by Address"
         query={{
           key: GOOGLE_PLACES_API_KEY,
-          language: "en", // language of the results
+          language: "en",
         }}
         fetchDetails
-        onPress={(data, details) => (details.formatted_address)}
+        onPress={(data, details) => fillForm(details.formatted_address)}
         onFail={(error) => console.error(error)}
-        renderLeftButton={ () =>
-          <Feather 
+        renderLeftButton={() => (
+          <Feather
             name="search"
             color="#34383D80"
             size={20}
             style={styles.searchIcon}
           />
-        }
-        styles={{
-          container: {
-            flex: 0,
-          },
-          textInputContainer: {
-            marginHorizontal: 20,
-            marginBottom: 20,
-            marginTop: 10,
-            borderRadius: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-            height: 45,
-            flexDirection: "row",
-            backgroundColor: "#fff",
-          },
-          textInput: {
-            height: 45,
-            color: "#34383D",
-            fontSize: 16,
-            fontWeight: "500",
-          }
-        }}
+        )}
+        styles={googlePlacesStyles}
       />
 
       <KeyboardAwareScrollView>
-        <Text style={styles.sectionText}>Property Address:</Text>
-        <Text style={styles.sectionLabel}>Address</Text>
-        <Text style={styles.sectionLabel}>City, State, Zip Code</Text>
+        <View>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Address ..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.propertyInput}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="address"
+            rules={{ required: "true" }}
+            defaultValue=""
+          />
+          {errors.address && (
+            <Text style={styles.fieldError}>This field is required</Text>
+          )}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="City ..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.propertyInput}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="city"
+            rules={{ required: "true" }}
+            defaultValue=""
+          />
+          {errors.city && (
+            <Text style={styles.fieldError}>This field is required</Text>
+          )}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="State ..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.propertyInput}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="state"
+            rules={{ required: "true" }}
+            defaultValue=""
+          />
+          {errors.state && (
+            <Text style={styles.fieldError}>This field is required</Text>
+          )}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Zip ..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.propertyInput}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="zip"
+            rules={{ required: "true" }}
+            defaultValue=""
+          />
+          {errors.zip && (
+            <Text style={styles.fieldError}>This field is required</Text>
+          )}
+        </View>
 
         {/* Units */}
         <TouchableOpacity
@@ -278,9 +303,5 @@ const AddProperty = ({ navigation }) => {
     </View>
   );
 };
-
-// const actions = {
-//   addProperty: doAddProperty,
-// };
 
 export default AddProperty;

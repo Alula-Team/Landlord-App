@@ -1,20 +1,28 @@
-import React, { useState } from "react";
-import { Alert, Text, View, TouchableOpacity, ScrollView, Modal } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  Alert,
+  Text,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Modal,
+} from "react-native";
 import { Header, Icon } from "react-native-elements";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./tenant-styles";
+import styles from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
 import { doDeleteTenant } from "../../redux/actions";
 
-import firestore from "../../firebase/firebase";
+import firestore, { db } from "../../firebase/firebase";
 
 import "./getInitials";
+import { collectIdsAndData } from "../../utilities";
 // Things I need
 // Actions button pops up modal with options to:
 //add lease (if no lease),
@@ -22,10 +30,32 @@ import "./getInitials";
 // renew lease (once lease term is set to expire in 60d)
 
 const TenantDetailScreen = ({ route, navigation }) => {
-  const { itemID, itemName, itemEmail, itemPhone } = route.params;
+  const { itemID, itemName, itemEmail, itemPhone, property } = route.params;
+  const [propertyInfo, setPropertyInfo] = useState();
+
+  let unsubscribe = null;
+  useEffect(() => {
+    let mounted = true;
+    async function getProperty() {
+      unsubscribe = await db
+        .collection("properties")
+        .where("id", "==", property)
+        .onSnapshot((snapshot) => {
+          const property = snapshot.docs.map(collectIdsAndData);
+          if (mounted) setPropertyInfo(property);
+          console.log(property);
+        });
+    }
+    getProperty();
+
+    return function cleanup() {
+      unsubscribe();
+      mounted = false;
+    };
+  }, []);
+
   const itemInitials = itemName.getInitials();
   const [modalVisible, setModalVisible] = useState(false);
-
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -112,28 +142,29 @@ const TenantDetailScreen = ({ route, navigation }) => {
               </Text>
             </View>
             <View style={{ marginLeft: 15, alignSelf: "center" }}>
-
               {/* Tenant Name */}
               <Text style={styles.tenantName}>{itemName}</Text>
 
               {/* Phone Number */}
               <View style={{ flexDirection: "row", marginLeft: 10 }}>
                 <Feather name="phone" size={16} color="#ffffff80" />
-                <Text style={styles.cardText}>
-                  {itemPhone}
-                </Text>
+                <Text style={styles.cardText}>{itemPhone}</Text>
               </View>
 
               {/* Email Address */}
-              <View style={{ flexDirection: "row", marginLeft: 10, marginVertical: 10 }}>
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginLeft: 10,
+                  marginVertical: 10,
+                }}
+              >
                 <Feather name="mail" size={16} color="#ffffff80" />
-                <Text style={styles.cardText}>
-                  {itemEmail}
-                </Text>
+                <Text style={styles.cardText}>{itemEmail}</Text>
               </View>
             </View>
           </View>
-          
+
           {/* Leasing Information */}
           <Text style={styles.sectionText}>Lease Information</Text>
           <View
@@ -145,8 +176,8 @@ const TenantDetailScreen = ({ route, navigation }) => {
               borderRadius: 10,
               shadowColor: "#000",
               shadowOffset: {
-                  width: 0,
-                  height: 2,
+                width: 0,
+                height: 2,
               },
               shadowOpacity: 0.25,
               shadowRadius: 3.84,
@@ -182,8 +213,12 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Rental Rate:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
                 $1,500
               </Text>
             </View>
@@ -199,7 +234,9 @@ const TenantDetailScreen = ({ route, navigation }) => {
               <Text style={{ color: "#34383D", fontSize: 16 }}>
                 Security Deposit:
               </Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
                 $750
               </Text>
             </View>
@@ -212,8 +249,12 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Type:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Lease Type:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
                 Fixed
               </Text>
             </View>
@@ -226,8 +267,12 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Length:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Lease Length:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
                 12 mo
               </Text>
             </View>
@@ -240,41 +285,46 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Rent Due On:</Text>
-              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Rent Due On:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
                 1st /mo
               </Text>
             </View>
           </View>
 
           {/* Current Lease Button */}
-          <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("CurrentLease")}
             style={{
               marginHorizontal: 5,
               marginTop: 10,
               marginBottom: 20,
               height: 45,
-              flexDirection: 'row',
-              justifyContent: 'space-between'
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
-            <View style={{ flexDirection: 'row' }}>
-              <Feather 
-                name='eye' 
-                size={18} 
-                color="#34383D80" 
-                style={{ 
-                  alignSelf: "center", 
-                  marginLeft: 20 
-                }} 
+            <View style={{ flexDirection: "row" }}>
+              <Feather
+                name="eye"
+                size={18}
+                color="#34383D80"
+                style={{
+                  alignSelf: "center",
+                  marginLeft: 20,
+                }}
               />
-              <Text 
-                style={{ 
-                  alignSelf: 'center', 
-                  color: '#34383D', 
-                  fontSize: 16, 
-                  fontWeight: '600',
-                  marginLeft: 10 
+              <Text
+                style={{
+                  alignSelf: "center",
+                  color: "#34383D",
+                  fontSize: 16,
+                  fontWeight: "600",
+                  marginLeft: 10,
                 }}
               >
                 View Current Lease
@@ -295,38 +345,38 @@ const TenantDetailScreen = ({ route, navigation }) => {
               marginTop: 10,
               marginBottom: 20,
               height: 45,
-              flexDirection: 'row',
-              justifyContent: 'space-between'
+              flexDirection: "row",
+              justifyContent: "space-between",
             }}
           >
-            <View style={{ flexDirection: 'row' }}>
-              <Feather 
-                name='upload' 
-                size={18} 
-                color="#34383D80" 
-                style={{ 
-                  alignSelf: "center", 
-                  marginLeft: 20 
-                }} 
+            <View style={{ flexDirection: "row" }}>
+              <Feather
+                name="upload"
+                size={18}
+                color="#34383D80"
+                style={{
+                  alignSelf: "center",
+                  marginLeft: 20,
+                }}
               />
-              <Text 
-                style={{ 
-                  alignSelf: 'center', 
-                  color: '#34383D', 
-                  fontSize: 16, 
-                  fontWeight: '600',
+              <Text
+                style={{
+                  alignSelf: "center",
+                  color: "#34383D",
+                  fontSize: 16,
+                  fontWeight: "600",
                   marginLeft: 10,
-                  textDecorationLine: 'underline'
+                  textDecorationLine: "underline",
                 }}
               >
                 Upload New Lease
               </Text>
             </View>
           </TouchableOpacity>
-          
+
           {/* Actions Modal */}
           <Modal
-            animationType='slide'
+            animationType="slide"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {

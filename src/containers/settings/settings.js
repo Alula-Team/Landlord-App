@@ -41,7 +41,7 @@ const Settings = ({ navigation }) => {
               fontWeight: "bold",
               fontSize: 25,
               paddingTop: 30,
-              paddingBottom: 7
+              paddingBottom: 7,
             },
           }}
           containerStyle={{
@@ -52,7 +52,6 @@ const Settings = ({ navigation }) => {
         />
 
         <ScrollView style={{ marginTop: 20 }}>
-
           {/* Edit Profile Button */}
           <TouchableOpacity
             style={styles.buttonContainer}

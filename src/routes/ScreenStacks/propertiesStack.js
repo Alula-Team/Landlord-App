@@ -1,6 +1,7 @@
 import React from "react";
 
 // Navigation
+import { enableScreens } from "react-native-screens";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
@@ -11,6 +12,7 @@ import PropertyDetail from "../../containers/properties/propertyDetail";
 import ServiceRequestDetail from "../../containers/properties/serviceRequestDetail";
 import CurrentLease from "../../containers/tenants/currentLease";
 
+enableScreens();
 const Stack = createStackNavigator();
 
 const PropertiesNavigation = (props) => {

@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
-// Firebase
-import { firestore } from "../../firebase/firebase";
-import firebase from "firebase/app";
 
 import DateTimePicker from "@react-native-community/datetimepicker";
 
@@ -16,42 +12,56 @@ faker.locale = "en_US";
 // Forms
 import { useForm, Controller } from "react-hook-form";
 
-// Navigation
-import { useNavigation } from "@react-navigation/native";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
-// Style Sheet
-import styles from "./tenant-styles";
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
 
-const auth = firebase.auth();
+// Redux
+import { connect } from "react-redux";
+
+// Style Sheet
+import styles, { pickerStyles } from "./styles";
+
+import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 const AddTenant = ({ navigation }) => {
   const [tenants, setTenants] = useState([]);
-  const [properties, setProperties] = useState([]);
 
-  let unsubscribe = null;
-  useEffect(() => {
-    let mounted = true;
-    async function getStuffs() {
-      unsubscribe = firestore.collection("tenants").onSnapshot((snapshot) => {
-        const tenants = snapshot.docs.map((doc) => {
-          return { id: doc.id, ...doc.data() };
-        });
-        if (mounted) setTenants(tenants);
-      });
-    }
-    getStuffs();
-    return function cleanup() {
-      unsubscribe();
-      mounted = false;
+  const properties = useContext(PropertiesContext);
+  const addressArray = properties.map((property) => {
+    return property.address;
+  });
+  const allProperties = properties.map((item) => {
+    return {
+      label: item.address,
+      value: item.id,
     };
-  }, []);
+  });
+
+  const getPropertyInfo = (id) => properties.filter(property.id === id);
+
+  // let unsubscribe = null;
+  // useEffect(() => {
+  //   let mounted = true;
+  //   async function getStuffs() {
+  //     unsubscribe = db.collection("tenants").onSnapshot((snapshot) => {
+  //       const tenants = snapshot.docs.map((doc) => {
+  //         return { id: doc.id, ...doc.data() };
+  //       });
+  //       if (mounted) setTenants(tenants);
+  //     });
+  //   }
+  //   getStuffs();
+  //   return function cleanup() {
+  //     unsubscribe();
+  //     mounted = false;
+  //   };
+  // }, []);
 
   const fakeIt = () => {
-    setValue("firstName", faker.name.firstName());
-    setValue("lastName", faker.name.lastName());
+    setValue("name", faker.name.firstName() + " " + faker.name.lastName());
     setValue("email", faker.internet.email().toLowerCase());
     setValue("phone", faker.phone.phoneNumber("(###) ###-####"));
     setValue("author", auth.currentUser.uid);
@@ -64,49 +74,14 @@ const AddTenant = ({ navigation }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    firestore.collection("tenants").add(data);
-    navigation.goBack();
-  };
+  const onSubmit = () => {
+    db.collection("properties")
+      .get()
+      .then((snapshot) =>
+        sanpshot.docs.forEach((doc) => console.log(doc.data()))
+      );
 
-  // For Picker Select
-  // Styles
-  const pickerStyles = {
-    inputIOS: {
-      marginHorizontal: 20,
-      marginTop: 10,
-      marginBottom: 20,
-      borderRadius: 10,
-      shadowColor: "#000",
-      shadowOffset: {
-          width: 0,
-          height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
-      height: 45,
-      flexDirection: 'row',
-      backgroundColor: '#fff',
-      color: "#34383D",
-      paddingLeft: 15,
-      fontSize: 16,
-      fontWeight: "500",
-    },
-    inputAndroid: {
-      marginHorizontal: 20,
-      marginTop: 15,
-      borderColor: "#ffffff50",
-      borderRadius: 10,
-      borderWidth: 1,
-      height: 45,
-      flexDirection: "row",
-      color: "#34383D",
-      paddingLeft: 15,
-      fontSize: 16,
-      fontWeight: "500",
-    },
+    // navigation.goBack();
   };
 
   // Placeholders
@@ -115,17 +90,6 @@ const AddTenant = ({ navigation }) => {
     value: null,
     color: "#34383D",
   };
-
-  const addressArray = properties.map((property) => {
-    return property.address;
-  });
-
-  const allProperties = properties.map((item) => {
-    return {
-      label: item.address,
-      value: item.address,
-    };
-  });
 
   return (
     <>
@@ -208,11 +172,11 @@ const AddTenant = ({ navigation }) => {
                 items={allProperties}
               />
             )}
-            name="address"
+            name="property"
             rules={{ required: true }}
             defaultValue=""
           />
-          {errors.address && (
+          {errors.property && (
             <Text
               style={{
                 color: "red",
@@ -240,11 +204,11 @@ const AddTenant = ({ navigation }) => {
                 />
               </View>
             )}
-            name="firstName"
+            name="name"
             rules={{ required: true }}
             defaultValue=""
           />
-          {errors.firstName && (
+          {errors.name && (
             <Text
               style={{
                 color: "red",
@@ -256,7 +220,7 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
-          
+
           <Text style={styles.sectionText}>Email</Text>
           <Controller
             control={control}
@@ -325,4 +289,8 @@ const AddTenant = ({ navigation }) => {
   );
 };
 
-export default AddTenant;
+const mapStateToProps = (state) => {
+  return { stateProperties: state.properties.properties };
+};
+
+export default connect(mapStateToProps)(AddTenant);

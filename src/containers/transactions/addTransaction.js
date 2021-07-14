@@ -6,10 +6,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
-// Firebase
-import { firestore } from "../../firebase/firebase";
-import firebase from "firebase/app";
-
 // Faker
 import faker from "faker";
 faker.locale = "en_US";
@@ -20,12 +16,29 @@ import RNPickerSelect from "react-native-picker-select";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
+// Firebase
+import firebase, { auth, db } from "../../firebase/firebase";
+
+// Redux
+import { connect } from "react-redux";
+
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
 
-const auth = firebase.auth();
+const AddTransaction = ({ navigation, stateProperties }) => {
+  const [properties, setProperties] = useState(stateProperties);
 
-const AddTransaction = ({ navigation }) => {
+  const addressArray = properties.map((property) => {
+    return property.address;
+  });
+
+  const allProperties = properties.map((item) => {
+    return {
+      label: item.address,
+      value: item.id,
+    };
+  });
+
   const {
     control,
     setValue,
@@ -59,7 +72,7 @@ const AddTransaction = ({ navigation }) => {
   // Date
   const onSubmit = (data) => {
     console.log(data);
-    firestore.collection("transactions").add(data);
+    db.collection("transactions").add(data);
     navigation.goBack();
   };
 
@@ -134,7 +147,7 @@ const AddTransaction = ({ navigation }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <RNPickerSelect
-                placeholder="Select Transaction Type..."
+                placeholder={TransactionPlaceholder}
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
@@ -145,7 +158,7 @@ const AddTransaction = ({ navigation }) => {
             rules={{ required: true }}
             defaultValue=""
           />
-          {errors.transactionType && (
+          {errors.payment && (
             <Text
               style={{
                 color: "red",
@@ -157,14 +170,14 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
-        </View>
-        <View>
+
+          {/* Category */}
           <Text style={styles.sectionText}>Category</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
               <RNPickerSelect
-                placeholder="Select Category..."
+                placeholder={CategoryPlaceholder}
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
@@ -187,10 +200,160 @@ const AddTransaction = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
+          {/* Property */}
+          <Text style={styles.sectionText}>Property</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={PropertyPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={allProperties}
+              />
+            )}
+            name="address"
+            rules={{ required: true }}
+            defaultValue="108 Verygold Lane"
+          />
+          {errors.address && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Payment Method */}
+          <Text style={styles.sectionText}>Payment Method</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                // placeholder={PaymentPlaceholder}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={paymentMethods}
+              />
+            )}
+            name="paymentMethod"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.paymentMethod && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Amount */}
+          <Text style={styles.sectionText}>Amount</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.searchContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="i.e 1500"
+                  placeholderTextColor="#34383D70"
+                  style={styles.dateText}
+                  keyboardType="numeric"
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="amount"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.amount && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Description */}
+          <Text style={styles.sectionText}>Description</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.textArea}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Transaction Description ..."
+                  placeholderTextColor="#34383D70"
+                  style={{
+                    color: "#34383D",
+                    fontSize: 16,
+                    fontWeight: "500",
+                    marginLeft: 12.5,
+                    paddingTop: 10,
+                  }}
+                  multiline={true}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="amount"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+
+          {/* Date Paid */}
+          <Controller
+            control={control}
+            render={() => (
+              <View style={{ flexDirection: "row", marginTop: 20 }}>
+                <Text style={styles.sectionText}>Date Paid:</Text>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode={mode}
+                  display="default"
+                  textColor="#fff"
+                  style={{
+                    marginLeft: 10,
+                    marginTop: 20,
+                    width: "100%",
+                  }}
+                  onChange={handleDateChange}
+                />
+              </View>
+            )}
+            name="date"
+          />
         </View>
       </KeyboardAwareScrollView>
     </View>
   );
 };
 
-export default AddTransaction;
+const mapStateToProps = (state) => {
+  return { stateProperties: state.properties.properties };
+};
+
+export default connect(mapStateToProps)(AddTransaction);
