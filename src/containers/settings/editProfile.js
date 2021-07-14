@@ -22,9 +22,9 @@ const EditProfile = ({ navigation }) => {
                         text: "Edit Profile",
                         style: {
                         color: "#fff",
-                        fontWeight: "bold",
-                        fontSize: 22,
-                        paddingTop: 30,
+                        fontWeight: '700', 
+                        fontSize: 20, 
+                        paddingTop: 20,
                         },
                     }}
                     leftComponent={
@@ -34,7 +34,7 @@ const EditProfile = ({ navigation }) => {
                         color="#fff"
                         size={25}
                         iconStyle={{
-                            paddingTop: 30,
+                            paddingTop: 20,
                             paddingLeft: 10,
                             paddingBottom: 10,
                         }}

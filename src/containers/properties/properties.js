@@ -137,7 +137,7 @@ const Properties = ({ navigation }) => {
                     status="error"
                     containerStyle={{
                       position: "absolute",
-                      top: 30,
+                      top: 20,
                       right: 20,
                       border: "none",
                     }}
@@ -147,6 +147,7 @@ const Properties = ({ navigation }) => {
                       borderWidth: 0,
                       borderRadius: 10 / 2,
                     }}
+                  />
                 </View>
 
                 {/* ADD PROPERTY */}

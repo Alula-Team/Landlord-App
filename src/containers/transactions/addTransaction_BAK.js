@@ -159,7 +159,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
               color: "#fff",
               fontWeight: "bold",
               fontSize: 22,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           leftComponent={
@@ -169,7 +169,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
               color="#fff"
               size={25}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingLeft: 10,
                 paddingBottom: 10,
               }}
@@ -178,7 +178,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
           }
           rightComponent={
             <TouchableOpacity
-              style={{ paddingTop: 32.5, paddingRight: 10 }}
+              style={{ paddingTop: 22.5, paddingRight: 10 }}
               onPress={handleSubmit(onSubmit)}
             >
               <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>

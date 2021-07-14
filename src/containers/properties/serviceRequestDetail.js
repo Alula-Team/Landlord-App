@@ -32,7 +32,7 @@ const ServiceRequestDetailScreen = () => {
           centerComponent={
             <TouchableOpacity
               style={{
-                paddingTop: 32.5,
+                paddingTop: 22.5,
                 borderBottomWidth: 1,
                 borderBottomColor: "#fff",
                 borderStyle: "solid",
@@ -57,7 +57,7 @@ const ServiceRequestDetailScreen = () => {
               color="#fff"
               size={25}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingLeft: 10,
                 paddingBottom: 10,
               }}
