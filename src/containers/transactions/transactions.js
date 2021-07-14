@@ -229,9 +229,14 @@ const Transactions = ({ navigation }) => {
         {/* Revenue Overview */}
         {shouldShow ? (
           <View style={styles.moneyBox}>
-            <Text style={{ fontWeight: "500", color: "#34383D80" }}>
-              Financial Activity
-            </Text>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={{ fontWeight: "500", color: "#34383D80", marginRight: 5 }}>
+                Financial Activity
+              </Text>
+              <Text style={{ fontSize: 12, fontWeight: "500", color: "#34383D80" }}>
+                (year to date)
+              </Text> 
+            </View>
             <View
               style={{
                 flexDirection: "row",

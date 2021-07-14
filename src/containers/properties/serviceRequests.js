@@ -48,35 +48,35 @@ const ServiceRequests = () => {
   return (
     <View style={styles.container}>
       {/* Header */}
-      <Header
-        centerComponent={{
-          text: "Service Requests",
-          style: {
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: 22,
-            paddingTop: 30,
-          },
-        }}
-        leftComponent={
-          <Icon
-            name="arrow-left"
-            type="feather"
-            color="#fff"
-            size={25}
-            iconStyle={{
-              paddingTop: 30,
-              paddingLeft: 10,
-              paddingBottom: 10,
-            }}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        containerStyle={{
-          backgroundColor: "#232256",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
+      <Header 
+          centerComponent={{ 
+              text: 'Service Requests', 
+              style: { 
+                  color: '#fff', 
+                  fontWeight: '700', 
+                  fontSize: 22, 
+                  paddingTop: 20
+              }
+          }}
+          leftComponent={
+              <Icon 
+                  name='arrow-left'
+                  type='feather'
+                  color='#fff'
+                  size={25}
+                  iconStyle={{
+                      paddingTop: 20,
+                      paddingLeft: 10,
+                      paddingBottom: 10
+                  }}
+                  onPress={() => navigation.goBack()}
+              />
+          }
+          containerStyle={{
+              backgroundColor: '#232256',
+              justifyContent: 'space-around',
+              borderBottomWidth: 0
+          }}
       />
 
       {/* Service Request Flat List */}

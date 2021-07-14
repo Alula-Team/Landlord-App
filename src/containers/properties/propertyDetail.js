@@ -81,8 +81,8 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
             style={{
               color: "#fff",
               fontSize: 17,
-              fontWeight: "600",
-              paddingTop: 32.5,
+              fontWeight: "700",
+              paddingTop: 22.5,
             }}
           >
             {itemAddress}
@@ -95,8 +95,9 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
             color="#fff"
             size={25}
             iconStyle={{
-              paddingTop: 30,
+              paddingTop: 20,
               paddingLeft: 10,
+              paddingBottom: 10
             }}
             onPress={() => navigation.goBack()}
           />
@@ -108,7 +109,7 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
             color="#fff"
             size={27.5}
             iconStyle={{
-              paddingTop: 30,
+              paddingTop: 20,
               paddingRight: 10,
             }}
             onPress={() => setModalVisible(true)}

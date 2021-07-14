@@ -112,9 +112,9 @@ const Properties = ({ navigation }) => {
             text: "Properties",
             style: {
               color: "#fff",
-              fontWeight: "bold",
+              fontWeight: "700",
               fontSize: 25,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           rightComponent={
@@ -128,9 +128,8 @@ const Properties = ({ navigation }) => {
                     color="#fff"
                     size={25}
                     iconStyle={{
-                      paddingTop: 30,
+                      paddingTop: 20,
                       paddingRight: 20,
-                      paddingBottom: 10,
                     }}
                     onPress={() => navigation.navigate("ServiceRequests")}
                   />
@@ -148,7 +147,6 @@ const Properties = ({ navigation }) => {
                       borderWidth: 0,
                       borderRadius: 10 / 2,
                     }}
-                  />
                 </View>
 
                 {/* ADD PROPERTY */}
@@ -158,7 +156,7 @@ const Properties = ({ navigation }) => {
                   color="#fff"
                   size={25}
                   iconStyle={{
-                    paddingTop: 30,
+                    paddingTop: 20,
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
@@ -176,6 +174,7 @@ const Properties = ({ navigation }) => {
             borderBottomWidth: 0,
           }}
         />
+
         {/* Search Bar */}
         <Controller
           control={control}
@@ -244,20 +243,7 @@ const Properties = ({ navigation }) => {
             ListEmptyComponent={EmptyListMessage}
           />
         </SafeAreaView>
-
         {/* END Search Bar */}
-        {/* Stepper
-        <Tab.Navigator
-          tabBarOptions={{
-            indicatorStyle: { backgroundColor: "#5858FB" },
-            labelStyle: { fontSize: 14, color: "#fff" },
-            style: { backgroundColor: "transparent" },
-          }}
-        >
-          <Tab.Screen name="Occupied" component={Occupied} />
-          <Tab.Screen name="Vacant" component={Vacant} />
-        </Tab.Navigator> */}
-        {/* END Stepper */}
       </View>
     </>
   );

@@ -18,8 +18,8 @@ import Tenants from "./ScreenStacks/tenantStack";
 // Settings
 import Settings from "./ScreenStacks/settingsStack";
 
-// Iconss
-import Icon from "react-native-vector-icons/Feather";
+// Icons
+import Icon from 'react-native-vector-icons/Feather';
 
 const Tab = createMaterialBottomTabNavigator();
 

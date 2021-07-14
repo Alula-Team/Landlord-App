@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Text, View, TouchableOpacity, ScrollView } from "react-native";
 import { Header } from "react-native-elements";
-import { UserContext } from "../../providers/UserProvider";
+// import { UserContext } from "../../providers/UserProvider";
+
 // Firebase
 import { firestore, loggingOut } from "../../firebase/firebase";
 import firebase from "firebase/app";
@@ -17,7 +18,7 @@ import styles from "./sett-styles";
 const auth = firebase.auth();
 
 const Settings = ({ navigation }) => {
-  const user = useContext(UserContext);
+ 
   // Sign Out
   async function handleSignOut() {
     try {
