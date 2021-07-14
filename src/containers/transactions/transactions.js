@@ -5,7 +5,6 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
   Image,
@@ -153,7 +152,7 @@ const Transactions = ({ navigation }) => {
               color: "#fff",
               fontWeight: "bold",
               fontSize: 25,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           rightComponent={
@@ -166,7 +165,7 @@ const Transactions = ({ navigation }) => {
                   color="#fff"
                   size={25}
                   iconStyle={{
-                    paddingTop: 30,
+                    paddingTop: 20,
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
@@ -179,7 +178,7 @@ const Transactions = ({ navigation }) => {
                   color="#fff"
                   size={25}
                   iconStyle={{
-                    paddingTop: 30,
+                    paddingTop: 20,
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
@@ -289,60 +288,58 @@ const Transactions = ({ navigation }) => {
         {/* END Revenue Overview */}
 
         {/* Transactions Flat List */}
-        <SafeAreaView>
-          <View style={styles.listView}>
-            <FlatList
-              data={data}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => {
-                return (
-                  <TouchableOpacity
-                    style={styles.listCell}
-                    onPress={() => navigation.navigate("ManageTransaction")}
-                  >
-                    {/* Transaction Category and Amount*/}
-                    <View style={styles.itemCenter}>
-                      <Text style={styles.transactionType}>
-                        {item.transactionCategory}
-                      </Text>
-                      <Text
-                        style={{
-                          color:
-                            item.transactionType === "Payment"
-                              ? "#5CB85C"
-                              : "#D9534F",
-                          fontWeight: "700",
-                          fontSize: 18,
-                        }}
-                      >
-                        ${item.amount}
-                      </Text>
-                    </View>
-                    {/* Property */}
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="map-pin" color="#34383D80" size={15} />
-                      <Text style={styles.listItem}>{item.address}</Text>
-                    </View>
-                    {/* Date */}
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="clock" color="#34383D80" size={15} />
-                      <Text style={styles.listItem}>{makeDate(item.date)}</Text>
-                    </View>
-                    {/* Payment Type */}
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="credit-card" color="#34383D80" size={15} />
-                      <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                    </View>
-                  </TouchableOpacity>
-                );
-              }}
-              contentContainerStyle={{ paddingBottom: 350 }}
-              showsVerticalScrollIndicator={false}
-              ItemSeparatorComponent={renderSeparator}
-              ListEmptyComponent={EmptyListMessage}
-            />
-          </View>
-        </SafeAreaView>
+        <View style={styles.listView}>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  style={styles.listCell}
+                  onPress={() => navigation.navigate("ManageTransaction")}
+                >
+                  {/* Transaction Category and Amount*/}
+                  <View style={styles.itemCenter}>
+                    <Text style={styles.transactionType}>
+                      {item.transactionCategory}
+                    </Text>
+                    <Text
+                      style={{
+                        color:
+                          item.transactionType === "Payment"
+                            ? "#5CB85C"
+                            : "#D9534F",
+                        fontWeight: "700",
+                        fontSize: 18,
+                      }}
+                    >
+                      ${item.amount}
+                    </Text>
+                  </View>
+                  {/* Property */}
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <Feather name="map-pin" color="#34383D80" size={15} />
+                    <Text style={styles.listItem}>{item.address}</Text>
+                  </View>
+                  {/* Date */}
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <Feather name="clock" color="#34383D80" size={15} />
+                    <Text style={styles.listItem}>{makeDate(item.date)}</Text>
+                  </View>
+                  {/* Payment Type */}
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <Feather name="credit-card" color="#34383D80" size={15} />
+                    <Text style={styles.listItem}>{item.paymentMethod}</Text>
+                  </View>
+                </TouchableOpacity>
+              );
+            }}
+            contentContainerStyle={{ paddingBottom: 350 }}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={renderSeparator}
+            ListEmptyComponent={EmptyListMessage}
+          />
+        </View>
       </View>
     </>
   );

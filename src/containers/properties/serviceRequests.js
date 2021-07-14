@@ -2,7 +2,6 @@ import React from "react";
 import {
   Text,
   View,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
 } from "react-native";
@@ -80,54 +79,52 @@ const ServiceRequests = () => {
       />
 
       {/* Service Request Flat List */}
-      <SafeAreaView>
-        <View style={styles.listView}>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.address}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.notificationContainer}
-                onPress={() => navigation.navigate("ServiceRequestDetail")}
+      <View style={styles.listView}>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.address}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.notificationContainer}
+              onPress={() => navigation.navigate("ServiceRequestDetail")}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                }}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <View>
-                    <Text style={styles.notificationTitle}>{item.title}</Text>
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="map-pin" color="#34383D80" size={15} />
-                      <Text style={styles.notificationText}>
-                        {item.address} {item.unit}
-                      </Text>
-                    </View>
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="clock" color="#34383D80" size={15} />
-                      <Text style={styles.notificationText}>{item.date}</Text>
-                    </View>
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="tool" color="#34383D80" size={15} />
-                      <Text style={styles.statusText}>{item.status}</Text>
-                    </View>
+                <View>
+                  <Text style={styles.notificationTitle}>{item.title}</Text>
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <Feather name="map-pin" color="#34383D80" size={15} />
+                    <Text style={styles.notificationText}>
+                      {item.address} {item.unit}
+                    </Text>
                   </View>
-                  <Feather
-                    name="arrow-right"
-                    color="#34383D90"
-                    size={20}
-                    style={styles.arrow}
-                  />
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <Feather name="clock" color="#34383D80" size={15} />
+                    <Text style={styles.notificationText}>{item.date}</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", marginTop: 10 }}>
+                    <Feather name="tool" color="#34383D80" size={15} />
+                    <Text style={styles.statusText}>{item.status}</Text>
+                  </View>
                 </View>
-              </TouchableOpacity>
-            )}
-            contentContainerStyle={{ paddingBottom: 350 }}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={renderSeparator}
-          />
-        </View>
-      </SafeAreaView>
+                <Feather
+                  name="arrow-right"
+                  color="#34383D90"
+                  size={20}
+                  style={styles.arrow}
+                />
+              </View>
+            </TouchableOpacity>
+          )}
+          contentContainerStyle={{ paddingBottom: 350 }}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={renderSeparator}
+        />
+      </View>
     </View>
   );
 };

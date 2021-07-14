@@ -3,12 +3,9 @@ import {
   Text,
   TextInput,
   View,
-  SafeAreaView,
   FlatList,
   TouchableOpacity,
   Image,
-  Modal,
-  KeyboardAvoidingView,
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -126,7 +123,7 @@ const Tenants = ({ navigation }) => {
               color: "#fff",
               fontWeight: "bold",
               fontSize: 25,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           rightComponent={
@@ -139,7 +136,7 @@ const Tenants = ({ navigation }) => {
                   color="#fff"
                   size={25}
                   iconStyle={{
-                    paddingTop: 30,
+                    paddingTop: 20,
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
@@ -187,45 +184,43 @@ const Tenants = ({ navigation }) => {
         {/* END Search Bar */}
 
         {/* Properties Flat List */}
-        <SafeAreaView>
-          <View style={styles.listView}>
-            <FlatList
-              data={data}
-              keyExtractor={(item) => item.id}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  style={styles.listCell}
-                  onPress={() =>
-                    navigation.navigate("TenantDetail", {
-                      itemID: item.id,
-                      itemName: `${item.name}`,
-                      itemEmail: item.email,
-                      itemPhone: item.phone,
-                      property: item.property,
-                    })
-                  }
-                >
-                  <View style={{ flexDirection: "row" }}>
-                    <Feather name="user" color="#34383D90" size={20} />
-                    <View>
-                      <Text style={styles.listItem}>{item.name}</Text>
-                    </View>
+        <View style={styles.listView}>
+          <FlatList
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={styles.listCell}
+                onPress={() =>
+                  navigation.navigate("TenantDetail", {
+                    itemID: item.id,
+                    itemName: `${item.name}`,
+                    itemEmail: item.email,
+                    itemPhone: item.phone,
+                    property: item.property,
+                  })
+                }
+              >
+                <View style={{ flexDirection: "row" }}>
+                  <Feather name="user" color="#34383D90" size={20} />
+                  <View>
+                    <Text style={styles.listItem}>{item.name}</Text>
                   </View>
-                  <Feather
-                    name="arrow-right"
-                    color="#34383D90"
-                    size={20}
-                    style={styles.arrow}
-                  />
-                </TouchableOpacity>
-              )}
-              contentContainerStyle={{ paddingBottom: 350 }}
-              showsVerticalScrollIndicator={false}
-              ItemSeparatorComponent={renderSeparator}
-              ListEmptyComponent={EmptyListMessage}
-            />
-          </View>
-        </SafeAreaView>
+                </View>
+                <Feather
+                  name="arrow-right"
+                  color="#34383D90"
+                  size={20}
+                  style={styles.arrow}
+                />
+              </TouchableOpacity>
+            )}
+            contentContainerStyle={{ paddingBottom: 350 }}
+            showsVerticalScrollIndicator={false}
+            ItemSeparatorComponent={renderSeparator}
+            ListEmptyComponent={EmptyListMessage}
+          />
+        </View>
       </View>
     </>
   );

@@ -56,7 +56,7 @@ const Dashboard = () => {
                             color: '#fff', 
                             fontWeight: 'bold', 
                             fontSize: 25, 
-                            paddingTop: 30,
+                            paddingTop: 20,
                             paddingBottom: 7
                         }
                     }}

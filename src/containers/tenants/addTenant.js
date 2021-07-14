@@ -102,7 +102,7 @@ const AddTenant = ({ navigation }) => {
               color: "#fff",
               fontWeight: "bold",
               fontSize: 22,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           leftComponent={
@@ -112,7 +112,7 @@ const AddTenant = ({ navigation }) => {
               color="#fff"
               size={25}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingLeft: 10,
                 paddingBottom: 10,
               }}
@@ -121,7 +121,7 @@ const AddTenant = ({ navigation }) => {
           }
           rightComponent={
             <TouchableOpacity
-              style={{ paddingTop: 32.5, paddingRight: 10 }}
+              style={{ paddingTop: 22.5, paddingRight: 10 }}
               onPress={handleSubmit(onSubmit)}
             >
               <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
