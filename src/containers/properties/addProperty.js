@@ -62,11 +62,11 @@ const AddProperty = ({ navigation }) => {
     data.units.forEach((item, index) => {
       addresses.push({
         address: data.address,
-        author: data.author,
+        author: auth.currentUser.uid,
         city: data.city,
         state: data.state,
+        tenants: [],
         unit: data.units[index].number,
-        tenants: data.tenants,
         zip: data.zip,
       });
     });
@@ -80,9 +80,6 @@ const AddProperty = ({ navigation }) => {
     setValue("city", city);
     setValue("state", state);
     setValue("zip", zip);
-    setValue("unit", "");
-    setValue("tenants", "");
-    setValue("author", auth.currentUser.uid);
   };
 
   const onSubmit = (data) => {

@@ -30,7 +30,6 @@ const AddTenant = ({ navigation }) => {
   const [tenants, setTenants] = useState([]);
 
   const properties = useContext(PropertiesContext);
-  // console.log(properties);
   const addressArray = properties.map((property) => {
     return property.address;
   });
@@ -41,23 +40,25 @@ const AddTenant = ({ navigation }) => {
     };
   });
 
-  let unsubscribe = null;
-  useEffect(() => {
-    let mounted = true;
-    async function getStuffs() {
-      unsubscribe = db.collection("tenants").onSnapshot((snapshot) => {
-        const tenants = snapshot.docs.map((doc) => {
-          return { id: doc.id, ...doc.data() };
-        });
-        if (mounted) setTenants(tenants);
-      });
-    }
-    getStuffs();
-    return function cleanup() {
-      unsubscribe();
-      mounted = false;
-    };
-  }, []);
+  const getPropertyInfo = (id) => properties.filter(property.id === id);
+
+  // let unsubscribe = null;
+  // useEffect(() => {
+  //   let mounted = true;
+  //   async function getStuffs() {
+  //     unsubscribe = db.collection("tenants").onSnapshot((snapshot) => {
+  //       const tenants = snapshot.docs.map((doc) => {
+  //         return { id: doc.id, ...doc.data() };
+  //       });
+  //       if (mounted) setTenants(tenants);
+  //     });
+  //   }
+  //   getStuffs();
+  //   return function cleanup() {
+  //     unsubscribe();
+  //     mounted = false;
+  //   };
+  // }, []);
 
   const fakeIt = () => {
     setValue("name", faker.name.firstName() + " " + faker.name.lastName());
@@ -73,12 +74,14 @@ const AddTenant = ({ navigation }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    db.collection("tenants")
-      .add(data)
-      .then((doc) => console.log(doc.id))
-      .catch((error) => console.error(error));
-    navigation.goBack();
+  const onSubmit = () => {
+    db.collection("properties")
+      .get()
+      .then((snapshot) =>
+        sanpshot.docs.forEach((doc) => console.log(doc.data()))
+      );
+
+    // navigation.goBack();
   };
 
   // Placeholders
