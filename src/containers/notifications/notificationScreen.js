@@ -54,7 +54,7 @@ const Dashboard = () => {
                         text: 'Notifications', 
                         style: { 
                             color: '#fff', 
-                            fontWeight: 'bold', 
+                            fontWeight: '700', 
                             fontSize: 25, 
                             paddingTop: 20,
                             paddingBottom: 7

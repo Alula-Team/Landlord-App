@@ -41,8 +41,8 @@ const UpdateEmail = ({ navigation }) => {
                         text: "Update Email",
                         style: {
                         color: "#fff",
-                        fontWeight: "bold",
-                        fontSize: 22,
+                        fontWeight: '700', 
+                        fontSize: 20,
                         paddingTop: 20,
                         },
                     }}

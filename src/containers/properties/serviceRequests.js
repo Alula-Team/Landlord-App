@@ -53,7 +53,7 @@ const ServiceRequests = () => {
               style: { 
                   color: '#fff', 
                   fontWeight: '700', 
-                  fontSize: 22, 
+                  fontSize: 20, 
                   paddingTop: 20
               }
           }}

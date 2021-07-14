@@ -28,8 +28,8 @@ const UpdatePayment = () => {
                             text: "Update Payment",
                             style: {
                             color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 22,
+                            fontWeight: '700', 
+                            fontSize: 20,
                             paddingTop: 20,
                             },
                     }}
