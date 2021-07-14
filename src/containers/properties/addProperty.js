@@ -148,9 +148,9 @@ const AddProperty = ({ navigation }) => {
           text: "Add Property",
           style: {
             color: "#fff",
-            fontWeight: "bold",
-            fontSize: 22,
-            paddingTop: 30,
+            fontWeight: "700",
+            fontSize: 20,
+            paddingTop: 20,
           },
         }}
         leftComponent={
@@ -160,7 +160,7 @@ const AddProperty = ({ navigation }) => {
             color="#fff"
             size={25}
             iconStyle={{
-              paddingTop: 30,
+              paddingTop: 20,
               paddingLeft: 10,
               paddingBottom: 10,
             }}
@@ -169,7 +169,7 @@ const AddProperty = ({ navigation }) => {
         }
         rightComponent={
           <TouchableOpacity
-            style={{ paddingTop: 32.5, paddingRight: 10 }}
+            style={{ paddingTop: 22.5, paddingRight: 10 }}
             onPress={handleSubmit(onSubmit)}
           >
             <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>

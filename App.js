@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -39,10 +40,12 @@ export default function App() {
     });
   };
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-        {signedIn ? <MainStack /> : <AuthStack />}
-      </NavigationContainer>
-    </Provider>
+    <SafeAreaProvider>
+      <Provider store={store}>
+        <NavigationContainer>
+          {signedIn ? <MainStack /> : <AuthStack />}
+        </NavigationContainer>
+      </Provider>
+    </SafeAreaProvider>
   );
 }
