@@ -110,9 +110,9 @@ const Properties = ({ navigation }) => {
             text: "Properties",
             style: {
               color: "#fff",
-              fontWeight: "bold",
+              fontWeight: "700",
               fontSize: 25,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           rightComponent={
@@ -126,15 +126,14 @@ const Properties = ({ navigation }) => {
                     color="#fff"
                     size={25}
                     iconStyle={{
-                      paddingTop: 30,
+                      paddingTop: 20,
                       paddingRight: 20,
-                      paddingBottom: 10,
                     }}
                     onPress={() => navigation.navigate("ServiceRequests")}
                   />
                   <Badge 
                     status="error" 
-                    containerStyle={{ position: 'absolute', top: 30, right: 20, border: 'none'}}
+                    containerStyle={{ position: 'absolute', top: 20, right: 20, border: 'none'}}
                     badgeStyle={{ height: 10, width: 10, borderWidth: 0, borderRadius: 10/2}}
                   />
                 </View>
@@ -146,7 +145,7 @@ const Properties = ({ navigation }) => {
                   color="#fff"
                   size={25}
                   iconStyle={{
-                    paddingTop: 30,
+                    paddingTop: 20,
                     paddingRight: 20,
                     paddingBottom: 10,
                   }}
