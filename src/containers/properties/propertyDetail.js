@@ -10,9 +10,6 @@ import {
 
 import { Header, Icon } from "react-native-elements";
 
-// Navigation
-import { useNavigation } from "@react-navigation/native";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 

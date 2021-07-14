@@ -55,9 +55,9 @@ const CurrentLease = ({ navigation }) => {
             text: "Current Lease",
             style: {
               color: "#fff",
-              fontWeight: "bold",
-              fontSize: 22,
-              paddingTop: 30,
+              fontWeight: "700",
+              fontSize: 20,
+              paddingTop: 20,
             },
           }}
           leftComponent={
@@ -67,7 +67,7 @@ const CurrentLease = ({ navigation }) => {
               color="#fff"
               size={25}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingLeft: 10,
                 paddingBottom: 10,
               }}
@@ -81,7 +81,7 @@ const CurrentLease = ({ navigation }) => {
               color="#fff"
               size={27.5}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingRight: 10,
               }}
               onPress={() => setModalVisible(true)}
