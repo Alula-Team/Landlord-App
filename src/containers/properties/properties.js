@@ -8,6 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  RefreshControl
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -32,6 +33,7 @@ const Properties = ({ navigation }) => {
   // const [properties, setProperties] = useState([]);
   const properties = useContext(PropertiesContext);
   const [query, setQuery] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
   const handleQuery = (text) => {
     setQuery(text);
   };
@@ -70,6 +72,13 @@ const Properties = ({ navigation }) => {
     control,
     formState: { isDirty },
   } = useForm();
+
+  // onRefresh
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+  },
+    [refreshing]
+  );
 
   // Separator
   const renderSeparator = () => {
@@ -238,6 +247,9 @@ const Properties = ({ navigation }) => {
                 />
               </TouchableOpacity>
             )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             contentContainerStyle={{ paddingBottom: 350 }}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={renderSeparator}

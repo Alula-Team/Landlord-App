@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
   FlatList,
   TouchableOpacity,
+  RefreshControl
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
-
-// Navigation
-import { useNavigation } from "@react-navigation/native";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -16,8 +14,8 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-const ServiceRequests = () => {
-  const navigation = useNavigation();
+const ServiceRequests = ({ navigation }) => {
+  const [refreshing, setRefreshing] = useState(false);
 
   // Flatlist Dummy Data
   const data = [
@@ -38,6 +36,13 @@ const ServiceRequests = () => {
       status: "Complete",
     },
   ];
+
+  // onRefresh
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+  },
+    [refreshing]
+  );
 
   // Separator
   const renderSeparator = () => {
@@ -120,6 +125,9 @@ const ServiceRequests = () => {
               </View>
             </TouchableOpacity>
           )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
           contentContainerStyle={{ paddingBottom: 350 }}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={renderSeparator}
