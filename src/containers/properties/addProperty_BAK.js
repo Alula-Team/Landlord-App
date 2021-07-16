@@ -8,10 +8,8 @@ import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { InputWithLabel } from "../../forms";
 
 // Google Places
-// import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-// import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
-// import { GOOGLE_PLACES_API_KEY } from "@env";
-
+import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
+import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
 import faker, { database } from "faker";
 faker.locale = "en_US";
 
@@ -110,8 +108,9 @@ const AddProperty = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <ScreenHeader onSubmit={onSubmit} />
+      <ScreenHeader onSubmit={handleSubmit(onSubmit)} />
       <GooglePlacesSearch />
+      <AddPropertyForm />
     </View>
   );
 };

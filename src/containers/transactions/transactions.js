@@ -23,7 +23,7 @@ import { styles } from "./styles";
 
 // Redux Stuff
 import { connect } from "react-redux";
-import { doDeleteTransaction } from "../../redux/actions";
+import { doDeleteTransaction } from "../../store/actions";
 
 // Firebase
 import firebase, { auth, db } from "../../firebase/firebase";
@@ -235,13 +235,21 @@ const Transactions = ({ navigation }) => {
         {/* Revenue Overview */}
         {shouldShow ? (
           <View style={styles.moneyBox}>
-            <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={{ fontWeight: "500", color: "#34383D80", marginRight: 5 }}>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text
+                style={{
+                  fontWeight: "500",
+                  color: "#34383D80",
+                  marginRight: 5,
+                }}
+              >
                 Financial Activity
               </Text>
-              <Text style={{ fontSize: 12, fontWeight: "500", color: "#34383D80" }}>
+              <Text
+                style={{ fontSize: 12, fontWeight: "500", color: "#34383D80" }}
+              >
                 (year to date)
-              </Text> 
+              </Text>
             </View>
             <View
               style={{

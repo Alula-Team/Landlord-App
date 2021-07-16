@@ -62,11 +62,11 @@ const Properties = ({ navigation }) => {
   //   };
   // }, []);
 
-  const filteredList = properties.filter((item) =>
-    item.address.toLowerCase().includes(query.trim().toLowerCase())
-  );
+  // const filteredList = properties.filter((item) =>
+  //   item.address.toLowerCase().includes(query.trim().toLowerCase())
+  // );
 
-  const data = filteredList;
+  const data = properties;
 
   const {
     control,
@@ -87,10 +87,10 @@ const Properties = ({ navigation }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
-    let message =
-      properties.length === 0
-        ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
-        : `Your search returned 0 properties. Back up and try again.`;
+    let message = "Great job buddy";
+    // properties.length === 0
+    //   ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
+    //   : `Your search returned 0 properties. Back up and try again.`;
     return (
       <View style={styles.emptyList}>
         <Image
