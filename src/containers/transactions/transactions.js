@@ -313,7 +313,6 @@ const Transactions = ({ navigation }) => {
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="credit-card" color="#34383D80" size={15} />
                     <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                    <Text style={styles.listItem}>{item.property}</Text>
                   </View>
                 </TouchableOpacity>
               );

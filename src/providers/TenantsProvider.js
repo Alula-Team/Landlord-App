@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 import { db } from "../firebase/firebase";
 import { collectIdsAndData } from "../utilities";
-
+import { withProperty } from "./PropertiesProvider";
 export const TenantsContext = createContext();
 
 const TenantsProvider = (props) => {

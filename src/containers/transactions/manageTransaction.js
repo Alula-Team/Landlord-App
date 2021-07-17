@@ -10,20 +10,20 @@ import {
 } from "react-native";
 
 import { Header, Icon } from "react-native-elements";
-
+import { db } from "../../firebase/firebase";
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
 import { styles } from "./styles";
 
-const ManageTransaction = ({ navigation }) => {
+const ManageTransaction = ({ navigation, params }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
-      "Delete Tenant?",
+      "Delete Transaction?",
       "Are you sure you want to delete this tenant?",
       [
         {
@@ -38,9 +38,7 @@ const ManageTransaction = ({ navigation }) => {
           // onPress: (id) => deleteTenant(itemID),
 
           onPress: () => {
-            // const filtered = tenants.filter((item) => item.id !== id);
-            firestore.doc(`tenants/${id}`).delete();
-            // setTenants(filtered);
+            db.doc(`transactions/${id}`).delete();
             navigation.goBack();
           },
         },

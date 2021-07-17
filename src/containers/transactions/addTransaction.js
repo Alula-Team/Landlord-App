@@ -18,14 +18,14 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
 
 faker.locale = "en_US";
 
-const AddTransaction = ({ navigation, stateProperties }) => {
+const AddTransaction = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
@@ -43,6 +43,8 @@ const AddTransaction = ({ navigation, stateProperties }) => {
   };
   const properties = useContext(PropertiesContext);
 
+  const thisProperty = {};
+
   const addressArray = properties.map((property) => {
     return property.address;
   });
@@ -50,7 +52,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
   const allProperties = properties.map((item) => {
     return {
       label: item.address,
-      id: item.id,
+      value: item.id,
     };
   });
 
@@ -70,7 +72,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
       "transactionCategory",
       faker.random.arrayElement(FakerOptions.transactionCategoryArray)
     );
-    setValue("property", faker.random.arrayElement(addressArray));
+    setValue("address", faker.random.arrayElement(addressArray));
     setValue(
       "paymentMethod",
       faker.random.arrayElement(FakerOptions.paymentMethodArray)
@@ -241,11 +243,11 @@ const AddTransaction = ({ navigation, stateProperties }) => {
                 items={allProperties}
               />
             )}
-            name="property"
+            name="address"
             rules={{ required: true }}
             defaultValue=""
           />
-          {errors.property && (
+          {errors.address && (
             <Text
               style={{
                 color: "red",
