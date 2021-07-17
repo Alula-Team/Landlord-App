@@ -16,10 +16,6 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doDeleteProperty } from "../../store/actions";
-
 // Firebase
 import { db } from "../../firebase/firebase";
 
@@ -28,10 +24,10 @@ import { db } from "../../firebase/firebase";
 // import { State } from "react-native-gesture-handler";
 // Function that deletes property from server
 
-const PropertyDetail = ({ navigation, route, stateProperties }) => {
-  const [properties, setProperties] = useState([...stateProperties]);
+const PropertyDetail = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { itemID, itemAddress, itemUnit } = route.params;
+  const { itemID, itemAddress, itemCity, itemState, itemZip, itemUnit } =
+    route.params;
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -47,15 +43,9 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
         {
           text: "Delete",
           style: "destructive",
-          // onPress: () => console.log("Deleting Item ", { itemID }),
           onPress: () => {
             console.log(itemID);
-            const properties = stateProperties.filter(
-              (item) => item.id !== itemID
-            );
             db.doc(`properties/${itemID}`).delete();
-            setProperties(properties);
-            // deleteProperty(itemID);
             navigation.goBack();
           },
         },
@@ -126,8 +116,12 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
         <Text style={styles.sectionTitle}>Property Information</Text>
 
         <View style={styles.propInfo}>
-          <Text style={styles.propInfoLabel}>Address Unit</Text>
-          <Text style={styles.propInfoLabel}>City, State, Zip Code</Text>
+          <Text style={styles.propInfoLabel}>
+            {itemAddress} {itemUnit}
+          </Text>
+          <Text style={styles.propInfoLabel}>
+            {itemCity}, {itemState} {itemZip}
+          </Text>
           <View
             style={{
               flexDirection: "row",
@@ -442,12 +436,4 @@ const PropertyDetail = ({ navigation, route, stateProperties }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-const actions = {
-  deleteProperty: doDeleteProperty,
-};
-
-export default connect(mapStateToProps, actions)(PropertyDetail);
+export default PropertyDetail;

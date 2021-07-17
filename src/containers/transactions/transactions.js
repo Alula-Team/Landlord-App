@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useContext } from "react";
 
 import {
   Alert,
@@ -21,12 +21,10 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import { styles } from "./styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doDeleteTransaction } from "../../store/actions";
-
 // Firebase
 import firebase, { auth, db } from "../../firebase/firebase";
+
+import { TransactionsContext } from "../../providers/TransactionsProvider";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -34,7 +32,7 @@ import firebase, { auth, db } from "../../firebase/firebase";
 // Separation between months/year
 
 const Transactions = ({ navigation }) => {
-  const [transactions, setTransactions] = useState([]);
+  const transactions = useContext(TransactionsContext);
   const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
@@ -61,30 +59,7 @@ const Transactions = ({ navigation }) => {
       item.transactionCategory.toLowerCase().includes(query.toLowerCase())
   );
 
-  let unsubscribe = null;
-  useEffect(() => {
-    let mounted = true;
-    console.log("Transaction Time");
-    async function getStuffs() {
-      unsubscribe = db
-        .collection("transactions")
-        .orderBy("date", "desc")
-        .onSnapshot((snapshot) => {
-          const transactions = snapshot.docs.map((doc) => {
-            return { id: doc.id, ...doc.data() };
-          });
-          if (mounted) setTransactions(transactions);
-        });
-    }
-    getStuffs();
-
-    return function cleanup() {
-      unsubscribe();
-      console.log("No mas transactions");
-      mounted = false;
-    };
-  }, []);
-
+  //
   let data = filteredList;
 
   const { control } = useForm();
@@ -338,6 +313,7 @@ const Transactions = ({ navigation }) => {
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="credit-card" color="#34383D80" size={15} />
                     <Text style={styles.listItem}>{item.paymentMethod}</Text>
+                    <Text style={styles.listItem}>{item.property}</Text>
                   </View>
                 </TouchableOpacity>
               );
@@ -353,14 +329,4 @@ const Transactions = ({ navigation }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    stateTransactions: state.transactions.transactions,
-  };
-};
-
-const actions = {
-  deleteTransaction: doDeleteTransaction,
-};
-
-export default connect(mapStateToProps, actions)(Transactions);
+export default Transactions;

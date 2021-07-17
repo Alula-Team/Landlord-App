@@ -5,7 +5,7 @@ import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
 import Feather from "react-native-vector-icons/Feather";
 import styles, { googlePlacesStyles } from "./styles";
 
-const GooglePlacesSearch = () => {
+const GooglePlacesSearch = ({ onPress }) => {
   console.log(GOOGLE_PLACES_API_KEY);
   return (
     <GooglePlacesAutocomplete
@@ -15,7 +15,7 @@ const GooglePlacesSearch = () => {
         language: "en",
       }}
       fetchDetails
-      onPress={(data, details) => fillForm(details.formatted_address)}
+      onPress={(data, details) => onPress(details.formatted_address)}
       onFail={(error) => console.error(error)}
       renderLeftButton={() => (
         <Feather

@@ -15,10 +15,6 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-import { doDeleteTenant } from "../../store/actions";
-
 import firestore, { db } from "../../firebase/firebase";
 
 import "./getInitials";
@@ -31,28 +27,28 @@ import { collectIdsAndData } from "../../utilities";
 
 const TenantDetailScreen = ({ route, navigation }) => {
   const { itemID, itemName, itemEmail, itemPhone, property } = route.params;
-  const [propertyInfo, setPropertyInfo] = useState();
+  // const [propertyInfo, setPropertyInfo] = useState();
 
-  let unsubscribe = null;
-  useEffect(() => {
-    let mounted = true;
-    async function getProperty() {
-      unsubscribe = await db
-        .collection("properties")
-        .where("id", "==", property)
-        .onSnapshot((snapshot) => {
-          const property = snapshot.docs.map(collectIdsAndData);
-          if (mounted) setPropertyInfo(property);
-          console.log(property);
-        });
-    }
-    getProperty();
+  // let unsubscribe = null;
+  // useEffect(() => {
+  //   let mounted = true;
+  //   async function getProperty() {
+  //     unsubscribe = await db
+  //       .collection("properties")
+  //       .where("id", "==", property)
+  //       .onSnapshot((snapshot) => {
+  //         const property = snapshot.docs.map(collectIdsAndData);
+  //         if (mounted) setPropertyInfo(property);
+  //         console.log(property);
+  //       });
+  //   }
+  //   getProperty();
 
-    return function cleanup() {
-      unsubscribe();
-      mounted = false;
-    };
-  }, []);
+  //   return function cleanup() {
+  //     unsubscribe();
+  //     mounted = false;
+  //   };
+  // }, []);
 
   const itemInitials = itemName.getInitials();
   const [modalVisible, setModalVisible] = useState(false);
@@ -495,8 +491,4 @@ const TenantDetailScreen = ({ route, navigation }) => {
   );
 };
 
-const actions = {
-  deleteTenant: doDeleteTenant,
-};
-
-export default connect(null, actions)(TenantDetailScreen);
+export default TenantDetailScreen;
