@@ -6,8 +6,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import AuthStack from "./src/routes/AuthStack";
 import MainStack from "./src/routes/MainStack";
 
-// import UserProvider from "./src/providers/UserProvider";
-
 // Redux Stuff
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -15,6 +13,10 @@ import thunk from "redux-thunk";
 import rootReducer from "./src/store/reducers";
 
 import PropertiesProvider from "./src/providers/PropertiesProvider";
+import TenantsProvider from "./src/providers/TenantsProvider";
+import TransactionsProvider from "./src/providers/TransactionsProvider";
+import NotificationsProvider from "./src/providers/NotificationsProvider";
+import UserProvider from "./src/providers/UserProvider";
 
 // Firebase
 import firebase from "firebase";
@@ -43,11 +45,17 @@ export default function App() {
   };
   return (
     <SafeAreaProvider>
-      <Provider store={store}>
-        <NavigationContainer>
-          {signedIn ? <MainStack /> : <AuthStack />}
-        </NavigationContainer>
-      </Provider>
+      <PropertiesProvider>
+        <TenantsProvider>
+          <TransactionsProvider>
+            <NotificationsProvider>
+              <NavigationContainer>
+                {signedIn ? <MainStack /> : <AuthStack />}
+              </NavigationContainer>
+            </NotificationsProvider>
+          </TransactionsProvider>
+        </TenantsProvider>
+      </PropertiesProvider>
     </SafeAreaProvider>
   );
 }

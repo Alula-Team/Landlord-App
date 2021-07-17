@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -6,9 +6,10 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
+import { PropertiesContext } from "../../providers/PropertiesProvider";
+
 // Faker
 import faker from "faker";
-faker.locale = "en_US";
 
 // Form Stuffs
 import { useForm, Controller } from "react-hook-form";
@@ -17,16 +18,32 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
-
-// Redux
-import { connect } from "react-redux";
+import { auth, db } from "../../firebase/firebase";
 
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
 
-const AddTransaction = ({ navigation, stateProperties }) => {
-  const [properties, setProperties] = useState(stateProperties);
+faker.locale = "en_US";
+
+const AddTransaction = ({ navigation }) => {
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
+
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    console.log(date);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
+  const properties = useContext(PropertiesContext);
+
+  const thisProperty = {};
 
   const addressArray = properties.map((property) => {
     return property.address;
@@ -147,7 +164,11 @@ const AddTransaction = ({ navigation, stateProperties }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <RNPickerSelect
-                placeholder={TransactionPlaceholder}
+                placeholder={{
+                  label: "Select Transaction",
+                  value: "",
+                  color: "white",
+                }}
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
@@ -177,7 +198,11 @@ const AddTransaction = ({ navigation, stateProperties }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <RNPickerSelect
-                placeholder={CategoryPlaceholder}
+                placeholder={{
+                  label: "Select Category",
+                  value: "",
+                  color: "white",
+                }}
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
@@ -207,7 +232,11 @@ const AddTransaction = ({ navigation, stateProperties }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <RNPickerSelect
-                placeholder={PropertyPlaceholder}
+                placeholder={{
+                  label: "Select Property",
+                  value: "",
+                  color: "white",
+                }}
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
@@ -216,7 +245,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
             )}
             name="address"
             rules={{ required: true }}
-            defaultValue="108 Verygold Lane"
+            defaultValue=""
           />
           {errors.address && (
             <Text
@@ -237,11 +266,15 @@ const AddTransaction = ({ navigation, stateProperties }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <RNPickerSelect
-                // placeholder={PaymentPlaceholder}
+                placeholder={{
+                  label: "Select Payment Method",
+                  value: "",
+                  color: "white",
+                }}
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
-                items={paymentMethods}
+                items={SelectOptions.paymentMethods}
               />
             )}
             name="paymentMethod"
@@ -318,7 +351,7 @@ const AddTransaction = ({ navigation, stateProperties }) => {
                 />
               </View>
             )}
-            name="amount"
+            name="description"
             rules={{ required: false }}
             defaultValue=""
           />
@@ -352,8 +385,4 @@ const AddTransaction = ({ navigation, stateProperties }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-export default connect(mapStateToProps)(AddTransaction);
+export default AddTransaction;

@@ -4,6 +4,8 @@ import { collectIdsAndData } from "../utilities";
 
 export const PropertiesContext = createContext();
 
+export const withProperty = (Component) => (props) => <Component {...props} />;
+
 const PropertiesProvider = (props) => {
   const [properties, setProperties] = useState([]);
 

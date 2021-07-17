@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -9,8 +9,6 @@ import {
   RefreshControl
 } from "react-native";
 
-import { useForm, Controller } from "react-hook-form";
-
 import { Header, Icon } from "react-native-elements";
 
 // Vector Icons
@@ -19,45 +17,20 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
-
 // Firebase
 import firebase, { auth, db } from "../../firebase/firebase";
 import { collectIdsAndData } from "../../utilities";
+
+import { TenantsContext } from "../../providers/TenantsProvider";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New tenants auto sorted by first name
 
 const Tenants = ({ navigation }) => {
-  const [tenants, setTenants] = useState([]);
+  const tenants = useContext(TenantsContext);
   const [query, setQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
-
-  let unsubscribe = null;
-
-  useEffect(() => {
-    let mounted = true;
-    console.log("Tenants Mounted!");
-    async function getStuffs() {
-      unsubscribe = db.collection("tenants").onSnapshot((snapshot) => {
-        const tenants = snapshot.docs.map(collectIdsAndData);
-        if (mounted) setTenants(tenants);
-      });
-    }
-    getStuffs();
-    return function cleanup() {
-      mounted = false;
-      console.log("Tenants Unmounted!");
-      unsubscribe();
-    };
-  }, []);
-
-  const {
-    control,
-    formState: { isDirty },
-  } = useForm();
 
   const handleQuery = (text) => {
     setQuery(text);
@@ -149,30 +122,27 @@ const Tenants = ({ navigation }) => {
         />
 
         {/* Search Bar */}
-        <Controller
-          control={control}
-          render={() => (
-            <View style={styles.searchContainer}>
-              <Feather
-                name="search"
-                color="#34383D80"
-                size={20}
-                style={styles.searchIcon}
-              />
-              <TextInput
-                type="search"
-                placeholder="Search Tenants"
-                placeholderTextColor="#34383D80"
-                autoFocus={false}
-                autoCorrect={false}
-                style={styles.searchInput}
-                clearButtonMode="while-editing"
-                onChangeText={handleQuery}
-              />
-            </View>
-          )}
-          name="search"
-        />
+
+        <View style={styles.searchContainer}>
+          <Feather
+            name="search"
+            color="#34383D80"
+            size={20}
+            style={styles.searchIcon}
+          />
+          <TextInput
+            type="search"
+            placeholder="Search Tenants"
+            placeholderTextColor="#34383D80"
+            autoFocus={false}
+            autoCorrect={false}
+            style={styles.searchInput}
+            clearButtonMode="while-editing"
+            onChangeText={handleQuery}
+            value={query}
+          />
+        </View>
+
         {/* END Search Bar */}
 
         {/* Properties Flat List */}
@@ -221,8 +191,4 @@ const Tenants = ({ navigation }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateTenants: state.tenants.tenants };
-};
-
-export default connect(mapStateToProps)(Tenants);
+export default Tenants;

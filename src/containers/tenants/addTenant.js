@@ -18,47 +18,20 @@ import Feather from "react-native-vector-icons/Feather";
 // Firebase
 import firebase, { auth, db } from "../../firebase/firebase";
 
-// Redux
-import { connect } from "react-redux";
-
 // Style Sheet
 import styles, { pickerStyles } from "./styles";
 
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 const AddTenant = ({ navigation }) => {
-  const [tenants, setTenants] = useState([]);
-
   const properties = useContext(PropertiesContext);
-  const addressArray = properties.map((property) => {
-    return property.address;
-  });
+
   const allProperties = properties.map((item) => {
     return {
       label: item.address,
       value: item.id,
     };
   });
-
-  const getPropertyInfo = (id) => properties.filter(property.id === id);
-
-  // let unsubscribe = null;
-  // useEffect(() => {
-  //   let mounted = true;
-  //   async function getStuffs() {
-  //     unsubscribe = db.collection("tenants").onSnapshot((snapshot) => {
-  //       const tenants = snapshot.docs.map((doc) => {
-  //         return { id: doc.id, ...doc.data() };
-  //       });
-  //       if (mounted) setTenants(tenants);
-  //     });
-  //   }
-  //   getStuffs();
-  //   return function cleanup() {
-  //     unsubscribe();
-  //     mounted = false;
-  //   };
-  // }, []);
 
   const fakeIt = () => {
     setValue("name", faker.name.firstName() + " " + faker.name.lastName());
@@ -74,14 +47,15 @@ const AddTenant = ({ navigation }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = () => {
-    db.collection("properties")
-      .get()
-      .then((snapshot) =>
-        sanpshot.docs.forEach((doc) => console.log(doc.data()))
-      );
+  const onSubmit = (data) => {
+    console.log(data);
 
-    // navigation.goBack();
+    db.collection("properties")
+      .doc(data.property)
+      .collection("toonnants")
+      .add(data);
+
+    navigation.goBack();
   };
 
   // Placeholders
@@ -289,8 +263,4 @@ const AddTenant = ({ navigation }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return { stateProperties: state.properties.properties };
-};
-
-export default connect(mapStateToProps)(AddTenant);
+export default AddTenant;
