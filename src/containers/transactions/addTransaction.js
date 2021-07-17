@@ -103,7 +103,7 @@ const AddTransaction = ({ navigation }) => {
             color: "#fff",
             fontWeight: "bold",
             fontSize: 22,
-            paddingTop: 30,
+            paddingTop: 20,
           },
         }}
         leftComponent={

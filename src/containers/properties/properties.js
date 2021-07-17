@@ -8,6 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  RefreshControl
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -32,6 +33,7 @@ const Properties = ({ navigation }) => {
   // const [properties, setProperties] = useState([]);
   const properties = useContext(PropertiesContext);
   const [query, setQuery] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
   const handleQuery = (text) => {
     setQuery(text);
   };
@@ -71,6 +73,13 @@ const Properties = ({ navigation }) => {
     formState: { isDirty },
   } = useForm();
 
+  // onRefresh
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+  },
+    [refreshing]
+  );
+
   // Separator
   const renderSeparator = () => {
     return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
@@ -78,7 +87,7 @@ const Properties = ({ navigation }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
-    let message = "Great job buddy";
+    let message = "Hmmm... There's nothing here yet";
     // properties.length === 0
     //   ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
     //   : `Your search returned 0 properties. Back up and try again.`;
@@ -238,6 +247,9 @@ const Properties = ({ navigation }) => {
                 />
               </TouchableOpacity>
             )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             contentContainerStyle={{ paddingBottom: 350 }}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={renderSeparator}

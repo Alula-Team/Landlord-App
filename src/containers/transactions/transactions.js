@@ -8,7 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  Modal,
+  RefreshControl
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -35,7 +35,7 @@ const Transactions = ({ navigation }) => {
   const transactions = useContext(TransactionsContext);
   const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   const makeDate = (dateObj) => {
     const zeeDate = new Date(dateObj.seconds * 1000).toLocaleDateString(
@@ -64,6 +64,13 @@ const Transactions = ({ navigation }) => {
 
   const { control } = useForm();
 
+  // onRefresh
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+  },
+    [refreshing]
+  );
+
   // Separator
   const renderSeparator = () => {
     return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
@@ -79,7 +86,7 @@ const Transactions = ({ navigation }) => {
         />
         <Text
           style={{
-            color: "#fff",
+            color: "#34383D",
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
@@ -317,6 +324,9 @@ const Transactions = ({ navigation }) => {
                 </TouchableOpacity>
               );
             }}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             contentContainerStyle={{ paddingBottom: 350 }}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={renderSeparator}

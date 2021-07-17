@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
+  RefreshControl
 } from "react-native";
 
 import { Header, Icon } from "react-native-elements";
@@ -29,6 +30,7 @@ import { TenantsContext } from "../../providers/TenantsProvider";
 const Tenants = ({ navigation }) => {
   const tenants = useContext(TenantsContext);
   const [query, setQuery] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleQuery = (text) => {
     setQuery(text);
@@ -40,22 +42,12 @@ const Tenants = ({ navigation }) => {
 
   const data = filteredList;
 
-  function Active(props) {
-    return <Text style={{ color: "#5CB85C", fontWeight: "700" }}>Active</Text>;
-  }
-  function Archived(props) {
-    return (
-      <Text style={{ color: "#D9534F", fontWeight: "700" }}>Archived</Text>
-    );
-  }
-  function Status(props) {
-    const archived = props.archived;
-    if (archived) {
-      return <Archived />;
-    } else {
-      return <Active />;
-    }
-  }
+  // onRefresh
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+  },
+    [refreshing]
+  );
 
   // Separator
   const renderSeparator = () => {
@@ -72,7 +64,7 @@ const Tenants = ({ navigation }) => {
         />
         <Text
           style={{
-            color: "#fff",
+            color: "#34383D",
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
@@ -185,6 +177,9 @@ const Tenants = ({ navigation }) => {
                 />
               </TouchableOpacity>
             )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
             contentContainerStyle={{ paddingBottom: 350 }}
             showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={renderSeparator}

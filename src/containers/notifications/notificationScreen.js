@@ -1,5 +1,5 @@
-import React from 'react';
-import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, RefreshControl } from 'react-native';
 import { Badge, Header } from 'react-native-elements';
 
 // Vector Icons
@@ -11,39 +11,65 @@ import styles from './notif-styles';
 
 // Things I need:
     // Flatlist for Service Requests & Notifications
-        // Needs a sort feature where the newest requests are at the top
+        // Needs to hide badge when refreshed.
 
 
-const Dashboard = () => {
+const Notifications = () => {
+  const [refreshing, setRefreshing] = useState(false);
 
-    // Separator
-    const renderSeparator = () => {
-        return (
-        <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />
-        );
+  // Flatlist Dummy Data
+  const data = [
+    {
+      id: 0,
+      title: "Payment Received",
+      address: "5612 Harmony Ave",
+      unit: "",
+      date: "June 26, 2021"
+    },
+    {
+      id: 1,
+      title: "Past Due Balance",
+      address: "595 S. Green Valley Pkwy",
+      unit: "Unit 121",
+      date: "June 1, 2021"
+    },
+  ];
+
+  // Separator
+  const renderSeparator = () => {
+      return (
+      <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />
+      );
+  };
+
+  // Empty List Content
+  const EmptyListMessage = () => {
+      return (
+        <View style={styles.emptyList}>
+          <Image
+            source={require("../../assets/transEmptyList.png")}
+            style={styles.img}
+          />
+          <Text
+            style={{
+              color: "#34383D",
+              marginHorizontal: 35,
+              alignSelf: "center",
+              fontSize: 18,
+            }}
+          >
+            Hmm... No transactions yet
+          </Text>
+        </View>
+      );
     };
 
-    // Empty List Content
-    const EmptyListMessage = () => {
-        return (
-          <View style={styles.emptyList}>
-            <Image
-              source={require("../../assets/transEmptyList.png")}
-              style={styles.img}
-            />
-            <Text
-              style={{
-                color: "#fff",
-                marginHorizontal: 35,
-                alignSelf: "center",
-                fontSize: 18,
-              }}
-            >
-              Hmm... No transactions yet
-            </Text>
-          </View>
-        );
-      };
+    // onRefresh
+    const onRefresh = React.useCallback(async () => {
+      setRefreshing(true);
+    },
+      [refreshing]
+    );
     
     return(
         <>
@@ -67,25 +93,43 @@ const Dashboard = () => {
                     }}
                 />
 
-                {/* ***** Flatlist Layout ***** */}
-                <TouchableOpacity style={styles.notificationContainer}>
-                    <Text style={styles.notificationTitle}>Notification Title</Text>
-                    
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="map-pin" color="#34383D80" size={15} />
-                      <Text style={styles.notificationText}>Address</Text>
-                    </View>
-                    
-                    <View style={{ flexDirection: "row", marginTop: 10 }}>
-                      <Feather name="clock" color="#34383D80" size={15} />
-                      <Text style={styles.notificationText}>Date</Text>
-                    </View>
-                </TouchableOpacity>
-
                 {/* Flatlist */}
                 <SafeAreaView>
                     <FlatList 
-                        // SAME STYLING AS TRANSACTIONS FLATLIST
+                        data={data}
+                        keyExtractor={(item) => item.address}
+                        renderItem={({ item }) => (
+                          <View style={styles.notificationContainer}>
+                            <View style={{ flexDirection: "row", alignItems: 'center'}}>
+                              {/* Notification Badge */}
+                              <Badge
+                                status={'error'}
+                                containerStyle={{ marginRight: 25}}
+                              />
+
+                              {/* Cell Content */}
+                              <View>
+                                <Text style={styles.notificationTitle}>{item.title}</Text>
+                                
+                                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                                  <Feather name="map-pin" color="#34383D80" size={15} />
+                                  <Text style={styles.notificationText}>{item.address}</Text>
+                                </View>
+                                
+                                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                                  <Feather name="clock" color="#34383D80" size={15} />
+                                  <Text style={styles.notificationText}>{item.date}</Text>
+                                </View>
+                              </View>
+                            </View>
+                        </View>
+                        )}
+                        refreshControl={
+                          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                        }
+                        contentContainerStyle={{ paddingBottom: 350 }}
+                        showsVerticalScrollIndicator={false}
+                        ItemSeparatorComponent={renderSeparator}
                     />
                 </SafeAreaView>
             
@@ -94,4 +138,4 @@ const Dashboard = () => {
     );
 }
 
-export default Dashboard;
+export default Notifications;

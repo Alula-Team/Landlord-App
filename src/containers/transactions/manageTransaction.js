@@ -57,7 +57,7 @@ const ManageTransaction = ({ navigation, params }) => {
               color: "#fff",
               fontWeight: "bold",
               fontSize: 22,
-              paddingTop: 30,
+              paddingTop: 20,
             },
           }}
           leftComponent={
@@ -67,7 +67,7 @@ const ManageTransaction = ({ navigation, params }) => {
               color="#fff"
               size={25}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingLeft: 10,
                 paddingBottom: 10,
               }}
@@ -81,7 +81,7 @@ const ManageTransaction = ({ navigation, params }) => {
               color="#fff"
               size={27.5}
               iconStyle={{
-                paddingTop: 30,
+                paddingTop: 20,
                 paddingRight: 10,
               }}
               onPress={() => setModalVisible(true)}
