@@ -18,7 +18,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
 // Firebase
-import { auth, db } from "../../firebase/firebase";
+import firebase, { auth, db } from "../../firebase/firebase";
 
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
@@ -83,7 +83,7 @@ const AddTransaction = ({ navigation }) => {
     );
     setValue("description", faker.lorem.sentence());
     setValue("date", faker.date.past());
-    setValue("author", auth.currentUser.uid);
+    // setValue("author", auth.currentUser.uid);
   };
 
   // Date

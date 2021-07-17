@@ -49,12 +49,7 @@ const AddTenant = ({ navigation }) => {
 
   const onSubmit = (data) => {
     console.log(data);
-
-    db.collection("properties")
-      .doc(data.property)
-      .collection("toonnants")
-      .add(data);
-
+    db.collection("tenants").add(data);
     navigation.goBack();
   };
 
