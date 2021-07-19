@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
 } from "react-native";
 
 import { Header, Icon } from "react-native-elements";
@@ -45,9 +45,7 @@ const Tenants = ({ navigation }) => {
   // onRefresh
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-  },
-    [refreshing]
-  );
+  }, [refreshing]);
 
   // Separator
   const renderSeparator = () => {
@@ -156,7 +154,7 @@ const Tenants = ({ navigation }) => {
                 onPress={() =>
                   navigation.navigate("TenantDetail", {
                     itemID: item.id,
-                    itemName: `${item.name}`,
+                    itemName: item.name,
                     itemEmail: item.email,
                     itemPhone: item.phone,
                     property: item.property,

@@ -14,6 +14,7 @@ const TransactionsProvider = (props) => {
     async function getTransactions() {
       unsubscribeFromFirestore = await db
         .collection("transactions")
+        .orderBy("date", "desc")
         .onSnapshot((snapshot) => {
           const transactions = snapshot.docs.map(collectIdsAndData);
           if (mounted) setTransactions(transactions);

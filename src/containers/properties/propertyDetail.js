@@ -44,7 +44,6 @@ const PropertyDetail = ({ navigation, route }) => {
           text: "Delete",
           style: "destructive",
           onPress: () => {
-            console.log(itemID);
             db.doc(`properties/${itemID}`).delete();
             navigation.goBack();
           },

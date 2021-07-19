@@ -6,7 +6,6 @@ import Feather from "react-native-vector-icons/Feather";
 import styles, { googlePlacesStyles } from "./styles";
 
 const GooglePlacesSearch = ({ onPress }) => {
-  console.log(GOOGLE_PLACES_API_KEY);
   return (
     <GooglePlacesAutocomplete
       placeholder="Search by Address ..."

@@ -17,8 +17,18 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import { styles } from "./styles";
 
-const ManageTransaction = ({ navigation, params }) => {
+const ManageTransaction = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const {
+    itemID,
+    itemAddress,
+    itemAmount,
+    itemDate,
+    itemDescription,
+    itemPaymentMethod,
+    itemTransactionCategory,
+    itemTransactionType,
+  } = route.params;
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -38,7 +48,7 @@ const ManageTransaction = ({ navigation, params }) => {
           // onPress: (id) => deleteTenant(itemID),
 
           onPress: () => {
-            db.doc(`transactions/${id}`).delete();
+            db.doc(`transactions/${itemID}`).delete();
             navigation.goBack();
           },
         },
@@ -97,7 +107,7 @@ const ManageTransaction = ({ navigation, params }) => {
         <ScrollView>
           {/* Property Address */}
           <View style={styles.propertySectionSpacing}>
-            <Text style={styles.notificationTitle}>Property Address</Text>
+            <Text style={styles.notificationTitle}>{itemAddress}</Text>
             <View style={{ flexDirection: "row", marginTop: 5 }}>
               <Feather
                 name="map-pin"
@@ -109,19 +119,21 @@ const ManageTransaction = ({ navigation, params }) => {
             </View>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Feather name="clock" color="#34383D80" size={15} />
-              <Text style={styles.notificationText}>Date Paid</Text>
+              <Text style={styles.notificationText}>{itemDate}</Text>
             </View>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Feather name="credit-card" color="#34383D80" size={15} />
-              <Text style={styles.notificationText}>Payment Method</Text>
+              <Text style={styles.notificationText}>{itemPaymentMethod}</Text>
             </View>
           </View>
 
           {/* Transaction Title */}
           <View style={styles.propertySectionSpacing}>
-            <Text style={styles.notificationTitle}>Transaction Title</Text>
-            <Text style={styles.statusText}>Transaction Type</Text>
-            <Text style={styles.statusText}>Amount</Text>
+            <Text style={styles.notificationTitle}>
+              {itemTransactionCategory}
+            </Text>
+            <Text style={styles.statusText}>{itemTransactionType}</Text>
+            <Text style={styles.statusText}>{itemAmount}</Text>
           </View>
 
           {/* Description */}
@@ -138,15 +150,7 @@ const ManageTransaction = ({ navigation, params }) => {
             >
               Description:
             </Text>
-            <Text style={styles.descriptionText}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </Text>
+            <Text style={styles.descriptionText}>{itemDescription}</Text>
           </View>
 
           {/* Image - PDF, JPG or PNG */}

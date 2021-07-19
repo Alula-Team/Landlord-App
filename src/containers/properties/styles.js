@@ -15,7 +15,8 @@ const styles = StyleSheet.create({
   // Searchbar
   searchContainer: {
     marginHorizontal: 20,
-    marginVertical: 15,
+    marginTop: 10,
+    marginBottom: 20,
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {

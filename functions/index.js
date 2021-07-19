@@ -20,9 +20,18 @@ exports.propertyCreated = functions.firestore
     const property = doc.data();
     const notification = {
       content: "Added a new property",
-      user: `${property.author}`,
+      user: property.author,
       time: admin.firestore.FieldValue.serverTimestamp(),
     };
 
     return createNotification(notification);
+  });
+
+exports.notificationCreated = functions.firestore
+  .document("notifications/{notificationId}")
+  .onCreate(() => {
+    const notification = {
+      content: "Rent past due",
+      time: admin.firestore.FieldValue.serverTimestamp(),
+    };
   });

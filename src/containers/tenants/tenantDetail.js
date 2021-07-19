@@ -15,7 +15,7 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-import firestore, { db } from "../../firebase/firebase";
+import { db } from "../../firebase/firebase";
 
 import "./getInitials";
 import { collectIdsAndData } from "../../utilities";
@@ -71,9 +71,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
           // onPress: (id) => deleteTenant(itemID),
 
           onPress: () => {
-            // const filtered = tenants.filter((item) => item.id !== id);
-            firestore.doc(`tenants/${id}`).delete();
-            // setTenants(filtered);
+            db.doc(`tenants/${itemID}`).delete();
             navigation.goBack();
           },
         },

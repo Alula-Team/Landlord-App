@@ -52,7 +52,7 @@ const AddTransaction = ({ navigation }) => {
   const allProperties = properties.map((item) => {
     return {
       label: item.address,
-      value: item.id,
+      value: item.address,
     };
   });
 
@@ -81,9 +81,8 @@ const AddTransaction = ({ navigation }) => {
       "amount",
       faker.datatype.number({ min: 640, max: 1650 }).toString()
     );
-    setValue("description", faker.lorem.sentence());
+    setValue("description", faker.lorem.paragraph());
     setValue("date", faker.date.past());
-    // setValue("author", auth.currentUser.uid);
   };
 
   // Date

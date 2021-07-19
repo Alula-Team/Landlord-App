@@ -8,7 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -67,9 +67,7 @@ const Transactions = ({ navigation }) => {
   // onRefresh
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-  },
-    [refreshing]
-  );
+  }, [refreshing]);
 
   // Separator
   const renderSeparator = () => {
@@ -113,7 +111,6 @@ const Transactions = ({ navigation }) => {
           text: "Delete",
           style: "destructive",
           onPress: () => {
-            const filtered = transactions.filter((item) => item.id !== id);
             db.doc(`transactions/${id}`).delete();
             setTransactions(filtered);
           },
@@ -286,7 +283,18 @@ const Transactions = ({ navigation }) => {
               return (
                 <TouchableOpacity
                   style={styles.listCell}
-                  onPress={() => navigation.navigate("ManageTransaction")}
+                  onPress={() =>
+                    navigation.navigate("ManageTransaction", {
+                      itemID: item.id,
+                      itemAddress: item.address,
+                      itemAmount: item.amount,
+                      itemDate: makeDate(item.date),
+                      itemDescription: item.description,
+                      itemPaymentMethod: item.paymentMethod,
+                      itemTransactionCategory: item.transactionCategory,
+                      itemTransactionType: item.transactionType,
+                    })
+                  }
                 >
                   {/* Transaction Category and Amount*/}
                   <View style={styles.itemCenter}>
