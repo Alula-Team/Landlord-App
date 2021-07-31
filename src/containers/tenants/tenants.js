@@ -27,6 +27,7 @@ import { TenantsContext } from "../../providers/TenantsProvider";
 import Tenant from "./Tenant";
 import { PropertyContext } from "../../providers/PropertiesProvider";
 
+
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New tenants auto sorted by first name

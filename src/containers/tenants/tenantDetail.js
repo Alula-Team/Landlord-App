@@ -38,6 +38,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
     propertyUnit,
     propertyZip,
   } = route.params;
+
   // const [propertyInfo, setPropertyInfo] = useState();
 
   // let unsubscribe = null;
