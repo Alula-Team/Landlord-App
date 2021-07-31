@@ -18,7 +18,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
 // Firebase
-import { auth, db } from "../../firebase/firebase";
+import firebase, { auth, db } from "../../firebase/firebase";
 
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
@@ -43,16 +43,21 @@ const AddTransaction = ({ navigation }) => {
   };
   const properties = useContext(PropertiesContext);
 
-  const thisProperty = {};
-
   const addressArray = properties.map((property) => {
     return property.address;
   });
 
   const allProperties = properties.map((item) => {
     return {
-      label: item.address,
-      value: item.id,
+      label: `${item.address} ${item.unit}`,
+      value: {
+        id: item.id,
+        address: item.address,
+        city: item.city,
+        state: item.state,
+        unit: item.unit,
+        zip: item.zip,
+      },
     };
   });
 
@@ -72,7 +77,7 @@ const AddTransaction = ({ navigation }) => {
       "transactionCategory",
       faker.random.arrayElement(FakerOptions.transactionCategoryArray)
     );
-    setValue("address", faker.random.arrayElement(addressArray));
+    // setValue("property", faker.random.arrayElement(addressArray));
     setValue(
       "paymentMethod",
       faker.random.arrayElement(FakerOptions.paymentMethodArray)
@@ -81,9 +86,8 @@ const AddTransaction = ({ navigation }) => {
       "amount",
       faker.datatype.number({ min: 640, max: 1650 }).toString()
     );
-    setValue("description", faker.lorem.sentence());
+    setValue("description", faker.lorem.paragraph());
     setValue("date", faker.date.past());
-    setValue("author", auth.currentUser.uid);
   };
 
   // Date
@@ -243,11 +247,10 @@ const AddTransaction = ({ navigation }) => {
                 items={allProperties}
               />
             )}
-            name="address"
+            name="property"
             rules={{ required: true }}
-            defaultValue=""
           />
-          {errors.address && (
+          {errors.property && (
             <Text
               style={{
                 color: "red",

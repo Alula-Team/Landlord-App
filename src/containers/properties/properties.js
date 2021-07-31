@@ -8,7 +8,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
 } from "react-native";
 
 import { useForm, Controller } from "react-hook-form";
@@ -38,35 +38,11 @@ const Properties = ({ navigation }) => {
     setQuery(text);
   };
 
-  // let unsubscribe = null;
-  // useEffect(() => {
-  //   let mounted = true;
-  //   console.log("Im back here!");
-  //   async function getStuffs() {
-  //     unsubscribe = db
-  //       .collection("properties")
-  //       .orderBy("address", "asc")
-  //       .orderBy("unit", "asc")
-  //       .onSnapshot((snapshot) => {
-  //         const properties = snapshot.docs.map((doc) => {
-  //           return { id: doc.id, ...doc.data() };
-  //         });
-  //         if (mounted) setProperties(properties);
-  //       });
-  //   }
-  //   getStuffs();
-  //   return function cleanup() {
-  //     console.log("Im outta here!");
-  //     mounted = false;
-  //     unsubscribe();
-  //   };
-  // }, []);
+  const filteredList = properties.filter((item) =>
+    item.address.toLowerCase().includes(query.trim().toLowerCase())
+  );
 
-  // const filteredList = properties.filter((item) =>
-  //   item.address.toLowerCase().includes(query.trim().toLowerCase())
-  // );
-
-  const data = properties;
+  const data = filteredList;
 
   const {
     control,
@@ -76,9 +52,7 @@ const Properties = ({ navigation }) => {
   // onRefresh
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-  },
-    [refreshing]
-  );
+  }, [refreshing]);
 
   // Separator
   const renderSeparator = () => {
@@ -87,10 +61,10 @@ const Properties = ({ navigation }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
-    let message = "Hmmm... There's nothing here yet";
-    // properties.length === 0
-    //   ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
-    //   : `Your search returned 0 properties. Back up and try again.`;
+    let message =
+      properties.length === 0
+        ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
+        : `Your search returned 0 properties. Back up and try again.`;
     return (
       <View style={styles.emptyList}>
         <Image

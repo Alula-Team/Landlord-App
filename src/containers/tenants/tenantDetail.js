@@ -15,7 +15,7 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-import firestore, { db } from "../../firebase/firebase";
+import { db } from "../../firebase/firebase";
 
 import "./getInitials";
 import { collectIdsAndData } from "../../utilities";
@@ -26,7 +26,19 @@ import { collectIdsAndData } from "../../utilities";
 // renew lease (once lease term is set to expire in 60d)
 
 const TenantDetailScreen = ({ route, navigation }) => {
-  const { itemID, itemName, itemEmail, itemPhone, property } = route.params;
+  const {
+    itemID,
+    itemName,
+    itemEmail,
+    itemPhone,
+    propertyId,
+    propertyAddress,
+    propertyCity,
+    propertyState,
+    propertyUnit,
+    propertyZip,
+  } = route.params;
+
   // const [propertyInfo, setPropertyInfo] = useState();
 
   // let unsubscribe = null;
@@ -71,9 +83,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
           // onPress: (id) => deleteTenant(itemID),
 
           onPress: () => {
-            // const filtered = tenants.filter((item) => item.id !== id);
-            firestore.doc(`tenants/${id}`).delete();
-            // setTenants(filtered);
+            db.doc(`tenants/${itemID}`).delete();
             navigation.goBack();
           },
         },
@@ -188,7 +198,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              Address
+              {propertyAddress} {propertyUnit}
             </Text>
             <Text
               style={{
@@ -198,7 +208,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              City, State, Zip Code
+              {propertyCity}, {propertyState} {propertyZip}
             </Text>
 
             {/* Rental Rate */}
@@ -396,6 +406,20 @@ const TenantDetailScreen = ({ route, navigation }) => {
 
                 {/* Edit Tenant */}
                 <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("EditTenant", {
+                      itemID,
+                      itemName,
+                      itemEmail,
+                      itemPhone,
+                      propertyId,
+                      propertyAddress,
+                      propertyCity,
+                      propertyState,
+                      propertyUnit,
+                      propertyZip,
+                    })
+                  }
                   style={{
                     flexDirection: "row",
                     alignItems: "center",

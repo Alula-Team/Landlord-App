@@ -6,7 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Image,
-  RefreshControl
+  RefreshControl,
 } from "react-native";
 
 import { Header, Icon } from "react-native-elements";
@@ -22,6 +22,11 @@ import firebase, { auth, db } from "../../firebase/firebase";
 import { collectIdsAndData } from "../../utilities";
 
 import { TenantsContext } from "../../providers/TenantsProvider";
+// import { withProperty } from "../../providers/PropertiesProvider";
+
+import Tenant from "./Tenant";
+import { PropertyContext } from "../../providers/PropertiesProvider";
+
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -42,12 +47,39 @@ const Tenants = ({ navigation }) => {
 
   const data = filteredList;
 
+  // const listItemBase = () => (
+  //   <TouchableOpacity
+  //     style={styles.listCell}
+  //     onPress={() =>
+  //       navigation.navigate("TenantDetail", {
+  //         itemID: item.id,
+  //         itemName: item.name,
+  //         itemEmail: item.email,
+  //         itemPhone: item.phone,
+  //         property: item.property,
+  //       })
+  //     }
+  //   >
+  //     <Tenant />
+  //     <View style={{ flexDirection: "row" }}>
+  //       <Feather name="user" color="#34383D90" size={20} />
+  //       <View>
+  //         <Text style={styles.listItem}>{item.name}</Text>
+  //       </View>
+  //     </View>
+  //     <Feather
+  //       name="arrow-right"
+  //       color="#34383D90"
+  //       size={20}
+  //       style={styles.arrow}
+  //     />
+  //   </TouchableOpacity>
+  // );
+
   // onRefresh
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
-  },
-    [refreshing]
-  );
+  }, [refreshing]);
 
   // Separator
   const renderSeparator = () => {
@@ -156,10 +188,15 @@ const Tenants = ({ navigation }) => {
                 onPress={() =>
                   navigation.navigate("TenantDetail", {
                     itemID: item.id,
-                    itemName: `${item.name}`,
+                    itemName: item.name,
                     itemEmail: item.email,
                     itemPhone: item.phone,
-                    property: item.property,
+                    propertyId: item.property.id,
+                    propertyAddress: item.property.address,
+                    propertyCity: item.property.city,
+                    propertyState: item.property.state,
+                    propertyUnit: item.property.unit,
+                    propertyZip: item.property.zip,
                   })
                 }
               >
@@ -167,6 +204,9 @@ const Tenants = ({ navigation }) => {
                   <Feather name="user" color="#34383D90" size={20} />
                   <View>
                     <Text style={styles.listItem}>{item.name}</Text>
+                    <Text style={styles.listItem}>
+                      {item.property.address} {item.property.unit}
+                    </Text>
                   </View>
                 </View>
                 <Feather

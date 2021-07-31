@@ -4,8 +4,6 @@ import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import DateTimePicker from "@react-native-community/datetimepicker";
-
 import faker from "faker";
 faker.locale = "en_US";
 
@@ -28,8 +26,15 @@ const AddTenant = ({ navigation }) => {
 
   const allProperties = properties.map((item) => {
     return {
-      label: item.address,
-      value: item.id,
+      label: `${item.address} ${item.unit}`,
+      value: {
+        id: item.id,
+        address: item.address,
+        city: item.city,
+        state: item.state,
+        zip: item.zip,
+        unit: item.unit,
+      },
     };
   });
 
@@ -49,12 +54,7 @@ const AddTenant = ({ navigation }) => {
 
   const onSubmit = (data) => {
     console.log(data);
-
-    db.collection("properties")
-      .doc(data.property)
-      .collection("toonnants")
-      .add(data);
-
+    db.collection("tenants").add(data);
     navigation.goBack();
   };
 
