@@ -29,7 +29,14 @@ const AddTenant = ({ navigation }) => {
   const allProperties = properties.map((item) => {
     return {
       label: item.address,
-      value: item.id,
+      value: {
+        id: item.id,
+        address: item.address,
+        city: item.city,
+        state: item.state,
+        zip: item.zip,
+        unit: item.unit,
+      },
     };
   });
 

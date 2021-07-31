@@ -26,7 +26,18 @@ import { collectIdsAndData } from "../../utilities";
 // renew lease (once lease term is set to expire in 60d)
 
 const TenantDetailScreen = ({ route, navigation }) => {
-  const { itemID, itemName, itemEmail, itemPhone, property } = route.params;
+  const {
+    itemID,
+    itemName,
+    itemEmail,
+    itemPhone,
+    propertyId,
+    propertyAddress,
+    propertyCity,
+    propertyState,
+    propertyUnit,
+    propertyZip,
+  } = route.params;
   // const [propertyInfo, setPropertyInfo] = useState();
 
   // let unsubscribe = null;
@@ -186,7 +197,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              Address
+              {propertyAddress}
             </Text>
             <Text
               style={{
@@ -196,7 +207,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              City, State, Zip Code
+              {propertyCity}, {propertyState} {propertyZip}
             </Text>
 
             {/* Rental Rate */}
@@ -394,6 +405,20 @@ const TenantDetailScreen = ({ route, navigation }) => {
 
                 {/* Edit Tenant */}
                 <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("EditTenant", {
+                      itemID,
+                      itemName,
+                      itemEmail,
+                      itemPhone,
+                      propertyId,
+                      propertyAddress,
+                      propertyCity,
+                      propertyState,
+                      propertyUnit,
+                      propertyZip,
+                    })
+                  }
                   style={{
                     flexDirection: "row",
                     alignItems: "center",

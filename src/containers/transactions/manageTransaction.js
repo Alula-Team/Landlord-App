@@ -28,6 +28,12 @@ const ManageTransaction = ({ navigation, route }) => {
     itemPaymentMethod,
     itemTransactionCategory,
     itemTransactionType,
+    propertyId,
+    propertyAddress,
+    propertyCity,
+    propertyState,
+    propertyUnit,
+    propertyZip,
   } = route.params;
 
   // Delete Alert Pop Up
@@ -107,7 +113,7 @@ const ManageTransaction = ({ navigation, route }) => {
         <ScrollView>
           {/* Property Address */}
           <View style={styles.propertySectionSpacing}>
-            <Text style={styles.notificationTitle}>{itemAddress}</Text>
+            <Text style={styles.notificationTitle}>{propertyAddress}</Text>
             <View style={{ flexDirection: "row", marginTop: 5 }}>
               <Feather
                 name="map-pin"
@@ -115,7 +121,9 @@ const ManageTransaction = ({ navigation, route }) => {
                 size={15}
                 style={{ marginTop: 1, color: "#34383D80" }}
               />
-              <Text style={styles.notificationText}>City, State, Zip</Text>
+              <Text style={styles.notificationText}>
+                {propertyCity}, {propertyState} {propertyZip}
+              </Text>
             </View>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Feather name="clock" color="#34383D80" size={15} />
@@ -198,6 +206,17 @@ const ManageTransaction = ({ navigation, route }) => {
                 </Text>
 
                 <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("EditTransaction", {
+                      itemID,
+                      itemAmount,
+                      itemDate,
+                      itemDescription,
+                      itemPaymentMethod,
+                      itemTransactionCategory,
+                      itemTransactionType,
+                    })
+                  }
                   style={{
                     flexDirection: "row",
                     alignItems: "center",

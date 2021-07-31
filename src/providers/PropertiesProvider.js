@@ -4,7 +4,48 @@ import { collectIdsAndData } from "../utilities";
 
 export const PropertiesContext = createContext();
 
-export const withProperty = (Component) => (props) => <Component {...props} />;
+export const PropertyContext = createContext();
+
+const getTenantAddress = (tenant) => {
+  let theProperty = properties.filter((item) => item.id === tenant.property);
+  let thePaddedTenant = { ...tenant, property: { ...theProperty } };
+  return thePaddedTenant;
+};
+
+export const withProperty = (Component) => (props) => {
+  let property;
+  db.collection("properties")
+    .doc(props.property)
+    .get()
+    .then((doc) => (property = { propertyInfo: { ...doc.data() } }));
+
+  return (
+    <PropertyContext.Consumer>
+      {(property) => <Component {...props} property={property} />}
+    </PropertyContext.Consumer>
+  );
+};
+
+export const useProperty = ({ Component, propertyID }) => {
+  const [property, setProperty] = useState({});
+
+  useEffect(() => {
+    async function getProperty() {
+      try {
+        await db
+          .collection("properties")
+          .doc(propertyID)
+          .get()
+          .then((doc) => setProperty(...doc.data()));
+      } catch {
+        (error) => console.error(error);
+      }
+    }
+    getProperty();
+  }, []);
+
+  return <Component property={property} />;
+};
 
 const PropertiesProvider = (props) => {
   const [properties, setProperties] = useState([]);

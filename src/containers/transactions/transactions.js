@@ -25,6 +25,9 @@ import { styles } from "./styles";
 import firebase, { auth, db } from "../../firebase/firebase";
 
 import { TransactionsContext } from "../../providers/TransactionsProvider";
+import { PropertiesContext } from "../../providers/PropertiesProvider";
+
+// import { getSubCollections } from "../../../functions";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -33,6 +36,7 @@ import { TransactionsContext } from "../../providers/TransactionsProvider";
 
 const Transactions = ({ navigation }) => {
   const transactions = useContext(TransactionsContext);
+  const properties = useContext(PropertiesContext);
   const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -286,13 +290,18 @@ const Transactions = ({ navigation }) => {
                   onPress={() =>
                     navigation.navigate("ManageTransaction", {
                       itemID: item.id,
-                      itemAddress: item.address,
                       itemAmount: item.amount,
                       itemDate: makeDate(item.date),
                       itemDescription: item.description,
                       itemPaymentMethod: item.paymentMethod,
                       itemTransactionCategory: item.transactionCategory,
                       itemTransactionType: item.transactionType,
+                      propertyId: item.property.id,
+                      propertyAddress: item.property.address,
+                      propertyCity: item.property.city,
+                      propertyState: item.property.state,
+                      propertyUnit: item.property.unit,
+                      propertyZip: item.property.zip,
                     })
                   }
                 >
@@ -317,7 +326,7 @@ const Transactions = ({ navigation }) => {
                   {/* Property */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="map-pin" color="#34383D80" size={15} />
-                    <Text style={styles.listItem}>{item.address}</Text>
+                    <Text style={styles.listItem}>{item.property.address}</Text>
                   </View>
                   {/* Date */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>

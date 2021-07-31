@@ -1,37 +1,18 @@
+/* eslint-disable object-curly-spacing */
+/* eslint-disable indent */
 const functions = require("firebase-functions");
-const admin = require("firebase-admin");
-admin.initializeApp(functions.config().firebase);
 
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
 exports.helloWorld = functions.https.onRequest((request, response) => {
   functions.logger.info("Hello logs!", { structuredData: true });
-  response.send("Hello, Pooples!");
+  response.send("Hello from Firebase!");
 });
 
-const createNotification = (notification) => {
-  return admin.firestore
-    .collection("notifications")
-    .add(notification)
-    .then((doc) => console.log("Notification added", doc));
-};
-
-exports.propertyCreated = functions.firestore
+exports.brandNewProperty = functions.firestore
   .document("properties/{propertyId}")
-  .onCreate((doc) => {
-    const property = doc.data();
-    const notification = {
-      content: "Added a new property",
-      user: property.author,
-      time: admin.firestore.FieldValue.serverTimestamp(),
-    };
-
-    return createNotification(notification);
-  });
-
-exports.notificationCreated = functions.firestore
-  .document("notifications/{notificationId}")
-  .onCreate(() => {
-    const notification = {
-      content: "Rent past due",
-      time: admin.firestore.FieldValue.serverTimestamp(),
-    };
+  .onCreate((snapshot) => {
+    const allStuffs = snapshot.data();
+    console.log(allStuffs);
   });

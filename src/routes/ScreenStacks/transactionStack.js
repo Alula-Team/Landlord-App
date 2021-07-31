@@ -6,7 +6,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 // Screens
 import Transactions from "../../containers/transactions/transactions";
 import AddTransaction from "../../containers/transactions/addTransaction";
-import ManageTransaction from '../../containers/transactions/manageTransaction';
+import EditTransaction from "../../containers/transactions/editTransaction";
+import ManageTransaction from "../../containers/transactions/manageTransaction";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,11 @@ const TransactionsNavigation = (props) => {
         <Stack.Screen
           name="AddTransaction"
           component={AddTransaction}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditTransaction"
+          component={EditTransaction}
           options={{ headerShown: false }}
         />
         <Stack.Screen

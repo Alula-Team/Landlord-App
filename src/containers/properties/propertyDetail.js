@@ -19,11 +19,6 @@ import styles from "./styles";
 // Firebase
 import { db } from "../../firebase/firebase";
 
-// What I need:
-// State
-// import { State } from "react-native-gesture-handler";
-// Function that deletes property from server
-
 const PropertyDetail = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { itemID, itemAddress, itemCity, itemState, itemZip, itemUnit } =
@@ -364,6 +359,16 @@ const PropertyDetail = ({ navigation, route }) => {
               </Text>
 
               <TouchableOpacity
+                onPress={() =>
+                  navigation.navigate("EditProperty", {
+                    itemID,
+                    itemAddress,
+                    itemCity,
+                    itemState,
+                    itemUnit,
+                    itemZip,
+                  })
+                }
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
