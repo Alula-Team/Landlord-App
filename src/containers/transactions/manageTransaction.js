@@ -113,7 +113,9 @@ const ManageTransaction = ({ navigation, route }) => {
         <ScrollView>
           {/* Property Address */}
           <View style={styles.propertySectionSpacing}>
-            <Text style={styles.notificationTitle}>{propertyAddress}</Text>
+            <Text style={styles.notificationTitle}>
+              {propertyAddress} {propertyUnit}
+            </Text>
             <View style={{ flexDirection: "row", marginTop: 5 }}>
               <Feather
                 name="map-pin"

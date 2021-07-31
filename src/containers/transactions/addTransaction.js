@@ -49,7 +49,7 @@ const AddTransaction = ({ navigation }) => {
 
   const allProperties = properties.map((item) => {
     return {
-      label: item.address,
+      label: `${item.address} ${item.unit}`,
       value: {
         id: item.id,
         address: item.address,

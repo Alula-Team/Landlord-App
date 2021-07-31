@@ -203,7 +203,9 @@ const Tenants = ({ navigation }) => {
                   <Feather name="user" color="#34383D90" size={20} />
                   <View>
                     <Text style={styles.listItem}>{item.name}</Text>
-                    <Text style={styles.listItem}>{item.property.address}</Text>
+                    <Text style={styles.listItem}>
+                      {item.property.address} {item.property.unit}
+                    </Text>
                   </View>
                 </View>
                 <Feather

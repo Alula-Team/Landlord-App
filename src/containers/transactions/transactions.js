@@ -326,7 +326,9 @@ const Transactions = ({ navigation }) => {
                   {/* Property */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>
                     <Feather name="map-pin" color="#34383D80" size={15} />
-                    <Text style={styles.listItem}>{item.property.address}</Text>
+                    <Text style={styles.listItem}>
+                      {item.property.address} {item.property.unit}
+                    </Text>
                   </View>
                   {/* Date */}
                   <View style={{ flexDirection: "row", marginTop: 10 }}>

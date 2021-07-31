@@ -4,8 +4,6 @@ import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import DateTimePicker from "@react-native-community/datetimepicker";
-
 import faker from "faker";
 faker.locale = "en_US";
 
@@ -28,7 +26,7 @@ const AddTenant = ({ navigation }) => {
 
   const allProperties = properties.map((item) => {
     return {
-      label: item.address,
+      label: `${item.address} ${item.unit}`,
       value: {
         id: item.id,
         address: item.address,

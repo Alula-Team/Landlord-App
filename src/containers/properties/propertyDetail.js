@@ -66,7 +66,7 @@ const PropertyDetail = ({ navigation, route }) => {
               paddingTop: 22.5,
             }}
           >
-            {itemAddress}
+            {itemAddress} {itemUnit}
           </Text>
         }
         leftComponent={

@@ -197,7 +197,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              {propertyAddress}
+              {propertyAddress} {propertyUnit}
             </Text>
             <Text
               style={{
