@@ -107,11 +107,11 @@ const AddProperty = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView  style={styles.container}>
       <ScreenHeader onSubmit={handleSubmit(onSubmit)} />
       <GooglePlacesSearch />
       <AddPropertyForm />
-    </View>
+    </KeyboardAwareScrollView >
   );
 };
 
