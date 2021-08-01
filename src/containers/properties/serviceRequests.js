@@ -14,6 +14,10 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const ServiceRequests = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
 
@@ -38,11 +42,10 @@ const ServiceRequests = ({ navigation }) => {
   ];
 
   // onRefresh
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-  },
-    [refreshing]
-  );
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   // Separator
   const renderSeparator = () => {

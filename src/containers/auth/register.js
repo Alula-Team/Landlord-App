@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { Header } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import firebase from "firebase";
@@ -17,11 +17,13 @@ const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [indicator, setIndicator] = useState(false);
 
   const emptyState = () => {
     setUsername("");
     setEmail("");
     setPassword("");
+    setIndicator(!indicator);
   };
 
   const onSubmit = () => {
@@ -129,6 +131,8 @@ const RegisterScreen = ({ navigation }) => {
               value={password}
             />
           </View>
+
+          <ActivityIndicator size="large" color="#232256" animating={indicator} hideActivityIndicator='true' />
         </View>
 
         {/* Sign Up Button */}
