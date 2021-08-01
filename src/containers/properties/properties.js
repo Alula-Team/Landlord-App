@@ -63,7 +63,7 @@ const Properties = ({ navigation }) => {
   const EmptyListMessage = () => {
     let message =
       properties.length === 0
-        ? `Hmm... There is nothing here... Let's add your first property! Use the '+' symbol at the top to get started.`
+        ? `I think it may be time to add a property 🤷🏽‍♂️`
         : `Your search returned 0 properties. Back up and try again.`;
     return (
       <View style={styles.emptyList}>
@@ -73,10 +73,11 @@ const Properties = ({ navigation }) => {
         />
         <Text
           style={{
-            color: "#34383D",
+            color: "#34383D80",
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
+            fontWeight: '600'
           }}
         >
           {message}

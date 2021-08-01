@@ -97,13 +97,26 @@ const Tenants = ({ navigation }) => {
         />
         <Text
           style={{
-            color: "#34383D",
+            color: "#34383D80",
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
+            fontWeight: '600'
           }}
         >
-          When you invite tenants to connect, they will show up here!
+          Let's move someone in...
+        </Text>
+        <Text
+          style={{
+            color: "#34383D80",
+            marginTop: 5,
+            marginHorizontal: 35,
+            alignSelf: "center",
+            fontSize: 18,
+            fontWeight: '600'
+          }}
+        >
+          These guys charge by the minute!
         </Text>
       </View>
     );
