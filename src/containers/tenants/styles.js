@@ -38,24 +38,51 @@ const styles = StyleSheet.create({
   },
 
   // Flatlist
+  inputLabel: {
+    marginLeft: 22.5, 
+    marginTop: 20, 
+    fontSize: 16, 
+    fontWeight: '500'
+  },
+  inputContainer: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "#00000012",
+  },
+  inputField: {
+      paddingLeft: 12.5,
+      color: "#34383D",
+      fontSize: 16,
+      fontWeight: "500",
+      width: "85%",
+  },
   listCell: {
     paddingVertical: 20,
     paddingHorizontal: 25,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: 'center'
   },
   itemCenter: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
     alignItems: "center",
   },
   listItem: {
     paddingLeft: 12.5,
     fontSize: 15,
     fontWeight: "600",
-    color: "#34383D",
-    alignSelf: "center",
+    color: "#34383D"
+  },
+  listItemMuted: {
+    paddingLeft: 12.5,
+    paddingTop: 2,
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#34383D90"
   },
   status: {
     color: "#fff",
@@ -192,42 +219,32 @@ const styles = StyleSheet.create({
   },
 });
 
-const pickerStyles = {
+const pickerStyles = StyleSheet.create({
   inputIOS: {
     marginHorizontal: 20,
     marginTop: 10,
-    marginBottom: 20,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     height: 45,
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#00000012",
+    paddingLeft: 12.5,
     color: "#34383D",
-    paddingLeft: 15,
     fontSize: 16,
     fontWeight: "500",
   },
   inputAndroid: {
     marginHorizontal: 20,
-    marginTop: 15,
-    borderColor: "#ffffff50",
+    marginTop: 10,
     borderRadius: 10,
-    borderWidth: 1,
     height: 45,
     flexDirection: "row",
+    backgroundColor: "#00000012",
+    paddingLeft: 12.5,
     color: "#34383D",
-    paddingLeft: 15,
     fontSize: 16,
     fontWeight: "500",
   },
-};
+});
 
 export default styles;
 export { pickerStyles };

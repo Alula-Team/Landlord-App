@@ -26,6 +26,7 @@ import firebase, { auth, db } from "../../firebase/firebase";
 
 import { TransactionsContext } from "../../providers/TransactionsProvider";
 import { PropertiesContext } from "../../providers/PropertiesProvider";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // import { getSubCollections } from "../../../functions";
 
@@ -279,7 +280,6 @@ const Transactions = ({ navigation }) => {
         {/* END Revenue Overview */}
 
         {/* Transactions Flat List */}
-        <View style={styles.listView}>
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}
@@ -351,7 +351,6 @@ const Transactions = ({ navigation }) => {
             ItemSeparatorComponent={renderSeparator}
             ListEmptyComponent={EmptyListMessage}
           />
-        </View>
       </View>
     </>
   );

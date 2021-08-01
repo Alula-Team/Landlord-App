@@ -163,7 +163,7 @@ const AddTransaction = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <View>
-          <Text style={styles.sectionText}>Transaction Type</Text>
+          <Text style={styles.inputLabel}>Transaction Type</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -197,7 +197,7 @@ const AddTransaction = ({ navigation }) => {
           )}
 
           {/* Category */}
-          <Text style={styles.sectionText}>Category</Text>
+          <Text style={styles.inputLabel}>Category</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -231,7 +231,7 @@ const AddTransaction = ({ navigation }) => {
           )}
 
           {/* Property */}
-          <Text style={styles.sectionText}>Property</Text>
+          <Text style={styles.inputLabel}>Property</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -264,7 +264,7 @@ const AddTransaction = ({ navigation }) => {
           )}
 
           {/* Payment Method */}
-          <Text style={styles.sectionText}>Payment Method</Text>
+          <Text style={styles.inputLabel}>Payment Method</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -298,11 +298,11 @@ const AddTransaction = ({ navigation }) => {
           )}
 
           {/* Amount */}
-          <Text style={styles.sectionText}>Amount</Text>
+          <Text style={styles.inputLabel}>Amount</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.searchContainer}>
+              <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
                   placeholder="i.e 1500"
@@ -332,7 +332,7 @@ const AddTransaction = ({ navigation }) => {
           )}
 
           {/* Description */}
-          <Text style={styles.sectionText}>Description</Text>
+          <Text style={styles.inputLabel}>Description</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -364,7 +364,7 @@ const AddTransaction = ({ navigation }) => {
             control={control}
             render={() => (
               <View style={{ flexDirection: "row", marginTop: 20 }}>
-                <Text style={styles.sectionText}>Date Paid:</Text>
+                <Text style={styles.inputLabel}>Date Paid:</Text>
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={date}

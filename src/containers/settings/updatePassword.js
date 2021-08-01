@@ -77,12 +77,12 @@ const UpdateProfile = ({ navigation }) => {
                 {/* Edit Profile Form */}
                 <ScrollView style={{marginTop: 20}}>
                     {/* Current Password */}
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.inputContainer}>
                         <TextInput
                             type="text"
                             placeholder="Current Password"
                             placeholderTextColor="#34383D80"
-                            style={styles.formInput}
+                            style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
                             keyboardAppearance="dark"
@@ -93,12 +93,12 @@ const UpdateProfile = ({ navigation }) => {
                     </View>
 
                     {/* Password */}
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.inputContainer}>
                         <TextInput
                             type="text"
                             placeholder="New Password"
                             placeholderTextColor="#34383D80"
-                            style={styles.formInput}
+                            style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
                             keyboardAppearance="dark"
@@ -109,12 +109,12 @@ const UpdateProfile = ({ navigation }) => {
                     </View>
                         
                     {/* Confirm Password */}
-                    {/* <View style={styles.buttonContainer}>
+                    {/* <View style={styles.inputContainer}>
                         <TextInput 
                             type='text'
                             placeholder='Confirm Password'
                             placeholderTextColor='#34383D80'
-                            style={styles.formInput}
+                            style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
                             keyboardAppearance='dark'

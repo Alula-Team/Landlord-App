@@ -134,7 +134,7 @@ const AddTenant = ({ navigation }) => {
           </TouchableOpacity>
 
           {/* Property */}
-          <Text style={styles.sectionText}>Property</Text>
+          <Text style={styles.inputLabel}>Property</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -163,16 +163,16 @@ const AddTenant = ({ navigation }) => {
             </Text>
           )}
           {/* First Name */}
-          <Text style={styles.sectionText}>Tenant Name</Text>
+          <Text style={styles.inputLabel}>Tenant Name</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.searchContainer}>
+              <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
                   placeholder="Tenant Name"
                   placeholderTextColor="#34383D70"
-                  style={styles.tenantInput}
+                  style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
                 />
@@ -195,16 +195,16 @@ const AddTenant = ({ navigation }) => {
             </Text>
           )}
 
-          <Text style={styles.sectionText}>Email</Text>
+          <Text style={styles.inputLabel}>Email</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.searchContainer}>
+              <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
                   placeholder="Email"
                   placeholderTextColor="#34383D70"
-                  style={styles.tenantInput}
+                  style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
                 />
@@ -226,16 +226,16 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
-          <Text style={styles.sectionText}>Phone</Text>
+          <Text style={styles.inputLabel}>Phone</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.searchContainer}>
+              <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
                   placeholder="Phone"
                   placeholderTextColor="#34383D70"
-                  style={styles.tenantInput}
+                  style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
                 />

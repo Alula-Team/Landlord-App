@@ -71,12 +71,12 @@ const UpdateEmail = ({ navigation }) => {
                 <ScrollView style={{marginTop: 20}}>
 
                     {/* Email Address */}
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.inputContainer}>
                         <TextInput 
                             type='text'
                             placeholder='New Email'
                             placeholderTextColor='#34383D80'
-                            style={styles.formInput}
+                            style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
                             keyboardAppearance='dark'
@@ -87,9 +87,9 @@ const UpdateEmail = ({ navigation }) => {
                     </View>
 
                     {/* Password */}
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.inputContainer}>
                         <TextInput
-                            style={styles.formInput}
+                            style={styles.inputField}
                             placeholder='Enter Password to Save Changes'
                             placeholderTextColor='#34383D80'
                             secureTextEntry={true}

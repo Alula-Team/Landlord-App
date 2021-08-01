@@ -150,16 +150,19 @@ const AddProperty = ({ navigation }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
-              <TextInput
-                type="text"
-                placeholder="Address..."
-                placeholderTextColor="#34383D70"
-                style={styles.searchInput}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <>
+              <Text style={styles.inputLabel}>Address</Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Address..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            </>
           )}
           name="address"
           rules={{ required: true }}
@@ -180,16 +183,19 @@ const AddProperty = ({ navigation }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
-              <TextInput
-                type="text"
-                placeholder="City..."
-                placeholderTextColor="#34383D70"
-                style={styles.searchInput}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <>
+              <Text style={styles.inputLabel}>City</Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="City..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            </>
           )}
           name="city"
           rules={{ required: true }}
@@ -210,16 +216,19 @@ const AddProperty = ({ navigation }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
-              <TextInput
-                type="text"
-                placeholder="State..."
-                placeholderTextColor="#34383D70"
-                style={styles.searchInput}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <>
+              <Text style={styles.inputLabel}>State</Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="State..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            </>
           )}
           name="state"
           rules={{ required: true }}
@@ -240,16 +249,19 @@ const AddProperty = ({ navigation }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
-              <TextInput
-                type="text"
-                placeholder="Zip..."
-                placeholderTextColor="#34383D70"
-                style={styles.searchInput}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <>
+              <Text style={styles.inputLabel}>Zip</Text>
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Zip..."
+                  placeholderTextColor="#34383D70"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            </>
           )}
           name="zip"
           rules={{ required: true }}
@@ -283,18 +295,18 @@ const AddProperty = ({ navigation }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <View style={{ flexDirection: "row" }}>
-                <View style={styles.addUnitInput}>
+                <View style={styles.inputContainer}>
                   <TextInput
                     type="text"
                     placeholder="Apt, Unit, Suite, etc..."
                     placeholderTextColor="#34383D70"
-                    style={styles.propertyInput}
+                    style={styles.inputField}
                     onChangeText={onChange}
                     value={value}
                   />
                 </View>
                 <TouchableOpacity
-                  style={{ alignSelf: "center", marginBottom: 12.5 }}
+                  style={{ alignSelf: "center"}}
                   onPress={() => remove(index)}
                 >
                   <Feather name="trash" color="#34383D80" size={20} />

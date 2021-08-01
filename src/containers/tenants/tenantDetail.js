@@ -406,7 +406,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
 
                 {/* Edit Tenant */}
                 <TouchableOpacity
-                  onPress={() =>
+                  onPress={() => (setModalVisible(!modalVisible),
                     navigation.navigate("EditTenant", {
                       itemID,
                       itemName,
@@ -418,7 +418,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                       propertyState,
                       propertyUnit,
                       propertyZip,
-                    })
+                    }))
                   }
                   style={{
                     flexDirection: "row",

@@ -157,7 +157,7 @@ const EditTransaction = ({ navigation, route }) => {
       />
 
       <KeyboardAwareScrollView>
-        <Text style={styles.sectionText}>Transaction Type</Text>
+        <Text style={styles.inputLabel}>Transaction Type</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
@@ -191,7 +191,7 @@ const EditTransaction = ({ navigation, route }) => {
         )}
 
         {/* Category */}
-        <Text style={styles.sectionText}>Category</Text>
+        <Text style={styles.inputLabel}>Category</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
@@ -225,7 +225,7 @@ const EditTransaction = ({ navigation, route }) => {
         )}
 
         {/* Payment Method */}
-        <Text style={styles.sectionText}>Payment Method</Text>
+        <Text style={styles.inputLabel}>Payment Method</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
@@ -259,11 +259,11 @@ const EditTransaction = ({ navigation, route }) => {
         )}
 
         {/* Amount */}
-        <Text style={styles.sectionText}>Amount</Text>
+        <Text style={styles.inputLabel}>Amount</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
+            <View style={styles.inputContainer}>
               <TextInput
                 type="text"
                 placeholder="i.e 1500"
@@ -293,7 +293,7 @@ const EditTransaction = ({ navigation, route }) => {
         )}
 
         {/* Description */}
-        <Text style={styles.sectionText}>Description</Text>
+        <Text style={styles.inputLabel}>Description</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
@@ -325,7 +325,7 @@ const EditTransaction = ({ navigation, route }) => {
           control={control}
           render={() => (
             <View style={{ flexDirection: "row", marginTop: 20 }}>
-              <Text style={styles.sectionText}>Date Paid:</Text>
+              <Text style={styles.inputLabel}>Date Paid:</Text>
               <DateTimePicker
                 testID="dateTimePicker"
                 value={date}

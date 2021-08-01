@@ -143,7 +143,7 @@ const ManageTransaction = ({ navigation, route }) => {
               {itemTransactionCategory}
             </Text>
             <Text style={styles.statusText}>{itemTransactionType}</Text>
-            <Text style={styles.statusText}>{itemAmount}</Text>
+            <Text style={styles.statusText}>${itemAmount}</Text>
           </View>
 
           {/* Description */}
@@ -208,7 +208,7 @@ const ManageTransaction = ({ navigation, route }) => {
                 </Text>
 
                 <TouchableOpacity
-                  onPress={() =>
+                  onPress={() => (setModalVisible(!modalVisible),
                     navigation.navigate("EditTransaction", {
                       itemID,
                       itemAmount,
@@ -217,7 +217,7 @@ const ManageTransaction = ({ navigation, route }) => {
                       itemPaymentMethod,
                       itemTransactionCategory,
                       itemTransactionType,
-                    })
+                    }))
                   }
                   style={{
                     flexDirection: "row",

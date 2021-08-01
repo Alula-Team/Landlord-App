@@ -43,6 +43,27 @@ const styles = StyleSheet.create({
   },
 
   // Flatlist
+  inputLabel: {
+    marginLeft: 22.5, 
+    marginTop: 20, 
+    fontSize: 16, 
+    fontWeight: '500'
+  },
+  inputContainer: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "#00000012",
+  },
+  inputField: {
+      paddingLeft: 12.5,
+      color: "#34383D",
+      fontSize: 16,
+      fontWeight: "500",
+      width: "85%",
+  },
   listCell: {
     paddingVertical: 20,
     paddingHorizontal: 25,
@@ -95,7 +116,7 @@ const styles = StyleSheet.create({
   addButton: {
     flexDirection: "row",
     marginLeft: 20,
-    marginTop: 20,
+    marginTop: 30,
     marginBottom: 10,
   },
   addButtonText: {

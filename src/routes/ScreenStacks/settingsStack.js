@@ -11,6 +11,8 @@ import UpdateEmail from '../../containers/settings/updateEmail';
 import UpdatePassword from '../../containers/settings/updatePassword';
 import UpdatePayment from '../../containers/settings/updatePayment';
 import About from '../../containers/settings/about';
+import PrivacyPolicy from '../../containers/settings/privacyPolicy';
+import Terms from '../../containers/settings/terms';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,8 @@ const PropertiesNavigation = (props) => {
                 <Stack.Screen name='UpdatePassword' component={UpdatePassword}  options={{ headerShown: false }} />
                 <Stack.Screen name='UpdatePayment' component={UpdatePayment}  options={{ headerShown: false }} />
                 <Stack.Screen name='About' component={About}  options={{ headerShown: false }} />
+                <Stack.Screen name='PrivacyPolicy' component={PrivacyPolicy}  options={{ headerShown: false }} />
+                <Stack.Screen name='Terms' component={Terms}  options={{ headerShown: false }} />
             </Stack.Navigator>
         </>
     );
