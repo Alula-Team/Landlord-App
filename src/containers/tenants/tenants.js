@@ -33,6 +33,10 @@ import { PropertyContext } from "../../providers/PropertiesProvider";
 // Working Search Feature
 // New tenants auto sorted by first name
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Tenants = ({ navigation }) => {
   const tenants = useContext(TenantsContext);
   const [query, setQuery] = useState("");
@@ -78,9 +82,10 @@ const Tenants = ({ navigation }) => {
   // );
 
   // onRefresh
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-  }, [refreshing]);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   // Separator
   const renderSeparator = () => {

@@ -35,6 +35,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // New transactions auto sorted by newest to oldest
 // Separation between months/year
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Transactions = ({ navigation }) => {
   const transactions = useContext(TransactionsContext);
   const properties = useContext(PropertiesContext);
@@ -70,9 +74,10 @@ const Transactions = ({ navigation }) => {
   const { control } = useForm();
 
   // onRefresh
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-  }, [refreshing]);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   // Separator
   const renderSeparator = () => {

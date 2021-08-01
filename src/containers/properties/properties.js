@@ -29,6 +29,10 @@ import firebase, { auth, db } from "../../firebase/firebase";
 
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Properties = ({ navigation }) => {
   // const [properties, setProperties] = useState([]);
   const properties = useContext(PropertiesContext);
@@ -50,9 +54,10 @@ const Properties = ({ navigation }) => {
   } = useForm();
 
   // onRefresh
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-  }, [refreshing]);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   // Separator
   const renderSeparator = () => {

@@ -22,6 +22,10 @@ import styles from "./notif-styles";
 // Flatlist for Service Requests & Notifications
 // Needs to hide badge when refreshed.
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const Notifications = () => {
   const [refreshing, setRefreshing] = useState(false);
 
@@ -72,9 +76,10 @@ const Notifications = () => {
   };
 
   // onRefresh
-  const onRefresh = React.useCallback(async () => {
+  const onRefresh = React.useCallback(() => {
     setRefreshing(true);
-  }, [refreshing]);
+    wait(2000).then(() => setRefreshing(false));
+  }, []);
 
   return (
     <>
