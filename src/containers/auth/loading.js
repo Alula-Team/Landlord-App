@@ -1,44 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Animated, Easing } from "react-native";
-
-// Navigation
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
+import { View, Image } from "react-native";
 
 // Style Sheet
 import styles from "./auth-styles";
 
-const Loading = () => {
-
-    const navigation = useNavigation();
-
-    const [spinAnim, setSpinAnim] = useState(new Animated.Value(0));
-    const spin = spinAnim.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['0deg', '360deg']
-    });
-
-    useEffect(() => {
-        Animated.loop(
-            Animated.timing(spinAnim, {
-                toValue: 1,
-                duration: 3000,
-                easing: Easing.linear,
-                useNativeDriver: true
-            }),
-        ).start();
-    });
+const Loading = ({ navigation }) => {
 
     setTimeout(function(){
- 
         //Put All Your Code Here, Which You Want To Execute After Some Delay Time.
         navigation.navigate('Login')
-   
-    }, 3000);
+    }, 5500);
 
     return(
         <View style={styles.splashContainer}>
-            <Animated.Image source={require('../../assets/favicon.png')} style={{width: 100, height: 100, alignSelf: 'center', transform: [{rotate: spin}], marginBottom: 12.5}} />
-            <Text style={{color: '#34383D80', fontSize: 18, fontWeight: '700', textAlign: 'center'}}>Loading ...</Text>
+            <Image source={require('../../assets/splash.png')} style={{width: '100%', height: '100%', alignSelf: 'center'}} />
         </View>
     );
 }

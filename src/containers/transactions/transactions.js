@@ -89,10 +89,11 @@ const Transactions = ({ navigation }) => {
         />
         <Text
           style={{
-            color: "#34383D",
+            color: "#34383D80",
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
+            fontWeight: '600'
           }}
         >
           Hmm... No transactions yet
