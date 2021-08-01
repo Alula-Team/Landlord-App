@@ -190,7 +190,7 @@ const EditProperty = ({ navigation, route }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
+            <View style={styles.inputContainer}>
               <TextInput
                 type="text"
                 placeholder="Address..."

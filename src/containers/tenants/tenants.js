@@ -4,6 +4,7 @@ import {
   TextInput,
   View,
   FlatList,
+  SafeAreaView,
   TouchableOpacity,
   Image,
   RefreshControl,
@@ -154,7 +155,6 @@ const Tenants = ({ navigation }) => {
         />
 
         {/* Search Bar */}
-
         <View style={styles.searchContainer}>
           <Feather
             name="search"
@@ -178,7 +178,7 @@ const Tenants = ({ navigation }) => {
         {/* END Search Bar */}
 
         {/* Properties Flat List */}
-        <View style={styles.listView}>
+        <SafeAreaView>
           <FlatList
             data={data}
             keyExtractor={(item) => item.id}
@@ -200,11 +200,11 @@ const Tenants = ({ navigation }) => {
                   })
                 }
               >
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: "row", alignItems: 'center' }}>
                   <Feather name="user" color="#34383D90" size={20} />
                   <View>
                     <Text style={styles.listItem}>{item.name}</Text>
-                    <Text style={styles.listItem}>
+                    <Text style={styles.listItemMuted}>
                       {item.property.address} {item.property.unit}
                     </Text>
                   </View>
@@ -225,7 +225,7 @@ const Tenants = ({ navigation }) => {
             ItemSeparatorComponent={renderSeparator}
             ListEmptyComponent={EmptyListMessage}
           />
-        </View>
+        </SafeAreaView>
       </View>
     </>
   );

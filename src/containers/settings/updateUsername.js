@@ -69,12 +69,12 @@ const UpdateProfile = ({ navigation }) => {
                 <ScrollView style={{marginTop: 20}}>
 
                     {/* Username */}
-                    <View style={styles.buttonContainer}>
+                    <View style={styles.inputContainer}>
                         <TextInput
                             type="text"
                             placeholder="Enter Company or Landlord Name"
                             placeholderTextColor="#34383D80"
-                            style={styles.formInput}
+                            style={styles.inputField}
                             autoCapitalize='words'
                             keyboardAppearance="dark"
                             onChangeText={(name) => setUsername(name)}

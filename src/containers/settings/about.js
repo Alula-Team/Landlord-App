@@ -2,18 +2,13 @@ import React from 'react';
 import { Text, TextInput, View, TouchableOpacity, ScrollView } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
-// Navigation
-import { useNavigation } from '@react-navigation/native';
-
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';
 
 // Style Sheet
 import styles from './sett-styles';
 
-const About = () => {
-
-    const navigation = useNavigation();
+const About = ({ navigation }) => {
 
     return(
         <>
@@ -57,7 +52,7 @@ const About = () => {
                 </View>
 
                 {/* Privacy Policy */}
-                <TouchableOpacity style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('PrivacyPolicy')}>
                     <View style={{flexDirection: 'row'}}>
                         <Feather name='lock' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                         <Text style={styles.buttonText}>Privacy Policy</Text>
@@ -66,7 +61,7 @@ const About = () => {
                 </TouchableOpacity>
 
                 {/* Privacy Policy */}
-                <TouchableOpacity style={styles.buttonContainer}>
+                <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('Terms')}>
                     <View style={{flexDirection: 'row'}}>
                         <Feather name='archive' color='#34383D80' size={20} style={{alignSelf: 'center', marginLeft: 15}} />
                         <Text style={styles.buttonText}>Terms & Conditions</Text>

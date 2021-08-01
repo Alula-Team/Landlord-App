@@ -47,12 +47,6 @@ const PropertyDetail = ({ navigation, route }) => {
     );
   };
 
-  // View Service Requests
-  const viewServiceRequests = () => {
-    navigation.navigate("ServiceRequests");
-    setModalVisible(!modalVisible);
-  };
-
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -359,7 +353,7 @@ const PropertyDetail = ({ navigation, route }) => {
               </Text>
 
               <TouchableOpacity
-                onPress={() =>
+                onPress={() => (setModalVisible(!modalVisible),
                   navigation.navigate("EditProperty", {
                     itemID,
                     itemAddress,
@@ -367,7 +361,7 @@ const PropertyDetail = ({ navigation, route }) => {
                     itemState,
                     itemUnit,
                     itemZip,
-                  })
+                  }))
                 }
                 style={{
                   flexDirection: "row",
