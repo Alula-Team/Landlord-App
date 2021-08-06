@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         color: "#34383D",
         fontSize: 16,
         fontWeight: "500",
-        width: "85%",
+        width: "100%",
     },
     inputIcon: {
         justifyContent: 'center',

@@ -79,7 +79,9 @@ const UpdateEmail = ({ navigation }) => {
                             style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
-                            keyboardAppearance='dark'
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            keyboardAppearance='light'
                             keyboardType='email-address'
                             onChangeText={(email) => setEmail(email)}
                             value={email}
@@ -98,7 +100,7 @@ const UpdateEmail = ({ navigation }) => {
                             autoCorrect={false}
                             clearButtonMode={'while-editing'}
                             returnKeyType={'done'}
-                            keyboardAppearance='dark'
+                            keyboardAppearance='light'
                             onChangeText={(password) => setPassword(password)}
                             value={password}
                         />

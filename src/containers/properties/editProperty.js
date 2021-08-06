@@ -144,6 +144,9 @@ const EditProperty = ({ navigation, route }) => {
                   type="text"
                   placeholder="Address..."
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -177,6 +180,9 @@ const EditProperty = ({ navigation, route }) => {
                   type="text"
                   placeholder="City..."
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -210,6 +216,9 @@ const EditProperty = ({ navigation, route }) => {
                   type="text"
                   placeholder="State..."
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -243,6 +252,9 @@ const EditProperty = ({ navigation, route }) => {
                   type="text"
                   placeholder="Zip..."
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -276,6 +288,9 @@ const EditProperty = ({ navigation, route }) => {
                   type="text"
                   placeholder="Unit..."
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}

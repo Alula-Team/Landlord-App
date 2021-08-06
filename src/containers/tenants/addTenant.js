@@ -171,6 +171,10 @@ const AddTenant = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Tenant Name"
+                  autoCapitalize={true}
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   placeholderTextColor="#34383D70"
                   style={styles.inputField}
                   onChangeText={onChange}
@@ -204,6 +208,10 @@ const AddTenant = ({ navigation }) => {
                   type="text"
                   placeholder="Email"
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
+                  keyboardType='email-address'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -235,6 +243,10 @@ const AddTenant = ({ navigation }) => {
                   type="text"
                   placeholder="Phone"
                   placeholderTextColor="#34383D70"
+                  autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
+                  keyboardType='phone-pad'
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}

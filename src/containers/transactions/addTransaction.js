@@ -307,7 +307,9 @@ const AddTransaction = ({ navigation }) => {
                   type="text"
                   placeholder="i.e 1500"
                   placeholderTextColor="#34383D70"
-                  style={styles.dateText}
+                  style={styles.inputField}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                   keyboardType="numeric"
                   onChangeText={onChange}
                   value={value}

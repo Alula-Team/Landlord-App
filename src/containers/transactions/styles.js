@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#00000012",
   },
   inputField: {
-      paddingLeft: 12.5,
-      color: "#34383D",
-      fontSize: 16,
-      fontWeight: "500",
-      width: "85%",
+    paddingLeft: 12.5,
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500",
+    width: "100%",
   },
   listCell: {
     paddingVertical: 20,
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#00000012",
     color: "#34383D",
     fontSize: 16,
-    fontWeight: "500",
+    fontWeight: "500"
   },
   dateContainer: {
     marginHorizontal: 20,
