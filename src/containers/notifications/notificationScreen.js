@@ -16,11 +16,16 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./notif-styles";
 
-// import { notificationCreated } from "../../../functions";
-
 // Things I need:
 // Flatlist for Service Requests & Notifications
 // Needs to hide badge when refreshed.
+
+// Types of notifications
+  // Payment Received
+  // Past Due Balance
+  // Lease Expiration: 90d
+  // Lease Expiration: 60d
+  // Lease Expiration: 30d
 
 const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));

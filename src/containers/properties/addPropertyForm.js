@@ -71,6 +71,9 @@ const AddPropertyForm = () => {
                 type="text"
                 placeholder="Address ..."
                 placeholderTextColor="#34383D70"
+                autoCorrect={false}
+                  clearButtonMode={'while-editing'}
+                  keyboardAppearance='light'
                 style={styles.propertyInput}
                 onChangeText={onChange}
                 value={value}
@@ -92,6 +95,9 @@ const AddPropertyForm = () => {
                 type="text"
                 placeholder="City ..."
                 placeholderTextColor="#34383D70"
+                autoCorrect={false}
+                clearButtonMode={'while-editing'}
+                keyboardAppearance='light'
                 style={styles.propertyInput}
                 onChangeText={onChange}
                 value={value}

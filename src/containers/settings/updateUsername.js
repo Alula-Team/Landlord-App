@@ -76,7 +76,9 @@ const UpdateProfile = ({ navigation }) => {
                             placeholderTextColor="#34383D80"
                             style={styles.inputField}
                             autoCapitalize='words'
-                            keyboardAppearance="dark"
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            keyboardAppearance='light'
                             onChangeText={(name) => setUsername(name)}
                             value={username}
                         />

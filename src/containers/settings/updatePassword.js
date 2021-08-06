@@ -85,7 +85,9 @@ const UpdateProfile = ({ navigation }) => {
                             style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
-                            keyboardAppearance="dark"
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            keyboardAppearance='light'
                             secureTextEntry={true}
                             onChangeText={(password) => setPassword(password)}
                             value={password}
@@ -101,7 +103,9 @@ const UpdateProfile = ({ navigation }) => {
                             style={styles.inputField}
                             autoCapitalize='none'
                             autocomplete='off'
-                            keyboardAppearance="dark"
+                            autoCorrect={false}
+                            clearButtonMode={'while-editing'}
+                            keyboardAppearance='light'
                             secureTextEntry={true}
                             onChangeText={(newPassword) => setNewPassword(newPassword)}
                             value={newPassword}
