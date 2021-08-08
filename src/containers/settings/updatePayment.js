@@ -25,13 +25,13 @@ const UpdatePayment = () => {
                 {/* Header */}
                 <Header
                     centerComponent={{
-                            text: "Update Payment",
-                            style: {
-                            color: "#fff",
-                            fontWeight: '700', 
-                            fontSize: 20,
-                            paddingTop: 20,
-                            },
+                        text: "Update Payment",
+                        style: {
+                        color: "#fff",
+                        fontWeight: '700', 
+                        fontSize: 20,
+                        paddingTop: 20,
+                        },
                     }}
                     leftComponent={
                         <Icon
