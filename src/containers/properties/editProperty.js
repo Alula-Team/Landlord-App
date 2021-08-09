@@ -145,8 +145,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="Address..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -181,8 +181,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="City..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -217,8 +217,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="State..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -253,8 +253,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="Zip..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -289,8 +289,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="Unit..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}

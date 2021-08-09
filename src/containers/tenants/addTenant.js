@@ -27,14 +27,15 @@ const AddTenant = ({ navigation }) => {
   const allProperties = properties.map((item) => {
     return {
       label: `${item.address} ${item.unit}`,
-      value: {
-        id: item.id,
-        address: item.address,
-        city: item.city,
-        state: item.state,
-        zip: item.zip,
-        unit: item.unit,
-      },
+      value: item.id,
+      // value: {
+      //   id: item.id,
+      //   address: item.address,
+      //   city: item.city,
+      //   state: item.state,
+      //   zip: item.zip,
+      //   unit: item.unit,
+      // },
     };
   });
 
@@ -173,8 +174,8 @@ const AddTenant = ({ navigation }) => {
                   placeholder="Tenant Name"
                   autoCapitalize={true}
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   placeholderTextColor="#34383D70"
                   style={styles.inputField}
                   onChangeText={onChange}
@@ -209,9 +210,9 @@ const AddTenant = ({ navigation }) => {
                   placeholder="Email"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
-                  keyboardType='email-address'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType="email-address"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -244,9 +245,9 @@ const AddTenant = ({ navigation }) => {
                   placeholder="Phone"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
-                  keyboardType='phone-pad'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType="phone-pad"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
