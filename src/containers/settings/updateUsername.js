@@ -6,7 +6,7 @@ import { Header, Icon } from 'react-native-elements';
 import { updateUsername } from '../../firebase/firebase';
 
 // Style Sheet
-import styles from './sett-styles';
+import styles from './styles';
 
 const UpdateProfile = ({ navigation }) => {
 

@@ -18,17 +18,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     height: 45,
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#00000009",
   },
   searchIcon: {
     alignSelf: "center",
@@ -55,7 +47,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 45,
     flexDirection: "row",
-    backgroundColor: "#00000012",
+    backgroundColor: "#00000009",
   },
   inputField: {
       paddingLeft: 12.5,
@@ -294,23 +286,16 @@ const googlePlacesStyles = {
     marginBottom: 20,
     marginTop: 10,
     borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
     height: 45,
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#00000009",
   },
   textInput: {
     height: 45,
     color: "#34383D",
     fontSize: 16,
     fontWeight: "500",
+    backgroundColor: "transparent",
   },
 };
 

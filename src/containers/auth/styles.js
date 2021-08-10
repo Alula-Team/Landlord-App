@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         height: 45,
         flexDirection: "row",
-        backgroundColor: "#00000012",
+        backgroundColor: "#00000009",
     },
     inputField: {
         color: "#34383D",

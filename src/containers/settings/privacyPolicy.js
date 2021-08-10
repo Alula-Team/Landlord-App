@@ -3,7 +3,7 @@ import { Text, View, ScrollView } from 'react-native';
 import { Header, Icon } from 'react-native-elements';
 
 // Style Sheet
-import styles from './sett-styles';
+import styles from './styles';
 
 const PrivacyPolicy = ({ navigation }) => {
 

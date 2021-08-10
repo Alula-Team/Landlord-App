@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from "react-native";
 import { Header } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -13,7 +13,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { signIn } from "../../firebase/firebase";
 
 // Style Sheet
-import styles from "./auth-styles";
+import styles from "./styles";
 
 const LoginScreen = ({ navigation }) => {
   // const { control, handleSubmit, formState: { errors } } = useForm();
@@ -58,14 +58,14 @@ const LoginScreen = ({ navigation }) => {
               style={{
                 alignSelf: "center",
                 marginHorizontal: 15,
-                color: "#34383D80",
+                color: "#34383D50",
               }}
             />
 
             <TextInput
               style={styles.inputField}
               placeholder="Email"
-              placeholderTextColor="#34383D80"
+              placeholderTextColor="#34383D50"
               autoCapitalize="none"
               autoCompleteType="email"
               autoCorrect={false}
@@ -89,13 +89,13 @@ const LoginScreen = ({ navigation }) => {
               style={{
                 alignSelf: "center",
                 marginHorizontal: 15,
-                color: "#34383D80",
+                color: "#34383D50",
               }}
             />
             <TextInput
               style={styles.inputField}
               placeholder="Password"
-              placeholderTextColor="#34383D80"
+              placeholderTextColor="#34383D50"
               secureTextEntry={true}
               autoCapitalize="none"
               autoCompleteType="password"
