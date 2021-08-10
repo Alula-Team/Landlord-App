@@ -12,7 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import Feather from "react-native-vector-icons/Feather";
 
 // Styles
-import styles from "./auth-styles";
+import styles from "./styles";
 import { handlePasswordReset } from "../../firebase/firebase";
 
 const ForgotPasswordScreen = ({ navigation }) => {
@@ -36,7 +36,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
                         name={'arrow-left'}
                         size={25}
                         style={{
-                            color: '#34383D80',
+                            color: '#34383D50',
                             marginTop: 40,
                             marginLeft: 20
                         }}
@@ -63,13 +63,13 @@ const ForgotPasswordScreen = ({ navigation }) => {
               style={{
                 alignSelf: "center",
                 marginHorizontal: 15,
-                color: "#34383D80",
+                color: "#34383D50",
               }}
             />
             <TextInput
               style={styles.inputField}
               placeholder="Email"
-              placeholderTextColor="#34383D80"
+              placeholderTextColor="#34383D50"
               autoCapitalize="none"
               autoCompleteType="email"
               autoCorrect={false}

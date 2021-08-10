@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./sett-styles";
+import styles from "./styles";
 const auth = firebase.auth();
 
 const Settings = ({ navigation }) => {

@@ -6,7 +6,7 @@ import { Header, Icon } from 'react-native-elements';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Style Sheet
-import styles from './sett-styles';
+import styles from './styles';
 
 const Terms = ({ navigation }) => {
 

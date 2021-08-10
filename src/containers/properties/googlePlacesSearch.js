@@ -25,6 +25,7 @@ const GooglePlacesSearch = ({ onPress }) => {
         />
       )}
       styles={googlePlacesStyles}
+      textInputProps={{ placeholderTextColor: '#34383D80' }}
     />
   );
 };

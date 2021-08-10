@@ -13,7 +13,7 @@ import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 
 // Style Sheet
-import styles from './sett-styles';
+import styles from './styles';
 
 const UpdatePayment = () => {
 
@@ -25,13 +25,13 @@ const UpdatePayment = () => {
                 {/* Header */}
                 <Header
                     centerComponent={{
-                            text: "Update Payment",
-                            style: {
-                            color: "#fff",
-                            fontWeight: '700', 
-                            fontSize: 20,
-                            paddingTop: 20,
-                            },
+                        text: "Update Payment",
+                        style: {
+                        color: "#fff",
+                        fontWeight: '700', 
+                        fontSize: 20,
+                        paddingTop: 20,
+                        },
                     }}
                     leftComponent={
                         <Icon

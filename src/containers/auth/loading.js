@@ -2,7 +2,7 @@ import React from "react";
 import { View, Image } from "react-native";
 
 // Style Sheet
-import styles from "./auth-styles";
+import styles from "./styles";
 
 const Loading = ({ navigation }) => {
 
