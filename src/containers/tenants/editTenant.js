@@ -17,12 +17,13 @@ import styles from "./styles";
 import { auth, db } from "../../firebase/firebase";
 
 const EditTenant = ({ navigation, route }) => {
-  const { itemID, itemName, itemEmail, itemPhone } = route.params;
+  const { theItem, theProperty } = route.params;
 
   const INITIAL_STATE = {
-    name: itemName,
-    email: itemEmail,
-    phone: itemPhone,
+    property: {
+      ...theProperty,
+    },
+    ...theItem,
   };
 
   const checkEqual = (prop1, prop2) => {
@@ -119,6 +120,35 @@ const EditTenant = ({ navigation, route }) => {
       />
 
       <KeyboardAwareScrollView>
+        {/* Property */}
+        <Text style={styles.inputLabel}>Property</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <RNPickerSelect
+              placeholder={PropertyPlaceholder}
+              style={pickerStyles}
+              value={value}
+              onValueChange={onChange}
+              items={allProperties}
+            />
+          )}
+          name="property"
+          rules={{ required: false }}
+          defaultValue=""
+        />
+        {errors.property && (
+          <Text
+            style={{
+              color: "red",
+              paddingLeft: 35,
+              marginTop: 5,
+              marginBottom: -22,
+            }}
+          >
+            This field is required
+          </Text>
+        )}
         {/* First Name */}
         <Text style={styles.inputLabel}>Tenant Name</Text>
         <Controller

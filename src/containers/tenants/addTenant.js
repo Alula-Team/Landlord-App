@@ -27,15 +27,14 @@ const AddTenant = ({ navigation }) => {
   const allProperties = properties.map((item) => {
     return {
       label: `${item.address} ${item.unit}`,
-      value: item.id,
-      // value: {
-      //   id: item.id,
-      //   address: item.address,
-      //   city: item.city,
-      //   state: item.state,
-      //   zip: item.zip,
-      //   unit: item.unit,
-      // },
+      value: {
+        id: item.id,
+        address: item.address,
+        city: item.city,
+        state: item.state,
+        zip: item.zip,
+        unit: item.unit,
+      },
     };
   });
 
@@ -148,7 +147,7 @@ const AddTenant = ({ navigation }) => {
               />
             )}
             name="property"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.property && (

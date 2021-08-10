@@ -28,14 +28,13 @@ import { TenantsContext } from "../../providers/TenantsProvider";
 import Tenant from "./Tenant";
 import { PropertyContext } from "../../providers/PropertiesProvider";
 
-
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
 // New tenants auto sorted by first name
 
 const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 const Tenants = ({ navigation }) => {
   const tenants = useContext(TenantsContext);
@@ -106,7 +105,7 @@ const Tenants = ({ navigation }) => {
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
-            fontWeight: '600'
+            fontWeight: "600",
           }}
         >
           Let's move someone in...
@@ -118,7 +117,7 @@ const Tenants = ({ navigation }) => {
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
-            fontWeight: '600'
+            fontWeight: "600",
           }}
         >
           These guys charge by the minute!
@@ -205,20 +204,24 @@ const Tenants = ({ navigation }) => {
                 style={styles.listCell}
                 onPress={() =>
                   navigation.navigate("TenantDetail", {
-                    itemID: item.id,
-                    itemName: item.name,
-                    itemEmail: item.email,
-                    itemPhone: item.phone,
-                    propertyId: item.property.id,
-                    propertyAddress: item.property.address,
-                    propertyCity: item.property.city,
-                    propertyState: item.property.state,
-                    propertyUnit: item.property.unit,
-                    propertyZip: item.property.zip,
+                    theItem: {
+                      ID: item.id,
+                      name: item.name,
+                      email: item.email,
+                      phone: item.phone,
+                    },
+                    theProperty: {
+                      ID: item.property.id,
+                      address: item.property.address,
+                      city: item.property.city,
+                      state: item.property.state,
+                      unit: item.property.unit,
+                      zip: item.property.zip,
+                    },
                   })
                 }
               >
-                <View style={{ flexDirection: "row", alignItems: 'center' }}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Feather name="user" color="#34383D90" size={20} />
                   <View>
                     <Text style={styles.listItem}>{item.name}</Text>
