@@ -26,18 +26,7 @@ import { collectIdsAndData } from "../../utilities";
 // renew lease (once lease term is set to expire in 60d)
 
 const TenantDetailScreen = ({ route, navigation }) => {
-  const {
-    itemID,
-    itemName,
-    itemEmail,
-    itemPhone,
-    propertyId,
-    propertyAddress,
-    propertyCity,
-    propertyState,
-    propertyUnit,
-    propertyZip,
-  } = route.params;
+  const { theItem, theProperty } = route.params;
 
   // const [propertyInfo, setPropertyInfo] = useState();
 
@@ -62,7 +51,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
   //   };
   // }, []);
 
-  const itemInitials = itemName.getInitials();
+  const itemInitials = theItem.name.getInitials();
   const [modalVisible, setModalVisible] = useState(false);
 
   // Delete Alert Pop Up
@@ -83,7 +72,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
           // onPress: (id) => deleteTenant(itemID),
 
           onPress: () => {
-            db.doc(`tenants/${itemID}`).delete();
+            db.doc(`tenants/${theItem.ID}`).delete();
             navigation.goBack();
           },
         },
@@ -149,12 +138,12 @@ const TenantDetailScreen = ({ route, navigation }) => {
             </View>
             <View style={{ marginLeft: 15, alignSelf: "center" }}>
               {/* Tenant Name */}
-              <Text style={styles.tenantName}>{itemName}</Text>
+              <Text style={styles.tenantName}>{theItem.name}</Text>
 
               {/* Phone Number */}
               <View style={{ flexDirection: "row", marginLeft: 10 }}>
                 <Feather name="phone" size={16} color="#ffffff80" />
-                <Text style={styles.cardText}>{itemPhone}</Text>
+                <Text style={styles.cardText}>{theItem.phone}</Text>
               </View>
 
               {/* Email Address */}
@@ -166,7 +155,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 }}
               >
                 <Feather name="mail" size={16} color="#ffffff80" />
-                <Text style={styles.cardText}>{itemEmail}</Text>
+                <Text style={styles.cardText}>{theItem.email}</Text>
               </View>
             </View>
           </View>
@@ -198,7 +187,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              {propertyAddress} {propertyUnit}
+              {theProperty.address} {theProperty.unit}
             </Text>
             <Text
               style={{
@@ -208,94 +197,132 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 fontWeight: "600",
               }}
             >
-              {propertyCity}, {propertyState} {propertyZip}
+              {theProperty.city}, {theProperty.state} {theProperty.zip}
             </Text>
 
-            
-
             {/* Start Date */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Start Date:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>Jan 1, 2021</Text>
-          </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Start Date:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                Jan 1, 2021
+              </Text>
+            </View>
 
-          {/* End Date */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>End Date:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>Jan 1, 2022</Text>
-          </View>
+            {/* End Date */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>End Date:</Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                Jan 1, 2022
+              </Text>
+            </View>
 
-          {/* Lease Length */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Length:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>12 mo</Text>
-          </View>
+            {/* Lease Length */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Lease Length:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                12 mo
+              </Text>
+            </View>
 
-          {/* Lease Type */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Type:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>Fixed</Text>
-          </View>
+            {/* Lease Type */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Lease Type:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                Fixed
+              </Text>
+            </View>
 
-          {/* Rental Rate */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>$1,500</Text>
-          </View>
+            {/* Rental Rate */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Rental Rate:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                $1,500
+              </Text>
+            </View>
 
-          {/* Security Deposit */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Security Deposit:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>$750</Text>
-          </View>
+            {/* Security Deposit */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Security Deposit:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                $750
+              </Text>
+            </View>
 
-          {/* Payment Due */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Rent Due On:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>1st /mo</Text>
-          </View>
+            {/* Payment Due */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 20,
+              }}
+            >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>
+                Rent Due On:
+              </Text>
+              <Text
+                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
+              >
+                1st /mo
+              </Text>
+            </View>
           </View>
 
           {/* Current Lease Button */}
@@ -402,7 +429,8 @@ const TenantDetailScreen = ({ route, navigation }) => {
 
                 {/* Edit Tenant */}
                 <TouchableOpacity
-                  onPress={() => (setModalVisible(!modalVisible),
+                  onPress={() => (
+                    setModalVisible(!modalVisible),
                     navigation.navigate("EditTenant", {
                       itemID,
                       itemName,
@@ -414,8 +442,8 @@ const TenantDetailScreen = ({ route, navigation }) => {
                       propertyState,
                       propertyUnit,
                       propertyZip,
-                    }))
-                  }
+                    })
+                  )}
                   style={{
                     flexDirection: "row",
                     alignItems: "center",

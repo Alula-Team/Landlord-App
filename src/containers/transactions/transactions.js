@@ -36,8 +36,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 // Separation between months/year
 
 const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 const Transactions = ({ navigation }) => {
   const transactions = useContext(TransactionsContext);
@@ -98,7 +98,7 @@ const Transactions = ({ navigation }) => {
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
-            fontWeight: '600'
+            fontWeight: "600",
           }}
         >
           Hmm... No transactions yet
@@ -286,77 +286,81 @@ const Transactions = ({ navigation }) => {
         {/* END Revenue Overview */}
 
         {/* Transactions Flat List */}
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => {
-              return (
-                <TouchableOpacity
-                  style={styles.listCell}
-                  onPress={() =>
-                    navigation.navigate("ManageTransaction", {
-                      itemID: item.id,
-                      itemAmount: item.amount,
-                      itemDate: makeDate(item.date),
-                      itemDescription: item.description,
-                      itemPaymentMethod: item.paymentMethod,
-                      itemTransactionCategory: item.transactionCategory,
-                      itemTransactionType: item.transactionType,
-                      propertyId: item.property.id,
-                      propertyAddress: item.property.address,
-                      propertyCity: item.property.city,
-                      propertyState: item.property.state,
-                      propertyUnit: item.property.unit,
-                      propertyZip: item.property.zip,
-                    })
-                  }
-                >
-                  {/* Transaction Category and Amount*/}
-                  <View style={styles.itemCenter}>
-                    <Text style={styles.transactionType}>
-                      {item.transactionCategory}
-                    </Text>
-                    <Text
-                      style={{
-                        color:
-                          item.transactionType === "Payment"
-                            ? "#5CB85C"
-                            : "#D9534F",
-                        fontWeight: "700",
-                        fontSize: 18,
-                      }}
-                    >
-                      ${item.amount}
-                    </Text>
-                  </View>
-                  {/* Property */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="map-pin" color="#34383D80" size={15} />
-                    <Text style={styles.listItem}>
-                      {item.property.address} {item.property.unit}
-                    </Text>
-                  </View>
-                  {/* Date */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="clock" color="#34383D80" size={15} />
-                    <Text style={styles.listItem}>{makeDate(item.date)}</Text>
-                  </View>
-                  {/* Payment Type */}
-                  <View style={{ flexDirection: "row", marginTop: 10 }}>
-                    <Feather name="credit-card" color="#34383D80" size={15} />
-                    <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                  </View>
-                </TouchableOpacity>
-              );
-            }}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            contentContainerStyle={{ paddingBottom: 350 }}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={renderSeparator}
-            ListEmptyComponent={EmptyListMessage}
-          />
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity
+                style={styles.listCell}
+                onPress={() =>
+                  navigation.navigate("ManageTransaction", {
+                    theItem: {
+                      ID: item.id,
+                      amount: item.amount,
+                      date: makeDate(item.date),
+                      description: item.description,
+                      paymentMethod: item.paymentMethod,
+                      transactionCategory: item.transactionCategory,
+                      transactionType: item.transactionType,
+                    },
+                    theProperty: {
+                      ID: item.property.id,
+                      address: item.property.address,
+                      city: item.property.city,
+                      state: item.property.state,
+                      unit: item.property.unit,
+                      zip: item.property.zip,
+                    },
+                  })
+                }
+              >
+                {/* Transaction Category and Amount*/}
+                <View style={styles.itemCenter}>
+                  <Text style={styles.transactionType}>
+                    {item.transactionCategory}
+                  </Text>
+                  <Text
+                    style={{
+                      color:
+                        item.transactionType === "Payment"
+                          ? "#5CB85C"
+                          : "#D9534F",
+                      fontWeight: "700",
+                      fontSize: 18,
+                    }}
+                  >
+                    ${item.amount}
+                  </Text>
+                </View>
+                {/* Property */}
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <Feather name="map-pin" color="#34383D80" size={15} />
+                  <Text style={styles.listItem}>
+                    {item.property.address} {item.property.unit}
+                  </Text>
+                </View>
+                {/* Date */}
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <Feather name="clock" color="#34383D80" size={15} />
+                  <Text style={styles.listItem}>{makeDate(item.date)}</Text>
+                </View>
+                {/* Payment Type */}
+                <View style={{ flexDirection: "row", marginTop: 10 }}>
+                  <Feather name="credit-card" color="#34383D80" size={15} />
+                  <Text style={styles.listItem}>{item.paymentMethod}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          contentContainerStyle={{ paddingBottom: 350 }}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={renderSeparator}
+          ListEmptyComponent={EmptyListMessage}
+        />
       </View>
     </>
   );

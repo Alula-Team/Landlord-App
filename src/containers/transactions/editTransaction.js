@@ -21,23 +21,13 @@ import { SelectOptions, FakerOptions } from "../../forms";
 import { auth, db } from "../../firebase/firebase";
 
 const EditTransaction = ({ navigation, route }) => {
-  const {
-    itemID,
-    itemAmount,
-    itemDate,
-    itemDescription,
-    itemPaymentMethod,
-    itemTransactionCategory,
-    itemTransactionType,
-  } = route.params;
+  const { theItem, theProperty } = route.params;
 
   const INITIAL_STATE = {
-    amount: itemAmount,
-    date: itemDate,
-    description: itemDescription,
-    paymentMethod: itemPaymentMethod,
-    transactionCategory: itemTransactionCategory,
-    transactionType: itemTransactionType,
+    property: {
+      ...theProperty,
+    },
+    ...theItem,
   };
 
   const [date, setDate] = useState(new Date());
@@ -73,32 +63,36 @@ const EditTransaction = ({ navigation, route }) => {
     return finished;
   };
 
-  useEffect(() => {
-    function fillForm() {
-      setValue("amount", itemAmount);
-      setValue("date", itemDate);
-      setValue("description", itemDescription);
-      setValue("paymentMethod", itemPaymentMethod);
-      setValue("transactionCategory", itemTransactionCategory);
-      setValue("transactionType", itemTransactionType);
-    }
-    fillForm();
-  }, []);
+  // useEffect(() => {
+  //   function fillForm() {
+  //     setValue("amount", itemAmount);
+  //     setValue("date", itemDate);
+  //     setValue("description", itemDescription);
+  //     setValue("paymentMethod", itemPaymentMethod);
+  //     setValue("transactionCategory", itemTransactionCategory);
+  //     setValue("transactionType", itemTransactionType);
+  //   }
+  //   fillForm();
+  // }, []);
 
   const {
     control,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      ...theItem,
+    },
+  });
 
   const onSubmit = (data) => {
     let updates = returnFinalObject(INITIAL_STATE, data);
-    data.id = itemID;
+    data.id = theItem.ID;
     console.log(data);
     console.log(updates);
     db.collection("transactions")
-      .doc(itemID)
+      .doc(theItem.ID)
       .update(updates)
       .then(() => console.log(`Successfully updated yer stuffs!`))
       .catch((error) => console.error(error));

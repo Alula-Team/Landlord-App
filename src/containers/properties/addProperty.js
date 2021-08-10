@@ -54,10 +54,8 @@ const AddProperty = ({ navigation }) => {
     data.unit.forEach((item, index) => {
       addresses.push({
         address: data.address,
-        author: auth.currentUser.uid,
         city: data.city,
         state: data.state,
-        tenants: [],
         unit: data.unit[index].number,
         zip: data.zip,
       });
@@ -158,8 +156,8 @@ const AddProperty = ({ navigation }) => {
                   placeholder="Address..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -194,8 +192,8 @@ const AddProperty = ({ navigation }) => {
                   placeholder="City..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -230,8 +228,8 @@ const AddProperty = ({ navigation }) => {
                   placeholder="State..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -266,8 +264,8 @@ const AddProperty = ({ navigation }) => {
                   placeholder="Zip..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -313,15 +311,15 @@ const AddProperty = ({ navigation }) => {
                     placeholder="Apt, Unit, Suite, etc..."
                     placeholderTextColor="#34383D70"
                     autoCorrect={false}
-                    clearButtonMode={'while-editing'}
-                    keyboardAppearance='light'
+                    clearButtonMode={"while-editing"}
+                    keyboardAppearance="light"
                     style={styles.inputField}
                     onChangeText={onChange}
                     value={value}
                   />
                 </View>
                 <TouchableOpacity
-                  style={{ alignSelf: "center"}}
+                  style={{ alignSelf: "center" }}
                   onPress={() => remove(index)}
                 >
                   <Feather name="trash" color="#34383D80" size={20} />

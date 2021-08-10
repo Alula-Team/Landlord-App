@@ -14,7 +14,6 @@ const propertiesReducer = (state = initialState, action) => {
           city: action.payload.city,
           state: action.payload.state,
           zip: action.payload.zipCode,
-          vacant: true,
         };
         propertyArray.push(oneProperty);
       }
@@ -29,7 +28,6 @@ const propertiesReducer = (state = initialState, action) => {
         city: action.payload.city,
         state: action.payload.states,
         zip: action.payload.zipCode,
-        vacant: true,
       };
       const properties = [...state.properties, newProperty];
       return {

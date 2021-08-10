@@ -19,22 +19,7 @@ import { styles } from "./styles";
 
 const ManageTransaction = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const {
-    itemID,
-    itemAddress,
-    itemAmount,
-    itemDate,
-    itemDescription,
-    itemPaymentMethod,
-    itemTransactionCategory,
-    itemTransactionType,
-    propertyId,
-    propertyAddress,
-    propertyCity,
-    propertyState,
-    propertyUnit,
-    propertyZip,
-  } = route.params;
+  const { theItem, theProperty } = route.params;
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -54,7 +39,7 @@ const ManageTransaction = ({ navigation, route }) => {
           // onPress: (id) => deleteTenant(itemID),
 
           onPress: () => {
-            db.doc(`transactions/${itemID}`).delete();
+            db.doc(`transactions/${theItem.ID}`).delete();
             navigation.goBack();
           },
         },
@@ -114,7 +99,7 @@ const ManageTransaction = ({ navigation, route }) => {
           {/* Property Address */}
           <View style={styles.propertySectionSpacing}>
             <Text style={styles.notificationTitle}>
-              {propertyAddress} {propertyUnit}
+              {theProperty.address} {theProperty.unit}
             </Text>
             <View style={{ flexDirection: "row", marginTop: 5 }}>
               <Feather
@@ -124,26 +109,28 @@ const ManageTransaction = ({ navigation, route }) => {
                 style={{ marginTop: 1, color: "#34383D80" }}
               />
               <Text style={styles.notificationText}>
-                {propertyCity}, {propertyState} {propertyZip}
+                {theProperty.city}, {theProperty.state} {theProperty.zip}
               </Text>
             </View>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Feather name="clock" color="#34383D80" size={15} />
-              <Text style={styles.notificationText}>{itemDate}</Text>
+              <Text style={styles.notificationText}>{theItem.date}</Text>
             </View>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
               <Feather name="credit-card" color="#34383D80" size={15} />
-              <Text style={styles.notificationText}>{itemPaymentMethod}</Text>
+              <Text style={styles.notificationText}>
+                {theItem.paymentMethod}
+              </Text>
             </View>
           </View>
 
           {/* Transaction Title */}
           <View style={styles.propertySectionSpacing}>
             <Text style={styles.notificationTitle}>
-              {itemTransactionCategory}
+              {theItem.transactionCategory}
             </Text>
-            <Text style={styles.statusText}>{itemTransactionType}</Text>
-            <Text style={styles.statusText}>${itemAmount}</Text>
+            <Text style={styles.statusText}>{theItem.transactionType}</Text>
+            <Text style={styles.statusText}>${theItem.amount}</Text>
           </View>
 
           {/* Description */}
@@ -160,7 +147,7 @@ const ManageTransaction = ({ navigation, route }) => {
             >
               Description:
             </Text>
-            <Text style={styles.descriptionText}>{itemDescription}</Text>
+            <Text style={styles.descriptionText}>{theItem.description}</Text>
           </View>
 
           {/* Image - PDF, JPG or PNG */}
@@ -208,17 +195,20 @@ const ManageTransaction = ({ navigation, route }) => {
                 </Text>
 
                 <TouchableOpacity
-                  onPress={() => (setModalVisible(!modalVisible),
+                  onPress={() => (
+                    setModalVisible(!modalVisible),
                     navigation.navigate("EditTransaction", {
-                      itemID,
-                      itemAmount,
-                      itemDate,
-                      itemDescription,
-                      itemPaymentMethod,
-                      itemTransactionCategory,
-                      itemTransactionType,
-                    }))
-                  }
+                      theItem: {
+                        ID: theItem.id,
+                        amount: theItem.amount,
+                        date: theItem.date,
+                        description: theItem.description,
+                        paymentMethod: theItem.paymentMethod,
+                        transactionCategory: theItem.transactionCategory,
+                        transactionType: theItem.transactionType,
+                      },
+                    })
+                  )}
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
