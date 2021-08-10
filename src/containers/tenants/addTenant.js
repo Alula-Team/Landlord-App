@@ -147,7 +147,7 @@ const AddTenant = ({ navigation }) => {
               />
             )}
             name="property"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.property && (
@@ -173,8 +173,8 @@ const AddTenant = ({ navigation }) => {
                   placeholder="Tenant Name"
                   autoCapitalize={true}
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   placeholderTextColor="#34383D70"
                   style={styles.inputField}
                   onChangeText={onChange}
@@ -209,9 +209,9 @@ const AddTenant = ({ navigation }) => {
                   placeholder="Email"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
-                  keyboardType='email-address'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType="email-address"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -244,9 +244,9 @@ const AddTenant = ({ navigation }) => {
                   placeholder="Phone"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
-                  keyboardType='phone-pad'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType="phone-pad"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}

@@ -30,11 +30,10 @@ import firebase, { auth, db } from "../../firebase/firebase";
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 const wait = (timeout) => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-}
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};
 
 const Properties = ({ navigation }) => {
-  // const [properties, setProperties] = useState([]);
   const properties = useContext(PropertiesContext);
   const [query, setQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
@@ -82,7 +81,7 @@ const Properties = ({ navigation }) => {
             marginHorizontal: 35,
             alignSelf: "center",
             fontSize: 18,
-            fontWeight: '600'
+            fontWeight: "600",
           }}
         >
           {message}

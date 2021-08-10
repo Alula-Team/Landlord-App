@@ -64,15 +64,36 @@ const EditProperty = ({ navigation, route }) => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     let updates = returnFinalObject(INITIAL_STATE, data);
     data.id = itemID;
-    console.log(data);
-    db.collection("properties")
-      .doc(itemID)
+
+    let theProperty = db.collection("properties").doc(itemID);
+
+    theProperty
       .update(updates)
-      .then(() => console.log(`Successfully updated yer stuffs!`))
-      .catch((error) => console.error(error));
+      .then(() => console.log(`Successfully update yer property`));
+
+    let theTenants = db
+      .collection("tenants")
+      .where("property.id", "==", data.id);
+
+    theTenants.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({ property: updates });
+      });
+    });
+
+    let theTransactions = db
+      .collection("transactions")
+      .where("property.id", "==", data.id);
+
+    theTransactions.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({ property: updates });
+      });
+    });
+
     navigation.navigate("PropertyDetail", {
       itemID: data.id,
       itemAddress: data.address,
@@ -145,8 +166,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="Address..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -181,8 +202,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="City..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -217,8 +238,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="State..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -253,8 +274,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="Zip..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -289,8 +310,8 @@ const EditProperty = ({ navigation, route }) => {
                   placeholder="Unit..."
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
