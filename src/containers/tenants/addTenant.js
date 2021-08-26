@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import RNPickerSelect from "react-native-picker-select";
+import DateTimePicker from "@react-native-community/datetimepicker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 import faker from "faker";
@@ -22,7 +23,22 @@ import styles, { pickerStyles } from "./styles";
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 const AddTenant = ({ navigation }) => {
+  const [date, setDate] = useState(new Date());
+  const [mode, setMode] = useState("date");
+  const [show, setShow] = useState(false);
   const properties = useContext(PropertiesContext);
+
+  const handleDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShow(Platform.OS === "ios");
+    setDate(currentDate);
+    console.log(date);
+  };
+
+  const showMode = (currentMode) => {
+    setShow(true);
+    setMode(currentMode);
+  };
 
   const allProperties = properties.map((item) => {
     return {
@@ -56,13 +72,6 @@ const AddTenant = ({ navigation }) => {
     console.log(data);
     db.collection("tenants").add(data);
     navigation.goBack();
-  };
-
-  // Placeholders
-  const PropertyPlaceholder = {
-    label: "Select Property...",
-    value: null,
-    color: "#34383D",
   };
 
   return (
@@ -133,37 +142,9 @@ const AddTenant = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
 
-          {/* Property */}
-          <Text style={styles.inputLabel}>Property</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={PropertyPlaceholder}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={allProperties}
-              />
-            )}
-            name="property"
-            rules={{ required: false }}
-            defaultValue=""
-          />
-          {errors.property && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
-              }}
-            >
-              This field is required
-            </Text>
-          )}
+          {/* TENANT INFORMATION */}
+          <Text style={styles.inputLabel}>Tenant Information</Text>
           {/* First Name */}
-          <Text style={styles.inputLabel}>Tenant Name</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -171,7 +152,7 @@ const AddTenant = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Tenant Name"
-                  autoCapitalize={true}
+                  autoCapitalize='words'
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
@@ -199,7 +180,7 @@ const AddTenant = ({ navigation }) => {
             </Text>
           )}
 
-          <Text style={styles.inputLabel}>Email</Text>
+          {/* Email */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -208,6 +189,7 @@ const AddTenant = ({ navigation }) => {
                   type="text"
                   placeholder="Email"
                   placeholderTextColor="#34383D70"
+                  autoCapitalize='none'
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
@@ -234,7 +216,8 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
-          <Text style={styles.inputLabel}>Phone</Text>
+          
+          {/* Phone Number */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -269,6 +252,276 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
+
+          {/* LEASING INFORMATION */}
+          <Text style={styles.inputLabel}>Leasing Information</Text>
+    
+          {/* Property */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={{
+                  label: "Select Property",
+                  value: "selectProperty",
+                  color: "#34383D",
+                }}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={allProperties}
+              />
+            )}
+            name="property"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+          {errors.property && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Lease Length */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={{
+                  label: "Select Leasing Length",
+                  value: "selectLeasingLength",
+                  color: "#34383D",
+                }}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={[
+                    { label: '6 Month', value: 'sixMonth' },
+                    { label: '12 Month', value: 'twelveMonth' },
+                    { label: '15 Month', value: 'fifteenMonth' },
+                    { label: '18 Month', value: 'eighteenMonth' },
+                    { label: '24 Month', value: 'twentyFourMonth' },
+                    { label: 'Month to Month', value: 'monthToMonth' },
+                ]}
+              />
+            )}
+            name="leaseLength"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+          {errors.leaseLength && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Lease Type */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={{
+                  label: "Select Leasing Type",
+                  value: "selectLeasingType",
+                  color: "#34383D",
+                }}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={[
+                    { label: 'Fixed', value: 'fixed' },
+                    { label: 'Month to Month', value: 'monthToMonth' },
+                ]}
+              />
+            )}
+            name="leaseType"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+          {errors.leaseType && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Rent Due On */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <RNPickerSelect
+                placeholder={{
+                  label: "Select Rent Due Date",
+                  value: "selectRentDueDate",
+                  color: "#34383D",
+                }}
+                style={pickerStyles}
+                value={value}
+                onValueChange={onChange}
+                items={[
+                    { label: '1st of Month', value: '1stOfMonth' },
+                    { label: '15th of Month', value: '15thOfMonth' },
+                ]}
+              />
+            )}
+            name="rentDueOn"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+          {errors.rentDueOn && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 5,
+                marginBottom: -22,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Rent Rate */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Rental Rate"
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType='number-pad'
+                  placeholderTextColor="#34383D70"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="rentRate"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.rentRate && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Security Deposit */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Security Deposit"
+                  autoCapitalize='true'
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType='number-pad'
+                  placeholderTextColor="#34383D70"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="securityDeposit"
+            rules={{ required: true }}
+            defaultValue=""
+          />
+          {errors.securityDeposit && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: -15,
+                marginBottom: -2,
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
+          {/* Start Date - Calendar */}
+          <Controller
+            control={control}
+            render={() => (
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Text style={styles.inputLabel}>Start Date:</Text>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode={mode}
+                  display="default"
+                  textColor="#fff"
+                  style={{
+                    marginLeft: 10,
+                    marginTop: 20,
+                    width: "100%",
+                  }}
+                  onChange={handleDateChange}
+                />
+              </View>
+            )}
+            name="date"
+          />
+
+          {/* End Date - Calendar */}
+          <Controller
+            control={control}
+            render={() => (
+              <View style={{ flexDirection: "row", paddingBottom: 30, alignItems: "center" }}>
+                <Text style={styles.inputLabel}>End Date:</Text>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode={mode}
+                  display="default"
+                  textColor="#fff"
+                  style={{
+                    marginLeft: 10,
+                    marginTop: 20,
+                    width: "100%",
+                  }}
+                  onChange={handleDateChange}
+                />
+              </View>
+            )}
+            name="date"
+          />
+
         </KeyboardAwareScrollView>
       </View>
     </>

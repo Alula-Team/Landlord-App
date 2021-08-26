@@ -93,6 +93,10 @@ const Tenants = ({ navigation }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
+    let message =
+      tenants.length === 0
+        ? `Let's move someone in... These guys charge by the minute!`
+        : `Your search returned 0 tenants. Back up and try again.`;
     return (
       <View style={styles.emptyList}>
         <Image
@@ -108,19 +112,7 @@ const Tenants = ({ navigation }) => {
             fontWeight: "600",
           }}
         >
-          Let's move someone in...
-        </Text>
-        <Text
-          style={{
-            color: "#34383D80",
-            marginTop: 5,
-            marginHorizontal: 35,
-            alignSelf: "center",
-            fontSize: 18,
-            fontWeight: "600",
-          }}
-        >
-          These guys charge by the minute!
+          {message}
         </Text>
       </View>
     );

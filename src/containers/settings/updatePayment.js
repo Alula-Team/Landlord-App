@@ -68,6 +68,10 @@ const UpdatePayment = () => {
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
+                                <Text style={styles.listText}>Automated Financial Reporting</Text>
+                            </View>
+                            <View style={styles.listInline}>
+                                <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
                                 <Text style={styles.listText}>Unlimited Properties, Tenants & Transactions</Text>
                             </View>
                             <View style={styles.listInline}>
@@ -78,7 +82,7 @@ const UpdatePayment = () => {
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
                                 <Text style={styles.listText}>No Monthly Subscription*</Text>
                             </View>
-                            <Text style={{color: '#34383D80', marginTop: 20, textAlign: 'center'}}>* 1% transaction fee on rent payments</Text>
+                            <Text style={{color: '#34383D80', marginTop: 20, textAlign: 'center'}}>* 1% convenience fee passed onto tenant</Text>
                         </View>
                     </View>
 

@@ -135,7 +135,7 @@ const Settings = ({ navigation }) => {
           </TouchableOpacity> */}
 
           {/* Generate Reports Button */}
-          {/* <TouchableOpacity style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.buttonContainer}>
             <View style={{ flexDirection: "row" }}>
               <Feather
                 name="activity"
@@ -151,7 +151,7 @@ const Settings = ({ navigation }) => {
               size={20}
               style={{ alignSelf: "center", marginRight: 10 }}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 
           {/* About Button */}
           <TouchableOpacity

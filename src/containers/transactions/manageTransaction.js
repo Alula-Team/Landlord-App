@@ -141,7 +141,7 @@ const ManageTransaction = ({ navigation, route }) => {
                 fontSize: 15,
                 fontWeight: "600",
                 marginTop: 30,
-                marginBottom: 20,
+                marginBottom: 10,
                 marginLeft: 20,
               }}
             >
@@ -157,7 +157,6 @@ const ManageTransaction = ({ navigation, route }) => {
                 color: "#34383D80",
                 fontSize: 15,
                 fontWeight: "600",
-                marginBottom: 20,
               }}
             >
               Receipt:
