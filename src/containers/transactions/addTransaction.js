@@ -205,7 +205,7 @@ const AddTransaction = ({ navigation }) => {
                 placeholder={{
                   label: "Select Category",
                   value: "",
-                  color: "white",
+                  color: "#34383D",
                 }}
                 style={pickerStyles}
                 value={value}
@@ -365,7 +365,7 @@ const AddTransaction = ({ navigation }) => {
           <Controller
             control={control}
             render={() => (
-              <View style={{ flexDirection: "row", marginTop: 20 }}>
+              <View style={{ flexDirection: "row", marginVertical: 20, alignItems: "center" }}>
                 <Text style={styles.inputLabel}>Date Paid:</Text>
                 <DateTimePicker
                   testID="dateTimePicker"
@@ -384,6 +384,15 @@ const AddTransaction = ({ navigation }) => {
             )}
             name="date"
           />
+
+          {/* Upload Recipt*/}
+          <TouchableOpacity style={{marginTop: 20, marginBottom: 30, marginHorizontal: 20, padding: 15, alignItems: 'center', backgroundColor: '#7556FF', borderRadius: 10}}>
+            <View style={{flexDirection: 'row', alignItems: "center"}}>
+              <Feather name='upload' size={20} color='white' />
+              <Text style={{fontSize: 16, fontWeight: '500', marginLeft: 10, color: 'white'}}>Upload Receipt</Text>
+            </View>
+          </TouchableOpacity>
+          
         </View>
       </KeyboardAwareScrollView>
     </View>

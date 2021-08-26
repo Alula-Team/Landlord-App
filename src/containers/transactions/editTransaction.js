@@ -318,7 +318,7 @@ const EditTransaction = ({ navigation, route }) => {
         <Controller
           control={control}
           render={() => (
-            <View style={{ flexDirection: "row", marginTop: 20 }}>
+            <View style={{ flexDirection: "row", marginVertical: 20, alignItems: 'center' }}>
               <Text style={styles.inputLabel}>Date Paid:</Text>
               <DateTimePicker
                 testID="dateTimePicker"
@@ -337,6 +337,15 @@ const EditTransaction = ({ navigation, route }) => {
           )}
           name="date"
         />
+
+        {/* Upload Recipt*/}
+        <TouchableOpacity style={{marginTop: 20, marginBottom: 30, marginHorizontal: 20, padding: 15, alignItems: 'center', backgroundColor: '#7556FF', borderRadius: 10}}>
+          <View style={{flexDirection: 'row', alignItems: "center"}}>
+            <Feather name='upload' size={20} color='white' />
+            <Text style={{fontSize: 16, fontWeight: '500', marginLeft: 10, color: 'white'}}>Upload Receipt</Text>
+          </View>
+        </TouchableOpacity>
+
       </KeyboardAwareScrollView>
     </View>
   );

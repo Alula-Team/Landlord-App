@@ -86,6 +86,10 @@ const Transactions = ({ navigation }) => {
 
   // Empty List Content
   const EmptyListMessage = () => {
+    let message =
+      transactions.length === 0
+        ? `Hmm... No transactions yet`
+        : `Your search returned 0 transactions. Back up and try again.`;
     return (
       <View style={styles.emptyList}>
         <Image
@@ -101,7 +105,7 @@ const Transactions = ({ navigation }) => {
             fontWeight: "600",
           }}
         >
-          Hmm... No transactions yet
+          {message}
         </Text>
       </View>
     );
