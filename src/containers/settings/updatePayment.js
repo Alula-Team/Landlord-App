@@ -27,8 +27,8 @@ const UpdatePayment = () => {
                     centerComponent={{
                         text: "Update Payment",
                         style: {
-                        color: "#fff",
-                        fontWeight: '700', 
+                        color: "#34383D",
+                        fontWeight: '600', 
                         fontSize: 20,
                         paddingTop: 20,
                         },
@@ -37,7 +37,7 @@ const UpdatePayment = () => {
                         <Icon
                         name="arrow-left"
                         type="feather"
-                        color="#fff"
+                        color="#34383D80"
                         size={25}
                         iconStyle={{
                             paddingTop: 20,
@@ -48,7 +48,7 @@ const UpdatePayment = () => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#232256",
+                        backgroundColor: "#fff",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -87,8 +87,8 @@ const UpdatePayment = () => {
                     </View>
 
                     {/* Conintue Button */}
-                    <TouchableOpacity style={styles.continueButton}>
-                        <Text style={styles.continueButtonText}>Continue</Text>
+                    <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
+                        <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>CONTINUE</Text>
                     </TouchableOpacity>
                 </ScrollView>
             </View>

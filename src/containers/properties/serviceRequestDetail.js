@@ -28,33 +28,11 @@ const ServiceRequestDetailScreen = () => {
       <View style={styles.container}>
         {/* Header */}
         <Header
-          placement={"right"}
-          centerComponent={
-            <TouchableOpacity
-              style={{
-                paddingTop: 22.5,
-                borderBottomWidth: 1,
-                borderBottomColor: "#fff",
-                borderStyle: "solid",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#fff",
-                  fontSize: 16,
-                  fontWeight: "600",
-                  paddingBottom: 2,
-                }}
-              >
-                Mark Complete
-              </Text>
-            </TouchableOpacity>
-          }
           leftComponent={
             <Icon
               name="arrow-left"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={25}
               iconStyle={{
                 paddingTop: 20,
@@ -65,17 +43,13 @@ const ServiceRequestDetailScreen = () => {
             />
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
         />
 
-        {/* Content */}
-
         <ScrollView>
-          {/* Image */}
-
           {/* Property Address */}
           <View style={styles.propertySectionSpacing}>
             <Text style={styles.notificationTitle}>Property Address</Text>
@@ -88,14 +62,14 @@ const ServiceRequestDetailScreen = () => {
               />
               <Text style={styles.notificationText}>City, State, Zip</Text>
             </View>
-            <View style={{ flexDirection: "row", marginTop: 15 }}>
+            <View style={{ flexDirection: "row", marginTop: 20 }}>
               <Feather name="tool" color="#34383D80" size={15} />
               <Text style={styles.statusText}>Status</Text>
             </View>
           </View>
 
           {/* Service Title */}
-          <View style={styles.propertySectionSpacing}>
+          <View style={{marginLeft: 20}}>
             <Text style={styles.notificationTitle}>Service Request Title</Text>
           </View>
 
@@ -124,7 +98,12 @@ const ServiceRequestDetailScreen = () => {
             </Text>
           </View>
 
+          {/* Image */}
+
           {/* Buttons */}
+          <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARK COMPLETE</Text>
+        </TouchableOpacity>
         </ScrollView>
       </View>
     </>

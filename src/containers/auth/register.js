@@ -136,8 +136,8 @@ const RegisterScreen = ({ navigation }) => {
         </View>
 
         {/* Sign Up Button */}
-        <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
-          <Text style={styles.submitText}>Sign Up</Text>
+        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }} onPress={onSubmit}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>REGISTER</Text>
         </TouchableOpacity>
 
         {/* Terms & Conditions */}
@@ -155,7 +155,7 @@ const RegisterScreen = ({ navigation }) => {
       >
         <Text style={styles.otherAuthText}>
           Already have an account?{" "}
-          <Text style={{ fontWeight: "800" }}>Login Instead</Text>
+          <Text style={{ fontWeight: "800" }}>Sign In Instead</Text>
         </Text>
       </TouchableOpacity>
     </KeyboardAwareScrollView>

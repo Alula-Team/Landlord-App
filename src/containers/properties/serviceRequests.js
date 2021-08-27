@@ -49,7 +49,7 @@ const ServiceRequests = ({ navigation }) => {
 
   // Separator
   const renderSeparator = () => {
-    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE", width: '90%', alignSelf: 'center' }} />;
   };
 
   return (
@@ -59,8 +59,8 @@ const ServiceRequests = ({ navigation }) => {
           centerComponent={{ 
               text: 'Service Requests', 
               style: { 
-                  color: '#fff', 
-                  fontWeight: '700', 
+                  color: '#34383D', 
+                  fontWeight: "600",
                   fontSize: 20, 
                   paddingTop: 20
               }
@@ -69,7 +69,7 @@ const ServiceRequests = ({ navigation }) => {
               <Icon 
                   name='arrow-left'
                   type='feather'
-                  color='#fff'
+                  color='#34383D80'
                   size={25}
                   iconStyle={{
                       paddingTop: 20,
@@ -80,7 +80,7 @@ const ServiceRequests = ({ navigation }) => {
               />
           }
           containerStyle={{
-              backgroundColor: '#232256',
+              backgroundColor: '#fff',
               justifyContent: 'space-around',
               borderBottomWidth: 0
           }}

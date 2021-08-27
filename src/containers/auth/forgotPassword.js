@@ -82,8 +82,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
         </View>
 
         {/* Sign In Button */}
-        <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
-          <Text style={styles.submitText}>Submit</Text>
+        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }} onPress={onSubmit}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
     </View>

@@ -54,9 +54,9 @@ const PropertyDetail = ({ navigation, route }) => {
         centerComponent={
           <Text
             style={{
-              color: "#fff",
+              color: "#34383D",
               fontSize: 17,
-              fontWeight: "700",
+              fontWeight: "600",
               paddingTop: 22.5,
             }}
           >
@@ -67,7 +67,7 @@ const PropertyDetail = ({ navigation, route }) => {
           <Icon
             name="arrow-left"
             type="feather"
-            color="#fff"
+            color="#34383D80"
             size={25}
             iconStyle={{
               paddingTop: 20,
@@ -81,7 +81,7 @@ const PropertyDetail = ({ navigation, route }) => {
           <Icon
             name="more-horizontal"
             type="feather"
-            color="#fff"
+            color="#34383D80"
             size={27.5}
             iconStyle={{
               paddingTop: 20,
@@ -91,7 +91,7 @@ const PropertyDetail = ({ navigation, route }) => {
           />
         }
         containerStyle={{
-          backgroundColor: "#232256",
+          backgroundColor: "#fff",
           justifyContent: "space-around",
           borderBottomWidth: 0,
         }}
@@ -99,74 +99,39 @@ const PropertyDetail = ({ navigation, route }) => {
 
       <ScrollView>
         {/* Property Information */}
-        <View style={{ marginTop: 30 }}></View>
-
-        <Text style={styles.sectionTitle}>Property Information</Text>
-
         <View style={styles.propInfo}>
-          <Text style={styles.propInfoLabel}>
-            {itemAddress} {itemUnit}
-          </Text>
-          <Text style={styles.propInfoLabel}>
-            {itemCity}, {itemState} {itemZip}
-          </Text>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
+          <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10}}>
+              <Text
+                style={{
+                  fontWeight: "500",
+                  color: "#fff",
+                  marginRight: 5,
+                }}
+              >
+                Financial Activity
+              </Text>
+              <Text
+                style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
+              >
+                (year to date)
+              </Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
             <Text style={styles.propInfoLabel}>$42,000</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
             <Text style={styles.propInfoLabel}>- $14,450</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Net Profit:</Text>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
             <Text style={styles.propInfoLabel}>$27,550</Text>
           </View>
         </View>
 
         {/* Tenant Information */}
-        <Text style={styles.sectionTitle}>Tenant Information</Text>
-
-        <View
-          style={{
-            backgroundColor: "#5858FB",
-            marginHorizontal: 20,
-            padding: 20,
-            marginBottom: 20,
-            borderRadius: 10,
-            shadowColor: "#000",
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.25,
-            shadowRadius: 3.84,
-            elevation: 5,
-          }}
-        >
-          <Text style={{ color: "#ffffff90", fontSize: 14, fontWeight: "600" }}>
-            Tenant:
-          </Text>
-
+        <View style={styles.tenantInfo}>
           <View
             style={{
               flexDirection: "row",
@@ -174,28 +139,22 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <View style={styles.tenantInitials}>
-              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
-                TN
-              </Text>
-            </View>
             <View>
               <Text
                 style={{
-                  color: "#fff",
+                  color: "#34383D",
                   fontSize: 20,
                   fontWeight: "600",
-                  marginLeft: 10,
                 }}
               >
                 Tenant's Name
               </Text>
               <Text
                 style={{
-                  color: "#ffffff90",
+                  color: "#34383D90",
                   fontSize: 15,
+                  fontWeight: "500",
                   marginTop: 5,
-                  marginLeft: 10,
                 }}
               >
                 tenant@tenant.com
@@ -205,7 +164,7 @@ const PropertyDetail = ({ navigation, route }) => {
 
           <Text
             style={{
-              color: "#ffffff90",
+              color: "#34383D90",
               fontSize: 14,
               marginTop: 20,
               fontWeight: "600",
@@ -222,8 +181,8 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Start Date:</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Start Date:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               Jan 1, 2021
             </Text>
           </View>
@@ -236,8 +195,8 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>End Date:</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>End Date:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               Jan 1, 2022
             </Text>
           </View>
@@ -250,8 +209,8 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Lease Length:</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Length:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               12 mo
             </Text>
           </View>
@@ -264,8 +223,8 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Lease Type:</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Type:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               Fixed
             </Text>
           </View>
@@ -278,8 +237,8 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Rental Rate:</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               $1,500
             </Text>
           </View>
@@ -292,10 +251,10 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>
               Security Deposit:
             </Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               $750
             </Text>
           </View>
@@ -308,52 +267,21 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#fff", fontSize: 16 }}>Rent Due On:</Text>
-            <Text style={{ color: "#fff", fontSize: 16, fontWeight: "600" }}>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Rent Due On:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               1st /mo
             </Text>
           </View>
+
+          <TouchableOpacity onPress={() => navigation.navigate("CurrentLease")} style={{ marginTop: 30, height: 45, alignItems: 'center'}}>
+            <Text style={{ alignSelf: "center",color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline'}}>
+              View Lease Agreement
+            </Text>
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          onPress={() => navigation.navigate("CurrentLease")}
-          style={{
-            marginHorizontal: 5,
-            marginTop: 10,
-            marginBottom: 20,
-            height: 45,
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <View style={{ flexDirection: "row" }}>
-            <Feather
-              name="eye"
-              size={18}
-              color="#34383D80"
-              style={{
-                alignSelf: "center",
-                marginLeft: 20,
-              }}
-            />
-            <Text
-              style={{
-                alignSelf: "center",
-                color: "#34383D",
-                fontSize: 16,
-                fontWeight: "600",
-                marginLeft: 10,
-              }}
-            >
-              View Current Lease
-            </Text>
-          </View>
-          <Feather
-            name="arrow-right"
-            color="#34383D80"
-            size={20}
-            style={{ alignSelf: "center", marginRight: 10 }}
-          />
+        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
         </TouchableOpacity>
 
         {/* Actions Modal */}

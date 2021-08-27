@@ -55,9 +55,9 @@ const ManageTransaction = ({ navigation, route }) => {
           centerComponent={{
             text: "Manage Transaction",
             style: {
-              color: "#fff",
-              fontWeight: "bold",
-              fontSize: 22,
+              color: "#34383D",
+              fontWeight: "600",
+              fontSize: 20,
               paddingTop: 20,
             },
           }}
@@ -65,7 +65,7 @@ const ManageTransaction = ({ navigation, route }) => {
             <Icon
               name="arrow-left"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={25}
               iconStyle={{
                 paddingTop: 20,
@@ -79,7 +79,7 @@ const ManageTransaction = ({ navigation, route }) => {
             <Icon
               name="more-horizontal"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={27.5}
               iconStyle={{
                 paddingTop: 20,
@@ -89,7 +89,7 @@ const ManageTransaction = ({ navigation, route }) => {
             />
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
