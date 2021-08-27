@@ -15,8 +15,8 @@ const PrivacyPolicy = ({ navigation }) => {
                     centerComponent={{
                         text: "Privacy Policy",
                         style: {
-                            color: "#fff",
-                            fontWeight: '700', 
+                            color: "#34383D",
+                            fontWeight: '600', 
                             fontSize: 20, 
                             paddingTop: 20,
                         },
@@ -25,7 +25,7 @@ const PrivacyPolicy = ({ navigation }) => {
                         <Icon
                             name="arrow-left"
                             type="feather"
-                            color="#fff"
+                            color="#34383D80"
                             size={25}
                             iconStyle={{
                             paddingTop: 20,
@@ -36,7 +36,7 @@ const PrivacyPolicy = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#232256",
+                        backgroundColor: "#fff",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}

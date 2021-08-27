@@ -121,8 +121,8 @@ const LoginScreen = ({ navigation }) => {
         </TouchableOpacity>
 
         {/* Sign In Button */}
-        <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
-          <Text style={styles.submitText}>Login</Text>
+        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }} onPress={onSubmit}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>SIGN IN</Text>
         </TouchableOpacity>
       </View>
 
@@ -133,7 +133,7 @@ const LoginScreen = ({ navigation }) => {
       >
         <Text style={styles.otherAuthText}>
           Need an account?{" "}
-          <Text style={{ fontWeight: "800" }}>Sign Up Instead</Text>
+          <Text style={{ fontWeight: "800" }}>Register Instead</Text>
         </Text>
       </TouchableOpacity>
     </KeyboardAwareScrollView>

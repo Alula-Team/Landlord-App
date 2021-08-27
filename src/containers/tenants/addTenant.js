@@ -82,9 +82,9 @@ const AddTenant = ({ navigation }) => {
           centerComponent={{
             text: "Add Tenant",
             style: {
-              color: "#fff",
-              fontWeight: "bold",
-              fontSize: 22,
+              color: "#34383D",
+              fontWeight: "600",
+              fontSize: 20,
               paddingTop: 20,
             },
           }}
@@ -92,7 +92,7 @@ const AddTenant = ({ navigation }) => {
             <Icon
               name="arrow-left"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={25}
               iconStyle={{
                 paddingTop: 20,
@@ -107,13 +107,13 @@ const AddTenant = ({ navigation }) => {
               style={{ paddingTop: 22.5, paddingRight: 10 }}
               onPress={handleSubmit(onSubmit)}
             >
-              <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+              <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
                 Save
               </Text>
             </TouchableOpacity>
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -172,8 +172,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: -15,
-                marginBottom: -2,
+                marginTop: 10
               }}
             >
               This field is required
@@ -209,8 +208,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: -15,
-                marginBottom: -2,
+                marginTop: 10,
               }}
             >
               This field is required
@@ -245,8 +243,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: -15,
-                marginBottom: -2,
+                marginTop: 10,
               }}
             >
               This field is required
@@ -281,8 +278,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
+                marginTop: 10
               }}
             >
               This field is required
@@ -321,8 +317,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
+                marginTop: 10
               }}
             >
               This field is required
@@ -357,8 +352,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
+                marginTop: 10
               }}
             >
               This field is required
@@ -393,8 +387,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
+                marginTop: 10
               }}
             >
               This field is required
@@ -429,8 +422,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: -15,
-                marginBottom: -2,
+                marginTop: 10
               }}
             >
               This field is required
@@ -445,7 +437,6 @@ const AddTenant = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Security Deposit"
-                  autoCapitalize='true'
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
@@ -466,8 +457,7 @@ const AddTenant = ({ navigation }) => {
               style={{
                 color: "red",
                 paddingLeft: 35,
-                marginTop: -15,
-                marginBottom: -2,
+                marginTop: 10
               }}
             >
               This field is required

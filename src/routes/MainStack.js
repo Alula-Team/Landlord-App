@@ -27,9 +27,14 @@ const RootNavigation = (props) => {
   return (
     <>
       <Tab.Navigator
-        activeColor="#655CA0"
-        inactiveColor="#9E9CD390"
-        barStyle={{ backgroundColor: "#fff" }}
+        activeColor="#955C28"
+        inactiveColor="#34383D40"
+        barStyle={{ 
+          backgroundColor: "#fff", 
+          borderColor: 'transparent',
+          borderTopWidth: 0,
+          elevation: 0
+        }}
       >
         <Tab.Screen
           name={"Properties"}

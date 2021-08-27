@@ -14,7 +14,7 @@ import { Badge, Header, Icon } from "react-native-elements";
 import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
-import styles from "./notif-styles";
+import styles from "./styles";
 
 // Things I need:
 // Flatlist for Service Requests & Notifications
@@ -54,7 +54,7 @@ const Notifications = () => {
 
   // Separator
   const renderSeparator = () => {
-    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE", width: '90%', alignSelf: 'center' }} />;
   };
 
   // Empty List Content
@@ -95,7 +95,7 @@ const Notifications = () => {
           centerComponent={{
             text: "Notifications",
             style: {
-              color: "#fff",
+              color: "#34383D",
               fontWeight: "700",
               fontSize: 25,
               paddingTop: 20,
@@ -103,7 +103,7 @@ const Notifications = () => {
             },
           }}
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}

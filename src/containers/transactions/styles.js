@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   // Body
   container: {
-    backgroundColor: "#ffffff80",
+    backgroundColor: "#ffffff",
     height: "100%",
   },
 
@@ -31,20 +31,18 @@ const styles = StyleSheet.create({
 
   // Money Boxes
   moneyBox: {
-    marginHorizontal: 20,
-    marginTop: 10,
-    marginBottom: 20,
-    borderRadius: 10,
-    padding: 20,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: .5,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 2.5,
-    elevation: 5,
-    backgroundColor: "#fff",
+    backgroundColor: "#955C28",
+    paddingHorizontal: 20,
+    paddingVertical: 12.5,
+    marginHorizontal: 10,
+    borderRadius: 10
+  },
+  propInfoLabel: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#fff",
+    textAlign: "left",
+    marginVertical: 10,
   },
 
   // Flatlist

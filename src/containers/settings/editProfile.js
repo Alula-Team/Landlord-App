@@ -21,7 +21,7 @@ const EditProfile = ({ navigation }) => {
                     centerComponent={{
                         text: "Edit Profile",
                         style: {
-                        color: "#fff",
+                        color: "#34383D",
                         fontWeight: '700', 
                         fontSize: 20, 
                         paddingTop: 20,
@@ -31,7 +31,7 @@ const EditProfile = ({ navigation }) => {
                         <Icon
                         name="arrow-left"
                         type="feather"
-                        color="#fff"
+                        color="#34383D80"
                         size={25}
                         iconStyle={{
                             paddingTop: 20,
@@ -42,7 +42,7 @@ const EditProfile = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#232256",
+                        backgroundColor: "#fff",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}

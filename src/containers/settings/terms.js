@@ -18,7 +18,7 @@ const Terms = ({ navigation }) => {
                     centerComponent={{
                         text: "Terms & Conditions",
                         style: {
-                            color: "#fff",
+                            color: "#34383D",
                             fontWeight: '700', 
                             fontSize: 20, 
                             paddingTop: 20,
@@ -28,7 +28,7 @@ const Terms = ({ navigation }) => {
                         <Icon
                             name="arrow-left"
                             type="feather"
-                            color="#fff"
+                            color="#34383D80"
                             size={25}
                             iconStyle={{
                             paddingTop: 20,
@@ -39,7 +39,7 @@ const Terms = ({ navigation }) => {
                         />
                     }
                     containerStyle={{
-                        backgroundColor: "#232256",
+                        backgroundColor: "#fff",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}

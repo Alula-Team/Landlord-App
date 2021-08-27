@@ -40,8 +40,8 @@ const UpdateEmail = ({ navigation }) => {
                     centerComponent={{
                         text: "Update Email",
                         style: {
-                        color: "#fff",
-                        fontWeight: '700', 
+                        color: "#34383D",
+                        fontWeight: '600', 
                         fontSize: 20,
                         paddingTop: 20,
                         },
@@ -50,7 +50,7 @@ const UpdateEmail = ({ navigation }) => {
                         <Icon
                         name="arrow-left"
                         type="feather"
-                        color="#fff"
+                        color="#34383D80"
                         size={25}
                         iconStyle={{
                             paddingTop: 20,
@@ -60,8 +60,18 @@ const UpdateEmail = ({ navigation }) => {
                         onPress={() => navigation.goBack()}
                         />
                     }
+                    rightComponent={
+                        <TouchableOpacity
+                          style={{ paddingTop: 22.5, paddingRight: 10 }}
+                          onPress={onSubmit}
+                        >
+                          <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
+                            Save
+                          </Text>
+                        </TouchableOpacity>
+                    }
                     containerStyle={{
-                        backgroundColor: "#232256",
+                        backgroundColor: "#fff",
                         justifyContent: "space-around",
                         borderBottomWidth: 0,
                     }}
@@ -105,11 +115,6 @@ const UpdateEmail = ({ navigation }) => {
                             value={password}
                         />
                     </View>
-
-                    {/* Conintue Button */}
-                    <TouchableOpacity style={styles.continueButton} onPress={onSubmit}>
-                        <Text style={styles.continueButtonText}>Save</Text>
-                    </TouchableOpacity>
                 </ScrollView>
             </View>
         </>

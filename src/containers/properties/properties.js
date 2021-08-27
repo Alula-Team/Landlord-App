@@ -60,7 +60,7 @@ const Properties = ({ navigation }) => {
 
   // Separator
   const renderSeparator = () => {
-    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE", width: '90%', alignSelf: 'center' }} />;
   };
 
   // Empty List Content
@@ -99,7 +99,7 @@ const Properties = ({ navigation }) => {
           centerComponent={{
             text: "Properties",
             style: {
-              color: "#fff",
+              color: "#34383D",
               fontWeight: "700",
               fontSize: 25,
               paddingTop: 20,
@@ -113,7 +113,7 @@ const Properties = ({ navigation }) => {
                   <Icon
                     name="message-circle"
                     type="feather"
-                    color="#fff"
+                    color="#34383D80"
                     size={25}
                     iconStyle={{
                       paddingTop: 20,
@@ -142,7 +142,7 @@ const Properties = ({ navigation }) => {
                 <Icon
                   name="plus"
                   type="feather"
-                  color="#fff"
+                  color="#34383D80"
                   size={25}
                   iconStyle={{
                     paddingTop: 20,
@@ -158,7 +158,7 @@ const Properties = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}

@@ -106,8 +106,8 @@ const AddProperty = ({ navigation }) => {
         centerComponent={{
           text: "Add Property",
           style: {
-            color: "#fff",
-            fontWeight: "700",
+            color: "#34383D",
+            fontWeight: "600",
             fontSize: 20,
             paddingTop: 20,
           },
@@ -116,7 +116,7 @@ const AddProperty = ({ navigation }) => {
           <Icon
             name="arrow-left"
             type="feather"
-            color="#fff"
+            color="#34383D80"
             size={25}
             iconStyle={{
               paddingTop: 20,
@@ -131,13 +131,13 @@ const AddProperty = ({ navigation }) => {
             style={{ paddingTop: 22.5, paddingRight: 10 }}
             onPress={handleSubmit(onSubmit)}
           >
-            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
               Save
             </Text>
           </TouchableOpacity>
         }
         containerStyle={{
-          backgroundColor: "#232256",
+          backgroundColor: "#fff",
           justifyContent: "space-around",
           borderBottomWidth: 0,
         }}

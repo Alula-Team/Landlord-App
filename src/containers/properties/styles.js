@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   // Body
   container: {
-    backgroundColor: "#ffffff80",
+    backgroundColor: "#ffffff",
     height: "100%",
   },
   fieldError: {
@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
 
   // ** SERVICE REQUEST Screen ** //
   propertySectionSpacing: {
-    marginTop: 30,
     marginLeft: 20,
+    marginBottom: 10
   },
   notificationContainer: {
     paddingVertical: 20,
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   statusText: {
-    paddingLeft: 12.5,
+    paddingLeft: 7.5,
     fontSize: 14,
     fontWeight: "800",
     color: "#34383D90",
@@ -194,26 +194,23 @@ const styles = StyleSheet.create({
 
   // ** PROPERTY DETAIL SCREEN ** //
   propInfo: {
-    backgroundColor: "#fff",
-    marginHorizontal: 20,
-    padding: 20,
-    marginBottom: 20,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    backgroundColor: "#955C28",
+    paddingHorizontal: 20,
+    paddingVertical: 12.5,
+    marginHorizontal: 10,
+    borderRadius: 10
   },
   propInfoLabel: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#34383D",
+    color: "#fff",
     textAlign: "left",
     marginVertical: 10,
+  },
+  tenantInfo: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 30,
+    paddingVertical: 12.5
   },
   sectionTitle: {
     color: "#34383D",
@@ -227,7 +224,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 80 / 2,
-    borderColor: "#fff",
+    borderColor: "#34383D",
     borderWidth: 3,
     justifyContent: "center",
     alignItems: "center",

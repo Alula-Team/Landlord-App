@@ -104,9 +104,9 @@ const AddTransaction = ({ navigation }) => {
         centerComponent={{
           text: "Add Transaction",
           style: {
-            color: "#fff",
-            fontWeight: "bold",
-            fontSize: 22,
+            color: "#34383D",
+            fontWeight: "600",
+            fontSize: 20,
             paddingTop: 20,
           },
         }}
@@ -114,7 +114,7 @@ const AddTransaction = ({ navigation }) => {
           <Icon
             name="arrow-left"
             type="feather"
-            color="#fff"
+            color="#34383D80"
             size={25}
             iconStyle={{
               paddingTop: 20,
@@ -129,13 +129,13 @@ const AddTransaction = ({ navigation }) => {
             style={{ paddingTop: 22.5, paddingRight: 10 }}
             onPress={handleSubmit(onSubmit)}
           >
-            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
               Save
             </Text>
           </TouchableOpacity>
         }
         containerStyle={{
-          backgroundColor: "#232256",
+          backgroundColor: "#fff",
           justifyContent: "space-around",
           borderBottomWidth: 0,
         }}
@@ -386,13 +386,10 @@ const AddTransaction = ({ navigation }) => {
           />
 
           {/* Upload Recipt*/}
-          <TouchableOpacity style={{marginTop: 20, marginBottom: 30, marginHorizontal: 20, padding: 15, alignItems: 'center', backgroundColor: '#7556FF', borderRadius: 10}}>
-            <View style={{flexDirection: 'row', alignItems: "center"}}>
-              <Feather name='upload' size={20} color='white' />
-              <Text style={{fontSize: 16, fontWeight: '500', marginLeft: 10, color: 'white'}}>Upload Receipt</Text>
-            </View>
+          <Text style={styles.inputLabel}>Upload Receipt:</Text>
+          <TouchableOpacity style={{backgroundColor: '#00000019', height: 220, width: 180, marginVertical: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", justifyContent: 'center'}}>
+            <Feather name='plus' size={40} color='#34383D50' />
           </TouchableOpacity>
-          
         </View>
       </KeyboardAwareScrollView>
     </View>

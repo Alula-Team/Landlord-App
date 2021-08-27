@@ -37,7 +37,7 @@ const Settings = ({ navigation }) => {
           centerComponent={{
             text: "Settings",
             style: {
-              color: "#fff",
+              color: "#34383D",
               fontWeight: "700",
               fontSize: 25,
               paddingTop: 20,
@@ -45,7 +45,7 @@ const Settings = ({ navigation }) => {
             },
           }}
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -187,7 +187,7 @@ const Settings = ({ navigation }) => {
                 size={20}
                 style={{ alignSelf: "center", marginLeft: 15 }}
               />
-              <Text style={styles.logoutButtonText}>Logout</Text>
+              <Text style={styles.logoutButtonText}>Sign Out</Text>
             </View>
             <Feather
               name="arrow-right"

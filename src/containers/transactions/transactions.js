@@ -81,7 +81,7 @@ const Transactions = ({ navigation }) => {
 
   // Separator
   const renderSeparator = () => {
-    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE", width: '90%', alignSelf: 'center' }} />;
   };
 
   // Empty List Content
@@ -143,7 +143,7 @@ const Transactions = ({ navigation }) => {
           centerComponent={{
             text: "Transactions",
             style: {
-              color: "#fff",
+              color: "#34383D",
               fontWeight: "bold",
               fontSize: 25,
               paddingTop: 20,
@@ -156,7 +156,7 @@ const Transactions = ({ navigation }) => {
                 <Icon
                   name="activity"
                   type="feather"
-                  color="#fff"
+                  color="#34383D80"
                   size={25}
                   iconStyle={{
                     paddingTop: 20,
@@ -169,7 +169,7 @@ const Transactions = ({ navigation }) => {
                 <Icon
                   name="plus"
                   type="feather"
-                  color="#fff"
+                  color="#34383D80"
                   size={25}
                   iconStyle={{
                     paddingTop: 20,
@@ -185,7 +185,7 @@ const Transactions = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -222,70 +222,36 @@ const Transactions = ({ navigation }) => {
         {/* Revenue Overview */}
         {shouldShow ? (
           <View style={styles.moneyBox}>
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10}}>
               <Text
                 style={{
                   fontWeight: "500",
-                  color: "#34383D80",
+                  color: "#fff",
                   marginRight: 5,
                 }}
               >
                 Financial Activity
               </Text>
               <Text
-                style={{ fontSize: 12, fontWeight: "500", color: "#34383D80" }}
+                style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
               >
                 (year to date)
               </Text>
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Revenue:</Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "500" }}
-              >
-                $42,000
-              </Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+              <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
+              <Text style={styles.propInfoLabel}>$42,000</Text>
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 10,
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>Expenses:</Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "500" }}
-              >
-                - $14,450
-              </Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+              <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
+              <Text style={styles.propInfoLabel}>- $14,450</Text>
             </View>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 10,
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Net Profit:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "500" }}
-              >
-                $27,550
-              </Text>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+              <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
+              <Text style={styles.propInfoLabel}>$27,550</Text>
             </View>
           </View>
+            
         ) : null}
         {/* END Revenue Overview */}
 

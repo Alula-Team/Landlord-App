@@ -88,7 +88,7 @@ const Tenants = ({ navigation }) => {
 
   // Separator
   const renderSeparator = () => {
-    return <View style={{ height: 0.5, backgroundColor: "#CED0CE" }} />;
+    return <View style={{ height: 0.5, backgroundColor: "#CED0CE", width: '90%', alignSelf: 'center' }} />;
   };
 
   // Empty List Content
@@ -127,7 +127,7 @@ const Tenants = ({ navigation }) => {
           centerComponent={{
             text: "Tenants",
             style: {
-              color: "#fff",
+              color: "#34383D",
               fontWeight: "bold",
               fontSize: 25,
               paddingTop: 20,
@@ -140,7 +140,7 @@ const Tenants = ({ navigation }) => {
                 <Icon
                   name="plus"
                   type="feather"
-                  color="#fff"
+                  color="#34383D80"
                   size={25}
                   iconStyle={{
                     paddingTop: 20,
@@ -157,7 +157,7 @@ const Tenants = ({ navigation }) => {
             </>
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
