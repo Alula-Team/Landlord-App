@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from 'expo-status-bar';
 
 // Navigation
 import { NavigationContainer } from "@react-navigation/native";
@@ -50,6 +51,7 @@ export default function App() {
           <TransactionsProvider>
             <NotificationsProvider>
               <NavigationContainer>
+                <StatusBar style="dark" />
                 {signedIn ? <MainStack /> : <AuthStack />}
               </NavigationContainer>
             </NotificationsProvider>
