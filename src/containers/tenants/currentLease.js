@@ -54,7 +54,7 @@ const CurrentLease = ({ navigation }) => {
           centerComponent={{
             text: "Current Lease",
             style: {
-              color: "#fff",
+              color: "#34383D",
               fontWeight: "700",
               fontSize: 20,
               paddingTop: 20,
@@ -64,7 +64,7 @@ const CurrentLease = ({ navigation }) => {
             <Icon
               name="arrow-left"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={25}
               iconStyle={{
                 paddingTop: 20,
@@ -78,7 +78,7 @@ const CurrentLease = ({ navigation }) => {
             <Icon
               name="more-horizontal"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={27.5}
               iconStyle={{
                 paddingTop: 20,
@@ -88,7 +88,7 @@ const CurrentLease = ({ navigation }) => {
             />
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
