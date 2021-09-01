@@ -280,9 +280,13 @@ const PropertyDetail = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
-          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
-        </TouchableOpacity>
+        {/* Market Property View */}
+        <View>
+          <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 16, fontWeight: '500'}}>This property is vacant. Let's list it.</Text>
+          <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
+            <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
+          </TouchableOpacity>
+        </View>
 
         {/* Actions Modal */}
         <Modal
