@@ -1,18 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
-import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+// Forms
+import { SelectOptions, FakerOptions } from "../../forms";
+import { useForm, Controller } from "react-hook-form";
+import RNPickerSelect from "react-native-picker-select";
+import DateTimePicker from "@react-native-community/datetimepicker";
+
+// Faker
 import faker from "faker";
 faker.locale = "en_US";
-
-// Forms
-import { useForm, Controller } from "react-hook-form";
-
-// Vector Icons
-import Feather from "react-native-vector-icons/Feather";
 
 // Firebase
 import firebase, { auth, db } from "../../firebase/firebase";
@@ -156,7 +155,7 @@ const AddTenant = ({ navigation }) => {
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -187,7 +186,7 @@ const AddTenant = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Email"
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   autoCapitalize='none'
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
@@ -223,7 +222,7 @@ const AddTenant = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Phone"
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
@@ -298,14 +297,7 @@ const AddTenant = ({ navigation }) => {
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
-                items={[
-                    { label: '6 Month', value: 'sixMonth' },
-                    { label: '12 Month', value: 'twelveMonth' },
-                    { label: '15 Month', value: 'fifteenMonth' },
-                    { label: '18 Month', value: 'eighteenMonth' },
-                    { label: '24 Month', value: 'twentyFourMonth' },
-                    { label: 'Month to Month', value: 'monthToMonth' },
-                ]}
+                items={SelectOptions.leasingLength}
               />
             )}
             name="leaseLength"
@@ -337,10 +329,7 @@ const AddTenant = ({ navigation }) => {
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
-                items={[
-                    { label: 'Fixed', value: 'fixed' },
-                    { label: 'Month to Month', value: 'monthToMonth' },
-                ]}
+                items={SelectOptions.leasingType}
               />
             )}
             name="leaseType"
@@ -372,10 +361,7 @@ const AddTenant = ({ navigation }) => {
                 style={pickerStyles}
                 value={value}
                 onValueChange={onChange}
-                items={[
-                    { label: '1st of Month', value: '1stOfMonth' },
-                    { label: '15th of Month', value: '15thOfMonth' },
-                ]}
+                items={SelectOptions.rentDueDate}
               />
             )}
             name="rentDueOn"
@@ -406,7 +392,7 @@ const AddTenant = ({ navigation }) => {
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
                   keyboardType='number-pad'
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -441,7 +427,7 @@ const AddTenant = ({ navigation }) => {
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"
                   keyboardType='number-pad'
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   style={styles.inputField}
                   onChangeText={onChange}
                   value={value}
@@ -470,30 +456,6 @@ const AddTenant = ({ navigation }) => {
             render={() => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Text style={styles.inputLabel}>Start Date:</Text>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode={mode}
-                  display="default"
-                  textColor="#fff"
-                  style={{
-                    marginLeft: 10,
-                    marginTop: 20,
-                    width: "100%",
-                  }}
-                  onChange={handleDateChange}
-                />
-              </View>
-            )}
-            name="date"
-          />
-
-          {/* End Date - Calendar */}
-          <Controller
-            control={control}
-            render={() => (
-              <View style={{ flexDirection: "row", paddingBottom: 30, alignItems: "center" }}>
-                <Text style={styles.inputLabel}>End Date:</Text>
                 <DateTimePicker
                   testID="dateTimePicker"
                   value={date}
