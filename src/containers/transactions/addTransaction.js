@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, TextInput, Modal } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import CameraUpload from "./camera";
+import UploadReceipt from "./uploadReceipt";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -31,7 +31,6 @@ const AddTransaction = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false);
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -390,22 +389,8 @@ const AddTransaction = ({ navigation }) => {
 
           {/* Upload Recipt*/}
           <Text style={styles.inputLabel}>Upload Receipt:</Text>
-          <TouchableOpacity onPress={() => setModalVisible(true)} style={{backgroundColor: '#00000019', height: 220, width: 180, marginVertical: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", justifyContent: 'center'}}>
-            <Feather name='plus' size={40} color='#34383D50' />
-          </TouchableOpacity>
-
-          {/* Modal */}
-          <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <CameraUpload />
-          </Modal>
+          <UploadReceipt />
+          
         </View>
       </KeyboardAwareScrollView>
     </View>
