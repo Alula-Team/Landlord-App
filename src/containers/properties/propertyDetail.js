@@ -12,6 +12,7 @@ import { Header, Icon } from "react-native-elements";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 // Style Sheet
 import styles from "./styles";
@@ -127,6 +128,26 @@ const PropertyDetail = ({ navigation, route }) => {
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
             <Text style={styles.propInfoLabel}>$11,841</Text>
+          </View>
+        </View>
+
+        <View style={styles.tenantInfo}>
+          <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10}}>
+              <Text style={{ color: "#34383D90", fontSize: 14, marginTop: 20, fontWeight: "600" }}>Home Details:</Text>
+          </View>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginHorizontal: 20 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center", marginTop: 10}}>
+                <FontAwesome name='bed' size={18} color='#34383D90' style={{marginRight: 10}} />
+                <Text style={{ color: "#34383D90", fontSize: 18, fontWeight: "800" }}>2</Text>
+              </View> 
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center", marginTop: 10}}>
+                <FontAwesome name='bath' size={18} color='#34383D90' style={{marginRight: 10}} />
+                <Text style={{ color: "#34383D90", fontSize: 18, fontWeight: "800" }}>2</Text>
+              </View> 
+              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center", marginTop: 10}}>
+                <FontAwesome name='ruler-combined' size={18} color='#34383D90' style={{marginRight: 10}} />
+                <Text style={{ color: "#34383D90", fontSize: 18, fontWeight: "800" }}>1,090</Text>
+              </View> 
           </View>
         </View>
 
