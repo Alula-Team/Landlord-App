@@ -400,7 +400,7 @@ const AddTenant = ({ navigation }) => {
               </View>
             )}
             name="rentRate"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.rentRate && (
@@ -435,7 +435,7 @@ const AddTenant = ({ navigation }) => {
               </View>
             )}
             name="securityDeposit"
-            rules={{ required: true }}
+            rules={{ required: false }}
             defaultValue=""
           />
           {errors.securityDeposit && (

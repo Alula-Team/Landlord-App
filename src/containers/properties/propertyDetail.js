@@ -118,15 +118,15 @@ const PropertyDetail = ({ navigation, route }) => {
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
-            <Text style={styles.propInfoLabel}>$42,000</Text>
+            <Text style={styles.propInfoLabel}>$12,591</Text>
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
-            <Text style={styles.propInfoLabel}>- $14,450</Text>
+            <Text style={styles.propInfoLabel}>- $750</Text>
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
-            <Text style={styles.propInfoLabel}>$27,550</Text>
+            <Text style={styles.propInfoLabel}>$11,841</Text>
           </View>
         </View>
 
@@ -147,7 +147,7 @@ const PropertyDetail = ({ navigation, route }) => {
                   fontWeight: "600",
                 }}
               >
-                Tenant's Name
+                Joseph Smith
               </Text>
               <Text
                 style={{
@@ -157,7 +157,7 @@ const PropertyDetail = ({ navigation, route }) => {
                   marginTop: 5,
                 }}
               >
-                tenant@tenant.com
+                joseph.smith@yahoo.com
               </Text>
             </View>
           </View>
@@ -239,7 +239,7 @@ const PropertyDetail = ({ navigation, route }) => {
           >
             <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-              $1,500
+              $1,399
             </Text>
           </View>
 
@@ -281,12 +281,12 @@ const PropertyDetail = ({ navigation, route }) => {
         </View>
 
         {/* Market Property View */}
-        <View>
+        {/* <View>
           <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 16, fontWeight: '500'}}>This property is vacant. Let's list it.</Text>
           <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
             <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
 
         {/* Actions Modal */}
         <Modal
