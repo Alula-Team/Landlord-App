@@ -79,7 +79,7 @@ const ServiceRequestDetailScreen = ({ navigation }) => {
           placeholder='What would you like to say?'
           textInputStyle={styles.inputField}
           renderUsernameOnMessage={true}
-          keyboardShouldPersistTaps='true'
+          keyboardShouldPersistTaps='always'
           onSend={messages => onSend(messages)}
           user={{
             _id: 1,

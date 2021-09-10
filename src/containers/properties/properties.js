@@ -119,7 +119,7 @@ const Properties = ({ navigation }) => {
                       paddingTop: 20,
                       paddingRight: 20,
                     }}
-                    onPress={() => navigation.navigate("ServiceRequests")}
+                    onPress={() => navigation.navigate("Messages")}
                   />
                   <Badge
                     status="error"

@@ -92,7 +92,7 @@ const ServiceRequests = ({ navigation }) => {
           data={data}
           keyExtractor={(item) => item.address}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.notificationContainer} onPress={() => navigation.navigate("ServiceRequestDetail")}>
+            <TouchableOpacity style={styles.notificationContainer} onPress={() => navigation.navigate("MessageDetail")}>
               <View style={{ flexDirection: "row", justifyContent: 'space-between', alignItems: 'center' }}>
                 <View>
                   {/* Title */}
@@ -108,7 +108,14 @@ const ServiceRequests = ({ navigation }) => {
                 </View>
 
                 {/* Chat Icon */}
-                <Feather name="message-circle" size={20} color='#34383D90' style={{marginRight: 10}} />
+                {/* <Feather name="message-circle" size={20} color='#34383D90' style={{marginRight: 10}} /> */}
+                <Badge 
+                  status="error" 
+                  containerStyle={{ border: "none" }} 
+                  badgeStyle={{ height: 25, width: 25, borderRadius: 30/2,  borderWidth: 0, }} 
+                  textStyle={{ color: 'white', fontSize: 12.5, fontWeight: '600' }} 
+                  value={1} 
+                />
               </View>
             </TouchableOpacity>
           )}

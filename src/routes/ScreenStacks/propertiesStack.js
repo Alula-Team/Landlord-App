@@ -8,9 +8,9 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Properties from "../../containers/properties/properties";
 import AddProperty from "../../containers/properties/addProperty";
 import EditProperty from "../../containers/properties/editProperty";
-import ServiceRequests from "../../containers/properties/serviceRequests";
+import Messages from "../../containers/properties/messages";
 import PropertyDetail from "../../containers/properties/propertyDetail";
-import ServiceRequestDetail from "../../containers/properties/serviceRequestDetail";
+import MessageDetail from "../../containers/properties/messageDetail";
 import CurrentLease from "../../containers/tenants/currentLease";
 
 enableScreens();
@@ -36,8 +36,8 @@ const PropertiesNavigation = (props) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ServiceRequests"
-          component={ServiceRequests}
+          name="Messages"
+          component={Messages}
           options={{ headerShown: false }}
         />
         <Stack.Screen
@@ -46,8 +46,8 @@ const PropertiesNavigation = (props) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="ServiceRequestDetail"
-          component={ServiceRequestDetail}
+          name="MessageDetail"
+          component={MessageDetail}
           options={{ headerShown: false }}
         />
         <Stack.Screen
