@@ -92,7 +92,7 @@ const ServiceRequests = ({ navigation }) => {
           data={data}
           keyExtractor={(item) => item.address}
           renderItem={({ item }) => (
-            <TouchableOpacity style={styles.notificationContainer} onPress={() => navigation.navigate("ServiceRequestDetail")}>
+            <TouchableOpacity style={styles.notificationContainer} onPress={() => navigation.navigate("MessageDetail")}>
               <View style={{ flexDirection: "row", justifyContent: 'space-between', alignItems: 'center' }}>
                 <View>
                   {/* Title */}
