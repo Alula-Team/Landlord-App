@@ -188,9 +188,8 @@ const styles = StyleSheet.create({
     color: "#34383D",
   },
   modalContainer: {
-    backgroundColor: "#2a2933",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    backgroundColor: "#fff",
+    borderRadius: 15,
     height: 275,
   },
   overlay: {
@@ -198,6 +197,58 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-end",
   },
+
+  // Camera Modal
+  cameraContainer: {
+    flex: 1,
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#000'
+  },
+  camera: {
+      flex: 1
+  },
+  cameraGroup: {
+      flex: 1,
+      backgroundColor: 'transparent',
+      justifyContent: 'flex-end'
+  },
+  backButton: {
+      flex: 0.1,
+      marginLeft: 30,
+      top: 60,
+      position: 'absolute',
+  },
+  cancel: {
+      fontSize: 18,
+      fontWeight: '600',
+      color: '#fff'
+  },
+  flipButton: {
+      flex: 0.1,
+      marginLeft: 30,
+      alignSelf: 'flex-start',
+      justifyContent: 'flex-end',
+  },
+  captureOuter: { 
+      borderWidth: 2,
+      borderRadius: 50,
+      borderColor: 'white',
+      height: 50,
+      width: 50,
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginBottom: 50
+  },
+  captureInner: {
+      borderWidth: 2,
+      borderRadius: 50,
+      borderColor: 'white',
+      height: 40,
+      width: 40,
+      backgroundColor: 'white',
+  }
 });
 
 const pickerStyles = StyleSheet.create({

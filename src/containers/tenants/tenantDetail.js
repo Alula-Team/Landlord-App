@@ -405,7 +405,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
 
           {/* Actions Modal */}
           <Modal
-            animationType="slide"
+            animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
@@ -417,7 +417,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
               <View style={styles.modalContainer}>
                 <Text
                   style={{
-                    color: "#fff",
+                    color: "#34383D",
                     fontSize: 18,
                     fontWeight: "600",
                     textAlign: "center",
@@ -451,10 +451,10 @@ const TenantDetailScreen = ({ route, navigation }) => {
                     paddingLeft: 20,
                   }}
                 >
-                  <Feather name="edit-3" size={22.5} color="#fff" />
+                  <Feather name="edit-3" size={22.5} color="#34383D" />
                   <Text
                     style={{
-                      color: "#fff",
+                      color: "#34383D",
                       fontSize: 16,
                       fontWeight: "600",
                       marginLeft: 10,
@@ -513,15 +513,18 @@ const TenantDetailScreen = ({ route, navigation }) => {
                   style={{
                     flexDirection: "row",
                     alignItems: "center",
-                    marginTop: 50,
+                    marginTop: 40,
                     justifyContent: "center",
+                    backgroundColor: "#34383D30",
+                    marginHorizontal: 30,
+                    padding: 15,
+                    borderRadius: 10
                   }}
                   onPress={() => setModalVisible(!modalVisible)}
                 >
-                  <Feather name="x" size={22.5} color="#fff" />
                   <Text
                     style={{
-                      color: "#fff",
+                      color: "#34383D",
                       fontSize: 16,
                       fontWeight: "600",
                       marginLeft: 10,

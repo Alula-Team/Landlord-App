@@ -1,21 +1,23 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
+import UploadReceipt from "./uploadReceipt";
+
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
+
+// Forms
+import { useForm, Controller } from "react-hook-form";
+import RNPickerSelect from "react-native-picker-select";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { SelectOptions, FakerOptions } from "../../forms";
 
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 // Faker
 import faker from "faker";
-
-// Form Stuffs
-import { useForm, Controller } from "react-hook-form";
-import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { SelectOptions, FakerOptions } from "../../forms";
 
 // Firebase
 import firebase, { auth, db } from "../../firebase/firebase";
@@ -170,8 +172,8 @@ const AddTransaction = ({ navigation }) => {
               <RNPickerSelect
                 placeholder={{
                   label: "Select Transaction",
-                  value: "",
-                  color: "white",
+                  value: "selectTransaction",
+                  color: "#34383D",
                 }}
                 style={pickerStyles}
                 value={value}
@@ -204,7 +206,7 @@ const AddTransaction = ({ navigation }) => {
               <RNPickerSelect
                 placeholder={{
                   label: "Select Category",
-                  value: "",
+                  value: "selectCategory",
                   color: "#34383D",
                 }}
                 style={pickerStyles}
@@ -238,8 +240,8 @@ const AddTransaction = ({ navigation }) => {
               <RNPickerSelect
                 placeholder={{
                   label: "Select Property",
-                  value: "",
-                  color: "white",
+                  value: "selectProperty",
+                  color: "#34383D",
                 }}
                 style={pickerStyles}
                 value={value}
@@ -271,8 +273,8 @@ const AddTransaction = ({ navigation }) => {
               <RNPickerSelect
                 placeholder={{
                   label: "Select Payment Method",
-                  value: "",
-                  color: "white",
+                  value: "selectPaymentMethod",
+                  color: "#34383D",
                 }}
                 style={pickerStyles}
                 value={value}
@@ -306,7 +308,7 @@ const AddTransaction = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="i.e 1500"
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   style={styles.inputField}
                   clearButtonMode={'while-editing'}
                   keyboardAppearance='light'
@@ -342,7 +344,7 @@ const AddTransaction = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Enter Transaction Description ..."
-                  placeholderTextColor="#34383D70"
+                  placeholderTextColor="#34383D40"
                   style={{
                     color: "#34383D",
                     fontSize: 16,
@@ -387,9 +389,8 @@ const AddTransaction = ({ navigation }) => {
 
           {/* Upload Recipt*/}
           <Text style={styles.inputLabel}>Upload Receipt:</Text>
-          <TouchableOpacity style={{backgroundColor: '#00000019', height: 220, width: 180, marginVertical: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", justifyContent: 'center'}}>
-            <Feather name='plus' size={40} color='#34383D50' />
-          </TouchableOpacity>
+          <UploadReceipt />
+          
         </View>
       </KeyboardAwareScrollView>
     </View>

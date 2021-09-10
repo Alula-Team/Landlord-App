@@ -231,9 +231,8 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   modalContainer: {
-    backgroundColor: "#2a2933",
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
+    backgroundColor: "#fff",
+    borderRadius: 15,
     height: 275,
   },
   overlay: {

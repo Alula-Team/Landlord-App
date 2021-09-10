@@ -12,6 +12,7 @@ import { Header, Icon } from "react-native-elements";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
+import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 // Style Sheet
 import styles from "./styles";
@@ -118,15 +119,15 @@ const PropertyDetail = ({ navigation, route }) => {
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
-            <Text style={styles.propInfoLabel}>$42,000</Text>
+            <Text style={styles.propInfoLabel}>$12,591</Text>
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
-            <Text style={styles.propInfoLabel}>- $14,450</Text>
+            <Text style={styles.propInfoLabel}>- $750</Text>
           </View>
           <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
-            <Text style={styles.propInfoLabel}>$27,550</Text>
+            <Text style={styles.propInfoLabel}>$11,841</Text>
           </View>
         </View>
 
@@ -147,7 +148,7 @@ const PropertyDetail = ({ navigation, route }) => {
                   fontWeight: "600",
                 }}
               >
-                Tenant's Name
+                Joseph Smith
               </Text>
               <Text
                 style={{
@@ -157,7 +158,7 @@ const PropertyDetail = ({ navigation, route }) => {
                   marginTop: 5,
                 }}
               >
-                tenant@tenant.com
+                joseph.smith@yahoo.com
               </Text>
             </View>
           </View>
@@ -239,7 +240,7 @@ const PropertyDetail = ({ navigation, route }) => {
           >
             <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-              $1,500
+              $1,399
             </Text>
           </View>
 
@@ -280,13 +281,14 @@ const PropertyDetail = ({ navigation, route }) => {
           </TouchableOpacity>
         </View>
 
+        {/* Market Property View */}
         <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
           <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
         </TouchableOpacity>
 
         {/* Actions Modal */}
         <Modal
-          animationType="slide"
+          animationType='fade'
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -298,8 +300,8 @@ const PropertyDetail = ({ navigation, route }) => {
             <View style={styles.modalContainer}>
               <Text
                 style={{
-                  color: "#fff",
-                  fontSize: 18,
+                  color: "#34383D",
+                  fontSize: 20,
                   fontWeight: "600",
                   textAlign: "center",
                   marginTop: 20,
@@ -326,10 +328,10 @@ const PropertyDetail = ({ navigation, route }) => {
                   paddingLeft: 20,
                 }}
               >
-                <Feather name="edit-3" size={22.5} color="#fff" />
+                <Feather name="edit-3" size={22.5} color="#34383D" />
                 <Text
                   style={{
-                    color: "#fff",
+                    color: "#34383D",
                     fontSize: 16,
                     fontWeight: "600",
                     marginLeft: 10,
@@ -365,15 +367,19 @@ const PropertyDetail = ({ navigation, route }) => {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  marginTop: 50,
+                  marginTop: 40,
                   justifyContent: "center",
+                  backgroundColor: "#34383D30",
+                  marginHorizontal: 30,
+                  padding: 15,
+                  borderRadius: 10
                 }}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Feather name="x" size={22.5} color="#fff" />
+                {/* <Feather name="x" size={22.5} color="#34383D" /> */}
                 <Text
                   style={{
-                    color: "#fff",
+                    color: "#34383D",
                     fontSize: 16,
                     fontWeight: "600",
                     marginLeft: 10,
