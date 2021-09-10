@@ -56,14 +56,14 @@ const styles = StyleSheet.create({
         height: 45,
         flexDirection: "row",
         backgroundColor: "#00000009",
-      },
-      inputField: {
-          paddingLeft: 12.5,
-          color: "#34383D",
-          fontSize: 16,
-          fontWeight: "500",
-          width: "100%",
-      },
+    },
+    inputField: {
+        paddingLeft: 12.5,
+        color: "#34383D",
+        fontSize: 16,
+        fontWeight: "500",
+        width: "100%",
+    },
 
     // Update Payment Explainer
         // Image

@@ -80,9 +80,8 @@ const UpdatePayment = () => {
                             </View>
                             <View style={styles.listInline}>
                                 <Feather name='check' size={25} color='#428bca' style={{marginRight: 10}} />
-                                <Text style={styles.listText}>No Monthly Subscription*</Text>
+                                <Text style={styles.listText}>Free for Landlords</Text>
                             </View>
-                            <Text style={{color: '#34383D80', marginTop: 20, textAlign: 'center'}}>* 1% convenience fee passed onto tenant</Text>
                         </View>
                     </View>
 

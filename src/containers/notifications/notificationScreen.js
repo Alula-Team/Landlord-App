@@ -58,27 +58,27 @@ const Notifications = () => {
   };
 
   // Empty List Content
-  const EmptyListMessage = () => {
-    return (
-      <View style={styles.emptyList}>
-        <Image
-          source={require("../../assets/transEmptyList.png")}
-          style={styles.img}
-        />
-        <Text
-          style={{
-            color: "#34383D80",
-            marginHorizontal: 35,
-            alignSelf: "center",
-            fontSize: 18,
-            fontWeight: '600'
-          }}
-        >
-          Hmm... No notifications yet
-        </Text>
-      </View>
-    );
-  };
+  // const EmptyListMessage = () => {
+  //   return (
+  //     <View style={styles.emptyList}>
+  //       <Image
+  //         source={require("../../assets/transEmptyList.png")}
+  //         style={styles.img}
+  //       />
+  //       <Text
+  //         style={{
+  //           color: "#34383D80",
+  //           marginHorizontal: 35,
+  //           alignSelf: "center",
+  //           fontSize: 18,
+  //           fontWeight: '600'
+  //         }}
+  //       >
+  //         Hmm... No notifications yet
+  //       </Text>
+  //     </View>
+  //   );
+  // };
 
   // onRefresh
   const onRefresh = React.useCallback(() => {

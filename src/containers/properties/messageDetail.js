@@ -12,7 +12,7 @@ import styles from "./styles";
 // Things I need
 //Function to swap buttons when marked complete or unmarked complete
 
-const ServiceRequestDetailScreen = ({ navigation }) => {
+const MessageDetailScreen = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
   
   useEffect(() => {
@@ -48,7 +48,7 @@ const ServiceRequestDetailScreen = ({ navigation }) => {
                 paddingTop: 22.5,
               }}
             >
-              Property Address
+              Recipient Name
             </Text>
           }
           leftComponent={
@@ -92,4 +92,4 @@ const ServiceRequestDetailScreen = ({ navigation }) => {
   );
 };
 
-export default ServiceRequestDetailScreen;
+export default MessageDetailScreen;
