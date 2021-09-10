@@ -1,4 +1,4 @@
-import React, { useState, version } from "react";
+import React, { useState } from "react";
 import {
   Text,
   View,
@@ -18,7 +18,7 @@ const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
-const ServiceRequests = ({ navigation }) => {
+const Messages = ({ navigation }) => {
   const [refreshing, setRefreshing] = useState(false);
 
   // Flatlist Dummy Data
@@ -56,37 +56,37 @@ const ServiceRequests = ({ navigation }) => {
     <View style={styles.container}>
       {/* Header */}
       <Header 
-          centerComponent={{ 
-              text: 'Messages', 
-              style: { 
-                  color: '#34383D', 
-                  fontWeight: "600",
-                  fontSize: 20, 
-                  paddingTop: 20
-              }
-          }}
-          leftComponent={
-              <Icon 
-                  name='arrow-left'
-                  type='feather'
-                  color='#34383D80'
-                  size={25}
-                  iconStyle={{
-                      paddingTop: 20,
-                      paddingLeft: 10,
-                      paddingBottom: 10
-                  }}
-                  onPress={() => navigation.goBack()}
-              />
-          }
-          containerStyle={{
-              backgroundColor: '#fff',
-              justifyContent: 'space-around',
-              borderBottomWidth: 0
-          }}
+        centerComponent={{ 
+            text: 'Messages', 
+            style: { 
+                color: '#34383D', 
+                fontWeight: "600",
+                fontSize: 20, 
+                paddingTop: 20
+            }
+        }}
+        leftComponent={
+            <Icon 
+                name='arrow-left'
+                type='feather'
+                color='#34383D80'
+                size={25}
+                iconStyle={{
+                    paddingTop: 20,
+                    paddingLeft: 10,
+                    paddingBottom: 10
+                }}
+                onPress={() => navigation.goBack()}
+            />
+        }
+        containerStyle={{
+            backgroundColor: '#fff',
+            justifyContent: 'space-around',
+            borderBottomWidth: 0
+        }}
       />
 
-      {/* Service Request Flat List */}
+      {/* Messages Flat List */}
       <View style={styles.listView}>
         <FlatList
           data={data}
@@ -131,4 +131,4 @@ const ServiceRequests = ({ navigation }) => {
   );
 };
 
-export default ServiceRequests;
+export default Messages;
