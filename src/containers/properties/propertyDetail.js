@@ -131,26 +131,6 @@ const PropertyDetail = ({ navigation, route }) => {
           </View>
         </View>
 
-        <View style={styles.tenantInfo}>
-          <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10}}>
-              <Text style={{ color: "#34383D90", fontSize: 14, marginTop: 20, fontWeight: "600" }}>Home Details:</Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginHorizontal: 20 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center", marginTop: 10}}>
-                <FontAwesome name='bed' size={18} color='#34383D90' style={{marginRight: 10}} />
-                <Text style={{ color: "#34383D90", fontSize: 18, fontWeight: "800" }}>2</Text>
-              </View> 
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center", marginTop: 10}}>
-                <FontAwesome name='bath' size={18} color='#34383D90' style={{marginRight: 10}} />
-                <Text style={{ color: "#34383D90", fontSize: 18, fontWeight: "800" }}>2</Text>
-              </View> 
-              <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: "center", marginTop: 10}}>
-                <FontAwesome name='ruler-combined' size={18} color='#34383D90' style={{marginRight: 10}} />
-                <Text style={{ color: "#34383D90", fontSize: 18, fontWeight: "800" }}>1,090</Text>
-              </View> 
-          </View>
-        </View>
-
         {/* Tenant Information */}
         <View style={styles.tenantInfo}>
           <View
@@ -302,16 +282,13 @@ const PropertyDetail = ({ navigation, route }) => {
         </View>
 
         {/* Market Property View */}
-        {/* <View>
-          <Text style={{ marginTop: 20, textAlign: 'center', fontSize: 16, fontWeight: '500'}}>This property is vacant. Let's list it.</Text>
-          <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
-            <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
-          </TouchableOpacity>
-        </View> */}
+        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
+        </TouchableOpacity>
 
         {/* Actions Modal */}
         <Modal
-          animationType="slide"
+          animationType='fade'
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -323,8 +300,8 @@ const PropertyDetail = ({ navigation, route }) => {
             <View style={styles.modalContainer}>
               <Text
                 style={{
-                  color: "#fff",
-                  fontSize: 18,
+                  color: "#34383D",
+                  fontSize: 20,
                   fontWeight: "600",
                   textAlign: "center",
                   marginTop: 20,
@@ -351,10 +328,10 @@ const PropertyDetail = ({ navigation, route }) => {
                   paddingLeft: 20,
                 }}
               >
-                <Feather name="edit-3" size={22.5} color="#fff" />
+                <Feather name="edit-3" size={22.5} color="#34383D" />
                 <Text
                   style={{
-                    color: "#fff",
+                    color: "#34383D",
                     fontSize: 16,
                     fontWeight: "600",
                     marginLeft: 10,
@@ -390,15 +367,19 @@ const PropertyDetail = ({ navigation, route }) => {
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
-                  marginTop: 50,
+                  marginTop: 40,
                   justifyContent: "center",
+                  backgroundColor: "#34383D30",
+                  marginHorizontal: 30,
+                  padding: 15,
+                  borderRadius: 10
                 }}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                <Feather name="x" size={22.5} color="#fff" />
+                {/* <Feather name="x" size={22.5} color="#34383D" /> */}
                 <Text
                   style={{
-                    color: "#fff",
+                    color: "#34383D",
                     fontSize: 16,
                     fontWeight: "600",
                     marginLeft: 10,

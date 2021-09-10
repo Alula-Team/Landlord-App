@@ -34,54 +34,54 @@ const UploadReceipt = () => {
 
             {/* Modal */}
             <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-              Alert.alert("Modal has been closed.");
-              setModalVisible(!modalVisible);
-            }}
-          >
-            <View style={styles.cameraContainer}>
-                <Camera style={styles.camera} type={type}>
-                    <View style={styles.cameraGroup}>
-                        {/* Back Button */}
-                        <TouchableOpacity style={styles.backButton} onPress={() => setModalVisible(!modalVisible)}>
-                            {/* <Feather name='arrow-left' size={25} color='#fff' /> */}
-                            <Text style={styles.cancel}>Cancel</Text>
-                        </TouchableOpacity>
-                        
-                        {/* Flip Camera */}
-                        <TouchableOpacity
-                            style={styles.flipButton}
-                            onPress={() => {
-                            setType(
-                                type === Camera.Constants.Type.back
-                                ? Camera.Constants.Type.front
-                                : Camera.Constants.Type.back
-                            );
-                            }}>
-                            <Feather name='repeat' size={20} color='#fff' />
-                        </TouchableOpacity>
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+                }}
+            >
+                <View style={styles.cameraContainer}>
+                    <Camera style={styles.camera} type={type}>
+                        <View style={styles.cameraGroup}>
+                            {/* Back Button */}
+                            <TouchableOpacity style={styles.backButton} onPress={() => setModalVisible(!modalVisible)}>
+                                {/* <Feather name='arrow-left' size={25} color='#fff' /> */}
+                                <Text style={styles.cancel}>Cancel</Text>
+                            </TouchableOpacity>
+                            
+                            {/* Flip Camera */}
+                            <TouchableOpacity
+                                style={styles.flipButton}
+                                onPress={() => {
+                                setType(
+                                    type === Camera.Constants.Type.back
+                                    ? Camera.Constants.Type.front
+                                    : Camera.Constants.Type.back
+                                );
+                                }}>
+                                <Feather name='repeat' size={20} color='#fff' />
+                            </TouchableOpacity>
 
-                        {/* Capture Image Button */}
-                        <TouchableOpacity 
-                            style={{alignSelf: 'center'}} 
-                            onPress={async() => {
-                                if(cameraRef){
-                                let photo = await cameraRef.takePictureAsync();
-                                console.log('photo', photo);
-                                }
-                            }}
-                        >
-                            <View style={styles.captureOuter}>
-                                <View style={styles.captureInner}></View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                </Camera>
-            </View>
-          </Modal>
+                            {/* Capture Image Button */}
+                            <TouchableOpacity 
+                                style={{alignSelf: 'center'}} 
+                                onPress={async() => {
+                                    if(cameraRef){
+                                    let photo = await cameraRef.takePictureAsync();
+                                    console.log('photo', photo);
+                                    }
+                                }}
+                            >
+                                <View style={styles.captureOuter}>
+                                    <View style={styles.captureInner}></View>
+                                </View>
+                            </TouchableOpacity>
+                        </View>
+                    </Camera>
+                </View>
+            </Modal>
         </>
     );
 

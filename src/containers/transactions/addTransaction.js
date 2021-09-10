@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Text, View, TouchableOpacity, TextInput, Modal } from "react-native";
+import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
