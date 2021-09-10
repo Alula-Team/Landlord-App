@@ -120,7 +120,8 @@ const Notifications = () => {
                   {/* Notification Badge */}
                   <Badge
                     status={"error"}
-                    containerStyle={{ marginRight: 25 }}
+                    containerStyle={{ marginRight: 25, border: "none" }}
+                    badgeStyle={{ borderWidth: 0 }}
                   />
 
                   {/* Cell Content */}
