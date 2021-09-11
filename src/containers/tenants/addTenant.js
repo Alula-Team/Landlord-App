@@ -268,21 +268,59 @@ const AddTenant = ({ navigation }) => {
             </Text>
           )}
 
+          {/* Lease Start Date */}
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Move In Date - MM/DD/YYYY"
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType='number-pad'
+                  placeholderTextColor="#34383D40"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="leaseStartDate"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+          {errors.leaseStartDate && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 10
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
           {/* Lease Length */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Leasing Length",
-                  value: "selectLeasingLength",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={SelectOptions.leasingLength}
-              />
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Lease Length - Months"
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType='number-pad'
+                  placeholderTextColor="#34383D40"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
             )}
             name="leaseLength"
             rules={{ required: false }}
@@ -407,41 +445,6 @@ const AddTenant = ({ navigation }) => {
                 <TextInput
                   type="text"
                   placeholder="Security Deposit"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType='number-pad'
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            )}
-            name="securityDeposit"
-            rules={{ required: false }}
-            defaultValue=""
-          />
-          {errors.securityDeposit && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
-          )}
-
-          {/* Lease Start Date */}
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Move In Date - MM/DD/YYYY"
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
                   keyboardAppearance="light"

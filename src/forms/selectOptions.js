@@ -25,11 +25,15 @@ export const paymentMethods = [
 
 // Add Tenant Screen Select Options
 export const leasingLength = [
+  { label: '3 Month', value: 'threeMonth' },
   { label: '6 Month', value: 'sixMonth' },
   { label: '12 Month', value: 'twelveMonth' },
   { label: '15 Month', value: 'fifteenMonth' },
   { label: '18 Month', value: 'eighteenMonth' },
   { label: '24 Month', value: 'twentyFourMonth' },
+  { label: '36 Month', value: 'thirtySixMonth' },
+  { label: '48 Month', value: 'fourtyEightMonth' },
+  { label: '60 Month', value: 'sixtyMonth' },
   { label: 'Month to Month', value: 'monthToMonth' }
 ];
 
