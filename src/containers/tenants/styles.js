@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     backgroundColor: "#fff",
     borderRadius: 15,
-    height: 325,
+    height: 350,
   },
   tenantInputContainer: {
     marginHorizontal: 20,
@@ -187,26 +187,28 @@ const styles = StyleSheet.create({
   },
   propInfo: {
     flexDirection: "row",
-    backgroundColor: "#5858FB",
-    marginHorizontal: 20,
-    padding: 20,
-    marginBottom: 20,
-    marginTop: 30,
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    backgroundColor: "#955C28",
+    paddingHorizontal: 20,
+    paddingVertical: 12.5,
+    marginHorizontal: 10,
+    borderRadius: 10
   },
   cardText: {
     color: "#fff",
     fontSize: 16,
     fontWeight: "500",
     marginLeft: 5,
+  },
+  textArea: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    height: 200,
+    flexDirection: "row",
+    backgroundColor: "#00000009",
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500"
   },
 });
 

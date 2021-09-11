@@ -149,11 +149,11 @@ const AddProperty = ({ navigation }) => {
           control={control}
           render={({ field: { value, onChange } }) => (
             <>
-              <Text style={styles.inputLabel}>Address</Text>
+              <Text style={styles.inputLabel}>Property Address</Text>
               <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
-                  placeholder="Address..."
+                  placeholder="Street"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
@@ -185,11 +185,10 @@ const AddProperty = ({ navigation }) => {
           control={control}
           render={({ field: { value, onChange } }) => (
             <>
-              <Text style={styles.inputLabel}>City</Text>
               <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
-                  placeholder="City..."
+                  placeholder="City"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
@@ -221,11 +220,10 @@ const AddProperty = ({ navigation }) => {
           control={control}
           render={({ field: { value, onChange } }) => (
             <>
-              <Text style={styles.inputLabel}>State</Text>
               <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
-                  placeholder="State..."
+                  placeholder="State"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}
@@ -257,11 +255,10 @@ const AddProperty = ({ navigation }) => {
           control={control}
           render={({ field: { value, onChange } }) => (
             <>
-              <Text style={styles.inputLabel}>Zip</Text>
               <View style={styles.inputContainer}>
                 <TextInput
                   type="text"
-                  placeholder="Zip..."
+                  placeholder="Zip Code"
                   placeholderTextColor="#34383D70"
                   autoCorrect={false}
                   clearButtonMode={"while-editing"}

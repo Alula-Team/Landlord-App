@@ -21,10 +21,10 @@ const EditProfile = ({ navigation }) => {
                     centerComponent={{
                         text: "Edit Profile",
                         style: {
-                        color: "#34383D",
-                        fontWeight: '700', 
-                        fontSize: 20, 
-                        paddingTop: 20,
+                            color: "#34383D",
+                            fontWeight: "600",
+                            fontSize: 20,
+                            paddingTop: 20,
                         },
                     }}
                     leftComponent={

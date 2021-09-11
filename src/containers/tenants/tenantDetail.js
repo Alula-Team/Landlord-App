@@ -88,9 +88,9 @@ const TenantDetailScreen = ({ route, navigation }) => {
           centerComponent={{
             text: "Manage Tenant",
             style: {
-              color: "#fff",
-              fontWeight: "bold",
-              fontSize: 22,
+              color: "#34383D",
+              fontWeight: "600",
+              fontSize: 20,
               paddingTop: 20,
             },
           }}
@@ -98,7 +98,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
             <Icon
               name="arrow-left"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={25}
               iconStyle={{
                 paddingTop: 20,
@@ -112,7 +112,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
             <Icon
               name="more-horizontal"
               type="feather"
-              color="#fff"
+              color="#34383D80"
               size={27.5}
               iconStyle={{
                 paddingTop: 20,
@@ -122,7 +122,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
             />
           }
           containerStyle={{
-            backgroundColor: "#232256",
+            backgroundColor: "#fff",
             justifyContent: "space-around",
             borderBottomWidth: 0,
           }}
@@ -159,45 +159,18 @@ const TenantDetailScreen = ({ route, navigation }) => {
               </View>
             </View>
           </View>
-
-          {/* Leasing Information */}
-          <Text style={styles.sectionText}>Lease Information</Text>
-          <View
-            style={{
-              backgroundColor: "#fff",
-              marginHorizontal: 20,
-              padding: 20,
-              marginBottom: 20,
-              borderRadius: 10,
-              shadowColor: "#000",
-              shadowOffset: {
-                width: 0,
-                height: 2,
-              },
-              shadowOpacity: 0.25,
-              shadowRadius: 3.84,
-              elevation: 5,
-            }}
-          >
-            {/* Property Address */}
-            <Text
-              style={{
-                color: "#34383D",
-                fontSize: 18,
-                fontWeight: "600",
-              }}
-            >
-              {theProperty.address} {theProperty.unit}
-            </Text>
+          
+          <View style={{backgroundColor: '#fff', paddingHorizontal: 30, paddingVertical: 12.5}} >
+            {/* Leasing Information */}
             <Text
               style={{
                 color: "#34383D90",
-                marginVertical: 10,
-                fontSize: 16,
+                fontSize: 14,
+                marginTop: 20,
                 fontWeight: "600",
               }}
             >
-              {theProperty.city}, {theProperty.state} {theProperty.zip}
+              Leasing Information:
             </Text>
 
             {/* Start Date */}
@@ -208,12 +181,8 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Start Date:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>Start Date:</Text>
+              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
                 Jan 1, 2021
               </Text>
             </View>
@@ -227,46 +196,8 @@ const TenantDetailScreen = ({ route, navigation }) => {
               }}
             >
               <Text style={{ color: "#34383D", fontSize: 16 }}>End Date:</Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
+              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
                 Jan 1, 2022
-              </Text>
-            </View>
-
-            {/* Lease Length */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Lease Length:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
-                12 mo
-              </Text>
-            </View>
-
-            {/* Lease Type */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Lease Type:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
-                Fixed
               </Text>
             </View>
 
@@ -278,31 +209,9 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Rental Rate:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
-                $1,500
-              </Text>
-            </View>
-
-            {/* Security Deposit */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 20,
-              }}
-            >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Security Deposit:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
-                $750
+              <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
+              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
+                $1,399
               </Text>
             </View>
 
@@ -314,94 +223,18 @@ const TenantDetailScreen = ({ route, navigation }) => {
                 marginTop: 20,
               }}
             >
-              <Text style={{ color: "#34383D", fontSize: 16 }}>
-                Rent Due On:
-              </Text>
-              <Text
-                style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}
-              >
+              <Text style={{ color: "#34383D", fontSize: 16 }}>Rent Due On:</Text>
+              <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
                 1st /mo
               </Text>
             </View>
+
+            <TouchableOpacity onPress={() => navigation.navigate("CurrentLease")} style={{ marginTop: 30, height: 45, alignItems: 'center'}}>
+              <Text style={{ alignSelf: "center",color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline'}}>
+                View Lease Agreement
+              </Text>
+            </TouchableOpacity>
           </View>
-
-          {/* Current Lease Button */}
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CurrentLease")}
-            style={{
-              marginHorizontal: 5,
-              marginTop: 10,
-              marginBottom: 20,
-              height: 45,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row" }}>
-              <Feather
-                name="eye"
-                size={18}
-                color="#34383D80"
-                style={{
-                  alignSelf: "center",
-                  marginLeft: 20,
-                }}
-              />
-              <Text
-                style={{
-                  alignSelf: "center",
-                  color: "#34383D",
-                  fontSize: 16,
-                  fontWeight: "600",
-                  marginLeft: 10,
-                }}
-              >
-                View Current Lease
-              </Text>
-            </View>
-            <Feather
-              name="arrow-right"
-              color="#34383D80"
-              size={20}
-              style={{ alignSelf: "center", marginRight: 10 }}
-            />
-          </TouchableOpacity>
-
-          {/* Upload New Lease */}
-          <TouchableOpacity
-            style={{
-              marginHorizontal: 5,
-              marginTop: 10,
-              marginBottom: 20,
-              height: 45,
-              flexDirection: "row",
-              justifyContent: "space-between",
-            }}
-          >
-            <View style={{ flexDirection: "row" }}>
-              <Feather
-                name="upload"
-                size={18}
-                color="#34383D80"
-                style={{
-                  alignSelf: "center",
-                  marginLeft: 20,
-                }}
-              />
-              <Text
-                style={{
-                  alignSelf: "center",
-                  color: "#34383D",
-                  fontSize: 16,
-                  fontWeight: "600",
-                  marginLeft: 10,
-                  textDecorationLine: "underline",
-                }}
-              >
-                Upload New Lease
-              </Text>
-            </View>
-          </TouchableOpacity>
 
           {/* Actions Modal */}
           <Modal
@@ -451,7 +284,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                     paddingLeft: 20,
                   }}
                 >
-                  <Feather name="edit-3" size={22.5} color="#34383D" />
+                  <Feather name="user" size={20} color="#34383D" />
                   <Text
                     style={{
                       color: "#34383D",
@@ -473,16 +306,16 @@ const TenantDetailScreen = ({ route, navigation }) => {
                     paddingLeft: 20,
                   }}
                 >
-                  <Feather name="edit-3" size={22.5} color="#fff" />
+                  <Feather name="file-text" size={20} color="#34383D" />
                   <Text
                     style={{
-                      color: "#fff",
+                      color: "#34383D",
                       fontSize: 16,
                       fontWeight: "600",
                       marginLeft: 10,
                     }}
                   >
-                    Edit Lease Information
+                    Edit Leasing Information
                   </Text>
                 </TouchableOpacity>
 
@@ -496,7 +329,7 @@ const TenantDetailScreen = ({ route, navigation }) => {
                   }}
                   onPress={deleteAlert}
                 >
-                  <Feather name="trash" size={22.5} color="red" />
+                  <Feather name="delete" size={20} color="red" />
                   <Text
                     style={{
                       color: "red",

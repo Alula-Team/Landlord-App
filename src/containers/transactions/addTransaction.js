@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import UploadReceipt from "./uploadReceipt";
+import UploadReceipt from "../constants/uploadReceipt";
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -11,7 +11,6 @@ import Feather from "react-native-vector-icons/Feather";
 // Forms
 import { useForm, Controller } from "react-hook-form";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { SelectOptions, FakerOptions } from "../../forms";
 
 import { PropertiesContext } from "../../providers/PropertiesProvider";
@@ -28,21 +27,7 @@ import { styles, pickerStyles } from "./styles";
 faker.locale = "en_US";
 
 const AddTransaction = ({ navigation }) => {
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
 
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
-    console.log(date);
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
   const properties = useContext(PropertiesContext);
 
   const addressArray = properties.map((property) => {
@@ -335,6 +320,42 @@ const AddTransaction = ({ navigation }) => {
             </Text>
           )}
 
+          {/* Date Paid */}
+          <Text style={styles.inputLabel}>Date Paid</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="MM/DD/YYYY"
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType='number-pad'
+                  placeholderTextColor="#34383D40"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="securityDeposit"
+            rules={{ required: false }}
+            defaultValue=""
+          />
+          {errors.securityDeposit && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 10
+              }}
+            >
+              This field is required
+            </Text>
+          )}
+
           {/* Description */}
           <Text style={styles.inputLabel}>Description</Text>
           <Controller
@@ -361,30 +382,6 @@ const AddTransaction = ({ navigation }) => {
             name="description"
             rules={{ required: false }}
             defaultValue=""
-          />
-
-          {/* Date Paid */}
-          <Controller
-            control={control}
-            render={() => (
-              <View style={{ flexDirection: "row", marginVertical: 20, alignItems: "center" }}>
-                <Text style={styles.inputLabel}>Date Paid:</Text>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode={mode}
-                  display="default"
-                  textColor="#fff"
-                  style={{
-                    marginLeft: 10,
-                    marginTop: 20,
-                    width: "100%",
-                  }}
-                  onChange={handleDateChange}
-                />
-              </View>
-            )}
-            name="date"
           />
 
           {/* Upload Recipt*/}
