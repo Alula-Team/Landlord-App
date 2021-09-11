@@ -23,13 +23,8 @@ const TransactionsNavigation = (props) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="EditTransaction"
-          component={EditTransaction}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ManageTransaction"
-          component={ManageTransaction}
+          name="TransactionDetail"
+          component={TransactionDetail}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

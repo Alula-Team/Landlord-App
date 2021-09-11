@@ -14,18 +14,17 @@ import faker from "faker";
 faker.locale = "en_US";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import firebase, { auth, db } from "../../firebase";
 
 // Style Sheet
 import styles, { pickerStyles } from "./styles";
 
-import { PropertiesContext } from "../../providers/PropertiesProvider";
+import PropertySelect from "../properties/PropertySelect";
 
 const AddTenant = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
-  const properties = useContext(PropertiesContext);
 
   const handleDateChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -39,19 +38,19 @@ const AddTenant = ({ navigation }) => {
     setMode(currentMode);
   };
 
-  const allProperties = properties.map((item) => {
-    return {
-      label: `${item.address} ${item.unit}`,
-      value: {
-        id: item.id,
-        address: item.address,
-        city: item.city,
-        state: item.state,
-        zip: item.zip,
-        unit: item.unit,
-      },
-    };
-  });
+  // const allProperties = properties.map((item) => {
+  //   return {
+  //     label: `${item.address} ${item.unit}`,
+  //     value: {
+  //       id: item.id,
+  //       address: item.address,
+  //       city: item.city,
+  //       state: item.state,
+  //       zip: item.zip,
+  //       unit: item.unit,
+  //     },
+  //   };
+  // });
 
   const fakeIt = () => {
     setValue("name", faker.name.firstName() + " " + faker.name.lastName());
@@ -213,7 +212,7 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
-          
+
           {/* Phone Number */}
           <Controller
             control={control}
@@ -251,22 +250,23 @@ const AddTenant = ({ navigation }) => {
 
           {/* LEASING INFORMATION */}
           <Text style={styles.inputLabel}>Leasing Information</Text>
-    
+
           {/* Property */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Property",
-                  value: "selectProperty",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={allProperties}
-              />
+              <PropertySelect value={value} onChange={onChange} />
+              // <RNPickerSelect
+              //   placeholder={{
+              //     label: "Select Property",
+              //     value: "selectProperty",
+              //     color: "#34383D",
+              //   }}
+              //   style={pickerStyles}
+              //   value={value}
+              //   onValueChange={onChange}
+              //   items={allProperties}
+              // />
             )}
             name="property"
             rules={{ required: false }}

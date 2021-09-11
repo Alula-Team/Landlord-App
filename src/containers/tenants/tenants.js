@@ -19,14 +19,11 @@ import Feather from "react-native-vector-icons/Feather";
 import styles from "./styles";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import firebase, { auth, db } from "../../firebase";
 import { collectIdsAndData } from "../../utilities";
 
 import { TenantsContext } from "../../providers/TenantsProvider";
 // import { withProperty } from "../../providers/PropertiesProvider";
-
-import Tenant from "./Tenant";
-import { PropertyContext } from "../../providers/PropertiesProvider";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature

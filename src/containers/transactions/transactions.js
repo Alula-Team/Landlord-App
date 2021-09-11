@@ -179,7 +179,7 @@ const Transactions = ({ navigation }) => {
                     paddingBottom: 10,
                   }}
                   onPress={() => {
-                    setQuery("");
+                    setSearch("");
                     navigation.navigate("AddTransaction");
                   }}
                 />
