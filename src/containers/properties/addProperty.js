@@ -22,9 +22,8 @@ import GooglePlacesSearch from "./googlePlacesSearch";
 import ScreenHeader from "./screenHeader";
 
 // Firebase
-import firebase from "firebase/app";
-import 'firebase/firestore';
-const db = firebase.firestore();
+import { db } from "../../firebase";
+
 
 const AddProperty = ({ navigation }) => {
   const INITIAL_STATE = {

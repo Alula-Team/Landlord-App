@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   Text,
@@ -18,12 +18,22 @@ import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import styles from "./styles";
 
 // Firebase
-import { db } from "../../firebase/firebase";
+import { db } from "../../firebase";
+import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 
 const PropertyDetail = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { itemID, itemAddress, itemCity, itemState, itemZip, itemUnit } =
-    route.params;
+  const { itemID } = route.params;
+
+  const propRef = db.collection('properties').doc(itemID);
+  const [property, loading, error] = useDocumentDataOnce(propRef, { idField: "id" });
+
+  if (error) {
+    console.log(error)
+  }
+  if (loading) {
+    console.log('Loading ...')
+  }
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -61,7 +71,9 @@ const PropertyDetail = ({ navigation, route }) => {
               paddingTop: 22.5,
             }}
           >
-            {itemAddress} {itemUnit}
+            {error && JSON.stringify(error)}
+            {loading && "Loading..."}
+            {property && `${property.address} ${property.unit}`}
           </Text>
         }
         leftComponent={
@@ -101,31 +113,31 @@ const PropertyDetail = ({ navigation, route }) => {
       <ScrollView>
         {/* Property Information */}
         <View style={styles.propInfo}>
-          <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10}}>
-              <Text
-                style={{
-                  fontWeight: "500",
-                  color: "#fff",
-                  marginRight: 5,
-                }}
-              >
-                Financial Activity
-              </Text>
-              <Text
-                style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
-              >
-                (year to date)
-              </Text>
+          <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
+            <Text
+              style={{
+                fontWeight: "500",
+                color: "#fff",
+                marginRight: 5,
+              }}
+            >
+              Financial Activity
+            </Text>
+            <Text
+              style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
+            >
+              (year to date)
+            </Text>
           </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
             <Text style={styles.propInfoLabel}>$12,591</Text>
           </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
             <Text style={styles.propInfoLabel}>- $750</Text>
           </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
             <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
             <Text style={styles.propInfoLabel}>$11,841</Text>
           </View>
@@ -274,8 +286,8 @@ const PropertyDetail = ({ navigation, route }) => {
             </Text>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.navigate("CurrentLease")} style={{ marginTop: 30, height: 45, alignItems: 'center'}}>
-            <Text style={{ alignSelf: "center",color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline'}}>
+          <TouchableOpacity onPress={() => navigation.navigate("CurrentLease")} style={{ marginTop: 30, height: 45, alignItems: 'center' }}>
+            <Text style={{ alignSelf: "center", color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline' }}>
               View Lease Agreement
             </Text>
           </TouchableOpacity>
@@ -283,7 +295,7 @@ const PropertyDetail = ({ navigation, route }) => {
 
         {/* Market Property View */}
         <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
-          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>MARKET PROPERTY</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>MARKET PROPERTY</Text>
         </TouchableOpacity>
 
         {/* Actions Modal */}

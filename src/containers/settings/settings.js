@@ -4,8 +4,7 @@ import { Header } from "react-native-elements";
 // import { UserContext } from "../../providers/UserProvider";
 
 // Firebase
-import { firestore, loggingOut } from "../../firebase/firebase";
-import firebase from "firebase/app";
+import firebase, { firestore, loggingOut } from "../../firebase";
 
 // Navigation
 import { useNavigation } from "@react-navigation/native";
@@ -18,7 +17,7 @@ import styles from "./styles";
 const auth = firebase.auth();
 
 const Settings = ({ navigation }) => {
- 
+
   // Sign Out
   async function handleSignOut() {
     try {

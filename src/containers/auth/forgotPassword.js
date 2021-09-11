@@ -13,7 +13,7 @@ import Feather from "react-native-vector-icons/Feather";
 
 // Styles
 import styles from "./styles";
-import { handlePasswordReset } from "../../firebase/firebase";
+import { handlePasswordReset } from "../../firebase";
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -24,29 +24,29 @@ const ForgotPasswordScreen = ({ navigation }) => {
     navigation.navigate("Login");
   };
 
-    return (
-        <View style={styles.container}>
-            {/* Navbar */}
-            <Header
-                backgroundColor={'transparent'}
-                barStyle={'light-content'}
-                containerStyle={{ borderBottomWidth: 0}}
-                leftComponent={
-                    <Feather 
-                        name={'arrow-left'}
-                        size={25}
-                        style={{
-                            color: '#34383D50',
-                            marginTop: 40,
-                            marginLeft: 20
-                        }}
-                        onPress={() => navigation.goBack()}
-                    />
-                }
-                centerComponent={
-                    <Image source={require('../../assets/favicon.png')} style={{width: 100, height: 100}} />
-                }
-            />
+  return (
+    <View style={styles.container}>
+      {/* Navbar */}
+      <Header
+        backgroundColor={'transparent'}
+        barStyle={'light-content'}
+        containerStyle={{ borderBottomWidth: 0 }}
+        leftComponent={
+          <Feather
+            name={'arrow-left'}
+            size={25}
+            style={{
+              color: '#34383D50',
+              marginTop: 40,
+              marginLeft: 20
+            }}
+            onPress={() => navigation.goBack()}
+          />
+        }
+        centerComponent={
+          <Image source={require('../../assets/favicon.png')} style={{ width: 100, height: 100 }} />
+        }
+      />
 
       {/* Greeting*/}
       <Text style={styles.title}>Forgot Password</Text>
@@ -83,7 +83,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
         {/* Sign In Button */}
         <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }} onPress={onSubmit}>
-          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>SUBMIT</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>SUBMIT</Text>
         </TouchableOpacity>
       </View>
     </View>

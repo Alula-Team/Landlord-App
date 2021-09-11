@@ -25,12 +25,7 @@ import styles from "./styles";
 import { connect } from "react-redux";
 
 // Firebase
-import firebase from 'firebase/app';
-import 'firebase/firestore';
 import { PropertiesContext } from "../../providers/PropertiesProvider";
-// import { useCollectionData } from 'react-firebase-hooks/firestore';
-
-const db = firebase.firestore();
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -38,8 +33,9 @@ const wait = (timeout) => {
 
 const Properties = ({ navigation }) => {
   const properties = useContext(PropertiesContext);
-  const [search, setSearch] = useState("");
   const [refreshing, setRefreshing] = useState(false);
+
+  const [search, setSearch] = useState("");
   const handleSearch = (text) => {
     setSearch(text);
   };
@@ -205,11 +201,6 @@ const Properties = ({ navigation }) => {
                 onPress={() =>
                   navigation.navigate("PropertyDetail", {
                     itemID: item.id,
-                    itemAddress: item.address,
-                    itemUnit: item.unit,
-                    itemCity: item.city,
-                    itemState: item.state,
-                    itemZip: item.zip,
                   })
                 }
               >

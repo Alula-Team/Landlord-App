@@ -36,6 +36,8 @@ const wait = (timeout) => {
 const Tenants = ({ navigation }) => {
   const tenants = useContext(TenantsContext);
 
+  console.log(tenants);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const [search, setSearch] = useState("");
@@ -193,22 +195,7 @@ const Tenants = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.listCell}
                 onPress={() =>
-                  navigation.navigate("TenantDetail", {
-                    theItem: {
-                      ID: item.id,
-                      name: item.name,
-                      email: item.email,
-                      phone: item.phone,
-                    },
-                    theProperty: {
-                      ID: item.property.id,
-                      address: item.property.address,
-                      city: item.property.city,
-                      state: item.property.state,
-                      unit: item.property.unit,
-                      zip: item.property.zip,
-                    },
-                  })
+                  navigation.navigate("TenantDetail", { itemID: item.id })
                 }
               >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>

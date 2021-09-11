@@ -8,7 +8,7 @@ import firebase from "firebase";
 import Feather from "react-native-vector-icons/Feather";
 
 // Firebase
-import { registration } from "../../firebase/firebase";
+import { registration } from "../../firebase";
 
 // Style Sheet
 import styles from "./styles";
@@ -137,7 +137,7 @@ const RegisterScreen = ({ navigation }) => {
 
         {/* Sign Up Button */}
         <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }} onPress={onSubmit}>
-          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>REGISTER</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>REGISTER</Text>
         </TouchableOpacity>
 
         {/* Terms & Conditions */}

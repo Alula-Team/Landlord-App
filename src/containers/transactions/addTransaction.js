@@ -20,7 +20,7 @@ import PropertySelect from "../properties/PropertySelect";
 import faker from "faker";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import { db } from "../../firebase";
 
 // Style Sheet
 import { styles, pickerStyles } from "./styles";

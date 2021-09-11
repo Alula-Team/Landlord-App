@@ -3,7 +3,7 @@ import { Text, TextInput, View, TouchableOpacity, ScrollView, Alert } from 'reac
 import { Header, Icon } from 'react-native-elements';
 
 // Firebase
-import { updateUserEmail } from '../../firebase/firebase';
+import { updateUserEmail } from '../../firebase';
 
 // Style Sheet
 import styles from './styles';
@@ -40,34 +40,34 @@ const UpdateEmail = ({ navigation }) => {
                     centerComponent={{
                         text: "Update Email",
                         style: {
-                        color: "#34383D",
-                        fontWeight: '600', 
-                        fontSize: 20,
-                        paddingTop: 20,
+                            color: "#34383D",
+                            fontWeight: '600',
+                            fontSize: 20,
+                            paddingTop: 20,
                         },
                     }}
                     leftComponent={
                         <Icon
-                        name="arrow-left"
-                        type="feather"
-                        color="#34383D80"
-                        size={25}
-                        iconStyle={{
-                            paddingTop: 20,
-                            paddingLeft: 10,
-                            paddingBottom: 10,
-                        }}
-                        onPress={() => navigation.goBack()}
+                            name="arrow-left"
+                            type="feather"
+                            color="#34383D80"
+                            size={25}
+                            iconStyle={{
+                                paddingTop: 20,
+                                paddingLeft: 10,
+                                paddingBottom: 10,
+                            }}
+                            onPress={() => navigation.goBack()}
                         />
                     }
                     rightComponent={
                         <TouchableOpacity
-                          style={{ paddingTop: 22.5, paddingRight: 10 }}
-                          onPress={onSubmit}
+                            style={{ paddingTop: 22.5, paddingRight: 10 }}
+                            onPress={onSubmit}
                         >
-                          <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
-                            Save
-                          </Text>
+                            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
+                                Save
+                            </Text>
                         </TouchableOpacity>
                     }
                     containerStyle={{
@@ -78,11 +78,11 @@ const UpdateEmail = ({ navigation }) => {
                 />
 
                 {/* Edit Profile Form */}
-                <ScrollView style={{marginTop: 20}}>
+                <ScrollView style={{ marginTop: 20 }}>
 
                     {/* Email Address */}
                     <View style={styles.inputContainer}>
-                        <TextInput 
+                        <TextInput
                             type='text'
                             placeholder='New Email'
                             placeholderTextColor='#34383D80'

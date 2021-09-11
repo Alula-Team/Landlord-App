@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { PropertiesContext } from '../../providers/PropertiesProvider'
 import RNPickerSelect from "react-native-picker-select";
 
-import { pickerStyles } from './styles'
+import { pickerStyles } from './styles';
 
 const PropertySelect = ({ value, onChange }) => {
   const properties = useContext(PropertiesContext);

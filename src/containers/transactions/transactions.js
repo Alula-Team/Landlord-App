@@ -22,10 +22,10 @@ import Feather from "react-native-vector-icons/Feather";
 import { styles } from "./styles";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import { db } from "../../firebase";
 
 import { TransactionsContext } from "../../providers/TransactionsProvider";
-import { PropertiesContext } from "../../providers/PropertiesProvider";
+// import { PropertiesContext } from "../../providers/PropertiesProvider";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // import { getSubCollections } from "../../../functions";
@@ -41,8 +41,6 @@ const wait = (timeout) => {
 
 const Transactions = ({ navigation }) => {
   const transactions = useContext(TransactionsContext);
-  const properties = useContext(PropertiesContext);
-
   const [shouldShow, setShouldShow] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
@@ -266,25 +264,10 @@ const Transactions = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.listCell}
                 onPress={() =>
-                  navigation.navigate("ManageTransaction", {
-                    theItem: {
-                      ID: item.id,
-                      amount: item.amount,
-                      date: makeDate(item.date),
-                      description: item.description,
-                      paymentMethod: item.paymentMethod,
-                      transactionCategory: item.transactionCategory,
-                      transactionType: item.transactionType,
-                    },
-                    theProperty: {
-                      ID: item.property.id,
-                      address: item.property.address,
-                      city: item.property.city,
-                      state: item.property.state,
-                      unit: item.property.unit,
-                      zip: item.property.zip,
-                    },
-                  })
+                  navigation.navigate("TransactionDetail", {
+                    itemID: item.id
+                  }
+                  )
                 }
               >
                 {/* Transaction Category and Amount*/}

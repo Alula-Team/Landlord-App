@@ -14,7 +14,7 @@ import faker from "faker";
 faker.locale = "en_US";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase";
+import { auth, db } from "../../firebase";
 
 // Style Sheet
 import styles, { pickerStyles } from "./styles";
@@ -67,6 +67,7 @@ const AddTenant = ({ navigation }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    data.property = JSON.parse(data.property);
     console.log(data);
     db.collection("tenants").add(data);
     navigation.goBack();
@@ -451,7 +452,7 @@ const AddTenant = ({ navigation }) => {
           )}
 
           {/* Start Date - Calendar */}
-          <Controller
+          {/* <Controller
             control={control}
             render={() => (
               <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -472,7 +473,7 @@ const AddTenant = ({ navigation }) => {
               </View>
             )}
             name="date"
-          />
+          /> */}
 
         </KeyboardAwareScrollView>
       </View>
