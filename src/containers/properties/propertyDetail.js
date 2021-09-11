@@ -163,6 +163,7 @@ const PropertyDetail = ({ navigation, route }) => {
             </View>
           </View>
 
+          {/* Leasing Information */}
           <Text
             style={{
               color: "#34383D90",
@@ -202,34 +203,6 @@ const PropertyDetail = ({ navigation, route }) => {
             </Text>
           </View>
 
-          {/* Lease Length */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Length:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-              12 mo
-            </Text>
-          </View>
-
-          {/* Lease Type */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Lease Type:</Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-              Fixed
-            </Text>
-          </View>
-
           {/* Rental Rate */}
           <View
             style={{
@@ -241,22 +214,6 @@ const PropertyDetail = ({ navigation, route }) => {
             <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               $1,399
-            </Text>
-          </View>
-
-          {/* Security Deposit */}
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              marginTop: 20,
-            }}
-          >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>
-              Security Deposit:
-            </Text>
-            <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
-              $750
             </Text>
           </View>
 
@@ -328,7 +285,7 @@ const PropertyDetail = ({ navigation, route }) => {
                   paddingLeft: 20,
                 }}
               >
-                <Feather name="edit-3" size={22.5} color="#34383D" />
+                <Feather name="key" size={20} color="#34383D" />
                 <Text
                   style={{
                     color: "#34383D",
@@ -350,7 +307,7 @@ const PropertyDetail = ({ navigation, route }) => {
                 }}
                 onPress={deleteAlert}
               >
-                <Feather name="trash" size={22.5} color="red" />
+                <Feather name="delete" size={20} color="red" />
                 <Text
                   style={{
                     color: "red",

@@ -1,7 +1,9 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { Text, View, Image, FlatList } from "react-native";
+import { Text, View, TouchableOpacity, Image } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { GiftedChat, Send } from "react-native-gifted-chat";
+
+import UploadImage from '../constants/uploadImage';
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -25,6 +27,10 @@ const MessageDetailScreen = ({ navigation }) => {
           _id: 2,
           name: 'Joseph Smith',
         },
+        image: '',
+        video: '',
+        sent: true,
+        received: true,
       },
     ])
   }, [])
@@ -34,22 +40,51 @@ const MessageDetailScreen = ({ navigation }) => {
     setMessages(previousMessages => GiftedChat.append(previousMessages, messages))
   }, []);
 
+  // Send Button
+  const renderSend = (props) => {
+    return (
+      <Send {...props}>
+        <View>
+          <Feather name='send' size={22.5} color='#2e64e5' style={{paddingTop: 10, paddingRight: 10, paddingBottom: 10}} />
+        </View>
+      </Send>
+    );
+  }
+  // Action Button
+  const renderActions = () => {
+    return (
+      <UploadImage />
+    );
+  }
+
   return (
     <>
       <View style={styles.container}>
         {/* Header */}
         <Header
           centerComponent={
-            <Text
+            <>
+              <Text
+                style={{
+                  color: "#34383D",
+                  fontSize: 17,
+                  fontWeight: "600",
+                  paddingTop: 7.5
+                }}
+              >
+                Recipient Name
+              </Text>
+              <Text
               style={{
-                color: "#34383D",
-                fontSize: 17,
+                color: "#34383D90",
+                fontSize: 14,
                 fontWeight: "600",
-                paddingTop: 22.5,
+                paddingTop: 10,
               }}
             >
-              Recipient Name
+              Property Address
             </Text>
+          </>
           }
           leftComponent={
             <Icon
@@ -77,8 +112,11 @@ const MessageDetailScreen = ({ navigation }) => {
           messages={messages}
           isTyping={true}
           placeholder='What would you like to say?'
-          textInputStyle={styles.inputField}
+          textInputStyle={{ color: "#34383D", fontSize: 16, fontWeight: "500", paddingTop: 10 }}
           renderUsernameOnMessage={true}
+          renderActions={renderActions}
+          renderSend={renderSend}
+          alwaysShowSend
           keyboardShouldPersistTaps='always'
           onSend={messages => onSend(messages)}
           user={{

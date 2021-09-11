@@ -215,7 +215,7 @@ const ManageTransaction = ({ navigation, route }) => {
                     paddingLeft: 20,
                   }}
                 >
-                  <Feather name="edit-3" size={22.5} color="#34383D" />
+                  <Feather name="file" size={20} color="#34383D" />
                   <Text
                     style={{
                       color: "#34383D",
@@ -237,7 +237,7 @@ const ManageTransaction = ({ navigation, route }) => {
                   }}
                   onPress={deleteAlert}
                 >
-                  <Feather name="trash" size={22.5} color="red" />
+                  <Feather name="delete" size={20} color="red" />
                   <Text
                     style={{
                       color: "red",

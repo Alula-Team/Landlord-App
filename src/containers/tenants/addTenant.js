@@ -7,7 +7,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { SelectOptions, FakerOptions } from "../../forms";
 import { useForm, Controller } from "react-hook-form";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 // Faker
 import faker from "faker";
@@ -22,22 +21,7 @@ import styles, { pickerStyles } from "./styles";
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 const AddTenant = ({ navigation }) => {
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
   const properties = useContext(PropertiesContext);
-
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
-    console.log(date);
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
-  };
 
   const allProperties = properties.map((item) => {
     return {
@@ -120,7 +104,7 @@ const AddTenant = ({ navigation }) => {
 
         {/* Content */}
         <KeyboardAwareScrollView>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               backgroundColor: "#5858FB",
               margin: 30,
@@ -139,7 +123,7 @@ const AddTenant = ({ navigation }) => {
             >
               Fake It!
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           {/* TENANT INFORMATION */}
           <Text style={styles.inputLabel}>Tenant Information</Text>
@@ -450,30 +434,68 @@ const AddTenant = ({ navigation }) => {
             </Text>
           )}
 
-          {/* Start Date - Calendar */}
+          {/* Lease Start Date */}
           <Controller
             control={control}
-            render={() => (
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Text style={styles.inputLabel}>Start Date:</Text>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode={mode}
-                  display="default"
-                  textColor="#fff"
-                  style={{
-                    marginLeft: 10,
-                    marginTop: 20,
-                    width: "100%",
-                  }}
-                  onChange={handleDateChange}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.inputContainer}>
+                <TextInput
+                  type="text"
+                  placeholder="Move In Date - MM/DD/YYYY"
+                  autoCorrect={false}
+                  clearButtonMode={"while-editing"}
+                  keyboardAppearance="light"
+                  keyboardType='number-pad'
+                  placeholderTextColor="#34383D40"
+                  style={styles.inputField}
+                  onChangeText={onChange}
+                  value={value}
                 />
               </View>
             )}
-            name="date"
+            name="securityDeposit"
+            rules={{ required: false }}
+            defaultValue=""
           />
+          {errors.securityDeposit && (
+            <Text
+              style={{
+                color: "red",
+                paddingLeft: 35,
+                marginTop: 10
+              }}
+            >
+              This field is required
+            </Text>
+          )}
 
+          {/* Description */}
+          <Text style={styles.inputLabel}>Description</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <View style={styles.textArea}>
+                <TextInput
+                  type="text"
+                  placeholder="Enter Transaction Description ..."
+                  placeholderTextColor="#34383D40"
+                  style={{
+                    color: "#34383D",
+                    fontSize: 16,
+                    fontWeight: "500",
+                    marginLeft: 12.5,
+                    paddingTop: 10,
+                  }}
+                  multiline={true}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              </View>
+            )}
+            name="description"
+            rules={{ required: false }}
+            defaultValue=""
+          />
         </KeyboardAwareScrollView>
       </View>
     </>

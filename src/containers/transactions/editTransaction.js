@@ -6,7 +6,6 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 // Form
 import { useForm, Controller } from "react-hook-form";
 import RNPickerSelect from "react-native-picker-select";
-import DateTimePicker from "@react-native-community/datetimepicker";
 
 import faker from "faker";
 faker.locale = "en_US";
@@ -28,22 +27,6 @@ const EditTransaction = ({ navigation, route }) => {
       ...theProperty,
     },
     ...theItem,
-  };
-
-  const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
-
-  const handleDateChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(Platform.OS === "ios");
-    setDate(currentDate);
-    console.log(date);
-  };
-
-  const showMode = (currentMode) => {
-    setShow(true);
-    setMode(currentMode);
   };
 
   const checkEqual = (prop1, prop2) => {
@@ -312,30 +295,6 @@ const EditTransaction = ({ navigation, route }) => {
           name="description"
           rules={{ required: false }}
           defaultValue=""
-        />
-
-        {/* Date Paid */}
-        <Controller
-          control={control}
-          render={() => (
-            <View style={{ flexDirection: "row", marginVertical: 20, alignItems: 'center' }}>
-              <Text style={styles.inputLabel}>Date Paid:</Text>
-              <DateTimePicker
-                testID="dateTimePicker"
-                value={date}
-                mode={mode}
-                display="default"
-                textColor="#fff"
-                style={{
-                  marginLeft: 10,
-                  marginTop: 20,
-                  width: "100%",
-                }}
-                onChange={handleDateChange}
-              />
-            </View>
-          )}
-          name="date"
         />
 
         {/* Upload Recipt*/}
