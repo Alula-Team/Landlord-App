@@ -25,9 +25,12 @@ import styles from "./styles";
 import { connect } from "react-redux";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
-
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import { PropertiesContext } from "../../providers/PropertiesProvider";
+// import { useCollectionData } from 'react-firebase-hooks/firestore';
+
+const db = firebase.firestore();
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -35,16 +38,16 @@ const wait = (timeout) => {
 
 const Properties = ({ navigation }) => {
   const properties = useContext(PropertiesContext);
-  const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
   const [refreshing, setRefreshing] = useState(false);
-  const handleQuery = (text) => {
-    setQuery(text);
+  const handleSearch = (text) => {
+    setSearch(text);
   };
 
   const filteredList = properties.filter((item) =>
-    item.address.toLowerCase().includes(query.trim().toLowerCase())
+    item.address.toLowerCase().includes(search.trim().toLowerCase())
   );
-
+  console.log(properties);
   const data = filteredList;
 
   const {
@@ -183,8 +186,8 @@ const Properties = ({ navigation }) => {
                 autoCorrect={false}
                 style={styles.searchInput}
                 clearButtonMode="while-editing"
-                onChangeText={handleQuery}
-                value={query}
+                onChangeText={handleSearch}
+                value={search}
               />
             </View>
           )}

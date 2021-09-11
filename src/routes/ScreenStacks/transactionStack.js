@@ -4,10 +4,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import Transactions from "../../containers/transactions/transactions";
-import AddTransaction from "../../containers/transactions/addTransaction";
-import EditTransaction from "../../containers/transactions/editTransaction";
-import ManageTransaction from "../../containers/transactions/manageTransaction";
+import { Transactions, TransactionDetail, AddTransaction } from "../../containers/transactions";
 
 const Stack = createStackNavigator();
 

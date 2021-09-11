@@ -15,15 +15,16 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles, { googlePlacesStyles } from "./styles";
 
-// Redux Stuff
-import { batch, connect } from "react-redux";
-import { doAddProperty } from "../../store/actions";
-import { onChange } from "react-native-reanimated";
+// Google Address bar
+import GooglePlacesSearch from "./googlePlacesSearch";
+
+// ScreenHeader
+import ScreenHeader from "./screenHeader";
 
 // Firebase
-import { auth, db } from "../../firebase/firebase";
-import ScreenHeader from "./screenHeader";
-import GooglePlacesSearch from "./googlePlacesSearch";
+import firebase from "firebase/app";
+import 'firebase/firestore';
+const db = firebase.firestore();
 
 const AddProperty = ({ navigation }) => {
   const INITIAL_STATE = {

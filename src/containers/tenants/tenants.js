@@ -38,15 +38,16 @@ const wait = (timeout) => {
 
 const Tenants = ({ navigation }) => {
   const tenants = useContext(TenantsContext);
-  const [query, setQuery] = useState("");
+
   const [refreshing, setRefreshing] = useState(false);
 
-  const handleQuery = (text) => {
-    setQuery(text);
+  const [search, setSearch] = useState("");
+  const handleSearch = (text) => {
+    setSearch(text);
   };
 
   const filteredList = tenants.filter((item) =>
-    item.name.toLowerCase().includes(query.trim().toLowerCase())
+    item.name.toLowerCase().includes(search.trim().toLowerCase())
   );
 
   const data = filteredList;
@@ -179,8 +180,8 @@ const Tenants = ({ navigation }) => {
             autoCorrect={false}
             style={styles.searchInput}
             clearButtonMode="while-editing"
-            onChangeText={handleQuery}
-            value={query}
+            onChangeText={handleSearch}
+            value={search}
           />
         </View>
 

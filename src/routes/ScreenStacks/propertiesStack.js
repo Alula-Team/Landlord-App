@@ -5,11 +5,8 @@ import { enableScreens } from "react-native-screens";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import Properties from "../../containers/properties/properties";
-import AddProperty from "../../containers/properties/addProperty";
-import EditProperty from "../../containers/properties/editProperty";
+import { Properties, AddProperty, PropertyDetail } from "../../containers/properties";
 import Messages from "../../containers/properties/messages";
-import PropertyDetail from "../../containers/properties/propertyDetail";
 import MessageDetail from "../../containers/properties/messageDetail";
 import CurrentLease from "../../containers/tenants/currentLease";
 
@@ -31,18 +28,13 @@ const PropertiesNavigation = (props) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="EditProperty"
-          component={EditProperty}
+          name="PropertyDetail"
+          component={PropertyDetail}
           options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Messages"
           component={Messages}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="PropertyDetail"
-          component={PropertyDetail}
           options={{ headerShown: false }}
         />
         <Stack.Screen
