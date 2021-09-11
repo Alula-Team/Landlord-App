@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         color: '#ffffff70'
     },
     errorMsg: {
-        marginLeft: 30, 
+        marginLeft: 30,
         marginTop: 10
     },
     errorText: {

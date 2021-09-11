@@ -13,13 +13,13 @@ import { useForm, Controller } from "react-hook-form";
 import RNPickerSelect from "react-native-picker-select";
 import { SelectOptions, FakerOptions } from "../../forms";
 
-import { PropertiesContext } from "../../providers/PropertiesProvider";
+import PropertySelect from "../properties/PropertySelect";
 
 // Faker
 import faker from "faker";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import { db } from "../../firebase";
 
 // Style Sheet
 import { styles, pickerStyles } from "./styles";
@@ -30,23 +30,23 @@ const AddTransaction = ({ navigation }) => {
 
   const properties = useContext(PropertiesContext);
 
-  const addressArray = properties.map((property) => {
-    return property.address;
-  });
+  // const addressArray = properties.map((property) => {
+  //   return property.address;
+  // });
 
-  const allProperties = properties.map((item) => {
-    return {
-      label: `${item.address} ${item.unit}`,
-      value: {
-        id: item.id,
-        address: item.address,
-        city: item.city,
-        state: item.state,
-        unit: item.unit,
-        zip: item.zip,
-      },
-    };
-  });
+  // const allProperties = properties.map((item) => {
+  //   return {
+  //     label: `${item.address} ${item.unit}`,
+  //     value: {
+  //       id: item.id,
+  //       address: item.address,
+  //       city: item.city,
+  //       state: item.state,
+  //       unit: item.unit,
+  //       zip: item.zip,
+  //     },
+  //   };
+  // });
 
   const {
     control,
@@ -79,6 +79,7 @@ const AddTransaction = ({ navigation }) => {
 
   // Date
   const onSubmit = (data) => {
+    data.property = JSON.parse(data.property);
     console.log(data);
     db.collection("transactions").add(data);
     navigation.goBack();
@@ -222,17 +223,18 @@ const AddTransaction = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Property",
-                  value: "selectProperty",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={allProperties}
-              />
+              <PropertySelect value={value} onChange={onChange} />
+              // <RNPickerSelect
+              //   placeholder={{
+              //     label: "Select Property",
+              //     value: "selectProperty",
+              //     color: "#34383D",
+              //   }}
+              //   style={pickerStyles}
+              //   value={value}
+              //   onValueChange={onChange}
+              //   items={allProperties}
+              // />
             )}
             name="property"
             rules={{ required: true }}
@@ -387,7 +389,7 @@ const AddTransaction = ({ navigation }) => {
           {/* Upload Recipt*/}
           <Text style={styles.inputLabel}>Upload Receipt:</Text>
           <UploadReceipt />
-          
+
         </View>
       </KeyboardAwareScrollView>
     </View>

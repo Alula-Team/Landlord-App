@@ -4,10 +4,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import Transactions from "../../containers/transactions/transactions";
-import AddTransaction from "../../containers/transactions/addTransaction";
-import EditTransaction from "../../containers/transactions/editTransaction";
-import ManageTransaction from "../../containers/transactions/manageTransaction";
+import { Transactions, TransactionDetail, AddTransaction } from "../../containers/transactions";
 
 const Stack = createStackNavigator();
 
@@ -26,13 +23,8 @@ const TransactionsNavigation = (props) => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="EditTransaction"
-          component={EditTransaction}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="ManageTransaction"
-          component={ManageTransaction}
+          name="TransactionDetail"
+          component={TransactionDetail}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

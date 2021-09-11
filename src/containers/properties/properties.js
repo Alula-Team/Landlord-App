@@ -25,8 +25,6 @@ import styles from "./styles";
 import { connect } from "react-redux";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
-
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 
 const wait = (timeout) => {
@@ -35,16 +33,17 @@ const wait = (timeout) => {
 
 const Properties = ({ navigation }) => {
   const properties = useContext(PropertiesContext);
-  const [query, setQuery] = useState("");
   const [refreshing, setRefreshing] = useState(false);
-  const handleQuery = (text) => {
-    setQuery(text);
+
+  const [search, setSearch] = useState("");
+  const handleSearch = (text) => {
+    setSearch(text);
   };
 
   const filteredList = properties.filter((item) =>
-    item.address.toLowerCase().includes(query.trim().toLowerCase())
+    item.address.toLowerCase().includes(search.trim().toLowerCase())
   );
-
+  console.log(properties);
   const data = filteredList;
 
   const {
@@ -183,8 +182,8 @@ const Properties = ({ navigation }) => {
                 autoCorrect={false}
                 style={styles.searchInput}
                 clearButtonMode="while-editing"
-                onChangeText={handleQuery}
-                value={query}
+                onChangeText={handleSearch}
+                value={search}
               />
             </View>
           )}
@@ -202,11 +201,6 @@ const Properties = ({ navigation }) => {
                 onPress={() =>
                   navigation.navigate("PropertyDetail", {
                     itemID: item.id,
-                    itemAddress: item.address,
-                    itemUnit: item.unit,
-                    itemCity: item.city,
-                    itemState: item.state,
-                    itemZip: item.zip,
                   })
                 }
               >

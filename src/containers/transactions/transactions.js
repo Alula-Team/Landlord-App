@@ -22,10 +22,10 @@ import Feather from "react-native-vector-icons/Feather";
 import { styles } from "./styles";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import { db } from "../../firebase";
 
 import { TransactionsContext } from "../../providers/TransactionsProvider";
-import { PropertiesContext } from "../../providers/PropertiesProvider";
+// import { PropertiesContext } from "../../providers/PropertiesProvider";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 // import { getSubCollections } from "../../../functions";
@@ -41,10 +41,13 @@ const wait = (timeout) => {
 
 const Transactions = ({ navigation }) => {
   const transactions = useContext(TransactionsContext);
-  const properties = useContext(PropertiesContext);
-  const [query, setQuery] = useState("");
   const [shouldShow, setShouldShow] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+
+  const [search, setSearch] = useState("");
+  const handleSearch = (text) => {
+    setSearch(text);
+  };
 
   const makeDate = (dateObj) => {
     const zeeDate = new Date(dateObj.seconds * 1000).toLocaleDateString(
@@ -58,14 +61,11 @@ const Transactions = ({ navigation }) => {
     return zeeDate;
   };
 
-  const handleQuery = (text) => {
-    setQuery(text);
-  };
 
   const filteredList = transactions.filter(
     (item) =>
-      item.transactionType.toLowerCase().includes(query.toLowerCase()) ||
-      item.transactionCategory.toLowerCase().includes(query.toLowerCase())
+      item.transactionType.toLowerCase().includes(search.toLowerCase()) ||
+      item.transactionCategory.toLowerCase().includes(search.toLowerCase())
   );
 
   //
@@ -177,7 +177,7 @@ const Transactions = ({ navigation }) => {
                     paddingBottom: 10,
                   }}
                   onPress={() => {
-                    setQuery("");
+                    setSearch("");
                     navigation.navigate("AddTransaction");
                   }}
                 />
@@ -210,8 +210,8 @@ const Transactions = ({ navigation }) => {
                 autoCorrect={false}
                 style={styles.searchInput}
                 clearButtonMode="while-editing"
-                onChangeText={handleQuery}
-                value={query}
+                onChangeText={handleSearch}
+                value={search}
               />
             </View>
           )}
@@ -222,7 +222,7 @@ const Transactions = ({ navigation }) => {
         {/* Revenue Overview */}
         {shouldShow ? (
           <View style={styles.moneyBox}>
-            <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10}}>
+            <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
               <Text
                 style={{
                   fontWeight: "500",
@@ -238,20 +238,20 @@ const Transactions = ({ navigation }) => {
                 (year to date)
               </Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
               <Text style={styles.propInfoLabel}>$42,000</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
               <Text style={styles.propInfoLabel}>- $14,450</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
               <Text style={styles.propInfoLabel}>$27,550</Text>
             </View>
           </View>
-            
+
         ) : null}
         {/* END Revenue Overview */}
 
@@ -264,25 +264,10 @@ const Transactions = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.listCell}
                 onPress={() =>
-                  navigation.navigate("ManageTransaction", {
-                    theItem: {
-                      ID: item.id,
-                      amount: item.amount,
-                      date: makeDate(item.date),
-                      description: item.description,
-                      paymentMethod: item.paymentMethod,
-                      transactionCategory: item.transactionCategory,
-                      transactionType: item.transactionType,
-                    },
-                    theProperty: {
-                      ID: item.property.id,
-                      address: item.property.address,
-                      city: item.property.city,
-                      state: item.property.state,
-                      unit: item.property.unit,
-                      zip: item.property.zip,
-                    },
-                  })
+                  navigation.navigate("TransactionDetail", {
+                    itemID: item.id
+                  }
+                  )
                 }
               >
                 {/* Transaction Category and Amount*/}

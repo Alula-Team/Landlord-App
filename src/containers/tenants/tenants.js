@@ -19,14 +19,11 @@ import Feather from "react-native-vector-icons/Feather";
 import styles from "./styles";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import firebase, { auth, db } from "../../firebase";
 import { collectIdsAndData } from "../../utilities";
 
 import { TenantsContext } from "../../providers/TenantsProvider";
 // import { withProperty } from "../../providers/PropertiesProvider";
-
-import Tenant from "./Tenant";
-import { PropertyContext } from "../../providers/PropertiesProvider";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -38,15 +35,18 @@ const wait = (timeout) => {
 
 const Tenants = ({ navigation }) => {
   const tenants = useContext(TenantsContext);
-  const [query, setQuery] = useState("");
+
+  console.log(tenants);
+
   const [refreshing, setRefreshing] = useState(false);
 
-  const handleQuery = (text) => {
-    setQuery(text);
+  const [search, setSearch] = useState("");
+  const handleSearch = (text) => {
+    setSearch(text);
   };
 
   const filteredList = tenants.filter((item) =>
-    item.name.toLowerCase().includes(query.trim().toLowerCase())
+    item.name.toLowerCase().includes(search.trim().toLowerCase())
   );
 
   const data = filteredList;
@@ -179,8 +179,8 @@ const Tenants = ({ navigation }) => {
             autoCorrect={false}
             style={styles.searchInput}
             clearButtonMode="while-editing"
-            onChangeText={handleQuery}
-            value={query}
+            onChangeText={handleSearch}
+            value={search}
           />
         </View>
 
@@ -195,22 +195,7 @@ const Tenants = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.listCell}
                 onPress={() =>
-                  navigation.navigate("TenantDetail", {
-                    theItem: {
-                      ID: item.id,
-                      name: item.name,
-                      email: item.email,
-                      phone: item.phone,
-                    },
-                    theProperty: {
-                      ID: item.property.id,
-                      address: item.property.address,
-                      city: item.property.city,
-                      state: item.property.state,
-                      unit: item.property.unit,
-                      zip: item.property.zip,
-                    },
-                  })
+                  navigation.navigate("TenantDetail", { itemID: item.id })
                 }
               >
                 <View style={{ flexDirection: "row", alignItems: "center" }}>

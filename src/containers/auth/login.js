@@ -10,7 +10,7 @@ import { useForm, Controller } from "react-hook-form";
 import Feather from "react-native-vector-icons/Feather";
 
 // Firebase
-import { signIn } from "../../firebase/firebase";
+import { signIn } from "../../firebase";
 
 // Style Sheet
 import styles from "./styles";
@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [indicator, setIndicator] = useState(false);
 
-  
+
   const onSubmit = () => {
     signIn(email, password);
     setEmail("");
@@ -122,7 +122,7 @@ const LoginScreen = ({ navigation }) => {
 
         {/* Sign In Button */}
         <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }} onPress={onSubmit}>
-          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white'}}>SIGN IN</Text>
+          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>SIGN IN</Text>
         </TouchableOpacity>
       </View>
 

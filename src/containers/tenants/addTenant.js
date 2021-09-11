@@ -13,12 +13,12 @@ import faker from "faker";
 faker.locale = "en_US";
 
 // Firebase
-import firebase, { auth, db } from "../../firebase/firebase";
+import { auth, db } from "../../firebase";
 
 // Style Sheet
 import styles, { pickerStyles } from "./styles";
 
-import { PropertiesContext } from "../../providers/PropertiesProvider";
+import PropertySelect from "../properties/PropertySelect";
 
 const AddTenant = ({ navigation }) => {
   const properties = useContext(PropertiesContext);
@@ -52,6 +52,7 @@ const AddTenant = ({ navigation }) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    data.property = JSON.parse(data.property);
     console.log(data);
     db.collection("tenants").add(data);
     navigation.goBack();
@@ -197,7 +198,7 @@ const AddTenant = ({ navigation }) => {
               This field is required
             </Text>
           )}
-          
+
           {/* Phone Number */}
           <Controller
             control={control}
@@ -235,22 +236,23 @@ const AddTenant = ({ navigation }) => {
 
           {/* LEASING INFORMATION */}
           <Text style={styles.inputLabel}>Leasing Information</Text>
-    
+
           {/* Property */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Property",
-                  value: "selectProperty",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={allProperties}
-              />
+              <PropertySelect value={value} onChange={onChange} />
+              // <RNPickerSelect
+              //   placeholder={{
+              //     label: "Select Property",
+              //     value: "selectProperty",
+              //     color: "#34383D",
+              //   }}
+              //   style={pickerStyles}
+              //   value={value}
+              //   onValueChange={onChange}
+              //   items={allProperties}
+              // />
             )}
             name="property"
             rules={{ required: false }}

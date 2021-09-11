@@ -1,5 +1,5 @@
 import React, { useState, useEffect, createContext } from "react";
-import { db } from "../firebase/firebase";
+import { db } from "../firebase";
 import { collectIdsAndData } from "../utilities";
 
 export const TransactionsContext = createContext();
