@@ -5,7 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
 import { Tenants, TenantDetail, AddTenant } from "../../containers/tenants";
-import CurrentLease from "../../containers/tenants/currentLease";
+import CurrentLease from '../../containers/tenants/currentLease';
 
 const Stack = createStackNavigator();
 

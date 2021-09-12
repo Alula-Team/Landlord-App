@@ -21,21 +21,6 @@ import styles, { pickerStyles } from "./styles";
 import PropertySelect from "../properties/PropertySelect";
 
 const AddTenant = ({ navigation }) => {
-  const properties = useContext(PropertiesContext);
-
-  const allProperties = properties.map((item) => {
-    return {
-      label: `${item.address} ${item.unit}`,
-      value: {
-        id: item.id,
-        address: item.address,
-        city: item.city,
-        state: item.state,
-        zip: item.zip,
-        unit: item.unit,
-      },
-    };
-  });
 
   const fakeIt = () => {
     setValue("name", faker.name.firstName() + " " + faker.name.lastName());
@@ -128,7 +113,7 @@ const AddTenant = ({ navigation }) => {
 
           {/* TENANT INFORMATION */}
           <Text style={styles.inputLabel}>Tenant Information</Text>
-          {/* First Name */}
+          {/* Tenant Name */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (

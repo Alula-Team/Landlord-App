@@ -5,7 +5,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
 import { Transactions, TransactionDetail, AddTransaction } from "../../containers/transactions";
-
 const Stack = createStackNavigator();
 
 const TransactionsNavigation = (props) => {

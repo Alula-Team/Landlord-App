@@ -221,7 +221,8 @@ const TenantDetail = ({ route, navigation }) => {
                 </Text>
               </View>
 
-              <TouchableOpacity onPress={() => navigation.navigate("CurrentLease")} style={{ marginTop: 30, height: 45, alignItems: 'center'}}>
+              {/* View Lease */}
+              <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')} style={{ marginTop: 30, height: 45, alignItems: 'center'}}>
                 <Text style={{ alignSelf: "center",color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline'}}>
                   View Lease Agreement
                 </Text>
@@ -242,69 +243,44 @@ const TenantDetail = ({ route, navigation }) => {
                 <View style={styles.modalContainer}>
                   <Text
                     style={{
-                      alignSelf: "center",
                       color: "#34383D",
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: "600",
-                      marginLeft: 10,
+                      textAlign: "center",
+                      marginTop: 20,
                     }}
                   >
-                    View Current Lease
+                    Actions
                   </Text>
-                </View>
-                <Feather
-                  name="arrow-right"
-                  color="#34383D80"
-                  size={20}
-                  style={{ alignSelf: "center", marginRight: 10 }}
-                />
-              </TouchableOpacity>
 
-              {/* Upload New Lease */}
-              <TouchableOpacity
-                style={{
-                  marginHorizontal: 5,
-                  marginTop: 10,
-                  marginBottom: 20,
-                  height: 45,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View style={{ flexDirection: "row" }}>
-                  <Feather
-                    name="upload"
-                    size={18}
-                    color="#34383D80"
+                  {/* Edit Tenant */}
+                  <TouchableOpacity
+                    // onPress={() => (
+                    //   setModalVisible(!modalVisible),
+                    //   navigation.navigate("EditTenant", {
+                    //     itemID
+                    //   })
+                    // )}
                     style={{
-                      alignSelf: "center",
-                      marginLeft: 20,
-                    }}
-                  />
-                  <Text
-                    style={{
-                      alignSelf: "center",
-                      color: "#34383D",
-                      fontSize: 16,
-                      fontWeight: "600",
-                      marginLeft: 10,
-                      textDecorationLine: "underline",
+                      flexDirection: "row",
+                      alignItems: "center",
+                      paddingTop: 30,
+                      paddingLeft: 20,
                     }}
                   >
                     <Feather name="user" size={20} color="#34383D" />
                     <Text
                       style={{
                         color: "#34383D",
-                        fontSize: 18,
+                        fontSize: 16,
                         fontWeight: "600",
-                        textAlign: "center",
-                        marginTop: 20,
+                        marginLeft: 10,
                       }}
                     >
-                      Actions
+                      Edit Tenant
                     </Text>
+                  </TouchableOpacity>
 
-  <<<<<<< HEAD
                   {/* Edit Lease Information */}
                   <TouchableOpacity
                     style={{
@@ -339,117 +315,44 @@ const TenantDetail = ({ route, navigation }) => {
                   >
                     <Feather name="delete" size={20} color="red" />
                     <Text
-  =======
-                    {/* Edit Tenant */}
-                    <TouchableOpacity
-                      onPress={() => (
-                        setModalVisible(!modalVisible),
-                        navigation.navigate("EditTenant", {
-                          itemID,
-                          itemName,
-                          itemEmail,
-                          itemPhone,
-                          propertyId,
-                          propertyAddress,
-                          propertyCity,
-                          propertyState,
-                          propertyUnit,
-                          propertyZip,
-                        })
-                      )}
                       style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        paddingTop: 30,
-                        paddingLeft: 20,
+                        color: "red",
+                        fontSize: 16,
+                        fontWeight: "600",
+                        marginLeft: 10,
                       }}
                     >
-                      <Feather name="edit-3" size={22.5} color="#34383D" />
-                      <Text
-                        style={{
-                          color: "#34383D",
-                          fontSize: 16,
-                          fontWeight: "600",
-                          marginLeft: 10,
-                        }}
-                      >
-                        Edit Tenant
-                      </Text>
-                    </TouchableOpacity>
+                      Delete Tenant
+                    </Text>
+                  </TouchableOpacity>
 
-                    {/* Edit Lease Information */}
-                    <TouchableOpacity
-  >>>>>>> JimboTwo
+                  <TouchableOpacity
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                      marginTop: 40,
+                      justifyContent: "center",
+                      backgroundColor: "#34383D30",
+                      marginHorizontal: 30,
+                      padding: 15,
+                      borderRadius: 10
+                    }}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text
                       style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        paddingTop: 30,
-                        paddingLeft: 20,
+                        color: "#34383D",
+                        fontSize: 16,
+                        fontWeight: "600",
+                        marginLeft: 10,
                       }}
                     >
-                      <Feather name="edit-3" size={22.5} color="#fff" />
-                      <Text
-                        style={{
-                          color: "#fff",
-                          fontSize: 16,
-                          fontWeight: "600",
-                          marginLeft: 10,
-                        }}
-                      >
-                        Edit Lease Information
-                      </Text>
-                    </TouchableOpacity>
-
-                    {/* Delete Tenant */}
-                    <TouchableOpacity
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        paddingTop: 30,
-                        paddingLeft: 20,
-                      }}
-                      onPress={deleteAlert}
-                    >
-                      <Feather name="trash" size={22.5} color="red" />
-                      <Text
-                        style={{
-                          color: "red",
-                          fontSize: 16,
-                          fontWeight: "600",
-                          marginLeft: 10,
-                        }}
-                      >
-                        Delete Tenant
-                      </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                      style={{
-                        flexDirection: "row",
-                        alignItems: "center",
-                        marginTop: 40,
-                        justifyContent: "center",
-                        backgroundColor: "#34383D30",
-                        marginHorizontal: 30,
-                        padding: 15,
-                        borderRadius: 10
-                      }}
-                      onPress={() => setModalVisible(!modalVisible)}
-                    >
-                      <Text
-                        style={{
-                          color: "#34383D",
-                          fontSize: 16,
-                          fontWeight: "600",
-                          marginLeft: 10,
-                        }}
-                      >
-                        Cancel
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
+                      Cancel
+                    </Text>
+                  </TouchableOpacity>
                 </View>
-              </Modal>
+              </View>
+            </Modal>
             </ScrollView>
           </View>
         </>
