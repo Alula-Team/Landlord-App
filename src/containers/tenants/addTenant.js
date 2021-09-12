@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -6,7 +6,8 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 // Forms
 import { SelectOptions, FakerOptions } from "../../forms";
 import { useForm, Controller } from "react-hook-form";
-import RNPickerSelect from "react-native-picker-select";
+import PropertySelect from "../../forms/PropertySelect";
+import { CustomTextInput, CustomEmailInput, CustomPhoneInput, CustomNumberInput, CustomSelectInput, CustomTextAreaInput, CustomErrorField } from '../../forms/CustomFormFields'
 
 // Faker
 import faker from "faker";
@@ -17,8 +18,6 @@ import { auth, db } from "../../firebase";
 
 // Style Sheet
 import styles, { pickerStyles } from "./styles";
-
-import PropertySelect from "../properties/PropertySelect";
 
 const AddTenant = ({ navigation }) => {
 
@@ -117,106 +116,42 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Tenant Name"
-                  autoCapitalize='words'
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomTextInput value={value} onChange={onChange} placeholder="Tenant Name" />
             )}
             name="name"
             rules={{ required: true }}
             defaultValue=""
           />
           {errors.name && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Email */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Email"
-                  placeholderTextColor="#34383D40"
-                  autoCapitalize='none'
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType="email-address"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomEmailInput value={value} onChange={onChange} />
             )}
             name="email"
             rules={{ required: true }}
             defaultValue=""
           />
           {errors.email && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10,
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Phone Number */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Phone"
-                  placeholderTextColor="#34383D40"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType="phone-pad"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomPhoneInput value={value} onChange={onChange} />
             )}
             name="phone"
             rules={{ required: true }}
             defaultValue=""
           />
           {errors.phone && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10,
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* LEASING INFORMATION */}
@@ -227,236 +162,97 @@ const AddTenant = ({ navigation }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <PropertySelect value={value} onChange={onChange} />
-              // <RNPickerSelect
-              //   placeholder={{
-              //     label: "Select Property",
-              //     value: "selectProperty",
-              //     color: "#34383D",
-              //   }}
-              //   style={pickerStyles}
-              //   value={value}
-              //   onValueChange={onChange}
-              //   items={allProperties}
-              // />
             )}
             name="property"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.property && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Lease Start Date */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Move In Date - MM/DD/YYYY"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType='number-pad'
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomNumberInput value={value} onChange={onChange} placeholder="Move-In Date - MM/DD/YYYY" />
             )}
             name="leaseStartDate"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.leaseStartDate && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Lease Length */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Lease Length - Months"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType='number-pad'
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomNumberInput value={value} onChange={onChange} placeholder="Lease Length - Months" />
             )}
             name="leaseLength"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.leaseLength && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Lease Type */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Leasing Type",
-                  value: "selectLeasingType",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={SelectOptions.leasingType}
-              />
+              <CustomSelectInput value={value} onChange={onChange} placeholder="Select Leasing Type" items={SelectOptions.leasingType} />
             )}
             name="leaseType"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.leaseType && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Rent Due On */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Rent Due Date",
-                  value: "selectRentDueDate",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={SelectOptions.rentDueDate}
-              />
+              <CustomSelectInput value={value} onChange={onChange} placeholder="Select Rent Due Date" items={SelectOptions.rentDueDate} />
             )}
             name="rentDueOn"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.rentDueOn && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Rent Rate */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Rental Rate"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType='number-pad'
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomNumberInput value={value} onChange={onChange} placeholder="Rental Rate" />
             )}
             name="rentRate"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.rentRate && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Security Deposit */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Security Deposit"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType='number-pad'
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomNumberInput value={value} onChange={onChange} placeholder="Security Deposit" />
             )}
             name="securityDeposit"
             rules={{ required: false }}
             defaultValue=""
           />
           {errors.securityDeposit && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
+            <CustomErrorField />
           )}
 
           {/* Description */}
@@ -464,28 +260,15 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.textArea}>
-                <TextInput
-                  type="text"
-                  placeholder="Enter Transaction Description ..."
-                  placeholderTextColor="#34383D40"
-                  style={{
-                    color: "#34383D",
-                    fontSize: 16,
-                    fontWeight: "500",
-                    marginLeft: 12.5,
-                    paddingTop: 10,
-                  }}
-                  multiline={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <CustomTextAreaInput value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
             )}
             name="description"
             rules={{ required: false }}
             defaultValue=""
           />
+          {errors.description && (
+            <CustomErrorField />
+          )}
         </KeyboardAwareScrollView>
       </View>
     </>
