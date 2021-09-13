@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 import { Text, View, TouchableOpacity, TextInput } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -9,11 +9,10 @@ import UploadReceipt from "../constants/uploadReceipt";
 import Feather from "react-native-vector-icons/Feather";
 
 // Forms
+import { SelectOptions, FakerOptions, APMInput } from "../../forms";
+import PropertySelect from "../../forms/PropertySelect";
 import { useForm, Controller } from "react-hook-form";
-import RNPickerSelect from "react-native-picker-select";
-import { SelectOptions, FakerOptions } from "../../forms";
 
-import PropertySelect from "../properties/PropertySelect";
 
 // Faker
 import faker from "faker";
@@ -22,32 +21,11 @@ import faker from "faker";
 import { db } from "../../firebase";
 
 // Style Sheet
-import { styles, pickerStyles } from "./styles";
+import { styles } from "./styles";
 
 faker.locale = "en_US";
 
 const AddTransaction = ({ navigation }) => {
-
-  const properties = useContext(PropertiesContext);
-
-  // const addressArray = properties.map((property) => {
-  //   return property.address;
-  // });
-
-  // const allProperties = properties.map((item) => {
-  //   return {
-  //     label: `${item.address} ${item.unit}`,
-  //     value: {
-  //       id: item.id,
-  //       address: item.address,
-  //       city: item.city,
-  //       state: item.state,
-  //       unit: item.unit,
-  //       zip: item.zip,
-  //     },
-  //   };
-  // });
-
   const {
     control,
     setValue,
@@ -155,67 +133,29 @@ const AddTransaction = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Transaction",
-                  value: "selectTransaction",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={SelectOptions.paymentTypes}
-              />
+              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Transaction" items={SelectOptions.paymentTypes} />
             )}
             name="transactionType"
             rules={{ required: true }}
-            defaultValue=""
           />
-          {errors.payment && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
-              }}
-            >
-              This field is required
-            </Text>
-          )}
+          {
+            errors.payment && (
+              <APMInput.APMError />
+            )
+          }
 
           {/* Category */}
           <Text style={styles.inputLabel}>Category</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Category",
-                  value: "selectCategory",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={SelectOptions.transactionCategories}
-              />
+              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Category" items={SelectOptions.transactionCategories} />
             )}
             name="transactionCategory"
             rules={{ required: true }}
-            defaultValue=""
           />
           {errors.transactionCategory && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
-              }}
-            >
-              This field is required
-            </Text>
+            <APMInput.APMError />
           )}
 
           {/* Property */}
@@ -224,32 +164,12 @@ const AddTransaction = ({ navigation }) => {
             control={control}
             render={({ field: { value, onChange } }) => (
               <PropertySelect value={value} onChange={onChange} />
-              // <RNPickerSelect
-              //   placeholder={{
-              //     label: "Select Property",
-              //     value: "selectProperty",
-              //     color: "#34383D",
-              //   }}
-              //   style={pickerStyles}
-              //   value={value}
-              //   onValueChange={onChange}
-              //   items={allProperties}
-              // />
             )}
             name="property"
             rules={{ required: true }}
           />
           {errors.property && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
-              }}
-            >
-              This field is required
-            </Text>
+            <APMInput.APMError />
           )}
 
           {/* Payment Method */}
@@ -257,33 +177,13 @@ const AddTransaction = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <RNPickerSelect
-                placeholder={{
-                  label: "Select Payment Method",
-                  value: "selectPaymentMethod",
-                  color: "#34383D",
-                }}
-                style={pickerStyles}
-                value={value}
-                onValueChange={onChange}
-                items={SelectOptions.paymentMethods}
-              />
+              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Payment Method" items={SelectOptions.paymentMethods} />
             )}
             name="paymentMethod"
             rules={{ required: true }}
-            defaultValue=""
           />
           {errors.paymentMethod && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
-              }}
-            >
-              This field is required
-            </Text>
+            <APMInput.APMError />
           )}
 
           {/* Amount */}
@@ -291,100 +191,42 @@ const AddTransaction = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="i.e 1500"
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  clearButtonMode={'while-editing'}
-                  keyboardAppearance='light'
-                  keyboardType="numeric"
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <APMInput.APMText value={value} onChange={onChange} placeholder="i.e. 1500" />
             )}
             name="amount"
             rules={{ required: true }}
-            defaultValue=""
           />
           {errors.amount && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 5,
-                marginBottom: -22,
-              }}
-            >
-              This field is required
-            </Text>
+            <APMInput.APMError />
           )}
 
           {/* Date Paid */}
-          <Text style={styles.inputLabel}>Date Paid</Text>
+          {/* <Text style={styles.inputLabel}>Date Paid</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="MM/DD/YYYY"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  keyboardType='number-pad'
-                  placeholderTextColor="#34383D40"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <APMNumberInput value={value} onChange={onChange} placeholder="MM/DD/YYYY" />
             )}
-            name="securityDeposit"
+            name="date"
             rules={{ required: false }}
-            defaultValue=""
           />
-          {errors.securityDeposit && (
-            <Text
-              style={{
-                color: "red",
-                paddingLeft: 35,
-                marginTop: 10
-              }}
-            >
-              This field is required
-            </Text>
-          )}
+          {errors.date && (
+            <APMErrorField />
+          )} */}
 
           {/* Description */}
           <Text style={styles.inputLabel}>Description</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <View style={styles.textArea}>
-                <TextInput
-                  type="text"
-                  placeholder="Enter Transaction Description ..."
-                  placeholderTextColor="#34383D40"
-                  style={{
-                    color: "#34383D",
-                    fontSize: 16,
-                    fontWeight: "500",
-                    marginLeft: 12.5,
-                    paddingTop: 10,
-                  }}
-                  multiline={true}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
+              <APMInput.APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
             )}
             name="description"
             rules={{ required: false }}
-            defaultValue=""
           />
+          {errors.description && (
+            <APMInput.APMError />
+          )}
 
           {/* Upload Recipt*/}
           <Text style={styles.inputLabel}>Upload Receipt:</Text>

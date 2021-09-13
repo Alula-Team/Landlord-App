@@ -4,10 +4,9 @@ import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Forms
-import { SelectOptions, FakerOptions } from "../../forms";
-import { useForm, Controller } from "react-hook-form";
+import { SelectOptions, FakerOptions, APMInput } from "../../forms";
 import PropertySelect from "../../forms/PropertySelect";
-import { CustomTextInput, CustomEmailInput, CustomPhoneInput, CustomNumberInput, CustomSelectInput, CustomTextAreaInput, CustomErrorField } from '../../forms/CustomFormFields'
+import { useForm, Controller } from "react-hook-form";
 
 // Faker
 import faker from "faker";
@@ -17,7 +16,7 @@ faker.locale = "en_US";
 import { auth, db } from "../../firebase";
 
 // Style Sheet
-import styles, { pickerStyles } from "./styles";
+import styles from "./styles";
 
 const AddTenant = ({ navigation }) => {
 
@@ -116,42 +115,39 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomTextInput value={value} onChange={onChange} placeholder="Tenant Name" />
+              <APMInput.APMText value={value} onChange={onChange} placeholder="Tenant Name" />
             )}
             name="name"
             rules={{ required: true }}
-            defaultValue=""
           />
           {errors.name && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Email */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomEmailInput value={value} onChange={onChange} />
+              <APMInput.APMEmail value={value} onChange={onChange} />
             )}
             name="email"
             rules={{ required: true }}
-            defaultValue=""
           />
           {errors.email && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Phone Number */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomPhoneInput value={value} onChange={onChange} />
+              <APMInput.APMPhone value={value} onChange={onChange} />
             )}
             name="phone"
             rules={{ required: true }}
-            defaultValue=""
           />
           {errors.phone && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* LEASING INFORMATION */}
@@ -165,94 +161,87 @@ const AddTenant = ({ navigation }) => {
             )}
             name="property"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.property && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Lease Start Date */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomNumberInput value={value} onChange={onChange} placeholder="Move-In Date - MM/DD/YYYY" />
+              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Move-In Date - MM/DD/YYYY" />
             )}
             name="leaseStartDate"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.leaseStartDate && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Lease Length */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomNumberInput value={value} onChange={onChange} placeholder="Lease Length - Months" />
+              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Lease Length - Months" />
             )}
             name="leaseLength"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.leaseLength && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Lease Type */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomSelectInput value={value} onChange={onChange} placeholder="Select Leasing Type" items={SelectOptions.leasingType} />
+              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Leasing Type" items={SelectOptions.leasingType} />
             )}
             name="leaseType"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.leaseType && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Rent Due On */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomSelectInput value={value} onChange={onChange} placeholder="Select Rent Due Date" items={SelectOptions.rentDueDate} />
+              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Rent Due Date" items={SelectOptions.rentDueDate} />
             )}
             name="rentDueOn"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.rentDueOn && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Rent Rate */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomNumberInput value={value} onChange={onChange} placeholder="Rental Rate" />
+              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Rental Rate" />
             )}
             name="rentRate"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.rentRate && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Security Deposit */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomNumberInput value={value} onChange={onChange} placeholder="Security Deposit" />
+              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Security Deposit" />
             )}
             name="securityDeposit"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.securityDeposit && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
 
           {/* Description */}
@@ -260,14 +249,13 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <CustomTextAreaInput value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
+              <APMInput.APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
             )}
             name="description"
             rules={{ required: false }}
-            defaultValue=""
           />
           {errors.description && (
-            <CustomErrorField />
+            <APMInput.APMError />
           )}
         </KeyboardAwareScrollView>
       </View>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Text,
@@ -18,13 +18,12 @@ import styles from "./styles";
 import { db } from "../../firebase";
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 
-import "./getInitials";
-import { collectIdsAndData } from "../../utilities";
+import { getInitials } from "../../utilities";
 
 
 // Things I need
 // Actions button pops up modal with options to:
-//add lease (if no lease),
+// add lease (if no lease),
 // remove lease (if there is a lease),
 // renew lease (once lease term is set to expire in 60d)
 
@@ -33,9 +32,6 @@ const TenantDetail = ({ route, navigation }) => {
 
   const tenantRef = db.collection('tenants').doc(itemID);
   const [tenant, loading, error] = useDocumentDataOnce(tenantRef, { idField: "id" });
-
-
-
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -53,13 +49,13 @@ const TenantDetail = ({ route, navigation }) => {
         {
           text: "Delete",
           style: "destructive",
-          //   onPress: () => console.log("Delete Pressed"),
-          // onPress: (id) => deleteTenant(itemID),
+          onPress: () => console.log("Delete Pressed"),
+          onPress: (id) => deleteTenant(itemID),
 
-          // onPress: () => {
-          //   db.doc(`tenants/${theItem.ID}`).delete();
-          //   navigation.goBack();
-          // },
+          onPress: () => {
+            db.doc(`tenants/${itemID}`).delete();
+            navigation.goBack();
+          },
         },
       ]
     );
@@ -70,7 +66,7 @@ const TenantDetail = ({ route, navigation }) => {
   }
   if (tenant) {
     const { property: { address, city, state, unit, zip }, name, email, phone } = tenant;
-    const itemInitials = name.getInitials();
+    const itemInitials = getInitials(name);
 
     return (
       <>
@@ -78,7 +74,7 @@ const TenantDetail = ({ route, navigation }) => {
           {/* Header */}
           <Header
             centerComponent={{
-              text: "Manage Tenant",
+              text: "Tenant Detail",
               style: {
                 color: "#34383D",
                 fontWeight: "600",
@@ -151,8 +147,8 @@ const TenantDetail = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-            
-            <View style={{backgroundColor: '#fff', paddingHorizontal: 30, paddingVertical: 12.5}} >
+
+            <View style={{ backgroundColor: '#fff', paddingHorizontal: 30, paddingVertical: 12.5 }} >
               {/* Leasing Information */}
               <Text
                 style={{
@@ -222,8 +218,8 @@ const TenantDetail = ({ route, navigation }) => {
               </View>
 
               {/* View Lease */}
-              <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')} style={{ marginTop: 30, height: 45, alignItems: 'center'}}>
-                <Text style={{ alignSelf: "center",color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline'}}>
+              <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')} style={{ marginTop: 30, height: 45, alignItems: 'center' }}>
+                <Text style={{ alignSelf: "center", color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline' }}>
                   View Lease Agreement
                 </Text>
               </TouchableOpacity>
@@ -353,10 +349,10 @@ const TenantDetail = ({ route, navigation }) => {
                 </View>
               </View>
             </Modal>
-            </ScrollView>
-          </View>
-        </>
-      );
+          </ScrollView>
+        </View>
+      </>
+    );
   }
 };
 

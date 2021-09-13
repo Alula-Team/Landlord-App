@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, TextInput } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
-import styles from "./styles";
+import styles, { pickerStyles } from "./styles";
 
-export const CustomTextInput = ({ value, onChange, placeholder = "Change this placeholder..." }) => (
+export const APMText = ({ value, onChange, placeholder = "Change this placeholder..." }) => (
   <View style={styles.inputContainer}>
     <TextInput
       type="text"
@@ -21,7 +21,7 @@ export const CustomTextInput = ({ value, onChange, placeholder = "Change this pl
   </View>
 )
 
-export const CustomEmailInput = ({ value, onChange, placeholder = "Email" }) => (
+export const APMEmail = ({ value, onChange, placeholder = "Email" }) => (
   <View style={styles.inputContainer}>
     <TextInput
       type="text"
@@ -39,7 +39,7 @@ export const CustomEmailInput = ({ value, onChange, placeholder = "Email" }) => 
   </View>
 )
 
-export const CustomPhoneInput = ({ value, onChange, placeholder = "Phone" }) => (
+export const APMPhone = ({ value, onChange, placeholder = "Phone" }) => (
   <View style={styles.inputContainer}>
     <TextInput
       type="text"
@@ -56,7 +56,7 @@ export const CustomPhoneInput = ({ value, onChange, placeholder = "Phone" }) => 
   </View>
 )
 
-export const CustomSelectInput = ({ value, onChange, placeholder = "Select one...", items = [] }) => {
+export const APMSelect = ({ value, onChange, placeholder = "Select one...", items = [] }) => {
   let fieldPlaceholder = {
     label: placeholder,
     value: null,
@@ -73,7 +73,7 @@ export const CustomSelectInput = ({ value, onChange, placeholder = "Select one..
   );
 }
 
-export const CustomTextAreaInput = ({ value, onChange, placeholder = "Enter Transaction Description..." }) => (
+export const APMTextarea = ({ value, onChange, placeholder = "Enter Transaction Description..." }) => (
   <View style={styles.textArea}>
     <TextInput
       type="text"
@@ -86,14 +86,14 @@ export const CustomTextAreaInput = ({ value, onChange, placeholder = "Enter Tran
         marginLeft: 12.5,
         paddingTop: 10,
       }}
-      multiline={multiline}
+      multiline={true}
       onChangeText={onChange}
       value={value}
     />
   </View>
 )
 
-export const CustomNumberInput = ({ value, onChange, placeholder = "Choose a number..." }) => (
+export const APMNumber = ({ value, onChange, placeholder = "Choose a number..." }) => (
   <View style={styles.inputContainer}>
     <TextInput
       type="text"
@@ -110,7 +110,7 @@ export const CustomNumberInput = ({ value, onChange, placeholder = "Choose a num
   </View>
 )
 
-export const CustomRepeaterInput = ({ value, onChange, placeholder = "Apt, Unit, Suite, etc..." }) => (
+export const APMRepeater = ({ value, onChange, placeholder = "Apt, Unit, Suite, etc..." }) => (
   <View style={{ flexDirection: "row" }}>
     <View style={styles.inputContainer}>
       <TextInput
@@ -134,7 +134,7 @@ export const CustomRepeaterInput = ({ value, onChange, placeholder = "Apt, Unit,
   </View>
 )
 
-export const CustomErrorField = () => (
+export const APMError = () => (
   <Text
     style={{
       color: "red",

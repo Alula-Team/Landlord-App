@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
-const ScreenHeader = ({ onSubmit, title = "Add..." }) => {
+
+
+const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit }) => {
   return (
     <Header
       centerComponent={{
@@ -24,7 +26,7 @@ const ScreenHeader = ({ onSubmit, title = "Add..." }) => {
             paddingLeft: 10,
             paddingBottom: 10,
           }}
-          onPress={() => navigation.goBack()}
+          onPress={onGoBack}
         />
       }
       rightComponent={
@@ -46,4 +48,4 @@ const ScreenHeader = ({ onSubmit, title = "Add..." }) => {
   );
 };
 
-export default ScreenHeader;
+export default AddScreenHeader;

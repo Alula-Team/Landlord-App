@@ -239,6 +239,28 @@ const styles = StyleSheet.create({
   },
 });
 
+const googlePlacesStyles = StyleSheet.create({
+  container: {
+    flex: 0,
+  },
+  textInputContainer: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "#00000009",
+  },
+  textInput: {
+    height: 45,
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500",
+    backgroundColor: "transparent",
+  },
+});
+
 const pickerStyles = StyleSheet.create({
   inputIOS: {
     marginHorizontal: 20,
@@ -277,4 +299,4 @@ const pickerStyles = StyleSheet.create({
 });
 
 export default styles;
-export { pickerStyles };
+export { pickerStyles, googlePlacesStyles };
