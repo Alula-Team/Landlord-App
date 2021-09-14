@@ -6,6 +6,7 @@ import AddScreen from '../constants/AddScreen';
 // Form
 import { useForm, Controller } from "react-hook-form";
 import { APMText, APMError } from "../../forms/APMFormFields";
+import AddScreenHeader from "../constants/AddScreenHeader";
 
 import faker from "faker";
 faker.locale = "en_US";
@@ -107,73 +108,78 @@ const AddProperty = ({ navigation, route }) => {
   };
 
   return (
-    <AddScreen title="Add Property" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
-      {/* Address */}
-      <Text style={styles.inputLabel}>Address</Text>
-      <Controller
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <APMText value={value} onChange={onChange} placeholder="Address..." />
+    <View style={styles.container}>
+      {/* Header */}
+      <AddScreenHeader title="Add Property" onGoBack={() => navigation.goBack()} onSubmit={onSubmit} />
+      {/* Content */}
+      <KeyboardAwareScrollView>
+        {/* Address */}
+        <Text style={styles.inputLabel}>Address</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="Address..." />
+          )}
+          name="address"
+          rules={{ required: true }}
+        />
+        {errors.address && (
+          <APMError />
         )}
-        name="address"
-        rules={{ required: true }}
-      />
-      {errors.address && (
-        <APMError />
-      )}
-      {/* City */}
-      <Text style={styles.inputLabel}>City</Text>
-      <Controller
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <APMText value={value} onChange={onChange} placeholder="City..." />
+        {/* City */}
+        <Text style={styles.inputLabel}>City</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="City..." />
+          )}
+          name="city"
+          rules={{ required: true }}
+        />
+        {errors.city && (
+          <APMError />
         )}
-        name="city"
-        rules={{ required: true }}
-      />
-      {errors.city && (
-        <APMError />
-      )}
-      {/* State */}
-      <Text style={styles.inputLabel}>State</Text>
-      <Controller
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <APMText value={value} onChange={onChange} placeholder="State..." />
+        {/* State */}
+        <Text style={styles.inputLabel}>State</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="State..." />
+          )}
+          name="state"
+          rules={{ required: true }}
+        />
+        {errors.state && (
+          <APMError />
         )}
-        name="state"
-        rules={{ required: true }}
-      />
-      {errors.state && (
-        <APMError />
-      )}
-      {/* Zip */}
-      <Text style={styles.inputLabel}>Zip Code</Text>
-      <Controller
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <APMText value={value} onChange={onChange} placeholder="Zip..." />
+        {/* Zip */}
+        <Text style={styles.inputLabel}>Zip Code</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="Zip..." />
+          )}
+          name="zip"
+          rules={{ required: true }}
+        />
+        {errors.zip && (
+          <APMError />
         )}
-        name="zip"
-        rules={{ required: true }}
-      />
-      {errors.zip && (
-        <APMError />
-      )}
-      {/* Unit */}
-      <Text style={styles.inputLabel}>Unit</Text>
-      <Controller
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <APMText value={value} onChange={onChange} placeholder="Unit..." />
+        {/* Unit */}
+        <Text style={styles.inputLabel}>Unit</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="Unit..." />
+          )}
+          name="unit"
+          rules={{ required: false }}
+        />
+        {errors.unit && (
+          <APMError />
         )}
-        name="unit"
-        rules={{ required: false }}
-      />
-      {errors.unit && (
-        <APMError />
-      )}
-    </AddScreen>
+      </KeyboardAwareScrollView>
+    </View>
   );
 };
 

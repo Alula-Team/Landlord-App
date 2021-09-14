@@ -1,19 +1,14 @@
 import * as React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
-
+import addStyles from './styles';
 
 const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit }) => {
   return (
     <Header
       centerComponent={{
         text: title,
-        style: {
-          color: "#fff",
-          fontWeight: "700",
-          fontSize: 20,
-          paddingTop: 20,
-        },
+        style: addStyles.centerText
       }}
       leftComponent={
         <Icon
@@ -21,29 +16,21 @@ const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit }) => {
           type="feather"
           color="#fff"
           size={25}
-          iconStyle={{
-            paddingTop: 20,
-            paddingLeft: 10,
-            paddingBottom: 10,
-          }}
+          iconStyle={addStyles.leftIcon}
           onPress={onGoBack}
         />
       }
       rightComponent={
         <TouchableOpacity
-          style={{ paddingTop: 22.5, paddingRight: 10 }}
+          style={addStyles.touchableOpacity}
           onPress={onSubmit}
         >
-          <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+          <Text style={addStyles.rightText}>
             Save
           </Text>
         </TouchableOpacity>
       }
-      containerStyle={{
-        backgroundColor: "#232256",
-        justifyContent: "space-around",
-        borderBottomWidth: 0,
-      }}
+      containerStyle={addStyles.containerRedux}
     />
   );
 };
