@@ -1,10 +1,10 @@
 import React from "react";
-import { Text, View, TouchableOpacity, TextInput } from "react-native";
-import { Header, Icon } from "react-native-elements";
+import { Text, View, TouchableOpacity } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Forms
-import { SelectOptions, FakerOptions, APMInput } from "../../forms";
+import { SelectOptions } from "../../forms";
+import { APMEmail, APMError, APMNumber, APMPhone, APMSelect, APMText, APMTextarea } from "../../forms/APMFormFields";
 import PropertySelect from "../../forms/PropertySelect";
 import { useForm, Controller } from "react-hook-form";
 
@@ -17,6 +17,7 @@ import { auth, db } from "../../firebase";
 
 // Style Sheet
 import styles from "./styles";
+import AddScreenHeader from "../constants/AddScreenHeader";
 
 const AddTenant = ({ navigation }) => {
 
@@ -45,50 +46,10 @@ const AddTenant = ({ navigation }) => {
     <>
       <View style={styles.container}>
         {/* Header */}
-        <Header
-          centerComponent={{
-            text: "Add Tenant",
-            style: {
-              color: "#34383D",
-              fontWeight: "600",
-              fontSize: 20,
-              paddingTop: 20,
-            },
-          }}
-          leftComponent={
-            <Icon
-              name="arrow-left"
-              type="feather"
-              color="#34383D80"
-              size={25}
-              iconStyle={{
-                paddingTop: 20,
-                paddingLeft: 10,
-                paddingBottom: 10,
-              }}
-              onPress={() => navigation.goBack()}
-            />
-          }
-          rightComponent={
-            <TouchableOpacity
-              style={{ paddingTop: 22.5, paddingRight: 10 }}
-              onPress={handleSubmit(onSubmit)}
-            >
-              <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
-                Save
-              </Text>
-            </TouchableOpacity>
-          }
-          containerStyle={{
-            backgroundColor: "#fff",
-            justifyContent: "space-around",
-            borderBottomWidth: 0,
-          }}
-        />
-
+        <AddScreenHeader title="Add Tenant" onGoBack={() => navigation.goBack()} onSubmit={onSubmit} />
         {/* Content */}
         <KeyboardAwareScrollView>
-          {/* <TouchableOpacity
+          <TouchableOpacity
             style={{
               backgroundColor: "#5858FB",
               margin: 30,
@@ -107,7 +68,7 @@ const AddTenant = ({ navigation }) => {
             >
               Fake It!
             </Text>
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 
           {/* TENANT INFORMATION */}
           <Text style={styles.inputLabel}>Tenant Information</Text>
@@ -115,39 +76,39 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMText value={value} onChange={onChange} placeholder="Tenant Name" />
+              <APMText value={value} onChange={onChange} placeholder="Tenant Name" />
             )}
             name="name"
             rules={{ required: true }}
           />
           {errors.name && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Email */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMEmail value={value} onChange={onChange} />
+              <APMEmail value={value} onChange={onChange} />
             )}
             name="email"
             rules={{ required: true }}
           />
           {errors.email && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Phone Number */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMPhone value={value} onChange={onChange} />
+              <APMPhone value={value} onChange={onChange} />
             )}
             name="phone"
             rules={{ required: true }}
           />
           {errors.phone && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* LEASING INFORMATION */}
@@ -163,85 +124,85 @@ const AddTenant = ({ navigation }) => {
             rules={{ required: false }}
           />
           {errors.property && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Lease Start Date */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Move-In Date - MM/DD/YYYY" />
+              <APMNumber value={value} onChange={onChange} placeholder="Move-In Date - MM/DD/YYYY" />
             )}
             name="leaseStartDate"
             rules={{ required: false }}
           />
           {errors.leaseStartDate && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Lease Length */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Lease Length - Months" />
+              <APMNumber value={value} onChange={onChange} placeholder="Lease Length - Months" />
             )}
             name="leaseLength"
             rules={{ required: false }}
           />
           {errors.leaseLength && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Lease Type */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Leasing Type" items={SelectOptions.leasingType} />
+              <APMSelect value={value} onChange={onChange} placeholder="Select Leasing Type" items={SelectOptions.leasingType} />
             )}
             name="leaseType"
             rules={{ required: false }}
           />
           {errors.leaseType && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Rent Due On */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMSelect value={value} onChange={onChange} placeholder="Select Rent Due Date" items={SelectOptions.rentDueDate} />
+              <APMSelect value={value} onChange={onChange} placeholder="Select Rent Due Date" items={SelectOptions.rentDueDate} />
             )}
             name="rentDueOn"
             rules={{ required: false }}
           />
           {errors.rentDueOn && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Rent Rate */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Rental Rate" />
+              <APMNumber value={value} onChange={onChange} placeholder="Rental Rate" />
             )}
             name="rentRate"
             rules={{ required: false }}
           />
           {errors.rentRate && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Security Deposit */}
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMNumber value={value} onChange={onChange} placeholder="Security Deposit" />
+              <APMNumber value={value} onChange={onChange} placeholder="Security Deposit" />
             )}
             name="securityDeposit"
             rules={{ required: false }}
           />
           {errors.securityDeposit && (
-            <APMInput.APMError />
+            <APMError />
           )}
 
           {/* Description */}
@@ -249,13 +210,13 @@ const AddTenant = ({ navigation }) => {
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
-              <APMInput.APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
+              <APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
             )}
             name="description"
             rules={{ required: false }}
           />
           {errors.description && (
-            <APMInput.APMError />
+            <APMError />
           )}
         </KeyboardAwareScrollView>
       </View>
