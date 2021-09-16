@@ -21,8 +21,7 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-// Redux Stuff
-import { connect } from "react-redux";
+import MainScreen from "../constants/MainScreen";
 
 // Firebase
 import { PropertiesContext } from "../../providers/PropertiesProvider";
@@ -90,148 +89,79 @@ const Properties = ({ navigation }) => {
   };
 
   return (
-    <>
-      <View style={styles.container}>
-        {/* Header */}
-        <Header
-          placement={"left"}
-          centerComponent={{
-            text: "Properties",
-            style: {
-              color: "#34383D",
-              fontWeight: "700",
-              fontSize: 25,
-              paddingTop: 20,
-            },
-          }}
-          rightComponent={
-            <>
+    <MainScreen
+      title="Properties"
+      onAction={() => navigation.navigate("Messages")}
+      onAdd={() => navigation.navigate("AddProperty")}
+    >
+
+      {/* Search Bar */}
+      <Controller
+        control={control}
+        render={() => (
+          <View style={styles.searchContainer}>
+            <Feather
+              name="search"
+              color="#34383D80"
+              size={20}
+              style={styles.searchIcon}
+            />
+            <TextInput
+              type="search"
+              placeholder="Search Properties"
+              placeholderTextColor="#34383D80"
+              autoFocus={false}
+              autoCorrect={false}
+              style={styles.searchInput}
+              clearButtonMode="while-editing"
+              onChangeText={handleSearch}
+              value={search}
+            />
+          </View>
+        )}
+        name="search"
+      />
+
+      {/* Properties Flat List */}
+      <SafeAreaView>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.listCell}
+              onPress={() =>
+                navigation.navigate("PropertyDetail", {
+                  itemID: item.id,
+                })
+              }
+            >
               <View style={{ flexDirection: "row" }}>
-                {/* SERVICE REQUESTS */}
+                <Feather name="map-pin" color="#34383D80" size={20} />
                 <View>
-                  <Icon
-                    name="message-circle"
-                    type="feather"
-                    color="#34383D80"
-                    size={25}
-                    iconStyle={{
-                      paddingTop: 20,
-                      paddingRight: 20,
-                    }}
-                    onPress={() => navigation.navigate("Messages")}
-                  />
-                  <Badge
-                    status="error"
-                    containerStyle={{
-                      position: "absolute",
-                      top: 20,
-                      right: 20,
-                      border: "none",
-                    }}
-                    badgeStyle={{
-                      height: 10,
-                      width: 10,
-                      borderWidth: 0,
-                      borderRadius: 10 / 2,
-                    }}
-                  />
+                  <Text style={styles.listItem}>
+                    {item.address} {item.unit}
+                  </Text>
                 </View>
-
-                {/* ADD PROPERTY */}
-                <Icon
-                  name="plus"
-                  type="feather"
-                  color="#34383D80"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 20,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  onPress={() => {
-                    // setQuery("");
-                    navigation.navigate("AddProperty");
-                  }}
-                />
               </View>
-            </>
-          }
-          containerStyle={{
-            backgroundColor: "#fff",
-            justifyContent: "space-around",
-            borderBottomWidth: 0,
-          }}
-        />
-
-        {/* Search Bar */}
-        <Controller
-          control={control}
-          render={() => (
-            <View style={styles.searchContainer}>
               <Feather
-                name="search"
-                color="#34383D80"
+                name="arrow-right"
+                color="#34383D90"
                 size={20}
-                style={styles.searchIcon}
+                style={styles.arrow}
               />
-              <TextInput
-                type="search"
-                placeholder="Search Properties"
-                placeholderTextColor="#34383D80"
-                autoFocus={false}
-                autoCorrect={false}
-                style={styles.searchInput}
-                clearButtonMode="while-editing"
-                onChangeText={handleSearch}
-                value={search}
-              />
-            </View>
+            </TouchableOpacity>
           )}
-          name="search"
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          contentContainerStyle={{ paddingBottom: 350 }}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={renderSeparator}
+          ListEmptyComponent={EmptyListMessage}
         />
-
-        {/* Properties Flat List */}
-        <SafeAreaView>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.listCell}
-                onPress={() =>
-                  navigation.navigate("PropertyDetail", {
-                    itemID: item.id,
-                  })
-                }
-              >
-                <View style={{ flexDirection: "row" }}>
-                  <Feather name="map-pin" color="#34383D80" size={20} />
-                  <View>
-                    <Text style={styles.listItem}>
-                      {item.address} {item.unit}
-                    </Text>
-                  </View>
-                </View>
-                <Feather
-                  name="arrow-right"
-                  color="#34383D90"
-                  size={20}
-                  style={styles.arrow}
-                />
-              </TouchableOpacity>
-            )}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            contentContainerStyle={{ paddingBottom: 350 }}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={renderSeparator}
-            ListEmptyComponent={EmptyListMessage}
-          />
-        </SafeAreaView>
-        {/* END Search Bar */}
-      </View>
-    </>
+      </SafeAreaView>
+    </MainScreen>
   );
 };
 

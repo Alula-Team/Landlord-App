@@ -22,7 +22,7 @@ import { db } from "../../firebase";
 
 // Style Sheet
 import { styles } from "./styles";
-import AddScreenHeader from "../constants/AddScreenHeader";
+import AddScreen from "../constants/AddScreen";
 
 faker.locale = "en_US";
 
@@ -65,107 +65,103 @@ const AddTransaction = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <AddScreenHeader title="Add Transaction" onGoBack={() => navigation.goBack()} onSubmit={onSubmit} />
-      {/* Content */}
-      <KeyboardAwareScrollView>
-        <TouchableOpacity
+    <AddScreen title="Add Transaction" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
+      <TouchableOpacity
+        style={{
+          backgroundColor: "#5858FB",
+          margin: 20,
+          padding: 15,
+          borderRadius: 10,
+        }}
+        onPress={fakeIt}
+      >
+        <Text
           style={{
-            backgroundColor: "#5858FB",
-            margin: 20,
-            padding: 15,
-            borderRadius: 10,
+            fontSize: 16,
+            fontWeight: "bold",
+            color: "white",
+            textAlign: "center",
           }}
-          onPress={fakeIt}
         >
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: "bold",
-              color: "white",
-              textAlign: "center",
-            }}
-          >
-            Fake It!
-          </Text>
-        </TouchableOpacity>
-        <View>
+          Fake It!
+        </Text>
+      </TouchableOpacity>
+      <View>
 
-          {/* Transaction Type */}
-          <Text style={styles.inputLabel}>Transaction Type</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <APMSelect value={value} onChange={onChange} placeholder="Select Transaction" items={SelectOptions.paymentTypes} />
-            )}
-            name="transactionType"
-            rules={{ required: true }}
-          />
-          {
-            errors.payment && (
-              <APMError />
-            )
-          }
-
-          {/* Category */}
-          <Text style={styles.inputLabel}>Category</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <APMSelect value={value} onChange={onChange} placeholder="Select Category" items={SelectOptions.transactionCategories} />
-            )}
-            name="transactionCategory"
-            rules={{ required: true }}
-          />
-          {errors.transactionCategory && (
-            <APMError />
+        {/* Transaction Type */}
+        <Text style={styles.inputLabel}>Transaction Type</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMSelect value={value} onChange={onChange} placeholder="Select Transaction" items={SelectOptions.paymentTypes} />
           )}
-
-          {/* Property */}
-          <Text style={styles.inputLabel}>Property</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <PropertySelect value={value} onChange={onChange} />
-            )}
-            name="property"
-            rules={{ required: true }}
-          />
-          {errors.property && (
+          name="transactionType"
+          rules={{ required: true }}
+        />
+        {
+          errors.payment && (
             <APMError />
-          )}
+          )
+        }
 
-          {/* Payment Method */}
-          <Text style={styles.inputLabel}>Payment Method</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <APMSelect value={value} onChange={onChange} placeholder="Select Payment Method" items={SelectOptions.paymentMethods} />
-            )}
-            name="paymentMethod"
-            rules={{ required: true }}
-          />
-          {errors.paymentMethod && (
-            <APMError />
+        {/* Category */}
+        <Text style={styles.inputLabel}>Category</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMSelect value={value} onChange={onChange} placeholder="Select Category" items={SelectOptions.transactionCategories} />
           )}
+          name="transactionCategory"
+          rules={{ required: true }}
+        />
+        {errors.transactionCategory && (
+          <APMError />
+        )}
 
-          {/* Amount */}
-          <Text style={styles.inputLabel}>Amount</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <APMText value={value} onChange={onChange} placeholder="i.e. 1500" />
-            )}
-            name="amount"
-            rules={{ required: true }}
-          />
-          {errors.amount && (
-            <APMError />
+        {/* Property */}
+        <Text style={styles.inputLabel}>Property</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <PropertySelect value={value} onChange={onChange} />
           )}
+          name="property"
+          rules={{ required: true }}
+        />
+        {errors.property && (
+          <APMError />
+        )}
 
-          {/* Date Paid */}
-          {/* <Text style={styles.inputLabel}>Date Paid</Text>
+        {/* Payment Method */}
+        <Text style={styles.inputLabel}>Payment Method</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMSelect value={value} onChange={onChange} placeholder="Select Payment Method" items={SelectOptions.paymentMethods} />
+          )}
+          name="paymentMethod"
+          rules={{ required: true }}
+        />
+        {errors.paymentMethod && (
+          <APMError />
+        )}
+
+        {/* Amount */}
+        <Text style={styles.inputLabel}>Amount</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="i.e. 1500" />
+          )}
+          name="amount"
+          rules={{ required: true }}
+        />
+        {errors.amount && (
+          <APMError />
+        )}
+
+        {/* Date Paid */}
+        {/* <Text style={styles.inputLabel}>Date Paid</Text>
           <Controller
             control={control}
             render={({ field: { value, onChange } }) => (
@@ -178,27 +174,26 @@ const AddTransaction = ({ navigation }) => {
             <APMErrorField />
           )} */}
 
-          {/* Description */}
-          <Text style={styles.inputLabel}>Description</Text>
-          <Controller
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
-            )}
-            name="description"
-            rules={{ required: false }}
-          />
-          {errors.description && (
-            <APMError />
+        {/* Description */}
+        <Text style={styles.inputLabel}>Description</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
           )}
+          name="description"
+          rules={{ required: false }}
+        />
+        {errors.description && (
+          <APMError />
+        )}
 
-          {/* Upload Recipt*/}
-          <Text style={styles.inputLabel}>Upload Receipt:</Text>
-          <UploadReceipt />
+        {/* Upload Recipt*/}
+        <Text style={styles.inputLabel}>Upload Receipt:</Text>
+        <UploadReceipt />
 
-        </View>
-      </KeyboardAwareScrollView>
-    </View>
+      </View>
+    </AddScreen>
   );
 };
 

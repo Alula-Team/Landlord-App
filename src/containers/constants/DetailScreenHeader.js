@@ -1,9 +1,8 @@
 import * as React from "react";
-import { Text, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { addStyles } from './styles';
 
-const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit = null }) => {
+const DetailScreenHeader = ({ title = "Add...", onGoBack, onPress }) => {
   return (
     <Header
       centerComponent={{
@@ -21,19 +20,18 @@ const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit = null }) => {
         />
       }
       rightComponent={
-        onSubmit === null ? "" :
-          <TouchableOpacity
-            style={addStyles.touchableOpacity}
-            onPress={onSubmit}
-          >
-            <Text style={addStyles.rightText}>
-              Save
-            </Text>
-          </TouchableOpacity>
+        <Icon
+          name="more-horizontal"
+          type="feather"
+          color="#34383D80"
+          size={27.5}
+          iconStyle={addStyles.rightIcon}
+          onPress={onPress}
+        />
       }
       containerStyle={addStyles.containerRedux}
     />
   );
 };
 
-export default AddScreenHeader;
+export default DetailScreenHeader;

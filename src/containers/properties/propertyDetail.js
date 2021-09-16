@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Alert,
   Text,
@@ -8,15 +8,13 @@ import {
   Modal,
 } from "react-native";
 
-import { Header, Icon } from "react-native-elements";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
-import FontAwesome from "react-native-vector-icons/FontAwesome5";
 
 // Style Sheet
 import styles from "./styles";
 
+import DetailScreen from "../constants/DetailScreen";
 // Firebase
 import { db } from "../../firebase";
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
@@ -59,57 +57,7 @@ const PropertyDetail = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <Header
-        centerComponent={
-          <Text
-            style={{
-              color: "#34383D",
-              fontSize: 17,
-              fontWeight: "600",
-              paddingTop: 22.5,
-            }}
-          >
-            {error && JSON.stringify(error)}
-            {loading && "Loading..."}
-            {property && `${property.address} ${property.unit}`}
-          </Text>
-        }
-        leftComponent={
-          <Icon
-            name="arrow-left"
-            type="feather"
-            color="#34383D80"
-            size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingLeft: 10,
-              paddingBottom: 10,
-            }}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        rightComponent={
-          <Icon
-            name="more-horizontal"
-            type="feather"
-            color="#34383D80"
-            size={27.5}
-            iconStyle={{
-              paddingTop: 20,
-              paddingRight: 10,
-            }}
-            onPress={() => setModalVisible(true)}
-          />
-        }
-        containerStyle={{
-          backgroundColor: "#fff",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
-      />
-
+    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)}>
       <ScrollView>
         {/* Property Information */}
         <View style={styles.propInfo}>
@@ -361,7 +309,7 @@ const PropertyDetail = ({ navigation, route }) => {
           </View>
         </Modal>
       </ScrollView>
-    </View>
+    </DetailScreen>
   );
 };
 

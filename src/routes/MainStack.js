@@ -29,8 +29,8 @@ const RootNavigation = (props) => {
       <Tab.Navigator
         activeColor="#586D81"
         inactiveColor="#34383D40"
-        barStyle={{ 
-          backgroundColor: "#fff", 
+        barStyle={{
+          backgroundColor: "#fff",
           borderColor: 'transparent',
           borderTopWidth: 0,
           elevation: 0
