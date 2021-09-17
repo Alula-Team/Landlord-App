@@ -21,10 +21,10 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-import MainScreen from "../constants/MainScreen";
-
 // Firebase
 import { PropertiesContext } from "../../providers/PropertiesProvider";
+import MainScreen from "../constants/MainScreen";
+import Shmeader from "../constants/Shmeader";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -89,12 +89,8 @@ const Properties = ({ navigation }) => {
   };
 
   return (
-    <MainScreen
-      title="Properties"
-      onAction={() => navigation.navigate("Messages")}
-      onAdd={() => navigation.navigate("AddProperty")}
-    >
-
+    <View>
+      <Shmeader />
       {/* Search Bar */}
       <Controller
         control={control}
@@ -161,7 +157,7 @@ const Properties = ({ navigation }) => {
           ListEmptyComponent={EmptyListMessage}
         />
       </SafeAreaView>
-    </MainScreen>
+    </View>
   );
 };
 
