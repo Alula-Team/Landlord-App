@@ -1,6 +1,6 @@
 import * as React from "react";
 import { View } from "react-native";
-import MainScreenHeader from "./AddScreenHeader";
+import MainScreenHeader from "./MainScreenHeader";
 import { mainStyles } from './styles';
 
 const MainScreen = ({ title, actionIcon, badge, onAction, onAdd, children }) => {

@@ -24,7 +24,8 @@ import styles from "./styles";
 // Firebase
 import { PropertiesContext } from "../../providers/PropertiesProvider";
 import MainScreen from "../constants/MainScreen";
-import Shmeader from "../constants/Shmeader";
+import { mainStyles } from "../constants/styles";
+// import MainScreenHeader from "../constants/MainScreenHeader";
 
 const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -88,10 +89,58 @@ const Properties = ({ navigation }) => {
     );
   };
 
-  return (
-    <View style={styles.container}>
+  // const Shmooder = () => {
+  //   return (
+  //     <Header
+  //       placement={"left"}
+  //       centerComponent={{
+  //         text: "Properties",
+  //         style: {
+  //           color: "#34383D",
+  //           fontWeight: "bold",
+  //           fontSize: 25,
+  //           paddingTop: 20,
+  //         },
+  //       }}
+  //       rightComponent={
+  //         <View style={{ flexDirection: "row" }}>
+  //           {/* Dashboard */}
+  //           <Icon
+  //             name="activity"
+  //             type="feather"
+  //             color="#34383D80"
+  //             size={25}
+  //             iconStyle={{
+  //               paddingTop: 20,
+  //               paddingRight: 20,
+  //               paddingBottom: 10,
+  //             }}
+  //             onPress={() => setShouldShow(!shouldShow)}
+  //           />
+  //           {/* ADD Transaction */}
+  //           <Icon
+  //             name="plus"
+  //             type="feather"
+  //             color="#34383D80"
+  //             size={25}
+  //             iconStyle={{
+  //               paddingTop: 20,
+  //               paddingRight: 20,
+  //               paddingBottom: 10,
+  //             }}
+  //             onPress={() => {
+  //               setSearch("");
+  //               navigation.navigate("AddTransaction");
+  //             }}
+  //           />
+  //         </View>
+  //       }
+  //     />
+  //   )
+  // }
 
-      {/* Search Bar */}
+  return (
+    <MainScreen title="Properties" actionIcon="message-circle" onAction={() => setShouldShow(!shouldShow)} onAdd={() => navigation.navigate("messages")}>
       <Controller
         control={control}
         render={() => (
@@ -157,7 +206,7 @@ const Properties = ({ navigation }) => {
           ListEmptyComponent={EmptyListMessage}
         />
       </SafeAreaView>
-    </View>
+    </MainScreen>
   );
 };
 

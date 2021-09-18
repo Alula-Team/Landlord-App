@@ -1,34 +1,25 @@
-import React from "react";
-import { Header, View, Icon, Badge, Text } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import * as React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { Header, Icon } from "react-native-elements";
 import { mainStyles } from './styles';
 
-const Shmeader = () => {
+const MainScreenHeader = ({ title = "Add...", onGoBack, onSubmit = null }) => {
   return (
     <Header
       placement={"left"}
       centerComponent={{
-        text: "Properties",
-        style: {
-          color: "#34383D",
-          fontWeight: "bold",
-          fontSize: 25,
-          paddingTop: 20,
-        },
+        text: title,
+        style: mainStyles.centerText
       }}
       rightComponent={
         <View style={{ flexDirection: "row" }}>
           {/* Dashboard */}
           <Icon
-            name="activity"
+            name="message-circle"
             type="feather"
             color="#34383D80"
             size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingRight: 20,
-              paddingBottom: 10,
-            }}
+            iconStyle={mainStyles.actionIcon}
             onPress={() => setShouldShow(!shouldShow)}
           />
           {/* ADD Transaction */}
@@ -37,11 +28,7 @@ const Shmeader = () => {
             type="feather"
             color="#34383D80"
             size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingRight: 20,
-              paddingBottom: 10,
-            }}
+            iconStyle={mainStyles.addIcon}
             onPress={() => {
               setSearch("");
               navigation.navigate("AddTransaction");
@@ -49,8 +36,9 @@ const Shmeader = () => {
           />
         </View>
       }
+      containerStyle={mainStyles.containerRedux}
     />
   );
 };
 
-export default Shmeader;
+export default MainScreenHeader;

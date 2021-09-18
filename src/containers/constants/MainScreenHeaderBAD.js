@@ -1,9 +1,10 @@
-import React from "react";
-import { Header, View, Icon, Badge, Text } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import * as React from "react";
+import { Header, View, Icon, Badge } from "react-native-elements";
 import { mainStyles } from './styles';
 
-const Shmeader = () => {
+// const MainScreenHeader = ({ title = "Adddddd...", actionIcon = null, badge = null, onAction = null, onAdd = null }) => {
+
+const Shmooder = ({ title = "Add...", onGoBack, onSubmit = null }) => {
   return (
     <Header
       placement={"left"}
@@ -20,7 +21,7 @@ const Shmeader = () => {
         <View style={{ flexDirection: "row" }}>
           {/* Dashboard */}
           <Icon
-            name="activity"
+            name="message-circle"
             type="feather"
             color="#34383D80"
             size={25}
@@ -49,8 +50,9 @@ const Shmeader = () => {
           />
         </View>
       }
+      containerStyle={mainStyles.containerRedux}
     />
   );
 };
 
-export default Shmeader;
+export default Shmooder;
