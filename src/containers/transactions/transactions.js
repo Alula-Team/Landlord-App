@@ -27,6 +27,7 @@ import { db } from "../../firebase";
 import { TransactionsContext } from "../../providers/TransactionsProvider";
 // import { PropertiesContext } from "../../providers/PropertiesProvider";
 import { SafeAreaView } from "react-native-safe-area-context";
+import Shmeader from "../constants/Shmeader";
 
 // import { getSubCollections } from "../../../functions";
 
@@ -138,6 +139,7 @@ const Transactions = ({ navigation }) => {
     <>
       <View style={styles.container}>
         {/* Header */}
+        {/* <Shmeader /> */}
         <Header
           placement={"left"}
           centerComponent={{
@@ -220,39 +222,41 @@ const Transactions = ({ navigation }) => {
         {/* END Search Bar */}
 
         {/* Revenue Overview */}
-        {shouldShow ? (
-          <View style={styles.moneyBox}>
-            <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
-              <Text
-                style={{
-                  fontWeight: "500",
-                  color: "#fff",
-                  marginRight: 5,
-                }}
-              >
-                Financial Activity
-              </Text>
-              <Text
-                style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
-              >
-                (year to date)
-              </Text>
+        {
+          shouldShow ? (
+            <View style={styles.moneyBox}>
+              <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
+                <Text
+                  style={{
+                    fontWeight: "500",
+                    color: "#fff",
+                    marginRight: 5,
+                  }}
+                >
+                  Financial Activity
+                </Text>
+                <Text
+                  style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
+                >
+                  (year to date)
+                </Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
+                <Text style={styles.propInfoLabel}>$42,000</Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
+                <Text style={styles.propInfoLabel}>- $14,450</Text>
+              </View>
+              <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
+                <Text style={styles.propInfoLabel}>$27,550</Text>
+              </View>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
-              <Text style={styles.propInfoLabel}>$42,000</Text>
-            </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
-              <Text style={styles.propInfoLabel}>- $14,450</Text>
-            </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
-              <Text style={styles.propInfoLabel}>$27,550</Text>
-            </View>
-          </View>
 
-        ) : null}
+          ) : null
+        }
         {/* END Revenue Overview */}
 
         {/* Transactions Flat List */}
@@ -316,7 +320,7 @@ const Transactions = ({ navigation }) => {
           ItemSeparatorComponent={renderSeparator}
           ListEmptyComponent={EmptyListMessage}
         />
-      </View>
+      </View >
     </>
   );
 };

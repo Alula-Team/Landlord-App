@@ -89,8 +89,8 @@ const Properties = ({ navigation }) => {
   };
 
   return (
-    <View>
-      <Shmeader />
+    <View style={styles.container}>
+
       {/* Search Bar */}
       <Controller
         control={control}
