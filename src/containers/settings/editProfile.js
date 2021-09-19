@@ -5,7 +5,7 @@ import { Header, Icon } from 'react-native-elements';
 // Firebase
 import { deleteAccount } from '../../firebase';
 
-import AddScreen from '../constants/AddScreen';
+import AddEditScreen from '../constants/AddEditScreen';
 // Vector Icons
 import Feather from 'react-native-vector-icons/Feather';
 
@@ -15,7 +15,7 @@ import styles from './styles';
 const EditProfile = ({ navigation }) => {
 
     return (
-        <AddScreen title="Edit Profile" onGoBack={() => navigation.goBack()}>
+        <AddEditScreen title="Edit Profile" onGoBack={() => navigation.goBack()}>
             <ScrollView style={{ marginTop: 20 }}>
                 {/* Edit Username Button */}
                 <TouchableOpacity style={styles.buttonContainer} onPress={() => navigation.navigate('UpdateUsername')}>
@@ -44,7 +44,7 @@ const EditProfile = ({ navigation }) => {
                     <Feather name='arrow-right' color='#34383D80' size={20} style={{ alignSelf: 'center', marginRight: 10 }} />
                 </TouchableOpacity>
             </ScrollView>
-        </AddScreen>
+        </AddEditScreen>
     );
 }
 

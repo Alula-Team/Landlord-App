@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AddScreen from '../constants/AddScreen';
+import AddEditScreen from '../constants/AddEditScreen';
 // Form
 import { useForm, Controller } from "react-hook-form";
 import { APMText, APMError } from "../../forms/APMFormFields";
@@ -104,7 +104,7 @@ const AddProperty = ({ navigation, route }) => {
   };
 
   return (
-    <AddScreen title="Add Property" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
+    <AddEditScreen title="Add Property" onGoBack={() => navigation.goBack()} onSubmit={handleSubmit(onSubmit)}>
       <KeyboardAwareScrollView>
         {/* Address */}
         <Text style={styles.inputLabel}>Address</Text>
@@ -172,7 +172,7 @@ const AddProperty = ({ navigation, route }) => {
           <APMError />
         )}
       </KeyboardAwareScrollView>
-    </AddScreen>
+    </AddEditScreen>
   );
 };
 

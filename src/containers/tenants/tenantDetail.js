@@ -62,6 +62,7 @@ const TenantDetail = ({ route, navigation }) => {
     );
   };
 
+
   if (loading) {
     return <Text>Loading...</Text>
   }
@@ -205,12 +206,12 @@ const TenantDetail = ({ route, navigation }) => {
 
               {/* Edit Tenant */}
               <TouchableOpacity
-                // onPress={() => (
-                //   setModalVisible(!modalVisible),
-                //   navigation.navigate("EditTenant", {
-                //     itemID
-                //   })
-                // )}
+                onPress={() => (
+                  setModalVisible(!modalVisible),
+                  navigation.navigate("EditTenant", {
+                    itemID
+                  })
+                )}
                 style={{
                   flexDirection: "row",
                   alignItems: "center",

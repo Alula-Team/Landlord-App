@@ -13,6 +13,7 @@ import {
 
 import { useForm, Controller } from "react-hook-form";
 
+
 import { Badge, Header, Icon } from "react-native-elements";
 
 // Vector Icons
@@ -31,6 +32,8 @@ const wait = (timeout) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
+
+
 const Properties = ({ navigation }) => {
   const properties = useContext(PropertiesContext);
   const [refreshing, setRefreshing] = useState(false);
@@ -45,6 +48,30 @@ const Properties = ({ navigation }) => {
   );
   console.log(properties);
   const data = filteredList;
+
+  const SearchZeeList = ({ placeholder = "Search...", value, onChangeText }) => {
+    return (
+      <View style={styles.searchContainer}>
+        <Feather
+          name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          type="search"
+          placeholder={placeholder}
+          placeholderTextColor="#34383D80"
+          autoFocus={false}
+          autoCorrect={false}
+          style={styles.searchInput}
+          clearButtonMode="while-editing"
+          onChangeText={onChangeText}
+          value={value}
+        />
+      </View>
+    )
+  }
 
   const {
     control,
@@ -89,83 +116,36 @@ const Properties = ({ navigation }) => {
     );
   };
 
-  // const Shmooder = () => {
-  //   return (
-  //     <Header
-  //       placement={"left"}
-  //       centerComponent={{
-  //         text: "Properties",
-  //         style: {
-  //           color: "#34383D",
-  //           fontWeight: "bold",
-  //           fontSize: 25,
-  //           paddingTop: 20,
-  //         },
-  //       }}
-  //       rightComponent={
-  //         <View style={{ flexDirection: "row" }}>
-  //           {/* Dashboard */}
-  //           <Icon
-  //             name="activity"
-  //             type="feather"
-  //             color="#34383D80"
-  //             size={25}
-  //             iconStyle={{
-  //               paddingTop: 20,
-  //               paddingRight: 20,
-  //               paddingBottom: 10,
-  //             }}
-  //             onPress={() => setShouldShow(!shouldShow)}
-  //           />
-  //           {/* ADD Transaction */}
-  //           <Icon
-  //             name="plus"
-  //             type="feather"
-  //             color="#34383D80"
-  //             size={25}
-  //             iconStyle={{
-  //               paddingTop: 20,
-  //               paddingRight: 20,
-  //               paddingBottom: 10,
-  //             }}
-  //             onPress={() => {
-  //               setSearch("");
-  //               navigation.navigate("AddTransaction");
-  //             }}
-  //           />
-  //         </View>
-  //       }
-  //     />
-  //   )
-  // }
+  const onAction = () => {
+    navigation.navigate("Messages")
+  }
+
+  const onAdd = () => {
+    setSearch("");
+    navigation.navigate("AddProperty");
+  }
 
   return (
-    <MainScreen title="Properties" actionIcon="message-circle" onAction={() => setShouldShow(!shouldShow)} onAdd={() => navigation.navigate("messages")}>
-      <Controller
-        control={control}
-        render={() => (
-          <View style={styles.searchContainer}>
-            <Feather
-              name="search"
-              color="#34383D80"
-              size={20}
-              style={styles.searchIcon}
-            />
-            <TextInput
-              type="search"
-              placeholder="Search Properties"
-              placeholderTextColor="#34383D80"
-              autoFocus={false}
-              autoCorrect={false}
-              style={styles.searchInput}
-              clearButtonMode="while-editing"
-              onChangeText={handleSearch}
-              value={search}
-            />
-          </View>
-        )}
-        name="search"
-      />
+    <MainScreen title="Properties" actionIcon="message-circle" onAction={onAction} onAdd={onAdd}>
+      <View style={styles.searchContainer}>
+        <Feather
+          name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          type="search"
+          placeholder="Search Properties"
+          placeholderTextColor="#34383D80"
+          autoFocus={false}
+          autoCorrect={false}
+          style={styles.searchInput}
+          clearButtonMode="while-editing"
+          onChangeText={handleSearch}
+          value={search}
+        />
+      </View>
 
       {/* Properties Flat List */}
       <SafeAreaView>

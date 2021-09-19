@@ -4,7 +4,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Screens
-import { Tenants, TenantDetail, AddTenant } from "../../containers/tenants";
+import { Tenants, TenantDetail, AddTenant, EditTenant } from "../../containers/tenants";
 import CurrentLease from '../../containers/tenants/currentLease';
 
 const Stack = createStackNavigator();
@@ -26,6 +26,11 @@ const TenantsNavigation = (props) => {
         <Stack.Screen
           name="AddTenant"
           component={AddTenant}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="EditTenant"
+          component={EditTenant}
           options={{ headerShown: false }}
         />
         <Stack.Screen

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, TextInput, View, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
@@ -12,241 +12,231 @@ faker.locale = "en_US";
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
-import styles from "./styles";
+import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
+import { PropertySelect } from "../../forms";
+import { APMError, APMEmail, APMNumber, APMPhone, APMText } from "../../forms/APMFormFields";
+
+import styles, { pickerStyles } from "./styles";
 // Firebase
-import { auth, db } from "../../firebase/firebase";
+import firebase, { auth, db } from "../../firebase";
+import AddEditScreen from "../constants/AddEditScreen";
 
 const EditTenant = ({ navigation, route }) => {
-  const { theItem, theProperty } = route.params;
+  const { itemID } = route.params;
 
-  const INITIAL_STATE = {
-    property: {
-      ...theProperty,
-    },
-    ...theItem,
-  };
+  const tenantRef = db.collection('tenants').doc(itemID);
+  const [tenant, loading, error] = useDocumentDataOnce(tenantRef, { idField: "id" });
 
-  const checkEqual = (prop1, prop2) => {
-    return prop1 === prop2;
-  };
+  let INITIAL_STATE = {};
 
-  const returnFinalObject = (obj1, obj2) => {
-    let finished = {};
-    Object.keys(obj1).forEach((key) => {
-      if (obj2.hasOwnProperty(key) && checkEqual(obj1[key], obj2[key])) {
-        return;
-      } else {
-        finished[key] = obj2[key];
-      }
+  if (loading) {
+    return <Text>Loading ...</Text>
+  }
+
+  if (tenant) {
+    const { property: { address, unit }, name, email, phone } = tenant;
+
+    INITIAL_STATE = {
+      property: `${address} ${unit}`,
+      name,
+      email,
+      phone
+    };
+
+    const {
+      control,
+      handleSubmit,
+      setValue,
+      formState: { errors },
+    } = useForm({
+      defaultValues: INITIAL_STATE
     });
-    console.log(finished);
-    return finished;
-  };
 
-  useEffect(() => {
-    function fillForm() {
-      setValue("name", itemName);
-      setValue("email", itemEmail);
-      setValue("phone", itemPhone);
-    }
-    fillForm();
-  }, []);
+    const checkEqual = (prop1, prop2) => {
+      return prop1 === prop2;
+    };
 
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
-
-  const onSubmit = (data) => {
-    let updates = returnFinalObject(INITIAL_STATE, data);
-    data.id = itemID;
-    console.log(data);
-    db.collection("tenants")
-      .doc(itemID)
-      .update(updates)
-      .then(() => console.log(`Successfully updated yer stuffs!`))
-      .catch((error) => console.error(error));
-    navigation.navigate("TenantDetail", {
-      itemID: data.id,
-      itemName: data.name,
-      itemEmail: data.email,
-      itemPhone: data.phone,
-    });
-  };
-
-  return (
-    <View style={styles.container}>
-      <Header
-        centerComponent={{
-          text: "Edit Tenant",
-          style: {
-            color: "#34383D",
-            fontWeight: "600",
-            fontSize: 20,
-            paddingTop: 20,
-          },
-        }}
-        leftComponent={
-          <Icon
-            name="arrow-left"
-            type="feather"
-            color="#34383D80"
-            size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingLeft: 10,
-              paddingBottom: 10,
-            }}
-            onPress={() => navigation.goBack()}
-          />
+    const returnFinalObject = (obj1, obj2) => {
+      let finished = {};
+      Object.keys(obj1).forEach((key) => {
+        if (obj2.hasOwnProperty(key) && checkEqual(obj1[key], obj2[key])) {
+          return;
+        } else {
+          finished[key] = obj2[key];
         }
-        rightComponent={
-          <TouchableOpacity
-            style={{ paddingTop: 22.5, paddingRight: 10 }}
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
-              Save
-            </Text>
-          </TouchableOpacity>
-        }
-        containerStyle={{
-          backgroundColor: "#fff",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
-      />
+      });
+      console.log(finished);
+      return finished;
+    };
 
-      <KeyboardAwareScrollView>
-        {/* Property */}
-        <Text style={styles.inputLabel}>Property</Text>
+    // useEffect(() => {
+    //   function fillForm() {
+    //     setValue("name", name);
+    //     setValue("email", email);
+    //     setValue("phone", phone);
+    //   }
+    //   fillForm();
+    // }, []);
+
+    const onSubmit = (data) => {
+      let updates = returnFinalObject(INITIAL_STATE, data);
+      data.id = itemID;
+      console.log(data);
+      db.collection("tenants")
+        .doc(itemID)
+        .update(updates)
+        .then(() => console.log(`Successfully updated yer stuffs!`))
+        .catch((error) => console.error(error));
+      navigation.navigate("TenantDetail", {
+        itemID: data.id,
+        itemName: data.name,
+        itemEmail: data.email,
+        itemPhone: data.phone,
+      });
+    };
+
+    return (
+      <AddEditScreen title="Edit Tunant" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
+        {/* TENANT INFORMATION */}
+        <Text style={styles.inputLabel}>Tenant Information</Text>
+        {/* Tenant Name */}
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <RNPickerSelect
-              placeholder={PropertyPlaceholder}
-              style={pickerStyles}
-              value={value}
-              onValueChange={onChange}
-              items={allProperties}
-            />
-          )}
-          name="property"
-          rules={{ required: false }}
-          defaultValue=""
-        />
-        {errors.property && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: 5,
-              marginBottom: -22,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
-        {/* First Name */}
-        <Text style={styles.inputLabel}>Tenant Name</Text>
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.inputContainer}>
-              <TextInput
-                type="text"
-                placeholder="Tenant Name"
-                placeholderTextColor="#34383D70"
-                style={styles.inputField}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <APMText value={value} onChange={onChange} placeholder="Tenant Name" />
           )}
           name="name"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.name && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
-
-        <Text style={styles.inputLabel}>Email</Text>
+        {/* Email */}
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.inputContainer}>
-              <TextInput
-                type="text"
-                placeholder="Email"
-                placeholderTextColor="#34383D70"
-                style={styles.inputField}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <APMEmail value={value} onChange={onChange} />
           )}
           name="email"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.email && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
-        <Text style={styles.inputLabel}>Phone</Text>
+        {/* Phone Number */}
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <View style={styles.inputContainer}>
-              <TextInput
-                type="text"
-                placeholder="Phone"
-                placeholderTextColor="#34383D70"
-                style={styles.inputField}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+            <APMPhone value={value} onChange={onChange} />
           )}
           name="phone"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.phone && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
-      </KeyboardAwareScrollView>
-    </View>
-  );
+        {/* LEASING INFORMATION */}
+        <Text style={styles.inputLabel}>Leasing Information</Text>
+        {/* Property */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <PropertySelect value={value} onChange={onChange} />
+          )}
+          name="property"
+          rules={{ required: false }}
+        />
+        {errors.property && (
+          <APMError />
+        )}
+        {/* Lease Start Date */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMNumber value={value} onChange={onChange} placeholder="Move-In Date - MM/DD/YYYY" />
+          )}
+          name="leaseStartDate"
+          rules={{ required: false }}
+        />
+        {errors.leaseStartDate && (
+          <APMError />
+        )}
+        {/* Lease Length */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMNumber value={value} onChange={onChange} placeholder="Lease Length - Months" />
+          )}
+          name="leaseLength"
+          rules={{ required: false }}
+        />
+        {errors.leaseLength && (
+          <APMError />
+        )}
+        {/* Lease Type */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMSelect value={value} onChange={onChange} placeholder="Select Leasing Type" items={SelectOptions.leasingType} />
+          )}
+          name="leaseType"
+          rules={{ required: false }}
+        />
+        {errors.leaseType && (
+          <APMError />
+        )}
+        {/* Rent Due On */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMSelect value={value} onChange={onChange} placeholder="Select Rent Due Date" items={SelectOptions.rentDueDate} />
+          )}
+          name="rentDueOn"
+          rules={{ required: false }}
+        />
+        {errors.rentDueOn && (
+          <APMError />
+        )}
+        {/* Rent Rate */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMNumber value={value} onChange={onChange} placeholder="Rental Rate" />
+          )}
+          name="rentRate"
+          rules={{ required: false }}
+        />
+        {errors.rentRate && (
+          <APMError />
+        )}
+        {/* Security Deposit */}
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMNumber value={value} onChange={onChange} placeholder="Security Deposit" />
+          )}
+          name="securityDeposit"
+          rules={{ required: false }}
+        />
+        {errors.securityDeposit && (
+          <APMError />
+        )}
+        {/* Description */}
+        <Text style={styles.inputLabel}>Description</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
+          )}
+          name="description"
+          rules={{ required: false }}
+        />
+        {errors.description && (
+          <APMError />
+        )}
+      </AddEditScreen>
+    );
+  }
 };
 
 export default EditTenant;

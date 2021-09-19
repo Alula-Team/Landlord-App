@@ -57,7 +57,7 @@ const PropertyDetail = ({ navigation, route }) => {
   };
 
   return (
-    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)}>
+    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
       <ScrollView>
         {/* Property Information */}
         <View style={styles.propInfo}>
@@ -309,7 +309,7 @@ const PropertyDetail = ({ navigation, route }) => {
           </View>
         </Modal>
       </ScrollView>
-    </DetailScreen>
+    </DetailScreen >
   );
 };
 

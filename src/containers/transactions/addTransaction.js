@@ -22,7 +22,7 @@ import { db } from "../../firebase";
 
 // Style Sheet
 import { styles } from "./styles";
-import AddScreen from "../constants/AddScreen";
+import AddEditScreen from "../constants/AddEditScreen";
 
 faker.locale = "en_US";
 
@@ -65,7 +65,7 @@ const AddTransaction = ({ navigation }) => {
   };
 
   return (
-    <AddScreen title="Add Transaction" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
+    <AddEditScreen title="Add Transaction" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
       <TouchableOpacity
         style={{
           backgroundColor: "#5858FB",
@@ -193,7 +193,7 @@ const AddTransaction = ({ navigation }) => {
         <UploadReceipt />
 
       </View>
-    </AddScreen>
+    </AddEditScreen>
   );
 };
 

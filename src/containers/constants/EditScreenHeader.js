@@ -3,7 +3,7 @@ import { Text, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import { addStyles } from './styles';
 
-const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit = null }) => {
+const EditScreenHeader = ({ title = "Edit...", onGoBack, onSubmit }) => {
   return (
     <Header
       centerComponent={{
@@ -36,4 +36,4 @@ const AddScreenHeader = ({ title = "Add...", onGoBack, onSubmit = null }) => {
   );
 };
 
-export default AddScreenHeader;
+export default EditScreenHeader;

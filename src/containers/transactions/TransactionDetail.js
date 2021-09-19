@@ -20,7 +20,9 @@ import { styles } from "./styles";
 
 const TransactionDetail = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { itemID } = route.params;
+  const { itemID, allElse } = route.params;
+
+  // const { property: { address, city, state, unit, zip }, amount, date, description, paymentMethod, transactionCategory, transactionType } = JSON.parse(item);
 
   const transRef = db.collection('transactions').doc(itemID);
   const [transaction, loading, error] = useDocumentDataOnce(transRef, { idField: "id" });
@@ -62,9 +64,15 @@ const TransactionDetail = ({ navigation, route }) => {
       ]
     );
   };
+
   if (loading) {
-    return (<Text>Loading...</Text>)
+    return <Text>Loading...</Text>;
   }
+
+  if (error) {
+    return <Text>`Error: ${error.message}`</Text>;
+  }
+
   if (transaction) {
     const { property: { address, city, state, unit, zip }, amount, date, description, paymentMethod, transactionCategory, transactionType } = transaction;
     return (
@@ -170,7 +178,7 @@ const TransactionDetail = ({ navigation, route }) => {
                 onPress={() => (
                   setModalVisible(!modalVisible),
                   navigation.navigate("EditTransaction", {
-                    editID: itemID,
+                    itemID,
                   },
                   )
                 )}

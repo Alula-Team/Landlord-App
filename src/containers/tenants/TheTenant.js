@@ -1,11 +1,11 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-const Tenant = (item) => (
+const TheTenant = (item) => (
   <View>
     <Text>Tenant: {item.name}</Text>
     {/* <Text>Property Address: {address}</Text> */}
   </View>
 );
 
-export default Tenant;
+export default TheTenant;

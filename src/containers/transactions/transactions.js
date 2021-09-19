@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-
 import {
   Alert,
   Text,
@@ -11,10 +10,6 @@ import {
   RefreshControl,
 } from "react-native";
 
-import { useForm, Controller } from "react-hook-form";
-
-import { Header, Icon } from "react-native-elements";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
@@ -25,12 +20,8 @@ import { styles } from "./styles";
 import { db } from "../../firebase";
 
 import { TransactionsContext } from "../../providers/TransactionsProvider";
-// import { PropertiesContext } from "../../providers/PropertiesProvider";
-import { SafeAreaView } from "react-native-safe-area-context";
-import Shmeader from "../constants/Shmeader";
 import MainScreen from "../constants/MainScreen";
 
-// import { getSubCollections } from "../../../functions";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -72,8 +63,6 @@ const Transactions = ({ navigation }) => {
 
   //
   let data = filteredList;
-
-  const { control } = useForm();
 
   // onRefresh
   const onRefresh = React.useCallback(() => {
@@ -136,90 +125,37 @@ const Transactions = ({ navigation }) => {
     );
   };
 
-  return (
-    <MainScreen title="Transactions" actionIcon="activity" onAction={() => setShouldShow(!shouldShow)} onAdd={() => navigation.navigate(AddTransaction)}>
-      {/* <View style={styles.container}>
-        {/* Header */}
-      {/* <Shmeader /> */}
-      <Header
-        placement={"left"}
-        centerComponent={{
-          text: "Transactions",
-          style: {
-            color: "#34383D",
-            fontWeight: "bold",
-            fontSize: 25,
-            paddingTop: 20,
-          },
-        }}
-        rightComponent={
-          <>
-            <View style={{ flexDirection: "row" }}>
-              {/* Dashboard */}
-              <Icon
-                name="activity"
-                type="feather"
-                color="#34383D80"
-                size={25}
-                iconStyle={{
-                  paddingTop: 20,
-                  paddingRight: 20,
-                  paddingBottom: 10,
-                }}
-                onPress={() => setShouldShow(!shouldShow)}
-              />
-              {/* ADD Transaction */}
-              <Icon
-                name="plus"
-                type="feather"
-                color="#34383D80"
-                size={25}
-                iconStyle={{
-                  paddingTop: 20,
-                  paddingRight: 20,
-                  paddingBottom: 10,
-                }}
-                onPress={() => {
-                  setSearch("");
-                  navigation.navigate("AddTransaction");
-                }}
-              />
-            </View>
-          </>
-        }
-        containerStyle={{
-          backgroundColor: "#fff",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
-      />
+  const onAction = () => {
+    setShouldShow(!shouldShow);
+  }
 
+  const onAdd = () => {
+    setSearch("");
+    navigation.navigate("AddTransaction");
+  }
+
+  return (
+    <MainScreen title="Transactions" actionIcon="activity" onAction={onAction} onAdd={onAdd}>
       {/* Search Bar */}
-      <Controller
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <View style={styles.searchContainer}>
-            <Feather
-              name="search"
-              color="#34383D80"
-              size={20}
-              style={styles.searchIcon}
-            />
-            <TextInput
-              type="search"
-              placeholder="Search Transactions"
-              placeholderTextColor="#34383D80"
-              autoFocus={false}
-              autoCorrect={false}
-              style={styles.searchInput}
-              clearButtonMode="while-editing"
-              onChangeText={handleSearch}
-              value={search}
-            />
-          </View>
-        )}
-        name="search"
-      />
+      <View style={styles.searchContainer}>
+        <Feather
+          name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
+        />
+        <TextInput
+          type="search"
+          placeholder="Search Transactions"
+          placeholderTextColor="#34383D80"
+          autoFocus={false}
+          autoCorrect={false}
+          style={styles.searchInput}
+          clearButtonMode="while-editing"
+          onChangeText={handleSearch}
+          value={search}
+        />
+      </View>
       {/* END Search Bar */}
 
       {/* Revenue Overview */}
@@ -270,7 +206,8 @@ const Transactions = ({ navigation }) => {
               style={styles.listCell}
               onPress={() =>
                 navigation.navigate("TransactionDetail", {
-                  itemID: item.id
+                  itemID: item.id,
+                  allElse: JSON.stringify(item)
                 }
                 )
               }

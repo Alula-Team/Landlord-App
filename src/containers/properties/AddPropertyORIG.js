@@ -19,7 +19,7 @@ import styles from "./styles";
 import GooglePlacesSearch from "../../forms";
 
 // ScreenHeader
-import AddScreenHeader from "../constants/AddScreenHeader";
+import AddEditScreenHeader from "../constants/AddEditScreenHeader";
 
 // Firebase
 import { db } from "../../firebase";
