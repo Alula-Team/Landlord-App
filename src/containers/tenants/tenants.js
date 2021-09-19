@@ -123,7 +123,7 @@ const Tenants = ({ navigation }) => {
     setSearch("");
     navigation.navigate("AddTenant");
   }
-
+  console.log('HERE ARE yer tenants', JSON.stringify(data));
   return (
     <MainScreen title="Tenants" onAdd={onAdd}>
       {/* Search Bar */}
