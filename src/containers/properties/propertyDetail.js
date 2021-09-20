@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Modal,
+
 } from "react-native";
 
 // Vector Icons
@@ -14,7 +15,7 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-import DetailScreen from "../constants/DetailScreen";
+import DetailScreen from "../constants/DetailScreen_BAK";
 // Firebase
 import { db } from "../../firebase";
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
