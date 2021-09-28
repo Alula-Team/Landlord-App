@@ -36,9 +36,9 @@ const styles = StyleSheet.create({
 
   // Flatlist
   inputLabel: {
-    marginLeft: 22.5, 
-    marginTop: 20, 
-    fontSize: 16, 
+    marginLeft: 22.5,
+    marginTop: 20,
+    fontSize: 16,
     fontWeight: '500'
   },
   inputContainer: {
@@ -50,11 +50,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#00000009",
   },
   inputField: {
-      paddingLeft: 12.5,
-      color: "#34383D",
-      fontSize: 16,
-      fontWeight: "500",
-      width: "100%",
+    paddingLeft: 12.5,
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500",
+    width: "100%",
   },
   listCell: {
     paddingVertical: 20,

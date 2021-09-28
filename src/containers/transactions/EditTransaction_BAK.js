@@ -19,7 +19,7 @@ import { APMError, APMSelect, APMText, APMTextarea } from "../../forms/APMFormFi
 import { PropertySelect } from "../../forms";
 
 // Firebase
-import { db } from "../../firebase";
+import { auth, db } from "../../firebase";
 import AddEditScreen from "../constants/AddEditScreen";
 import UploadReceipt from "../constants/uploadImage";
 
@@ -67,12 +67,12 @@ const EditTransaction = ({ navigation, route }) => {
   //   fillForm();
   // }, []);
 
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm();
+  // const {
+  //   control,
+  //   handleSubmit,
+  //   setValue,
+  //   formState: { errors },
+  // } = useForm();
 
   // const onSubmit = (data) => {
   //   let updates = returnFinalObject(INITIAL_STATE, data);
@@ -174,7 +174,6 @@ const EditTransaction = ({ navigation, route }) => {
             )}
             name="transactionType"
             rules={{ required: true }}
-            defaultValue={transaction.paymentType}
           />
           {
             errors.payment && (
