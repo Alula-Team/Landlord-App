@@ -20,6 +20,10 @@ import DetailScreen from "../constants/DetailScreen";
 import { db } from "../../firebase";
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 
+import TheProperty from "./TheProperty";
+import LoadingScreen from "../constants/LoadingScreen";
+import ErrorScreen from "../constants/ErrorScreen";
+
 const PropertyDetail = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
   const { itemID } = route.params;
@@ -27,12 +31,7 @@ const PropertyDetail = ({ navigation, route }) => {
   const propRef = db.collection('properties').doc(itemID);
   const [property, loading, error] = useDocumentDataOnce(propRef, { idField: "id" });
 
-  if (error) {
-    console.log(error)
-  }
-  if (loading) {
-    console.log('Loading ...')
-  }
+
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
@@ -57,12 +56,32 @@ const PropertyDetail = ({ navigation, route }) => {
     );
   };
 
+  if (error) {
+    return <ErrorScreen error={error} />
+  }
+  if (loading) {
+    return <LoadingScreen />
+  }
+
   return (
-    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
+    <DetailScreen DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)}>
       <ScrollView>
         {/* Property Information */}
         <View style={styles.propInfo}>
+          <View>
+            <Text
+              style={{
+                fontWeight: "500",
+                color: "#fff",
+                marginRight: 5,
+                textAlign: "center"
+              }}
+            >
+              {property.address} {property.unit}
+            </Text>
+          </View>
           <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
+
             <Text
               style={{
                 fontWeight: "500",
@@ -230,14 +249,7 @@ const PropertyDetail = ({ navigation, route }) => {
 
               <TouchableOpacity
                 onPress={() => (setModalVisible(!modalVisible),
-                  navigation.navigate("EditProperty", {
-                    itemID,
-                    itemAddress,
-                    itemCity,
-                    itemState,
-                    itemUnit,
-                    itemZip,
-                  }))
+                  navigation.navigate("EditProperty", { itemID }))
                 }
                 style={{
                   flexDirection: "row",
@@ -310,7 +322,7 @@ const PropertyDetail = ({ navigation, route }) => {
           </View>
         </Modal>
       </ScrollView>
-    </DetailScreen >
+    </DetailScreen>
   );
 };
 
