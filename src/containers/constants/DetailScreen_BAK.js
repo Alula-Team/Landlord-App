@@ -1,9 +1,9 @@
 import * as React from "react";
 import { View } from "react-native";
-import DetailScreenHeader from "./DetailScreenHeader";
+import DetailScreenHeader from "./DetailScreen";
 import { addStyles } from './styles';
 
-const DetailScreen = ({ title, onGoBack, onPress, children }) => {
+const DetailScreenBAK = ({ title, onGoBack, onPress, children }) => {
   return (
     <View style={addStyles.container}>
       <DetailScreenHeader title={title} onGoBack={onGoBack} onPress={onPress} />
@@ -12,4 +12,4 @@ const DetailScreen = ({ title, onGoBack, onPress, children }) => {
   );
 };
 
-export default DetailScreen;
+export default DetailScreenBAK;

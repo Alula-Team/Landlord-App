@@ -158,7 +158,7 @@ const Tenants = ({ navigation }) => {
             <TouchableOpacity
               style={styles.listCell}
               onPress={() =>
-                navigation.navigate("TenantDetail", { itemID: JSON.stringify(item) })
+                navigation.navigate("TenantDetail", { itemID: item.id })
               }
             >
               <View style={{ flexDirection: "row", alignItems: "center" }}>
