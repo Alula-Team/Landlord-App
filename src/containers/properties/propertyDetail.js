@@ -58,8 +58,19 @@ const PropertyDetail = ({ navigation, route }) => {
   };
 
   return (
-    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
+    <DetailScreen title="" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
       <ScrollView>
+        <Text
+          style={{
+            color: "#34383D",
+            fontSize: 18,
+            fontWeight: "600",
+            marginBottom: 20,
+            textAlign: 'center'
+          }}
+        >
+          Property Address
+        </Text>
         {/* Property Information */}
         <View style={styles.propInfo}>
           <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
