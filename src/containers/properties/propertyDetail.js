@@ -58,8 +58,19 @@ const PropertyDetail = ({ navigation, route }) => {
   };
 
   return (
-    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
+    <DetailScreen title="" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
       <ScrollView>
+        <Text
+          style={{
+            color: "#34383D",
+            fontSize: 18,
+            fontWeight: "600",
+            marginBottom: 20,
+            textAlign: 'center'
+          }}
+        >
+          Property Address
+        </Text>
         {/* Property Information */}
         <View style={styles.propInfo}>
           <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
@@ -200,9 +211,9 @@ const PropertyDetail = ({ navigation, route }) => {
         </View>
 
         {/* Market Property View */}
-        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
+        {/* <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
           <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>MARKET PROPERTY</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* Actions Modal */}
         <Modal
