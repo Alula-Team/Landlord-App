@@ -17,12 +17,12 @@ import Feather from "react-native-vector-icons/Feather";
 
 // Style Sheet
 import { styles } from "./styles";
+import LoadingScreen from "../constants/LoadingScreen";
+import ErrorScreen from "../constants/ErrorScreen";
 
 const TransactionDetail = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const { itemID, allElse } = route.params;
-
-  // const { property: { address, city, state, unit, zip }, amount, date, description, paymentMethod, transactionCategory, transactionType } = JSON.parse(item);
+  const { itemID } = route.params;
 
   const transRef = db.collection('transactions').doc(itemID);
   const [transaction, loading, error] = useDocumentDataOnce(transRef, { idField: "id" });
@@ -66,11 +66,11 @@ const TransactionDetail = ({ navigation, route }) => {
   };
 
   if (loading) {
-    return <Text>Loading...</Text>;
+    return <LoadingScreen />
   }
 
   if (error) {
-    return <Text>`Error: ${error.message}`</Text>;
+    return <ErrorScreen error={error} />
   }
 
   if (transaction) {
