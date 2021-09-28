@@ -4,34 +4,34 @@ import { collectIdsAndData } from "../utilities";
 export const TenantsContext = createContext();
 export const TenantContext = createContext();
 
-// const TenantProvider = (props) => {
-//   const [tenant, setTenant] = useState();
+export const TenantProvider = (props) => {
+  const [tenant, setTenant] = useState();
 
-//   let unsubscribeFromFirestore = null;
+  let unsubscribeFromFirestore = null;
 
-//   useEffect(() => {
-//     let mounted = true;
-//     async function getTenant() {
-//       unsubscribeFromFirestore = await db.collection('tenants').doc(props.id).onSnapshot((snapshot) => {
-//         const tenant = collectIdsAndData(snapshot.data);
-//         if (mounted) setTenant(tenant);
-//       });
-//     }
-//     getTenant();
-//     return function cleanup() {
-//       unsubscribeFromFirestore();
-//       mounted = false;
-//     }
-//   }, []);
+  useEffect(() => {
+    let mounted = true;
+    async function getTenant() {
+      unsubscribeFromFirestore = await db.collection('tenants').doc(props.id).onSnapshot((snapshot) => {
+        const tenant = collectIdsAndData(snapshot.data);
+        if (mounted) setTenant(tenant);
+      });
+    }
+    getTenant();
+    return function cleanup() {
+      unsubscribeFromFirestore();
+      mounted = false;
+    }
+  }, []);
 
-//   return (
-//     <TenantContext.Provider value={tenant}>
-//       {props.children}
-//     </TenantContext.Provider>
-//   )
-// }
+  return (
+    <TenantContext.Provider value={tenant}>
+      {props.children}
+    </TenantContext.Provider>
+  )
+}
 
-const TenantsProvider = (props) => {
+export const TenantsProvider = (props) => {
   const [tenants, setTenants] = useState([]);
 
   let unsubscribeFromFirestore = null;
@@ -60,5 +60,3 @@ const TenantsProvider = (props) => {
     </TenantsContext.Provider>
   );
 };
-
-export default TenantsProvider;

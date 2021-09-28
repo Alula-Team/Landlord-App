@@ -23,6 +23,7 @@ import firebase, { auth, db } from "../../firebase";
 import { collectIdsAndData } from "../../utilities";
 
 import { TenantsContext } from "../../providers/TenantsProvider";
+import MainScreen from "../constants/MainScreen";
 // import { withProperty } from "../../providers/PropertiesProvider";
 
 // THINGS I NEED FOR THIS SCREEN
@@ -118,114 +119,75 @@ const Tenants = ({ navigation }) => {
     );
   };
 
+  const onAdd = () => {
+    setSearch("");
+    navigation.navigate("AddTenant");
+  }
+  console.log('HERE ARE yer tenants', JSON.stringify(data));
   return (
-    <>
-      <View style={styles.container}>
-        {/* Header */}
-        <Header
-          placement={"left"}
-          centerComponent={{
-            text: "Tenants",
-            style: {
-              color: "#34383D",
-              fontWeight: "bold",
-              fontSize: 25,
-              paddingTop: 20,
-            },
-          }}
-          rightComponent={
-            <>
-              <View>
-                {/* ADD Tenant */}
-                <Icon
-                  name="plus"
-                  type="feather"
-                  color="#34383D80"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 20,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  // onPress={() => setModalVisible(true)}
-                  onPress={() => {
-                    // setQuery("");
-                    navigation.navigate("AddTenant");
-                  }}
-                />
-              </View>
-            </>
-          }
-          containerStyle={{
-            backgroundColor: "#fff",
-            justifyContent: "space-around",
-            borderBottomWidth: 0,
-          }}
+    <MainScreen title="Tenants" onAdd={onAdd}>
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <Feather
+          name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
         />
-
-        {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <Feather
-            name="search"
-            color="#34383D80"
-            size={20}
-            style={styles.searchIcon}
-          />
-          <TextInput
-            type="search"
-            placeholder="Search Tenants"
-            placeholderTextColor="#34383D80"
-            autoFocus={false}
-            autoCorrect={false}
-            style={styles.searchInput}
-            clearButtonMode="while-editing"
-            onChangeText={handleSearch}
-            value={search}
-          />
-        </View>
-
-        {/* END Search Bar */}
-
-        {/* Properties Flat List */}
-        <SafeAreaView>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.listCell}
-                onPress={() =>
-                  navigation.navigate("TenantDetail", { itemID: item.id })
-                }
-              >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Feather name="user" color="#34383D90" size={20} />
-                  <View>
-                    <Text style={styles.listItem}>{item.name}</Text>
-                    <Text style={styles.listItemMuted}>
-                      {item.property.address} {item.property.unit}
-                    </Text>
-                  </View>
-                </View>
-                <Feather
-                  name="arrow-right"
-                  color="#34383D90"
-                  size={20}
-                  style={styles.arrow}
-                />
-              </TouchableOpacity>
-            )}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            contentContainerStyle={{ paddingBottom: 350 }}
-            showsVerticalScrollIndicator={false}
-            ItemSeparatorComponent={renderSeparator}
-            ListEmptyComponent={EmptyListMessage}
-          />
-        </SafeAreaView>
+        <TextInput
+          type="search"
+          placeholder="Search Tenants"
+          placeholderTextColor="#34383D80"
+          autoFocus={false}
+          autoCorrect={false}
+          style={styles.searchInput}
+          clearButtonMode="while-editing"
+          onChangeText={handleSearch}
+          value={search}
+        />
       </View>
-    </>
+
+      {/* END Search Bar */}
+
+      {/* Properties Flat List */}
+      <SafeAreaView>
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={styles.listCell}
+              onPress={() =>
+                navigation.navigate("TenantDetail", { itemID: item.id })
+              }
+            >
+              <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <Feather name="user" color="#34383D90" size={20} />
+                <View>
+                  <Text style={styles.listItem}>{item.name}</Text>
+                  <Text style={styles.listItemMuted}>
+                    {item.property.address} {item.property.unit}
+                  </Text>
+                </View>
+              </View>
+              <Feather
+                name="arrow-right"
+                color="#34383D90"
+                size={20}
+                style={styles.arrow}
+              />
+            </TouchableOpacity>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+          contentContainerStyle={{ paddingBottom: 350 }}
+          showsVerticalScrollIndicator={false}
+          ItemSeparatorComponent={renderSeparator}
+          ListEmptyComponent={EmptyListMessage}
+        />
+      </SafeAreaView>
+    </MainScreen>
   );
 };
 

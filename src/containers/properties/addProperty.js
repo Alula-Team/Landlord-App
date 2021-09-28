@@ -1,41 +1,58 @@
-import * as React from "react";
-import { Text, TextInput, View, TouchableOpacity } from "react-native";
-import { Header, Icon } from "react-native-elements";
+import React from "react";
+import { Text } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-
+import AddEditScreen from '../constants/AddEditScreen';
 // Form
-import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import { APMText, APMError } from "../../forms/APMFormFields";
 
 import faker from "faker";
 faker.locale = "en_US";
 
 // Vector Icons
-import Feather from "react-native-vector-icons/Feather";
-
-// Style Sheet
-import styles, { googlePlacesStyles } from "./styles";
-
-// Google Address bar
-import GooglePlacesSearch from "./googlePlacesSearch";
-
-// ScreenHeader
-import ScreenHeader from "./screenHeader";
+import styles from "./styles";
 
 // Firebase
 import { db } from "../../firebase";
 
+const AddProperty = ({ navigation, route }) => {
+  // const { itemID } = route.params;
 
-const AddProperty = ({ navigation }) => {
-  const INITIAL_STATE = {
-    address: "",
-    author: "",
-    city: "",
-    state: "",
-    tenants: "",
-    unit: "",
-    zip: "",
+  // const INITIAL_STATE = {
+  //   address: itemAddress,
+  //   city: itemCity,
+  //   state: itemState,
+  //   unit: itemUnit,
+  //   zip: itemZip,
+  // };
+
+  const checkEqual = (prop1, prop2) => {
+    return prop1 === prop2;
   };
-  const [property, setProperty] = React.useState(INITIAL_STATE);
+
+  const returnFinalObject = (obj1, obj2) => {
+    let finished = {};
+    Object.keys(obj1).forEach((key) => {
+      if (obj2.hasOwnProperty(key) && checkEqual(obj1[key], obj2[key])) {
+        return;
+      } else {
+        finished[key] = obj2[key];
+      }
+    });
+    console.log(finished);
+    return finished;
+  };
+
+  // useEffect(() => {
+  //   function fillForm() {
+  //     setValue("address", itemAddress);
+  //     setValue("city", itemCity);
+  //     setValue("state", itemState);
+  //     setValue("zip", itemZip);
+  //     setValue("unit", itemUnit);
+  //   }
+  //   fillForm();
+  // }, []);
 
   const {
     control,
@@ -44,53 +61,39 @@ const AddProperty = ({ navigation }) => {
     formState: { errors },
   } = useForm();
 
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "unit",
-  });
+  const onSubmit = async (data) => {
+    let updates = returnFinalObject(INITIAL_STATE, data);
+    data.id = itemID;
 
-  const breakIntoUnits = (data) => {
-    let addresses = [];
-    data.unit.forEach((item, index) => {
-      addresses.push({
-        address: data.address,
-        city: data.city,
-        state: data.state,
-        unit: data.unit[index].number,
-        zip: data.zip,
+    let theProperty = db.collection("properties").doc(itemID);
+
+    theProperty
+      .update(updates)
+      .then(() => console.log(`Successfully update yer property`));
+
+    let theTenants = db
+      .collection("tenants")
+      .where("property.id", "==", data.id);
+
+    theTenants.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({ property: updates });
       });
     });
-    return addresses;
-  };
 
-  const fillForm = (property) => {
-    const reverseProperty = property.split(", ").reverse();
-    const [country, stateZip, city, address, maybe] = reverseProperty;
-    const [state, zip] = stateZip.split(" ");
-    setValue("address", address);
-    setValue("city", city);
-    setValue("state", state);
-    setValue("zip", zip);
-  };
+    let theTransactions = db
+      .collection("transactions")
+      .where("property.id", "==", data.id);
 
-  const onSubmit = (data) => {
-    if (data.unit.length) {
-      let batch = db.batch();
-      const docs = breakIntoUnits(data);
-      docs.forEach((doc) => {
-        var docRef = db.collection("properties").doc();
-        batch.set(docRef, doc);
+    theTransactions.get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        doc.ref.update({ property: updates });
       });
-      batch.commit();
-    } else {
-      data.tenants = [];
-      data.unit = "";
-      db.collection("properties")
-        .add(data)
-        .then((doc) => console.log(doc.id))
-        .catch((error) => console.error(error));
-    }
-    navigation.goBack();
+    });
+
+    navigation.navigate("PropertyDetail", {
+      itemID: data.id,
+    });
   };
 
   // Placeholder
@@ -101,235 +104,75 @@ const AddProperty = ({ navigation }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header
-        centerComponent={{
-          text: "Add Property",
-          style: {
-            color: "#34383D",
-            fontWeight: "600",
-            fontSize: 20,
-            paddingTop: 20,
-          },
-        }}
-        leftComponent={
-          <Icon
-            name="arrow-left"
-            type="feather"
-            color="#34383D80"
-            size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingLeft: 10,
-              paddingBottom: 10,
-            }}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        rightComponent={
-          <TouchableOpacity
-            style={{ paddingTop: 22.5, paddingRight: 10 }}
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
-              Save
-            </Text>
-          </TouchableOpacity>
-        }
-        containerStyle={{
-          backgroundColor: "#fff",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
-      />
-
-      <GooglePlacesSearch onPress={fillForm} />
+    <AddEditScreen title="Add Property" onGoBack={() => navigation.goBack()} onSubmit={handleSubmit(onSubmit)}>
       <KeyboardAwareScrollView>
+        {/* Address */}
+        <Text style={styles.inputLabel}>Address</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <Text style={styles.inputLabel}>Property Address</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Street"
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="Address..." />
           )}
           name="address"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.address && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* City */}
+        <Text style={styles.inputLabel}>City</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="City"
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="City..." />
           )}
           name="city"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.city && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* State */}
+        <Text style={styles.inputLabel}>State</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="State"
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="State..." />
           )}
           name="state"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.state && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* Zip */}
+        <Text style={styles.inputLabel}>Zip Code</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Zip Code"
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="Zip..." />
           )}
           name="zip"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.zip && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
-        {/* Units */}
-
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => append({ number: "" })}
-        >
-          <Text style={styles.addButtonText}>
-            + Add Unit(s) to this Property
-          </Text>
-        </TouchableOpacity>
-        {fields.map((item, index) => (
-          <Controller
-            key={item.id}
-            control={control}
-            render={({ field: { value, onChange } }) => (
-              <View style={{ flexDirection: "row" }}>
-                <View style={styles.inputContainer}>
-                  <TextInput
-                    type="text"
-                    placeholder="Apt, Unit, Suite, etc..."
-                    placeholderTextColor="#34383D70"
-                    autoCorrect={false}
-                    clearButtonMode={"while-editing"}
-                    keyboardAppearance="light"
-                    style={styles.inputField}
-                    onChangeText={onChange}
-                    value={value}
-                  />
-                </View>
-                <TouchableOpacity
-                  style={{ alignSelf: "center" }}
-                  onPress={() => remove(index)}
-                >
-                  <Feather name="trash" color="#34383D80" size={20} />
-                </TouchableOpacity>
-              </View>
-            )}
-            name={`unit[${index}].number`}
-            rules={{ required: true }}
-            defaultValue=""
-          />
-        ))}
+        {/* Unit */}
+        <Text style={styles.inputLabel}>Unit</Text>
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <APMText value={value} onChange={onChange} placeholder="Unit..." />
+          )}
+          name="unit"
+          rules={{ required: false }}
+        />
+        {errors.unit && (
+          <APMError />
+        )}
       </KeyboardAwareScrollView>
-    </View>
+    </AddEditScreen>
   );
 };
 

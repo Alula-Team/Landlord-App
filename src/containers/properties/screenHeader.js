@@ -1,11 +1,11 @@
 import * as React from "react";
 import { Text, TouchableOpacity } from "react-native";
 import { Header, Icon } from "react-native-elements";
-const ScreenHeader = ({ onSubmit }) => {
+const ScreenHeader = ({ onSubmit, title = "Add..." }) => {
   return (
     <Header
       centerComponent={{
-        text: "Add Property",
+        text: title,
         style: {
           color: "#fff",
           fontWeight: "700",

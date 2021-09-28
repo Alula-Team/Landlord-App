@@ -15,19 +15,77 @@ import Feather from "react-native-vector-icons/Feather";
 
 import { styles, pickerStyles } from "./styles";
 import { SelectOptions, FakerOptions } from "../../forms";
+import { APMError, APMSelect, APMText, APMTextarea } from "../../forms/APMFormFields";
+import { PropertySelect } from "../../forms";
 
 // Firebase
-import { auth, db } from "../../firebase/firebase";
+import { auth, db } from "../../firebase";
+import AddEditScreen from "../constants/AddEditScreen";
+import UploadReceipt from "../constants/uploadImage";
+
+import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 
 const EditTransaction = ({ navigation, route }) => {
-  const { theItem, theProperty } = route.params;
+  const { itemID } = route.params;
 
-  const INITIAL_STATE = {
-    property: {
-      ...theProperty,
-    },
-    ...theItem,
-  };
+  const transRef = db.collection("transactions").doc(itemID);
+  const [transaction, loading, error] = useDocumentDataOnce(transRef, { idField: "id" });
+
+  // const INITIAL_STATE = {
+  //   property: {
+  //     ...theProperty,
+  //   },
+  //   ...theItem,
+  // };
+
+  // const checkEqual = (prop1, prop2) => {
+  //   return prop1 === prop2;
+  // };
+
+  // const returnFinalObject = (obj1, obj2) => {
+  //   let finished = {};
+  //   Object.keys(obj1).forEach((key) => {
+  //     if (obj2.hasOwnProperty(key) && checkEqual(obj1[key], obj2[key])) {
+  //       return;
+  //     } else {
+  //       finished[key] = obj2[key];
+  //     }
+  //   });
+  //   console.log(finished);
+  //   return finished;
+  // };
+
+  // useEffect(() => {
+  //   function fillForm() {
+  //     setValue("amount", itemAmount);
+  //     setValue("date", itemDate);
+  //     setValue("description", itemDescription);
+  //     setValue("paymentMethod", itemPaymentMethod);
+  //     setValue("transactionCategory", itemTransactionCategory);
+  //     setValue("transactionType", itemTransactionType);
+  //   }
+  //   fillForm();
+  // }, []);
+
+  // const {
+  //   control,
+  //   handleSubmit,
+  //   setValue,
+  //   formState: { errors },
+  // } = useForm();
+
+  // const onSubmit = (data) => {
+  //   let updates = returnFinalObject(INITIAL_STATE, data);
+  //   data.id = itemID;
+  //   console.log(data);
+  //   console.log(updates);
+  //   db.collection("transactions")
+  //     .doc(itemID)
+  //     .update(updates)
+  //     .then(() => console.log(`Successfully updated yer stuffs!`))
+  //     .catch((error) => console.error(error));
+  //   navigation.navigate("TransactionDetail", { itemID: data.id });
+  // };
 
   const checkEqual = (prop1, prop2) => {
     return prop1 === prop2;
@@ -46,266 +104,179 @@ const EditTransaction = ({ navigation, route }) => {
     return finished;
   };
 
-  // useEffect(() => {
-  //   function fillForm() {
-  //     setValue("amount", itemAmount);
-  //     setValue("date", itemDate);
-  //     setValue("description", itemDescription);
-  //     setValue("paymentMethod", itemPaymentMethod);
-  //     setValue("transactionCategory", itemTransactionCategory);
-  //     setValue("transactionType", itemTransactionType);
-  //   }
-  //   fillForm();
-  // }, []);
+  // const {
+  //   control,
+  //   handleSubmit,
+  //   setValue,
+  //   formState: { errors },
+  // } = useForm({
+  //   defaultValues: INITIAL_STATE
+  // });
 
-  const {
-    control,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      ...theItem,
-    },
-  });
+  // const onSubmit = (data) => {
+  //   let updates = returnFinalObject(INITIAL_STATE, data);
+  //   data.id = itemID;
+  //   console.log(data);
+  //   console.log(updates);
+  //   db.collection("transactions")
+  //     .doc(itemID)
+  //     .update(updates)
+  //     .then(() => console.log(`Successfully updated yer stuffs!`))
+  //     .catch((error) => console.error(error));
+  //   navigation.navigate("TransactionDetail", { itemID: data.id });
+  // };
 
-  const onSubmit = (data) => {
-    let updates = returnFinalObject(INITIAL_STATE, data);
-    data.id = theItem.ID;
-    console.log(data);
-    console.log(updates);
-    db.collection("transactions")
-      .doc(theItem.ID)
-      .update(updates)
-      .then(() => console.log(`Successfully updated yer stuffs!`))
-      .catch((error) => console.error(error));
-    navigation.navigate("ManageTransaction", {
-      itemID: data.id,
-      itemAmount: data.amount,
-      itemDate: data.date,
-      itemDescription: data.description,
-      itemPaymentMethod: data.paymentMethod,
-      itemTransactionCategory: data.transactionCategory,
-      itemTransactionType: data.transactionType,
+  if (loading) {
+    return <Text>Loading...</Text>;
+  }
+
+  if (error) {
+    return `Error: ${error.message}`;
+  }
+
+  if (transaction) {
+    const { property: { address, city, state, unit, zip }, amount, date, description, paymentMethod, transactionCategory, transactionType } = transaction;
+    const INITIAL_STATE = {
+      ...transaction
+    };
+
+    const {
+      control,
+      handleSubmit,
+      setValue,
+      formState: { errors },
+    } = useForm({
+      defaultValues: INITIAL_STATE
     });
-  };
 
-  return (
-    <View style={styles.container}>
-      <Header
-        centerComponent={{
-          text: "Edit Transaction",
-          style: {
-            color: "#34383D",
-            fontWeight: "600",
-            fontSize: 20,
-            paddingTop: 20,
-          },
-        }}
-        leftComponent={
-          <Icon
-            name="arrow-left"
-            type="feather"
-            color="#34383D80"
-            size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingLeft: 10,
-              paddingBottom: 10,
-            }}
-            onPress={() => navigation.goBack()}
+    const onSubmit = (data) => {
+      let updates = returnFinalObject(INITIAL_STATE, data);
+      data.id = itemID;
+      console.log(data);
+      console.log(updates);
+      db.collection("transactions")
+        .doc(itemID)
+        .update(updates)
+        .then(() => console.log(`Successfully updated yer stuffs!`))
+        .catch((error) => console.error(error));
+      navigation.navigate("TransactionDetail", { itemID: data.id });
+    };
+
+    return (
+      <AddEditScreen title="Edit Transaction" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
+        <KeyboardAwareScrollView>
+          {/* Transaction Type */}
+          <Text style={styles.inputLabel}>Transaction Type</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <APMSelect value={value} onChange={onChange} placeholder="Select Transaction" items={SelectOptions.paymentTypes} />
+            )}
+            name="transactionType"
+            rules={{ required: true }}
           />
-        }
-        rightComponent={
-          <TouchableOpacity
-            style={{ paddingTop: 22.5, paddingRight: 10 }}
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
-              Save
-            </Text>
-          </TouchableOpacity>
-        }
-        containerStyle={{
-          backgroundColor: "#fff",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
-      />
+          {
+            errors.payment && (
+              <APMError />
+            )
+          }
 
-      <KeyboardAwareScrollView>
-        <Text style={styles.inputLabel}>Transaction Type</Text>
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <RNPickerSelect
-              placeholder={{
-                label: "Select Transaction",
-                value: "",
-                color: "white",
-              }}
-              style={pickerStyles}
-              value={value}
-              onValueChange={onChange}
-              items={SelectOptions.paymentTypes}
-            />
+          {/* Category */}
+          <Text style={styles.inputLabel}>Category</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <APMSelect value={value} onChange={onChange} placeholder="Select Category" items={SelectOptions.transactionCategories} />
+            )}
+            name="transactionCategory"
+            rules={{ required: true }}
+            defaultValue={transactionCategory}
+          />
+          {errors.transactionCategory && (
+            <APMError />
           )}
-          name="transactionType"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.payment && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: 5,
-              marginBottom: -22,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
 
-        {/* Category */}
-        <Text style={styles.inputLabel}>Category</Text>
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <RNPickerSelect
-              placeholder={{
-                label: "Select Category",
-                value: "",
-                color: "white",
-              }}
-              style={pickerStyles}
-              value={value}
-              onValueChange={onChange}
-              items={SelectOptions.transactionCategories}
-            />
+          {/* Property */}
+          <Text style={styles.inputLabel}>Property</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <PropertySelect value={value} onChange={onChange} />
+            )}
+            name="property"
+            rules={{ required: true }}
+            defaultValue={`${address} {${unit}`}
+          />
+          {errors.property && (
+            <APMError />
           )}
-          name="transactionCategory"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.transactionCategory && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: 5,
-              marginBottom: -22,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
 
-        {/* Payment Method */}
-        <Text style={styles.inputLabel}>Payment Method</Text>
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <RNPickerSelect
-              placeholder={{
-                label: "Select Payment Method",
-                value: "",
-                color: "white",
-              }}
-              style={pickerStyles}
-              value={value}
-              onValueChange={onChange}
-              items={SelectOptions.paymentMethods}
-            />
+          {/* Payment Method */}
+          <Text style={styles.inputLabel}>Payment Method</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <APMSelect value={value} onChange={onChange} placeholder="Select Payment Method" items={SelectOptions.paymentMethods} />
+            )}
+            name="paymentMethod"
+            rules={{ required: true }}
+            defaultValue={paymentMethod}
+          />
+          {errors.paymentMethod && (
+            <APMError />
           )}
-          name="paymentMethod"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.paymentMethod && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: 5,
-              marginBottom: -22,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
 
-        {/* Amount */}
-        <Text style={styles.inputLabel}>Amount</Text>
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.inputContainer}>
-              <TextInput
-                type="text"
-                placeholder="i.e 1500"
-                placeholderTextColor="#34383D70"
-                style={styles.dateText}
-                keyboardType="numeric"
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+          {/* Amount */}
+          <Text style={styles.inputLabel}>Amount</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <APMText value={value} onChange={onChange} placeholder="i.e. 1500" />
+            )}
+            name="amount"
+            rules={{ required: true }}
+            defaultValue={amount}
+          />
+          {errors.amount && (
+            <APMError />
           )}
-          name="amount"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        {errors.amount && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: 5,
-              marginBottom: -22,
-            }}
-          >
-            This field is required
-          </Text>
-        )}
 
-        {/* Description */}
-        <Text style={styles.inputLabel}>Description</Text>
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.textArea}>
-              <TextInput
-                type="text"
-                placeholder="Enter Transaction Description ..."
-                placeholderTextColor="#34383D70"
-                style={{
-                  color: "#34383D",
-                  fontSize: 16,
-                  fontWeight: "500",
-                  marginLeft: 12.5,
-                  paddingTop: 10,
-                }}
-                multiline={true}
-                onChangeText={onChange}
-                value={value}
-              />
-            </View>
+          {/* Date Paid */}
+          {/* <Text style={styles.inputLabel}>Date Paid</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <APMNumber value={value} onChange={onChange} placeholder="MM/DD/YYYY" />
+            )}
+            name="date"
+            rules={{ required: false }}
+          />
+          {errors.date && (
+            <APMError />
+          )} */}
+
+          {/* Description */}
+          <Text style={styles.inputLabel}>Description</Text>
+          <Controller
+            control={control}
+            render={({ field: { value, onChange } }) => (
+              <APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
+            )}
+            name="description"
+            rules={{ required: false }}
+            defaultValue={description}
+          />
+          {errors.description && (
+            <APMError />
           )}
-          name="description"
-          rules={{ required: false }}
-          defaultValue=""
-        />
 
-        {/* Upload Recipt*/}
-        <Text style={styles.inputLabel}>Receipt:</Text>
-        <TouchableOpacity style={{backgroundColor: '#00000019', height: 220, width: 180, marginVertical: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", justifyContent: 'center'}}>
-          <Feather name='plus' size={40} color='#34383D50' />
-        </TouchableOpacity>
-
-      </KeyboardAwareScrollView>
-    </View>
-  );
+          {/* Upload Recipt*/}
+          <Text style={styles.inputLabel}>Upload Receipt: </Text>
+          <UploadReceipt />
+        </KeyboardAwareScrollView>
+      </AddEditScreen>
+    );
+  }
 };
 
 export default EditTransaction;

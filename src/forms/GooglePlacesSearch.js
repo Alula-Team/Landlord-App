@@ -1,7 +1,7 @@
 import * as React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 // import { GOOGLE_PLACES_API_KEY } from "@env";
-import GOOGLE_PLACES_API_KEY from "../../googlePlaces";
+import GOOGLE_PLACES_API_KEY from "../googlePlaces";
 import Feather from "react-native-vector-icons/Feather";
 import styles, { googlePlacesStyles } from "./styles";
 

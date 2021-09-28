@@ -5,9 +5,11 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 
 // Form
 import { useForm, Controller } from "react-hook-form";
+import { APMError, APMText } from "../../forms/APMFormFields";
 
 import faker from "faker";
 faker.locale = "en_US";
+
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
@@ -15,7 +17,8 @@ import Feather from "react-native-vector-icons/Feather";
 import styles from "./styles";
 
 // Firebase
-import { auth, db } from "../../firebase/firebase";
+import { auth, db } from "../../firebase";
+import AddEditScreen from "../constants/AddEditScreen";
 
 const EditProperty = ({ navigation, route }) => {
   const { itemID, itemAddress, itemCity, itemState, itemUnit, itemZip } =
@@ -112,219 +115,75 @@ const EditProperty = ({ navigation, route }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Header
-        centerComponent={{
-          text: "Edit property",
-          style: {
-            color: "#34383D",
-            fontWeight: "600",
-            fontSize: 20,
-            paddingTop: 20,
-          },
-        }}
-        leftComponent={
-          <Icon
-            name="arrow-left"
-            type="feather"
-            color="#34383D80"
-            size={25}
-            iconStyle={{
-              paddingTop: 20,
-              paddingLeft: 10,
-              paddingBottom: 10,
-            }}
-            onPress={() => navigation.goBack()}
-          />
-        }
-        rightComponent={
-          <TouchableOpacity
-            style={{ paddingTop: 22.5, paddingRight: 10 }}
-            onPress={handleSubmit(onSubmit)}
-          >
-            <Text style={{ color: "#955C28", fontSize: 18, fontWeight: "600" }}>
-              Save
-            </Text>
-          </TouchableOpacity>
-        }
-        containerStyle={{
-          backgroundColor: "#fff",
-          justifyContent: "space-around",
-          borderBottomWidth: 0,
-        }}
-      />
-
+    <AddEditScreen title="Edit Property" onGoBack={() => navigation.navigate()} onSubmit={handleSubmit(onSubmit)}>
       <KeyboardAwareScrollView>
+        {/* Address */}
+        <Text style={styles.inputLabel}>Address</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <Text style={styles.inputLabel}>Address</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Address..."
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="Address..." />
           )}
           name="address"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.address && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* City */}
+        <Text style={styles.inputLabel}>City</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <Text style={styles.inputLabel}>City</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="City..."
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="City..." />
           )}
           name="city"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.city && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* State */}
+        <Text style={styles.inputLabel}>State</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <Text style={styles.inputLabel}>State</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="State..."
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="State..." />
           )}
           name="state"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.state && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* Zip */}
+        <Text style={styles.inputLabel}>Zip Code</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <Text style={styles.inputLabel}>Zip Code</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Zip..."
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="Zip..." />
           )}
           name="zip"
           rules={{ required: true }}
-          defaultValue=""
         />
         {errors.zip && (
-          <Text
-            style={{
-              color: "red",
-              paddingLeft: 35,
-              marginTop: -15,
-              marginBottom: -2,
-            }}
-          >
-            This field is required
-          </Text>
+          <APMError />
         )}
+        {/* Unit */}
+        <Text style={styles.inputLabel}>Unit</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <>
-              <Text style={styles.inputLabel}>Unit</Text>
-              <View style={styles.inputContainer}>
-                <TextInput
-                  type="text"
-                  placeholder="Unit..."
-                  placeholderTextColor="#34383D70"
-                  autoCorrect={false}
-                  clearButtonMode={"while-editing"}
-                  keyboardAppearance="light"
-                  style={styles.inputField}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              </View>
-            </>
+            <APMText value={value} onChange={onChange} placeholder="Unit..." />
           )}
           name="unit"
           rules={{ required: false }}
-          defaultValue=""
         />
+        {errors.unit && (
+          <APMError />
+        )}
       </KeyboardAwareScrollView>
-    </View>
+    </AddEditScreen>
   );
 };
 

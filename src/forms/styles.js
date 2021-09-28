@@ -166,6 +166,28 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     marginLeft: 12.5,
   },
+  // Flatlist
+  inputLabel: {
+    marginLeft: 22.5,
+    marginTop: 20,
+    fontSize: 16,
+    fontWeight: '500'
+  },
+  inputContainer: {
+    marginHorizontal: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "#00000009",
+  },
+  inputField: {
+    paddingLeft: 12.5,
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500",
+    width: "100%",
+  },
 
   // Manage Transaction Screen
   propertySectionSpacing: {
@@ -217,6 +239,28 @@ const styles = StyleSheet.create({
   },
 });
 
+const googlePlacesStyles = StyleSheet.create({
+  container: {
+    flex: 0,
+  },
+  textInputContainer: {
+    marginHorizontal: 20,
+    marginBottom: 20,
+    marginTop: 10,
+    borderRadius: 10,
+    height: 45,
+    flexDirection: "row",
+    backgroundColor: "#00000009",
+  },
+  textInput: {
+    height: 45,
+    color: "#34383D",
+    fontSize: 16,
+    fontWeight: "500",
+    backgroundColor: "transparent",
+  },
+});
+
 const pickerStyles = StyleSheet.create({
   inputIOS: {
     marginHorizontal: 20,
@@ -255,4 +299,4 @@ const pickerStyles = StyleSheet.create({
 });
 
 export default styles;
-export { pickerStyles };
+export { pickerStyles, googlePlacesStyles };

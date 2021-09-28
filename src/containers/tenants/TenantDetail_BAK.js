@@ -3,10 +3,9 @@ import {
   Alert,
   Text,
   View,
-  ScrollView,
   TouchableOpacity,
+  ScrollView,
   Modal,
-
 } from "react-native";
 
 // Vector Icons
@@ -16,29 +15,33 @@ import Feather from "react-native-vector-icons/Feather";
 import styles from "./styles";
 
 import DetailScreen from "../constants/DetailScreen";
-// Firebase
-import { db } from "../../firebase";
-import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 
-const PropertyDetail = ({ navigation, route }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+import { db } from "../../firebase";
+
+
+import { getInitials } from "../../utilities";
+
+import { TenantProvider } from "../../providers/TenantsProvider";
+
+// Things I need
+// Actions button pops up modal with options to:
+// add lease (if no lease),
+// remove lease (if there is a lease),
+// renew lease (once lease term is set to expire in 60d)
+
+const TenantDetail = ({ route, navigation }) => {
   const { itemID } = route.params;
 
-  const propRef = db.collection('properties').doc(itemID);
-  const [property, loading, error] = useDocumentDataOnce(propRef, { idField: "id" });
+  // const tenantRef = db.collection('tenants').doc(itemID);
+  // const [tenant, loading, error] = useDocumentDataOnce(tenantRef, { idField: "id" });
 
-  if (error) {
-    console.log(error)
-  }
-  if (loading) {
-    console.log('Loading ...')
-  }
+  const [modalVisible, setModalVisible] = useState(false);
 
   // Delete Alert Pop Up
   const deleteAlert = () => {
     Alert.alert(
-      "Delete Property?",
-      "Deleting this property will also delete its data from all reportings.",
+      "Delete Tenant?",
+      "Are you sure you want to delete this tenant?",
       [
         {
           text: "Cancel",
@@ -48,8 +51,11 @@ const PropertyDetail = ({ navigation, route }) => {
         {
           text: "Delete",
           style: "destructive",
+          onPress: () => console.log("Delete Pressed"),
+          onPress: (id) => deleteTenant(itemID),
+
           onPress: () => {
-            db.doc(`properties/${itemID}`).delete();
+            db.doc(`tenants/${itemID}`).delete();
             navigation.goBack();
           },
         },
@@ -58,72 +64,42 @@ const PropertyDetail = ({ navigation, route }) => {
   };
 
   return (
-    <DetailScreen title="Property Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)} >
-      <ScrollView>
-        {/* Property Information */}
+    <TenantProvider id={itemID}>
+      console.log("FUCK YERSELF");
+      {/* const itemInitials = getInitials(name); */}
+      <DetailScreen title="Tenant Detail" onGoBack={() => navigation.goBack()} onPress={() => setModalVisible(true)}>
+        {/* Tenant Information */}
         <View style={styles.propInfo}>
-          <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
-            <Text
+          <View style={styles.imgPlaceHolder}>
+            <Text style={{ color: "#fff", fontSize: 18, fontWeight: "600" }}>
+              {/* {itemInitials} */}
+            </Text>
+          </View>
+          <View style={{ marginLeft: 15, alignSelf: "center" }}>
+            {/* Tenant Name */}
+            {/* <Text style={styles.tenantName}>{name}</Text> */}
+
+            {/* Phone Number */}
+            <View style={{ flexDirection: "row", marginLeft: 10 }}>
+              <Feather name="phone" size={16} color="#ffffff80" />
+              {/* <Text style={styles.cardText}>{phone}</Text> */}
+            </View>
+
+            {/* Email Address */}
+            <View
               style={{
-                fontWeight: "500",
-                color: "#fff",
-                marginRight: 5,
+                flexDirection: "row",
+                marginLeft: 10,
+                marginVertical: 10,
               }}
             >
-              Financial Activity
-            </Text>
-            <Text
-              style={{ fontSize: 12, fontWeight: "500", color: "#ffffff90" }}
-            >
-              (year to date)
-            </Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <Text style={{ color: "#fff", fontSize: 16 }}>Revenue:</Text>
-            <Text style={styles.propInfoLabel}>$12,591</Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <Text style={{ color: "#fff", fontSize: 16 }}>Expenses:</Text>
-            <Text style={styles.propInfoLabel}>- $750</Text>
-          </View>
-          <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-            <Text style={{ color: "#fff", fontSize: 16 }}>Net Profit:</Text>
-            <Text style={styles.propInfoLabel}>$11,841</Text>
+              <Feather name="mail" size={16} color="#ffffff80" />
+              {/* <Text style={styles.cardText}>{email}</Text> */}
+            </View>
           </View>
         </View>
 
-        {/* Tenant Information */}
-        <View style={styles.tenantInfo}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              marginTop: 20,
-            }}
-          >
-            <View>
-              <Text
-                style={{
-                  color: "#34383D",
-                  fontSize: 20,
-                  fontWeight: "600",
-                }}
-              >
-                Joseph Smith
-              </Text>
-              <Text
-                style={{
-                  color: "#34383D90",
-                  fontSize: 15,
-                  fontWeight: "500",
-                  marginTop: 5,
-                }}
-              >
-                joseph.smith@yahoo.com
-              </Text>
-            </View>
-          </View>
-
+        <View style={{ backgroundColor: '#fff', paddingHorizontal: 30, paddingVertical: 12.5 }} >
           {/* Leasing Information */}
           <Text
             style={{
@@ -144,7 +120,7 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Start Date:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Start Date: </Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               Jan 1, 2021
             </Text>
@@ -158,7 +134,7 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>End Date:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>End Date: </Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               Jan 1, 2022
             </Text>
@@ -172,7 +148,7 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Rental Rate: </Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               $1,399
             </Text>
@@ -186,27 +162,23 @@ const PropertyDetail = ({ navigation, route }) => {
               marginTop: 20,
             }}
           >
-            <Text style={{ color: "#34383D", fontSize: 16 }}>Rent Due On:</Text>
+            <Text style={{ color: "#34383D", fontSize: 16 }}>Rent Due On: </Text>
             <Text style={{ color: "#34383D", fontSize: 16, fontWeight: "600" }}>
               1st /mo
             </Text>
           </View>
 
-          <TouchableOpacity onPress={() => navigation.navigate("CurrentLease")} style={{ marginTop: 30, height: 45, alignItems: 'center' }}>
+          {/* View Lease */}
+          <TouchableOpacity onPress={() => navigation.navigate('CurrentLease')} style={{ marginTop: 30, height: 45, alignItems: 'center' }}>
             <Text style={{ alignSelf: "center", color: "#232256", fontSize: 16, fontWeight: "600", textDecorationLine: 'underline' }}>
               View Lease Agreement
             </Text>
           </TouchableOpacity>
         </View>
 
-        {/* Market Property View */}
-        <TouchableOpacity style={{ backgroundColor: '#586D81', padding: 18, margin: 20, borderRadius: 10, alignItems: 'center' }}>
-          <Text style={{ fontSize: 16, fontWeight: '600', color: 'white' }}>MARKET PROPERTY</Text>
-        </TouchableOpacity>
-
         {/* Actions Modal */}
         <Modal
-          animationType='fade'
+          animationType="fade"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -219,7 +191,7 @@ const PropertyDetail = ({ navigation, route }) => {
               <Text
                 style={{
                   color: "#34383D",
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: "600",
                   textAlign: "center",
                   marginTop: 20,
@@ -228,17 +200,14 @@ const PropertyDetail = ({ navigation, route }) => {
                 Actions
               </Text>
 
+              {/* Edit Tenant */}
               <TouchableOpacity
-                onPress={() => (setModalVisible(!modalVisible),
-                  navigation.navigate("EditProperty", {
-                    itemID,
-                    itemAddress,
-                    itemCity,
-                    itemState,
-                    itemUnit,
-                    itemZip,
-                  }))
-                }
+                onPress={() => (
+                  setModalVisible(!modalVisible),
+                  navigation.navigate("EditTenant", {
+                    itemID
+                  })
+                )}
                 style={{
                   flexDirection: "row",
                   alignItems: "center",
@@ -246,7 +215,7 @@ const PropertyDetail = ({ navigation, route }) => {
                   paddingLeft: 20,
                 }}
               >
-                <Feather name="key" size={20} color="#34383D" />
+                <Feather name="user" size={20} color="#34383D" />
                 <Text
                   style={{
                     color: "#34383D",
@@ -255,10 +224,33 @@ const PropertyDetail = ({ navigation, route }) => {
                     marginLeft: 10,
                   }}
                 >
-                  Edit Property
+                  Edit Tenant
                 </Text>
               </TouchableOpacity>
 
+              {/* Edit Lease Information */}
+              <TouchableOpacity
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingTop: 30,
+                  paddingLeft: 20,
+                }}
+              >
+                <Feather name="file-text" size={20} color="#34383D" />
+                <Text
+                  style={{
+                    color: "#34383D",
+                    fontSize: 16,
+                    fontWeight: "600",
+                    marginLeft: 10,
+                  }}
+                >
+                  Edit Leasing Information
+                </Text>
+              </TouchableOpacity>
+
+              {/* Delete Tenant */}
               <TouchableOpacity
                 style={{
                   flexDirection: "row",
@@ -277,7 +269,7 @@ const PropertyDetail = ({ navigation, route }) => {
                     marginLeft: 10,
                   }}
                 >
-                  Delete Property
+                  Delete Tenant
                 </Text>
               </TouchableOpacity>
 
@@ -294,7 +286,6 @@ const PropertyDetail = ({ navigation, route }) => {
                 }}
                 onPress={() => setModalVisible(!modalVisible)}
               >
-                {/* <Feather name="x" size={22.5} color="#34383D" /> */}
                 <Text
                   style={{
                     color: "#34383D",
@@ -309,9 +300,9 @@ const PropertyDetail = ({ navigation, route }) => {
             </View>
           </View>
         </Modal>
-      </ScrollView>
-    </DetailScreen >
-  );
+      </DetailScreen >
+    </TenantProvider>
+  )
 };
 
-export default PropertyDetail;
+export default TenantDetail;

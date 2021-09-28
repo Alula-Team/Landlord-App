@@ -1,5 +1,4 @@
 import React, { useState, useContext } from "react";
-
 import {
   Alert,
   Text,
@@ -11,10 +10,6 @@ import {
   RefreshControl,
 } from "react-native";
 
-import { useForm, Controller } from "react-hook-form";
-
-import { Header, Icon } from "react-native-elements";
-
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
@@ -25,10 +20,8 @@ import { styles } from "./styles";
 import { db } from "../../firebase";
 
 import { TransactionsContext } from "../../providers/TransactionsProvider";
-// import { PropertiesContext } from "../../providers/PropertiesProvider";
-import { SafeAreaView } from "react-native-safe-area-context";
+import MainScreen from "../constants/MainScreen";
 
-// import { getSubCollections } from "../../../functions";
 
 // THINGS I NEED FOR THIS SCREEN
 // Working Search Feature
@@ -70,8 +63,6 @@ const Transactions = ({ navigation }) => {
 
   //
   let data = filteredList;
-
-  const { control } = useForm();
 
   // onRefresh
   const onRefresh = React.useCallback(() => {
@@ -134,93 +125,42 @@ const Transactions = ({ navigation }) => {
     );
   };
 
+  const onAction = () => {
+    setShouldShow(!shouldShow);
+  }
+
+  const onAdd = () => {
+    setSearch("");
+    navigation.navigate("AddTransaction");
+  }
+
   return (
-    <>
-      <View style={styles.container}>
-        {/* Header */}
-        <Header
-          placement={"left"}
-          centerComponent={{
-            text: "Transactions",
-            style: {
-              color: "#34383D",
-              fontWeight: "bold",
-              fontSize: 25,
-              paddingTop: 20,
-            },
-          }}
-          rightComponent={
-            <>
-              <View style={{ flexDirection: "row" }}>
-                {/* Dashboard */}
-                <Icon
-                  name="activity"
-                  type="feather"
-                  color="#34383D80"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 20,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  onPress={() => setShouldShow(!shouldShow)}
-                />
-                {/* ADD Transaction */}
-                <Icon
-                  name="plus"
-                  type="feather"
-                  color="#34383D80"
-                  size={25}
-                  iconStyle={{
-                    paddingTop: 20,
-                    paddingRight: 20,
-                    paddingBottom: 10,
-                  }}
-                  onPress={() => {
-                    setSearch("");
-                    navigation.navigate("AddTransaction");
-                  }}
-                />
-              </View>
-            </>
-          }
-          containerStyle={{
-            backgroundColor: "#fff",
-            justifyContent: "space-around",
-            borderBottomWidth: 0,
-          }}
-        />
-
-        {/* Search Bar */}
-        <Controller
-          control={control}
-          render={({ field: { value, onChange } }) => (
-            <View style={styles.searchContainer}>
-              <Feather
-                name="search"
-                color="#34383D80"
-                size={20}
-                style={styles.searchIcon}
-              />
-              <TextInput
-                type="search"
-                placeholder="Search Transactions"
-                placeholderTextColor="#34383D80"
-                autoFocus={false}
-                autoCorrect={false}
-                style={styles.searchInput}
-                clearButtonMode="while-editing"
-                onChangeText={handleSearch}
-                value={search}
-              />
-            </View>
-          )}
+    <MainScreen title="Transactions" actionIcon="activity" onAction={onAction} onAdd={onAdd}>
+      {/* Search Bar */}
+      <View style={styles.searchContainer}>
+        <Feather
           name="search"
+          color="#34383D80"
+          size={20}
+          style={styles.searchIcon}
         />
-        {/* END Search Bar */}
+        <TextInput
+          type="search"
+          placeholder="Search Transactions"
+          placeholderTextColor="#34383D80"
+          autoFocus={false}
+          autoCorrect={false}
+          style={styles.searchInput}
+          clearButtonMode="while-editing"
+          onChangeText={handleSearch}
+          value={search}
+        />
+      </View>
+      {/* END Search Bar */}
 
-        {/* Revenue Overview */}
-        {shouldShow ? (
+      {/* Revenue Overview */}
+      {
+        shouldShow ? (
           <View style={styles.moneyBox}>
             <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
               <Text
@@ -252,72 +192,73 @@ const Transactions = ({ navigation }) => {
             </View>
           </View>
 
-        ) : null}
-        {/* END Revenue Overview */}
+        ) : null
+      }
+      {/* END Revenue Overview */}
 
-        {/* Transactions Flat List */}
-        <FlatList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => {
-            return (
-              <TouchableOpacity
-                style={styles.listCell}
-                onPress={() =>
-                  navigation.navigate("TransactionDetail", {
-                    itemID: item.id
-                  }
-                  )
+      {/* Transactions Flat List */}
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => {
+          return (
+            <TouchableOpacity
+              style={styles.listCell}
+              onPress={() =>
+                navigation.navigate("TransactionDetail", {
+                  itemID: item.id,
+                  allElse: JSON.stringify(item)
                 }
-              >
-                {/* Transaction Category and Amount*/}
-                <View style={styles.itemCenter}>
-                  <Text style={styles.transactionType}>
-                    {item.transactionCategory}
-                  </Text>
-                  <Text
-                    style={{
-                      color:
-                        item.transactionType === "Payment"
-                          ? "#5CB85C"
-                          : "#D9534F",
-                      fontWeight: "700",
-                      fontSize: 18,
-                    }}
-                  >
-                    ${item.amount}
-                  </Text>
-                </View>
-                {/* Property */}
-                <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <Feather name="map-pin" color="#34383D80" size={15} />
-                  <Text style={styles.listItem}>
-                    {item.property.address} {item.property.unit}
-                  </Text>
-                </View>
-                {/* Date */}
-                <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <Feather name="clock" color="#34383D80" size={15} />
-                  <Text style={styles.listItem}>{makeDate(item.date)}</Text>
-                </View>
-                {/* Payment Type */}
-                <View style={{ flexDirection: "row", marginTop: 10 }}>
-                  <Feather name="credit-card" color="#34383D80" size={15} />
-                  <Text style={styles.listItem}>{item.paymentMethod}</Text>
-                </View>
-              </TouchableOpacity>
-            );
-          }}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-          contentContainerStyle={{ paddingBottom: 350 }}
-          showsVerticalScrollIndicator={false}
-          ItemSeparatorComponent={renderSeparator}
-          ListEmptyComponent={EmptyListMessage}
-        />
-      </View>
-    </>
+                )
+              }
+            >
+              {/* Transaction Category and Amount*/}
+              <View style={styles.itemCenter}>
+                <Text style={styles.transactionType}>
+                  {item.transactionCategory}
+                </Text>
+                <Text
+                  style={{
+                    color:
+                      item.transactionType === "Payment"
+                        ? "#5CB85C"
+                        : "#D9534F",
+                    fontWeight: "700",
+                    fontSize: 18,
+                  }}
+                >
+                  ${item.amount}
+                </Text>
+              </View>
+              {/* Property */}
+              <View style={{ flexDirection: "row", marginTop: 10 }}>
+                <Feather name="map-pin" color="#34383D80" size={15} />
+                <Text style={styles.listItem}>
+                  {item.property.address} {item.property.unit}
+                </Text>
+              </View>
+              {/* Date */}
+              <View style={{ flexDirection: "row", marginTop: 10 }}>
+                <Feather name="clock" color="#34383D80" size={15} />
+                <Text style={styles.listItem}>{makeDate(item.date)}</Text>
+              </View>
+              {/* Payment Type */}
+              <View style={{ flexDirection: "row", marginTop: 10 }}>
+                <Feather name="credit-card" color="#34383D80" size={15} />
+                <Text style={styles.listItem}>{item.paymentMethod}</Text>
+              </View>
+            </TouchableOpacity>
+          );
+        }}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+        contentContainerStyle={{ paddingBottom: 350 }}
+        showsVerticalScrollIndicator={false}
+        ItemSeparatorComponent={renderSeparator}
+        ListEmptyComponent={EmptyListMessage}
+      />
+    </MainScreen>
   );
 };
 

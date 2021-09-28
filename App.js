@@ -14,7 +14,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./src/store/reducers";
 
 import PropertiesProvider from "./src/providers/PropertiesProvider";
-import TenantsProvider from "./src/providers/TenantsProvider";
+import { TenantsProvider } from "./src/providers/TenantsProvider";
 import TransactionsProvider from "./src/providers/TransactionsProvider";
 import NotificationsProvider from "./src/providers/NotificationsProvider";
 import UserProvider from "./src/providers/UserProvider";
