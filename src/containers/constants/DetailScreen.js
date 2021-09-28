@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, Header, Icon } from "react-native-elements";
+import { View } from "react-native";
 import { addStyles } from './styles';
 import DetailScreenHeader from "./DetailScreenHeader";
 

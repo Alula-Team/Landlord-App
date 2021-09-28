@@ -15,7 +15,7 @@ import Feather from "react-native-vector-icons/Feather";
 // Style Sheet
 import styles from "./styles";
 
-import DetailScreen from "../constants/DetailScreen_BAK";
+import DetailScreen from "../constants/DetailScreen";
 // Firebase
 import { db } from "../../firebase";
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';

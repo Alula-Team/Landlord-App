@@ -124,31 +124,37 @@ const Properties = ({ navigation }) => {
     setSearch("");
     navigation.navigate("AddProperty");
   }
-
+  // const propsRef = db.collection('properties');
+  // const [properties: datums, loading, error] = useCollectionData(propsRef, { idField: "id" });
+  // if (error) {
+  //   console.log(error)
+  // }
+  // if (loading) {
+  //   console.log('Loading ...')
+  // }
   return (
     <MainScreen title="Properties" actionIcon="message-circle" onAction={onAction} onAdd={onAdd}>
-      <View style={styles.searchContainer}>
-        <Feather
-          name="search"
-          color="#34383D80"
-          size={20}
-          style={styles.searchIcon}
-        />
-        <TextInput
-          type="search"
-          placeholder="Search Properties"
-          placeholderTextColor="#34383D80"
-          autoFocus={false}
-          autoCorrect={false}
-          style={styles.searchInput}
-          clearButtonMode="while-editing"
-          onChangeText={handleSearch}
-          value={search}
-        />
-      </View>
-
-      {/* Properties Flat List */}
       <SafeAreaView>
+        <View style={styles.searchContainer}>
+          <Feather
+            name="search"
+            color="#34383D80"
+            size={20}
+            style={styles.searchIcon}
+          />
+          <TextInput
+            type="search"
+            placeholder="Search Properties"
+            placeholderTextColor="#34383D80"
+            autoFocus={false}
+            autoCorrect={false}
+            style={styles.searchInput}
+            clearButtonMode="while-editing"
+            onChangeText={handleSearch}
+            value={search}
+          />
+        </View>
+
         <FlatList
           data={data}
           keyExtractor={(item) => item.id}
