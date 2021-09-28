@@ -111,7 +111,7 @@ const AddProperty = ({ navigation, route }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <APMText value={value} onChange={onChange} placeholder="Address..." />
+            <APMText value={value} onChange={onChange} placeholder="Address" />
           )}
           name="address"
           rules={{ required: true }}
@@ -120,11 +120,11 @@ const AddProperty = ({ navigation, route }) => {
           <APMError />
         )}
         {/* City */}
-        <Text style={styles.inputLabel}>City</Text>
+        {/* <Text style={styles.inputLabel}>City</Text> */}
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <APMText value={value} onChange={onChange} placeholder="City..." />
+            <APMText value={value} onChange={onChange} placeholder="City" />
           )}
           name="city"
           rules={{ required: true }}
@@ -133,11 +133,11 @@ const AddProperty = ({ navigation, route }) => {
           <APMError />
         )}
         {/* State */}
-        <Text style={styles.inputLabel}>State</Text>
+        {/* <Text style={styles.inputLabel}>State</Text> */}
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <APMText value={value} onChange={onChange} placeholder="State..." />
+            <APMText value={value} onChange={onChange} placeholder="State" />
           )}
           name="state"
           rules={{ required: true }}
@@ -146,11 +146,11 @@ const AddProperty = ({ navigation, route }) => {
           <APMError />
         )}
         {/* Zip */}
-        <Text style={styles.inputLabel}>Zip Code</Text>
+        {/* <Text style={styles.inputLabel}>Zip Code</Text> */}
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <APMText value={value} onChange={onChange} placeholder="Zip..." />
+            <APMText value={value} onChange={onChange} placeholder="Zip" />
           )}
           name="zip"
           rules={{ required: true }}
@@ -163,7 +163,7 @@ const AddProperty = ({ navigation, route }) => {
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <APMText value={value} onChange={onChange} placeholder="Unit..." />
+            <APMText value={value} onChange={onChange} placeholder="Unit" />
           )}
           name="unit"
           rules={{ required: false }}

@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, ScrollView } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 // Forms
 import { SelectOptions } from "../../forms";
@@ -17,7 +18,6 @@ import { auth, db } from "../../firebase";
 
 // Style Sheet
 import styles from "./styles";
-import { ScrollView } from "react-native-gesture-handler";
 
 
 const AddTenant = ({ navigation }) => {
@@ -45,7 +45,7 @@ const AddTenant = ({ navigation }) => {
 
   return (
     <AddEditScreen title="Add Tenant" onGoBack={() => navigation.goBack()} onSubmit={onSubmit}>
-      <ScrollView>
+      <KeyboardAwareScrollView>
         <TouchableOpacity
           style={{
             backgroundColor: "#5858FB",
@@ -203,11 +203,10 @@ const AddTenant = ({ navigation }) => {
         )}
 
         {/* Description */}
-        <Text style={styles.inputLabel}>Description</Text>
         <Controller
           control={control}
           render={({ field: { value, onChange } }) => (
-            <APMTextarea value={value} onChange={onChange} placeholder="Enter Transaction Description..." />
+            <APMTextarea value={value} onChange={onChange} placeholder="Enter additional lease details..." />
           )}
           name="description"
           rules={{ required: false }}
@@ -215,7 +214,7 @@ const AddTenant = ({ navigation }) => {
         {errors.description && (
           <APMError />
         )}
-      </ScrollView>
+      </KeyboardAwareScrollView>
     </AddEditScreen>
   );
 };

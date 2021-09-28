@@ -13,7 +13,7 @@ export const addStyles = StyleSheet.create({
   },
   centerText: {
     color: "#34383D",
-    fontWeight: "700",
+    fontWeight: "600",
     fontSize: 20,
     paddingTop: 20,
   },
