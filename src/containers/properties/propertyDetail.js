@@ -75,22 +75,10 @@ const PropertyDetail = ({ navigation, route }) => {
             textAlign: 'center'
           }}
         >
-          Property Address
+          {property.address} {property.unit}
         </Text>
         {/* Property Information */}
         <View style={styles.propInfo}>
-          <View>
-            <Text
-              style={{
-                fontWeight: "500",
-                color: "#fff",
-                marginRight: 5,
-                textAlign: "center"
-              }}
-            >
-              {property.address} {property.unit}
-            </Text>
-          </View>
           <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 10 }}>
 
             <Text
