@@ -21,7 +21,7 @@ import { PropertySelect } from "../../forms";
 // Firebase
 import { auth, db } from "../../firebase";
 import AddEditScreen from "../constants/AddEditScreen";
-import UploadReceipt from "../constants/uploadImage";
+import UploadReceipt from "../constants/takePicture";
 
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 

@@ -29,7 +29,7 @@ const UploadReceipt = () => {
         <>
             {/* Upload Recipt*/}
             <TouchableOpacity onPress={() => setModalVisible(true)} style={{backgroundColor: '#00000019', height: 220, width: 180, marginVertical: 20, marginLeft: 20, borderRadius: 10, alignItems: "center", justifyContent: 'center'}}>
-                <Feather name='plus' size={40} color='#34383D50' />
+                <Feather name='camera' size={40} color='#34383D50' />
             </TouchableOpacity>
 
             {/* Modal */}

@@ -1,141 +1,84 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Modal} from 'react-native';
-import { Camera } from 'expo-camera';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
 // Vector Icons
 import Feather from "react-native-vector-icons/Feather";
 
-const UploadReceipt = () => {
-    const [hasPermission, setHasPermission] = useState(null);
-    const [type, setType] = useState(Camera.Constants.Type.back);
-    const [modalVisible, setModalVisible] = useState(false);
+const UploadImage = () => {
+    const [image, setImage] = useState(null);
 
-    // Camera
     useEffect(() => {
+        // Camera Roll ASYNC
         (async () => {
-        const { status } = await Camera.requestPermissionsAsync();
-        setHasPermission(status === 'granted');
+          if (Platform.OS !== 'web') {
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== 'granted') {
+              alert('Sorry, we need camera roll permissions to make this work!');
+            }
+          }
         })();
-    }, []);
+        
+        // Take Photo ASYNC
+        (async () => {
+            if (Platform.OS !== 'web') {
+              const { status } = await ImagePicker.requestCameraPermissionsAsync();
+              if (status !== 'granted') {
+                alert('Sorry, we need camera roll permissions to make this work!');
+              }
+            }
+          })();
+      }, []);
 
-    if (hasPermission === null) {
-        return <View />;
-    }
-    if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-    }
+    // Camera Roll
+    const cameraRoll = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All,
+        allowsEditing: false,
+        aspect: [4, 3],
+        quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+        setImage(result.uri);
+        }
+    };
+
+    // Take Image
+    const takePhoto = async () => {
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: false,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+        setImage(result.uri);
+        }
+    };
+
 
     return(
         <>
-            {/* Upload Recipt*/}
-            <TouchableOpacity onPress={() => setModalVisible(true)}>
-                <Feather name='image' color='#34383D90' size={25} style={{paddingTop: 10, paddingLeft: 10, paddingBottom: 10}} />
-            </TouchableOpacity>
+            {/* Upload Image*/}
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                {/* Camera Roll */}
+                <TouchableOpacity onPress={cameraRoll}>
+                    <Feather name='image' color='#34383D90' size={25} style={{ padding: 10 }} />
+                </TouchableOpacity>
 
-            {/* Modal */}
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-                setModalVisible(!modalVisible);
-                }}
-            >
-                <View style={styles.cameraContainer}>
-                    <Camera style={styles.camera} type={type}>
-                        <View style={styles.cameraGroup}>
-                            {/* Back Button */}
-                            <TouchableOpacity style={styles.backButton} onPress={() => setModalVisible(!modalVisible)}>
-                                {/* <Feather name='arrow-left' size={25} color='#fff' /> */}
-                                <Text style={styles.cancel}>Cancel</Text>
-                            </TouchableOpacity>
-                            
-                            {/* Flip Camera */}
-                            <TouchableOpacity
-                                style={styles.flipButton}
-                                onPress={() => {
-                                setType(
-                                    type === Camera.Constants.Type.back
-                                    ? Camera.Constants.Type.front
-                                    : Camera.Constants.Type.back
-                                );
-                                }}>
-                                <Feather name='repeat' size={20} color='#fff' />
-                            </TouchableOpacity>
-
-                            {/* Capture Image Button */}
-                            <TouchableOpacity 
-                                style={{alignSelf: 'center'}} 
-                                onPress={async() => {
-                                    if(cameraRef){
-                                    let photo = await cameraRef.takePictureAsync();
-                                    console.log('photo', photo);
-                                    }
-                                }}
-                            >
-                                <View style={styles.captureOuter}>
-                                    <View style={styles.captureInner}></View>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-                    </Camera>
-                </View>
-            </Modal>
+                {/* Take Photo */}
+                <TouchableOpacity onPress={takePhoto}>
+                    <Feather name='camera' color='#34383D90' size={25} style={{ paddingVertical: 10 }} />
+                </TouchableOpacity>
+            </View>
         </>
     );
-
 }
 
-const styles = StyleSheet.create({
-    cameraContainer: {
-        flex: 1,
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#000'
-    },
-    camera: {
-        flex: 1
-    },
-    cameraGroup: {
-        flex: 1,
-        backgroundColor: 'transparent',
-        justifyContent: 'flex-end'
-    },
-    backButton: {
-        flex: 0.1,
-        marginLeft: 30,
-        top: 60,
-        position: 'absolute',
-    },
-    cancel: {
-        fontSize: 18,
-        fontWeight: '600',
-        color: '#fff'
-    },
-    flipButton: {
-        flex: 0.1,
-        marginLeft: 30,
-        alignSelf: 'flex-start',
-        justifyContent: 'flex-end',
-    },
-    captureOuter: { 
-        borderWidth: 3,
-        borderRadius: 50,
-        borderColor: 'white',
-        height: 75,
-        width: 75,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 50
-    },
-    captureInner: {
-        borderRadius: 50,
-        height: 60,
-        width: 60,
-        backgroundColor: 'white',
-    }
-}); 
-
-export default UploadReceipt;
+export default UploadImage;
