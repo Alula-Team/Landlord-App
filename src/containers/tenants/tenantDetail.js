@@ -104,6 +104,8 @@ const TenantDetail = ({ route, navigation }) => {
     console.log("Submittified!");
   }
 
+  if (error)
+
   if (loading) {
     return <Text>Loading...</Text>
   }

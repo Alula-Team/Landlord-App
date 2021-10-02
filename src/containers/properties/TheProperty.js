@@ -6,8 +6,6 @@ import { APMError, APMText } from "../../forms/APMFormFields";
 
 import styles from './styles';
 
-
-
 const TheProperty = ({ property }) => {
   const { address, city, state, unit, zip } = property;
   const {
